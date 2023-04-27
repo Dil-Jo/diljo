@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-
+import Signin from "./Signin";
+import Signup from "./Signup";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -86,12 +87,22 @@ function Links() {
 function Buttons() {
   return (
     <>
-      <button className="text-gray-800 text-sm font-semibold hover:text-blue-600 mr-10">
+      <button
+        className="text-gray-800 text-sm font-semibold hover:text-blue-600
+        mr-10"
+        htmlFor="sign-in"
+      >
+        {" "}
         Sign in
       </button>
-      <button className="text-gray-800 text-sm font-semibold border px-4 py-1 rounded-lg hover:text-blue-600 hover:border-blue-600">
+      <Signin />
+      <button
+        className="text-gray-800 text-sm font-semibold border px-4 py-1 rounded-lg hover:text-blue-600 hover:border-blue-600"
+        htmlFor="sign-up"
+      >
         Sign up
       </button>
+      <Signup />
     </>
   );
 }

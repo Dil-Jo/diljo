@@ -3,7 +3,7 @@ export default function Card(props) {
     return { width: `${(raised / goal) * 100}%` };
   };
   let resolveImage = (url) => {
-    return { "background-image": `url("${url}")` };
+    return { backgroundImage: `url("${url}")` };
   };
 
   return (
@@ -23,9 +23,9 @@ export default function Card(props) {
         <h2 className="mt-4  font-small text-gray-400">{props.description}</h2>
         {/* <h2 className=""></h2> */}
 
-        <div class="w-full mt-4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+        <div className="w-full mt-4 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
           <div
-            class="bg-blue-600 h-2.5 rounded-full"
+            className="bg-blue-600 h-2.5 rounded-full"
             style={progressbar(props.raised, props.goal)}
           ></div>
         </div>

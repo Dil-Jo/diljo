@@ -4,7 +4,7 @@ export default function About() {
       <h1 className="tracking-tighter text-4xl font-black text-gray-900 dark:text-white">
         About Us
       </h1>
-      <h2 className=" text-gray-700 md:text-lg dark:text-gray-400 ml-10 mt-5">
+      <h2 className=" text-gray-700 md:text-lg dark:text-gray-400 ml-10 my-10">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
