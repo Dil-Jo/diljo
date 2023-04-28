@@ -7,7 +7,7 @@ import Footer from "./global-components/Footer";
 export default function Page() {
   return (
     <>
-      <Navbar navmain="true"/>
+      <Navbar navmain="true" />
       <Main />
       <div className="mx-4 mt-6">
         <FeaturedPosts />
