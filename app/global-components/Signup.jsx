@@ -4,6 +4,12 @@ export default function Signup() {
       <input type="checkbox" id="sign-up" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
+        <label
+            htmlFor="sign-up"
+            className="btn btn-sm btn-circle bg-gray-900 absolute right-2 top-2"
+          >
+            ✕
+          </label>
           <form>
             <div class="mb-6">
               <label

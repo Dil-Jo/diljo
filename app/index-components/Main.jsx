@@ -1,8 +1,22 @@
+"use client";
 export default function Main() {
+    function clickCoolButton(){
+    const scrollHeight = window.innerHeight - 50;
+    const element = document.querySelector('#coolscrolldownbutton');
+
+    if (document.body.scrollTop === scrollHeight || document.documentElement.scrollTop === scrollHeight) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+
   return (
     <div className="w-full bg-black h-screen grid place-items-end">
       <div className="w-full flex justify-center">
-        <div className="w-16 h-16 outline-4 outline-dotted outline-white rounded-full mb-14  transform duration-500 hover:-translate-y-3">
+        <div className="w-16 h-16 outline-4 outline-dotted outline-white rounded-full mb-14  transform duration-500 hover:-translate-y-3" id = "coolscrolldownbutton" onClick={clickCoolButton
+        }>
           <svg
             fill="#ffffff"
             version="1.1"
