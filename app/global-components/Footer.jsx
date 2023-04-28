@@ -1,17 +1,17 @@
 import Link from 'next/link';
 export default function Footer() {
 	return (
-		<footer className='bg-gray-200 rounded-lg shadow dark:bg-gray-900 m-4'>
-			<div className='w-full max-w-screen-xl mx-auto p-4 md:py-8'>
+		<footer className='m-4 rounded-lg bg-gray-200 shadow dark:bg-gray-900'>
+			<div className='mx-auto w-full max-w-screen-xl p-4 md:py-8'>
 				<div className='sm:flex sm:items-center sm:justify-between'>
 					<div>
 						<h1>logo</h1>
 					</div>
-					<ul className='flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400'>
+					<ul className='mb-6 flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:mb-0'>
 						<li>
 							<Link
 								href='/explore'
-								className=' text-gray-700 md:text-lg dark:text-gray-400 ml-10 my-10 hover:underline'
+								className=' my-10 ml-10 text-gray-700 hover:underline dark:text-gray-400 md:text-lg'
 							>
 								Explore
 							</Link>
@@ -19,7 +19,7 @@ export default function Footer() {
 						<li>
 							<Link
 								href='/main'
-								className=' text-gray-700 md:text-lg dark:text-gray-400 ml-10 my-10 hover:underline'
+								className=' my-10 ml-10 text-gray-700 hover:underline dark:text-gray-400 md:text-lg'
 							>
 								Main
 							</Link>
@@ -27,14 +27,14 @@ export default function Footer() {
 						<li>
 							<Link
 								href='/about'
-								className=' text-gray-700 md:text-lg dark:text-gray-400 ml-10 my-10 hover:underline'
+								className=' my-10 ml-10 text-gray-700 hover:underline dark:text-gray-400 md:text-lg'
 							>
 								About
 							</Link>
 						</li>
 					</ul>
 				</div>
-				<hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
+				<hr className='my-6 border-gray-200 dark:border-gray-700 sm:mx-auto lg:my-8' />
 			</div>
 		</footer>
 	);

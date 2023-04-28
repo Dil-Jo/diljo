@@ -1,20 +1,62 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Signin from './Signin';
 import Signup from './Signup';
-export default function Navbar() {
+export default function Navbar(props) {
 	const [isOpen, setIsOpen] = useState(false);
+	const navbarRef = useRef(null);
 
+	const router = usePathname();
 	function NavbarOpen() {
 		setIsOpen(!isOpen);
 	}
 
+	useEffect(() => {
+		console.log({ router });
+	}, []);
+
+	if (router === '/') {
+		useEffect(() => {
+			function scrollFunction() {
+				if (
+					document.body.scrollTop > 80 ||
+					document.documentElement.scrollTop > 80
+				) {
+					navbarRef.current.style.marginTop = '0';
+					navbarRef.current.style.transition = '0.3s';
+					navbarRef.current.style.borderRadius = '0';
+					navbarRef.current.style.width = '100%';
+					navbarRef.current.style.marginLeft = '0';
+				} else if (
+					document.body.scrollTop <= 80 ||
+					document.documentElement.scrollTop <= 80
+				) {
+					navbarRef.current.style.marginTop = '1rem';
+					navbarRef.current.style.transition = '0.3s';
+					navbarRef.current.style.borderRadius = '0.75rem';
+					navbarRef.current.style.width = 'calc(100% - 2.5rem)';
+					navbarRef.current.style.marginLeft = '1rem';
+				}
+			}
+
+			window.onscroll = scrollFunction;
+
+			return () => {
+				window.onscroll = null;
+			};
+		}, []);
+	}
+
 	return (
 		<div
-			className='bg-white shadow-2xl fixed mx-4 rounded-b-xl z-50 h-16'
+			className='fixed z-50 mx-4 mt-4 rounded-xl bg-white shadow-2xl'
+			ref={navbarRef}
 			style={{ width: 'calc(100% - 2.5rem)' }}
 		>
+			<Signup />
+			<Signin />
 			<div className='container mx-auto px-4'>
 				<div className='flex items-center justify-between py-4'>
 					<div>
@@ -30,12 +72,12 @@ export default function Navbar() {
 					</div>
 
 					<div
-						className='sm:hidden cursor-pointer '
+						className='cursor-pointer sm:hidden '
 						onClick={NavbarOpen}
 					>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
-							className='w-6 h-6 text-blue-600'
+							className='h-6 w-6 text-blue-600'
 							viewBox='0 0 24 24'
 						>
 							<path
@@ -49,11 +91,11 @@ export default function Navbar() {
 				<div
 					className={`${
 						isOpen ? 'block' : 'hidden'
-					} sm:hidden bg-white border-t-2 py-2`}
+					} border-t-2 bg-white py-2 sm:hidden`}
 				>
 					<div className='flex flex-col'>
 						<Links />
-						<div className='flex justify-between items-center border-t-2 pt-2'>
+						<div className='flex items-center justify-between border-t-2 pt-2'>
 							<Buttons />
 						</div>
 					</div>
@@ -62,27 +104,38 @@ export default function Navbar() {
 		</div>
 	);
 }
+
 function Links() {
+	const [hoveredIndex, setHoveredIndex] = useState(null);
+
+	const menuItems = [
+		{ id: 1, name: 'EXPLORE' },
+		{ id: 2, name: 'MAIN' },
+		{ id: 3, name: 'ABOUT' },
+	];
+
 	return (
 		<>
-			<Link
-				href='/explore'
-				className='tracking-tighter text-gray-800 text-md font-semibold hover:text-blue-600 mr-10'
-			>
-				Explore
-			</Link>
-			<Link
-				href='/main'
-				className='tracking-tighter text-gray-800 text-md font-semibold hover:text-blue-600 mr-10'
-			>
-				Main
-			</Link>
-			<Link
-				href='/about'
-				className='text-gray-800 tracking-tighter text-md font-semibold hover:text-blue-600'
-			>
-				About
-			</Link>
+			{menuItems.map((item) => (
+				<div
+					key={item.id}
+					className='mx-4'
+					onMouseEnter={() => setHoveredIndex(item.id)}
+					onMouseLeave={() => setHoveredIndex(null)}
+				>
+					<Link
+						href={`/${item.name.toLowerCase()}`}
+						className={`text-md font-semibold tracking-tighter text-gray-800 hover:text-blue-600`}
+					>
+						{item.name}
+					</Link>
+					<div
+						className={`h-1 bg-black transition-all duration-500 ease-in-out ${
+							hoveredIndex === item.id ? 'w-full' : 'w-0'
+						}`}
+					></div>
+				</div>
+			))}
 		</>
 	);
 }
@@ -90,22 +143,19 @@ function Links() {
 function Buttons() {
 	return (
 		<>
-			<button
-				className='text-gray-800 text-sm font-semibold hover:text-blue-600
-        mr-10'
+			<label
+				className='mr-10 text-sm font-semibold text-gray-800
+        hover:text-blue-600'
 				htmlFor='sign-in'
 			>
-				{' '}
 				Sign in
-			</button>
-			<Signin />
-			<button
-				className='text-gray-800 text-sm font-semibold border px-4 py-1 rounded-lg hover:text-blue-600 hover:border-blue-600'
+			</label>
+			<label
+				className='rounded-lg border px-4 py-1 text-sm font-semibold text-gray-800 hover:border-blue-600 hover:text-blue-600'
 				htmlFor='sign-up'
 			>
 				Sign up
-			</button>
-			<Signup />
+			</label>
 		</>
 	);
 }
