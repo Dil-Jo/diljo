@@ -10,13 +10,13 @@ export default function FeaturedPosts() {
   };
   return (
     <>
-      <h1 className="tracking-tighter text-4xl font-black text-gray-900 dark:text-white">
+      <h1 className="text-4xl font-black tracking-tighter text-gray-900 dark:text-white">
         Featured Fundraisers
       </h1>
-      <h2 className="tracking-tighter mt-2 text-gray-500 md:text-lg dark:text-gray-400">
+      <h2 className="mt-2 tracking-tighter text-gray-500 dark:text-gray-400 md:text-lg">
         Help those who need you the most
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
         <Card {...propsCard1} />
         <Card {...propsCard1} />
         <Card {...propsCard1} />

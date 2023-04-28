@@ -1,29 +1,34 @@
 "use client";
 export default function Main() {
-    function clickCoolButton(){
+  function clickCoolButton() {
     const scrollHeight = window.innerHeight - 50;
-    const element = document.querySelector('#coolscrolldownbutton');
+    const element = document.querySelector("#coolscrolldownbutton");
 
-    if (document.body.scrollTop === scrollHeight || document.documentElement.scrollTop === scrollHeight) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (
+      document.body.scrollTop === scrollHeight ||
+      document.documentElement.scrollTop === scrollHeight
+    ) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   }
 
-
   return (
-    <div className="w-full bg-black h-screen grid place-items-end">
-      <div className="w-full flex justify-center">
-        <div className="w-16 h-16 outline-4 outline-dotted outline-white rounded-full mb-14  transform duration-500 hover:-translate-y-3" id = "coolscrolldownbutton" onClick={clickCoolButton
-        }>
+    <div className="grid h-screen w-full place-items-end bg-black">
+      <div className="flex w-full justify-center">
+        <div
+          className="mb-14 h-16 w-16 transform rounded-full outline-dotted outline-4  outline-white duration-500 hover:-translate-y-3"
+          id="coolscrolldownbutton"
+          onClick={clickCoolButton}
+        >
           <svg
             fill="#ffffff"
             version="1.1"
             id="Capa_1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            className="w-10 h-10 mx-auto mt-4"
+            className="mx-auto mt-4 h-10 w-10"
             viewBox="0 0 30.727 30.727"
             xmlSpace="preserve"
           >
