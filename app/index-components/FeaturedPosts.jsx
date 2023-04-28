@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "../global-components/Card";
 export default function FeaturedPosts() {
   let propsCard1 = {
     id: "1",
