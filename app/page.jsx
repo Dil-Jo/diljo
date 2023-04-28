@@ -6,14 +6,13 @@ import Footer from './global-components/Footer';
 
 export default function Page() {
 	return (
-		<>
+		<div className='-mt-[4.5rem]'>
 			{/* <Navbar navmain='true' /> */}
 			<Main />
 			<div className='mx-4 mt-6'>
 				<FeaturedPosts />
 				<About />
 			</div>
-			<Footer />
-		</>
+		</div>
 	);
 }

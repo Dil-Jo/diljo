@@ -4,6 +4,7 @@ import Image from 'next/image';
 import reviewsImg from '../../assets/reviews.jpg';
 import nicePic from '../../assets/nicePic.jpg';
 import Button from '../global-components/Button';
+import Donate from '../Components/banner';
 import { useState } from 'react';
 
 const ExpolorePage = () => {
@@ -186,7 +187,12 @@ const SmallCard = ({ title, caption, img, link }) => {
 				<h4 className='max-w-full overflow-hidden text-gray-500'>
 					{caption}
 				</h4>
-				<Button link={link} text='Lets Goo!' type='primary' />
+				<Button
+					// link={link}
+					onClick={() => console.log("fe")}
+					text='Lets Goo!'
+					type='primary'
+				/>
 
 				{/* <Link href={link}>Visit Me!</Link> */}
 			</div>
