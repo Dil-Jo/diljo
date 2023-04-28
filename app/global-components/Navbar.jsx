@@ -15,10 +15,10 @@ export default function Navbar(props) {
 
 	useEffect(() => {
 		console.log({ router });
-	}, []);
+	}, [router]);
 
-	if (router === '/') {
-		useEffect(() => {
+	useEffect(() => {
+		if (router === '/') {
 			function scrollFunction() {
 				if (
 					document.body.scrollTop > 80 ||
@@ -46,8 +46,8 @@ export default function Navbar(props) {
 			return () => {
 				window.onscroll = null;
 			};
-		}, []);
-	}
+		}
+	}, [router]);
 
 	return (
 		<div

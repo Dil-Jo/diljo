@@ -1,7 +1,10 @@
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import reviewsImg from '../../assets/reviews.jpg';
 import nicePic from '../../assets/nicePic.jpg';
+import Button from '../global-components/Button';
+import { useState } from 'react';
 
 const ExpolorePage = () => {
 	const routes = [
@@ -45,6 +48,8 @@ const ExpolorePage = () => {
 		},
 	];
 
+	const [category, setCategory] = useState('title');
+
 	const text = `
 	We have a wonderful 14 year old cat named Jinx who has given us no vet troubles in the 14 years I've owned him.
 	My husband Mitch and I noticed a few days ago his face was swollen and hard on the one side and Jinx wasn't eating his hard food much anymore. I opened his mouth, and what looked to be a nasty hole in his gum with infection coming out of it.
@@ -58,36 +63,67 @@ const ExpolorePage = () => {
 	Thank you from the bottom of our hearts!
 	Tia, Mitch, Jinx & Luna `;
 	return (
-		<div className='min-h-full w-full px-10'>
-			<section className='flex flex-col gap-5'>
-				<h1 className='font-bold text-2xl'>Explore Page</h1>
-				<div className='flex gap-8'>
-					<Card
-						title='Help Jinx with Dental Surgery!'
-						content={text}
-						link='link'
-						key='1'
-						backgroundImg={nicePic}
-					/>
-					<Card
-						title='Help Jinx with Dental Surgery!'
-						content={text}
-						link='link'
-						key='2'
-						backgroundImg={nicePic}
-					/>
+		<div className='flex min-h-full w-full flex-col gap-14 px-10'>
+			<section className='flex w-full flex-col gap-5'>
+				<h1 className='text-center text-2xl font-bold'>Explore Page</h1>
+				<h3 className='text-center text-2xl font-bold'>
+					Explore Our Everlasting Collection of Chanda Program
+				</h3>
+				<div className='flex w-full gap-8'>
+					<div className='carousel-center carousel rounded-box w-full space-x-8  p-4'>
+						<Card
+							title='Help Jinx with Dental Surgery!'
+							content={text}
+							link='link'
+							key='1'
+							backgroundImg={nicePic}
+						/>
+						<Card
+							title='Help Jinx with Dental Surgery!'
+							content={text}
+							link='link'
+							key='2'
+							backgroundImg={nicePic}
+						/>
+						<Card
+							title='Help Jinx with Dental Surgery!'
+							content={text}
+							link='link'
+							key='2'
+							backgroundImg={nicePic}
+						/>
+						<Card
+							title='Help Jinx with Dental Surgery!'
+							content={text}
+							link='link'
+							key='2'
+							backgroundImg={nicePic}
+						/>
+						<Card
+							title='Help Jinx with Dental Surgery!'
+							content={text}
+							link='link'
+							key='2'
+							backgroundImg={nicePic}
+						/>
+					</div>
 				</div>
 			</section>
-			<section className='flex flex-col gap-5 w-full'>
-				<h1 className='font-bold text-2xl'>Explore Page</h1>
-				<ExploreNav routes={routes} />
-				<div className='flex flex-wrap gap-8 w-full'>
-					{content.map((item) => (
+			<section className='flex w-full flex-col gap-5'>
+				{/* <h1 className='font-bold text-2xl'>Explore Page</h1> */}
+				<ExploreNav
+					routes={routes}
+					changeCategory={setCategory}
+					currentCategory={category}
+				/>
+				<div className='flex w-full flex-wrap gap-8'>
+					{content.map((item, index) => (
 						<SmallCard
 							title={item.title}
 							caption={text}
 							img={item.img}
 							link={item.link}
+							key={index}
 						/>
 					))}
 				</div>
@@ -97,27 +133,41 @@ const ExpolorePage = () => {
 };
 
 const Card = ({ title, content, backgroundImg, link }) => {
+	// return (
+	// <div className='flex h-60 w-96 flex-col justify-evenly rounded bg-blue-500 px-4 text-white'>
+	// 	<h1 className='h-10 text-lg font-bold text-white'>{title}</h1>
+	// 	<h3 className='max-h-20 overflow-clip'>{content}</h3>
+	// 	<Button link={link} text='Lets Goo!' type='primary' />
+	// </div>
+	// );
+
 	return (
-		<div
-			className='flex flex-col px-4 w-96 bg-blue-500 h-60 rounded justify-evenly'
-			// style={{ backgroundImage: 'url(../../assets/nicePic.jpg)' }}
-		>
-			<h1 className='h-10 text-white text-lg font-bold'>{title}</h1>
-			<h3 className='max-h-20 overflow-clip'>{content}</h3>
-			<Link href={link} className='h-10'>
-				Lets Goo!
-			</Link>
+		<div className='carousel-item'>
+			<div className='flex h-60 w-96 flex-col justify-evenly rounded bg-blue-500 px-4 text-white'>
+				<h1 className='h-10 text-lg font-bold text-white'>{title}</h1>
+				<h3 className='max-h-20 overflow-clip'>{content}</h3>
+				<Button link={link} text='Lets Goo!' type='primary' />
+			</div>
 		</div>
 	);
 };
 
-const ExploreNav = ({ routes }) => {
+const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
 	return (
-		<div className='flex gap-4 justify-start'>
+		<div className='flex justify-start gap-6 text-lg font-bold'>
 			{routes.map((subRoute, index) => {
+				const styler =
+					currentCategory === subRoute.title ? 'w-full' : 'w-0';
 				return (
-					<div key={index}>
-						<Link href={subRoute.link}>Visit Me!</Link>
+					<div
+						key={index}
+						className='group text-gray-600'
+						onClick={() => changeCategory(subRoute.title)}
+					>
+						<button>Visit Me!</button>
+						<div
+							className={`h-1 w-0 bg-black transition-all group-hover:w-full ${styler}`}
+						></div>
 					</div>
 				);
 			})}
@@ -127,16 +177,18 @@ const ExploreNav = ({ routes }) => {
 
 const SmallCard = ({ title, caption, img, link }) => {
 	return (
-		<div className='flex w-2/5 h-40 rounded-md bg-orange-400 justify-between'>
-			<div id='imgContainer' className='w-4/12 h-full flex items-center'>
-				<Image src={img} className='w-full h-auto' alt='Donation Img' />
+		<div className='flex h-40 w-2/5 justify-between rounded-md border-b-4 border-r-4 border-gray-400'>
+			<div id='imgContainer' className='flex h-full w-4/12 items-center'>
+				<Image src={img} className='h-auto w-full' alt='Donation Img' />
 			</div>
-			<div className='flex flex-col w-11/12 pl-8 gap-2 my-2'>
-				<h3 className='font-bold text-lg'>{title}</h3>
-				<h4 className='text-lg overflow-hidden max-w-full'>
+			<div className='my-2 flex w-11/12 flex-col gap-2 pl-8'>
+				<h3 className='text-lg font-bold'>{title}</h3>
+				<h4 className='max-w-full overflow-hidden text-gray-500'>
 					{caption}
 				</h4>
-				<Link href={link}>Visit Me!</Link>
+				<Button link={link} text='Lets Goo!' type='primary' />
+
+				{/* <Link href={link}>Visit Me!</Link> */}
 			</div>
 		</div>
 	);
