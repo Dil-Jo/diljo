@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Signin from './Signin';
 import Signup from './Signup';
+
 export default function Navbar(props) {
 	const [isOpen, setIsOpen] = useState(false);
 	const navbarRef = useRef(null);
