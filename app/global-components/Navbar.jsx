@@ -1,18 +1,50 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Signin from "./Signin";
 import Signup from "./Signup";
-export default function Navbar() {
+export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
+  const navbarRef = useRef(null);
 
   function NavbarOpen() {
     setIsOpen(!isOpen);
   }
+if (props.navmain){
+  useEffect(() => {
+    function scrollFunction() {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
+        navbarRef.current.style.marginTop = "0";
+        navbarRef.current.style.transition = "0.3s";
+        navbarRef.current.style.borderRadius = "0";
+        navbarRef.current.style.width = "100%";
+        navbarRef.current.style.marginLeft = "0";
+      } else if (
+        document.body.scrollTop <= 80 ||
+        document.documentElement.scrollTop <= 80
+      ) {
+        navbarRef.current.style.marginTop = "1.5rem";
+        navbarRef.current.style.transition = "0.3s";
+        navbarRef.current.style.borderRadius = "1.5rem";
+        navbarRef.current.style.width = "calc(100% - 2.5rem)";
+        navbarRef.current.style.marginLeft = "1.5rem";
+      }
+    }
+
+    window.onscroll = scrollFunction;
+
+    return () => {
+      window.onscroll = null;
+    };
+  }, [])};
 
   return (
     <div
-      className="bg-white shadow-2xl fixed mx-4 rounded-b-xl z-50"
+      className="bg-white shadow-2xl fixed mx-4 mt-4 rounded-xl z-50"
+      ref={navbarRef}
       style={{ width: "calc(100% - 2.5rem)" }}
     >
       <Signup />
@@ -61,30 +93,43 @@ export default function Navbar() {
     </div>
   );
 }
+
 function Links() {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const menuItems = [
+    { id: 1, name: "EXPLORE" },
+    { id: 2, name: "MAIN" },
+    { id: 3, name: "ABOUT" }
+  ];
+
   return (
     <>
-      <Link
-        href="/explore"
-        className="tracking-tighter text-gray-800 text-md font-semibold hover:text-blue-600 mr-10"
-      >
-        Explore
-      </Link>
-      <Link
-        href="/main"
-        className="tracking-tighter text-gray-800 text-md font-semibold hover:text-blue-600 mr-10"
-      >
-        Main
-      </Link>
-      <Link
-        href="/about"
-        className="text-gray-800 tracking-tighter text-md font-semibold hover:text-blue-600"
-      >
-        About
-      </Link>
+      {menuItems.map((item) => (
+        <div
+          key={item.id}
+          className="mx-4"
+          onMouseEnter={() => setHoveredIndex(item.id)}
+          onMouseLeave={() => setHoveredIndex(null)}
+        >
+          <Link
+            href={`/${item.name.toLowerCase()}`}
+            className={`tracking-tighter text-gray-800 text-md font-semibold hover:text-blue-600`}
+          >
+            {item.name}
+          </Link>
+          <div
+            className={`bg-black h-1 transition-all duration-500 ease-in-out ${
+              hoveredIndex === item.id ? "w-full" : "w-0"
+            }`}
+          ></div>
+        </div>
+      ))}
     </>
   );
 }
+
+
 
 function Buttons() {
   return (
