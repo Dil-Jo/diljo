@@ -15,6 +15,8 @@ export default function Navbar() {
       className="bg-white shadow-2xl fixed mx-4 rounded-b-xl z-50"
       style={{ width: "calc(100% - 2.5rem)" }}
     >
+      <Signup />
+      <Signin />
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
           <div>
@@ -87,22 +89,19 @@ function Links() {
 function Buttons() {
   return (
     <>
-      <button
+      <label
         className="text-gray-800 text-sm font-semibold hover:text-blue-600
         mr-10"
         htmlFor="sign-in"
       >
-        {" "}
         Sign in
-      </button>
-      <Signin />
-      <button
+      </label>
+      <label
         className="text-gray-800 text-sm font-semibold border px-4 py-1 rounded-lg hover:text-blue-600 hover:border-blue-600"
         htmlFor="sign-up"
       >
         Sign up
-      </button>
-      <Signup />
+      </label>
     </>
   );
 }
