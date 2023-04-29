@@ -1,3 +1,9 @@
 export default function Page() {
-  return <></>;
+  return (
+    <>
+      <div className="h-screen w-screen">
+        <ProfileComponent />
+      </div>
+    </>
+  );
 }
