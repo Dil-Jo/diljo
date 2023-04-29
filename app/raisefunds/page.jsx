@@ -8,24 +8,23 @@ const RaiseFunds = () => {
         </div>
         <div className="w-4/6 bg-slate-300 rounded-l-3xl shadow-xl">
           
-<h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">What is the reason behind this Fundraising?</h3>
-<ul class="grid w-full gap-6 md:grid-cols-2">
+<h3 className="mb-5 text-lg font-medium text-gray-900 dark:text-white">What is the reason behind this Fundraising?</h3>
+<ul className="grid w-full gap-6 md:grid-cols-2">
     <li>
-        <input type="radio" id="education" name="education" value="education" class="hidden peer" required>
-        <label htmlFor="education" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
-            <div class="block">
-                <div class="w-full text-lg font-semibold">Education</div>
+        <input type="radio" id="education" name="education" value="education" className="hidden peer" required/>
+        <label htmlFor="education" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">                           
+            <div className="block">
+                <div cclassName="w-full text-lg font-semibold">Education</div>
             </div>
         </label>
-   </input> </li>
+</li>
     <li>
-        <input type="radio" id="emergency" name="emergency" value="emergency" class="hidden peer">
-        <label for="emergency" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-            <div class="block">
-                <div class="w-full text-lg font-semibold">Emergencies</div>
+        <input type="radio" id="emergency" name="emergency" value="emergency" className="hidden peer"/>
+        <label htmlFor="emergency" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div className="block">
+                <div className="w-full text-lg font-semibold">Emergencies</div>
             </div>
           </label>
-   </input> 
    </li>
 </ul>
 
