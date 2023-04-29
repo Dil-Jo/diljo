@@ -103,7 +103,7 @@ export default function Navbar(props) {
     <>
       {router === "/" ? (
         <div
-          className="fixed z-50  -m-[2.5rem] mx-4 rounded-xl bg-white shadow-2xl"
+          className="fixed z-50  -m-[2.5rem] mx-4 rounded-xl bg-white shadow-md"
           ref={navbarRef}
           style={{ width: "calc(100% - 2.5rem)" }}
         >
