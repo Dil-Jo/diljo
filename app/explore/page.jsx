@@ -4,7 +4,7 @@ import Image from 'next/image';
 import reviewsImg from '../../assets/reviews.jpg';
 import nicePic from '../../assets/nicePic.jpg';
 import Button from '../global-components/Button';
-import Donate from '../Components/banner';
+import Donate from '../Components/Banner';
 import { useState } from 'react';
 
 const ExpolorePage = () => {
