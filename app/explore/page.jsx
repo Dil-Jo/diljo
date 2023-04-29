@@ -67,10 +67,12 @@ const ExpolorePage = () => {
 	Tia, Mitch, Jinx & Luna `;
 
   return (
-    <div className="flex min-h-full w-full flex-col gap-14 px-10">
+    <div className="flex min-h-full w-full flex-col gap-14 px-10 mt-5">
       <div className="flex w-full flex-col gap-5">
-        <h1 className="text-center text-2xl font-bold">Explore Page</h1>
-        <h3 className="text-center text-2xl font-bold">
+        <h1 className="text-start text-3xl font-bold tracking-tighter">
+          Explore Page
+        </h1>
+        <h3 className="text-start text-2xl tracking-tighter  text-gray-500 dark:text-gray-400 md:text-lg">
           Explore Our Everlasting Collection of Chanda Program
         </h3>
         <div className="flex w-full gap-8">
@@ -158,14 +160,14 @@ const ExpolorePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex w-full flex-col gap-5">
+      <div className="mx-2 flex w-full flex-col gap-4">
         {/* <h1 className='font-bold text-2xl'>Explore Page</h1> */}
         <ExploreNav
           routes={routes}
           changeCategory={setCategory}
           currentCategory={category}
         />
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {content.map((item, index) => (
             <SmallCard
               title={item.title}

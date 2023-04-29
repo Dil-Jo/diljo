@@ -15,7 +15,7 @@ export default function Main() {
   }
 
   return (
-    <div className="grid h-screen w-full place-items-end bg-black">
+    <div className="-mt-[4.49rem] grid h-screen w-full place-items-end bg-black">
       <div className="flex w-full justify-center">
         <div
           className="mb-14 h-16 w-16 transform rounded-full outline-dotted outline-4  outline-white duration-500 hover:-translate-y-3"
