@@ -7,7 +7,7 @@ export default function Card(props) {
   };
 
   return (
-    <div className="group z-0 mx-auto mt-10 w-full max-w-md transform cursor-pointer rounded pb-8 shadow-xl duration-500 hover:-translate-y-1">
+    <div className="group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-500 hover:-translate-y-1">
       <div
         className="content h-64 rounded rounded-b-xl bg-cover bg-center"
         style={resolveImage(props.image)}
@@ -35,7 +35,7 @@ export default function Card(props) {
         <div className="flex flex-col items-center justify-center">
           <button
             type="button"
-            class="mb-2 mr-2 rounded-lg bg-gradient-to-br from-green-400 to-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-green-200 dark:focus:ring-green-800"
+            className="mb-2 mr-2 rounded-lg bg-gradient-to-br from-green-400 to-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-green-200 dark:focus:ring-green-800"
           >
             Donate
           </button>
