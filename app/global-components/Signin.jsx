@@ -5,8 +5,7 @@ export default function Signin() {
       <div className="modal">
         <div className="modal-box relative">
           <label
-            html
-            For="sign-in"
+            htmlFor="sign-in"
             className="btn-sm btn-circle btn absolute right-2 top-2 bg-gray-900"
           >
             ✕
