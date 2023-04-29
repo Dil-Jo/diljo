@@ -13,7 +13,7 @@ export default function Signup() {
           <form>
             <div class="mb-6">
               <label
-                for="email"
+                htmlFor="email"
                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
                 Your email
@@ -28,7 +28,7 @@ export default function Signup() {
             </div>
             <div class="mb-6">
               <label
-                for="password"
+                htmlFor="password"
                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
                 Your password
@@ -51,7 +51,7 @@ export default function Signup() {
                 ></input>
               </div>
               <label
-                for="remember"
+                htmlFor="remember"
                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 Remember me
