@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-const Button = ({ type, text, link = '' }) => {
+const Button = ({ type, text, link = '', onClick }) => {
 	const buttonColor = {
 		primary: 'bg-blue-500 hover:bg-blue-600',
 		secondary: 'bg-gray-500 hover:bg-gray-600',
@@ -18,7 +18,12 @@ const Button = ({ type, text, link = '' }) => {
 				<Link href={link}>{text}</Link>
 			</button>
 		);
-	else return <button className={btnStyles}>{text}</button>;
+	else
+		return (
+			<button onClick={onClick} className={btnStyles}>
+				{text}
+			</button>
+		);
 };
 
 export default Button;

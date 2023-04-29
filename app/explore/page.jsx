@@ -4,7 +4,7 @@ import Image from 'next/image';
 import reviewsImg from '../../assets/reviews.jpg';
 import nicePic from '../../assets/nicePic.jpg';
 import Button from '../global-components/Button';
-import Donate from '../Components/banner';
+import Donate from '../Components/Donate';
 import { useState } from 'react';
 
 const ExpolorePage = () => {
@@ -49,6 +49,15 @@ const ExpolorePage = () => {
 		},
 	];
 
+	const [displayModal, setDisplayModal] = useState(false);
+	// useEffect(() => {
+	//   if(displayModal)
+
+	//   return () => {
+	// 	console.log("Unmount the displayModal")
+	//   }
+	// }, [displayModal])
+
 	const [category, setCategory] = useState('title');
 
 	const text = `
@@ -65,6 +74,7 @@ const ExpolorePage = () => {
 	Tia, Mitch, Jinx & Luna `;
 	return (
 		<div className='flex min-h-full w-full flex-col gap-14 px-10'>
+			{displayModal && <Donate />}
 			<section className='flex w-full flex-col gap-5'>
 				<h1 className='text-center text-2xl font-bold'>Explore Page</h1>
 				<h3 className='text-center text-2xl font-bold'>
@@ -90,21 +100,21 @@ const ExpolorePage = () => {
 							title='Help Jinx with Dental Surgery!'
 							content={text}
 							link='link'
-							key='2'
+							key='3'
 							backgroundImg={nicePic}
 						/>
 						<Card
 							title='Help Jinx with Dental Surgery!'
 							content={text}
 							link='link'
-							key='2'
+							key='4'
 							backgroundImg={nicePic}
 						/>
 						<Card
 							title='Help Jinx with Dental Surgery!'
 							content={text}
 							link='link'
-							key='2'
+							key='5'
 							backgroundImg={nicePic}
 						/>
 					</div>
@@ -125,6 +135,7 @@ const ExpolorePage = () => {
 							img={item.img}
 							link={item.link}
 							key={index}
+							setDisplayModal={setDisplayModal}
 						/>
 					))}
 				</div>
@@ -176,7 +187,7 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
 	);
 };
 
-const SmallCard = ({ title, caption, img, link }) => {
+const SmallCard = ({ title, caption, img, link, setDisplayModal }) => {
 	return (
 		<div className='flex h-40 w-2/5 justify-between rounded-md border-b-4 border-r-4 border-gray-400'>
 			<div id='imgContainer' className='flex h-full w-4/12 items-center'>
@@ -189,7 +200,7 @@ const SmallCard = ({ title, caption, img, link }) => {
 				</h4>
 				<Button
 					// link={link}
-					onClick={() => console.log("fe")}
+					onClick={()=>setDisplayModal(true)}
 					text='Lets Goo!'
 					type='primary'
 				/>

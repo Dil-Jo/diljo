@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import pic from '../../assets/cat.jpeg';
 
-const donate = (props) => {
+const Donate = (props) => {
 	let progressbar = (raised, goal) => {
 		return { width: `${(raised / goal) * 100}%` };
 	};
@@ -11,7 +11,7 @@ const donate = (props) => {
 				<div className='flex h-full w-full flex-col items-center justify-center rounded-l-xl bg-slate-500'>
 					<Image
 						className='flex h-5/6 w-5/6 flex-col items-center justify-center rounded-md border-4 border-white bg-gray-700'
-						src={props.image}
+						src={pic}
 						alt='image here'
 					/>
 				</div>
@@ -62,4 +62,4 @@ const donate = (props) => {
 	);
 };
 
-export default donate;
+export default Donate;
