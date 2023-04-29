@@ -2,7 +2,6 @@
 import { useEffect, useContext } from 'react';
 import PocketBase from 'pocketbase';
 import GlobalContext from '../Contexts/GlobalContext';
-import Donate from '../Components/Donate'
 // import { GlobalContext } from 'GlobalContext';
 
 export const metadata = {
@@ -42,14 +41,13 @@ const TestPage = () => {
 	};
 	return (
 		<div>
-			{/* Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt,
+			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt,
 			aperiam aliquam! Dolorem recusandae qui id dolor atque consequatur
 			dolore suscipit animi magni possimus, dicta, laboriosam deleniti
 			nisi enim necessitatibus incidunt!
 			<button className='bg-slate-500 p-20 text-white' onClick={addUser}>
 				Click me
-			</button> */}
-			<Donate />
+			</button>
 		</div>
 	);
 };
