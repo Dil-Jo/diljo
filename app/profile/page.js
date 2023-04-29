@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-12">
       <div className="col-span-1 bg-white md:col-span-9">
-        <div className="m-6 h-screen">
+        <div className="m-6">
           <div className="inline">
             <CurrentSettingComponent />
           </div>

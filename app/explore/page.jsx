@@ -6,9 +6,12 @@ import nicePic from "../../assets/nicePic.jpg";
 import Button from "../global-components/Button";
 import { useState } from "react";
 import Card from "../global-components/Card";
+import Gareeb from "../../public/assets/photo.jpeg";
+
 function resolveText(text) {
   return text.length > 100 ? text.substring(0, 100) + "..." : text;
 }
+
 const ExpolorePage = () => {
   const routes = [
     {
@@ -67,8 +70,9 @@ const ExpolorePage = () => {
 	Tia, Mitch, Jinx & Luna `;
 
   return (
-    <div className="flex min-h-full w-full flex-col gap-14 px-10 mt-5">
+    <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-10">
       <div className="flex w-full flex-col gap-5">
+        <Banner />
         <h1 className="text-start text-3xl font-bold tracking-tighter">
           Explore Page
         </h1>
@@ -252,5 +256,42 @@ const SmallCard = ({ title, caption, img, link }) => {
     </div>
   );
 };
+
+function Banner() {
+  return (
+    <>
+      <div className={"h-full w-full"}>
+        <Link href={"#"}>
+          <div
+            className={"rounded-xl"}
+            style={{
+              backgroundImage: `url(assets/photo.jpeg)`,
+              backgroundSize: `cover`,
+              backgroundPosition: `center`,
+              backgroundRepeat: `no-repeat`,
+            }}
+          >
+            <div className={"h-52 w-full cursor-pointer rounded-xl"}>
+              <div
+                className={
+                  "flex h-full w-full rounded-xl bg-gray-950 bg-opacity-40"
+                }
+              >
+                <div className={"md:w-full"}></div>
+                <h1
+                  className={
+                    "my-auto  text-start text-6xl font-bold tracking-tighter text-white sm:text-7xl"
+                  }
+                >
+                  Donate to Charities.
+                </h1>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+    </>
+  );
+}
 
 export default ExpolorePage;

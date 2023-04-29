@@ -10,9 +10,11 @@ export default function Navbar(props) {
   const navbarRef = useRef(null);
 
   const router = usePathname();
+
   function NavbarOpen() {
     setIsOpen(!isOpen);
   }
+
   function NavDataComponent() {
     return (
       <>
