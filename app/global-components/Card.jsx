@@ -7,7 +7,7 @@ export default function Card(props) {
   };
 
   return (
-    <div className="group z-0 mx-auto mt-10 w-full max-w-md transform cursor-pointer rounded pb-8 shadow-xl duration-500 hover:-translate-y-1">
+    <div className="group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-500 hover:-translate-y-1">
       <div
         className="content h-64 rounded rounded-b-xl bg-cover bg-center"
         style={resolveImage(props.image)}
