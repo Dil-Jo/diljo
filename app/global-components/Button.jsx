@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const Button = ({ type, text, link = "" }) => {
+const Button = ({ type, text, link = "", onClick }) => {
   const buttonColor = {
     primary:
       "bg-blue-500 hover:bg-blue-600 hover:border-blue-300 focus:ring-blue-200",
@@ -18,6 +18,7 @@ const Button = ({ type, text, link = "" }) => {
     septenary:
       "bg-purple-500 hover:bg-purple-600 hover:border-purple-300 focus:ring-purple-200",
   };
+
   const btnStyles = `w-full place-items-center rounded-lg  px-5 py-2.5 text-center text-sm font-medium focus:outline-none focus:ring-4 sm:w-auto rounded-lg border w-max px-4 py-1 text-sm font-semibold text-gray-800 text-white ${buttonColor[type]}`;
   if (link !== "")
     return (
@@ -25,7 +26,12 @@ const Button = ({ type, text, link = "" }) => {
         <Link href={link}>{text}</Link>
       </button>
     );
-  else return <button className={btnStyles}>{text}</button>;
+  else
+    return (
+      <button onClick={onClick} className={btnStyles}>
+        {text}
+      </button>
+    );
 };
 
 export default Button;
