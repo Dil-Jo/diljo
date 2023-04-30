@@ -9,11 +9,11 @@ export default function Signup() {
   const confirmPasswordRef = useRef(null);
   const nameRef = useRef(null);
   const usernameRef = useRef(null);
+  const successRef = useRef(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
-  const [doPasswordsMatch, setDoPasswordsMatch] = useState(false);
   const [error, setError] = useState("");
 
   async function create() {
@@ -29,37 +29,43 @@ export default function Signup() {
     console.log(temp);
   }
   async function verify() {
-    setError("");
-    if (passwordRef.current.value === confirmPasswordRef.current.value) {
-      const pb = new PocketBase("http://127.0.0.1:8090");
-      // const emailAvailable = await pb.collection("users").;
-      const resultList = await pb.collection("users").getList(1, 50, {
-        filter: `email = "${email}" || username = "${username}"`,
-      });
-      console.log(resultList.items);
-      if (resultList.items.length > 0) {
-        setError("Email or username already exists");
-      } else {
-        create().then((r) => {
-          console.log(r);
-        });
-      }
-    } else {
-      setError("Passwords do not match");
-    }
-  }
-  function clickHandler() {
     setEmail(emailRef.current.value);
     setPassword(passwordRef.current.value);
     setName(nameRef.current.value);
     setUsername(usernameRef.current.value);
+    setError("");
+    successRef.current.style.display = "none";
+    if (email === "" || password === "" || name === "" || username === "") {
+      setError("Please fill all the fields");
+    } else {
+      if (password.length < 9) {
+        setError("Password must be at least 9 characters long");
+      } else {
+        if (passwordRef.current.value === confirmPasswordRef.current.value) {
+          const pb = new PocketBase("http://127.0.0.1:8090");
+          const resultList = await pb.collection("users").getList(1, 50, {
+            filter: `email = "${email}" || username = "${username}"`,
+          });
+          console.log(resultList.items);
+          if (resultList.items.length > 0) {
+            setError("Email or username already exists");
+          } else {
+            create().then((r) => {
+              setError("");
+              successRef.current.style.display = "block";
+            });
+          }
+        } else {
+          setError("Passwords do not match");
+        }
+      }
+    }
   }
-
-  useEffect(() => {
+  function clickHandler() {
     verify().then((r) => {
       console.log(r);
     });
-  }, [email, password, name, username]);
+  }
 
   return (
     <>
@@ -181,11 +187,13 @@ export default function Signup() {
               </div>
             </div>
             <h1 className={"text-red-800"}>{error}</h1>
+            <h1 className={"hidden text-green-800"} ref={successRef}>
+              Success! You can Sign in now.
+            </h1>
             <div className="grid w-full">
               <div
                 className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
-                onClick={clickHandler}
-                // type="submit"
+                onClick={() => clickHandler()}
               >
                 Submit
               </div>
