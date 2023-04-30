@@ -10,58 +10,63 @@ export default function Signup() {
   const nameRef = useRef(null);
   const usernameRef = useRef(null);
   const successRef = useRef(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
   const [error, setError] = useState("");
 
   async function create() {
     const pb = new PocketBase("http://127.0.0.1:8090");
     let temp = await pb.collection("users").create({
-      email: email,
+      email: emailRef.current.value,
       emailVisibility: true,
-      password: password,
-      passwordConfirm: password,
-      name: name,
-      username: username,
+      password: passwordRef.current.value,
+      passwordConfirm: passwordRef.current.value,
+      name: nameRef.current.value,
+      username: usernameRef.current.value,
     });
     console.log(temp);
   }
   async function verify() {
-    setEmail(emailRef.current.value);
-    setPassword(passwordRef.current.value);
-    setName(nameRef.current.value);
-    setUsername(usernameRef.current.value);
-    setError("");
-    successRef.current.style.display = "none";
-    if (email === "" || password === "" || name === "" || username === "") {
+    if (
+      emailRef.current.value === "" ||
+      passwordRef.current.value === "" ||
+      nameRef.current.value === "" ||
+      usernameRef.current.value === ""
+    ) {
       setError("Please fill all the fields");
-    } else {
-      if (password.length < 9) {
-        setError("Password must be at least 9 characters long");
-      } else {
-        if (passwordRef.current.value === confirmPasswordRef.current.value) {
-          const pb = new PocketBase("http://127.0.0.1:8090");
-          const resultList = await pb.collection("users").getList(1, 50, {
-            filter: `email = "${email}" || username = "${username}"`,
-          });
-          console.log(resultList.items);
-          if (resultList.items.length > 0) {
-            setError("Email or username already exists");
-          } else {
-            create().then((r) => {
-              setError("");
-              successRef.current.style.display = "block";
-            });
-          }
-        } else {
-          setError("Passwords do not match");
-        }
-      }
+      return;
+    }
+
+    if (passwordRef.current.value < 9) {
+      setError("Password must be at least 9 characters long");
+      return;
+    }
+
+    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    const pb = new PocketBase("http://127.0.0.1:8090");
+    const resultList = await pb.collection("users").getList(1, 50, {
+      filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`,
+    });
+    console.log(resultList.items);
+
+    if (resultList.items.length > 0) {
+      setError("Email or username already exists");
+      return;
+    }
+
+    try {
+      await create();
+      setError("");
+      successRef.current.style.display = "block";
+    } catch (error) {
+      // Handle any errors that occur during the create() function but baad may
     }
   }
   function clickHandler() {
+    setError("");
+    successRef.current.style.display = "none";
     verify().then((r) => {
       console.log(r);
     });
@@ -193,7 +198,7 @@ export default function Signup() {
             <div className="grid w-full">
               <div
                 className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
-                onClick={() => clickHandler()}
+                onClick={clickHandler}
               >
                 Submit
               </div>

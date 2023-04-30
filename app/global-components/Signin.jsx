@@ -9,6 +9,7 @@ export default function Signin() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const rememberRef = useRef(null);
+  const loadingRef = useRef(null);
 
   async function verify() {
     const pb = new PocketBase("http://127.0.0.1:8090");
@@ -26,6 +27,7 @@ export default function Signin() {
       <input type="checkbox" id="sign-in" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
+          <dialog ref={loadingRef}></dialog>
           <label
             htmlFor="sign-in"
             className="btn-sm btn absolute right-2 top-2 border-0 bg-white text-black hover:text-white"
