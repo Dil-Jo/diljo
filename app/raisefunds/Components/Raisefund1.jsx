@@ -1,8 +1,9 @@
-"use client"
-import Image from 'next/image';
+"use client";
+import Image from "next/image";
 import { useState } from "react";
 import upload from "../../../assets/upload.png";
 import defpic from "../../../assets/default.jpeg";
+
 const Comp1 = ({ next, updateForm }) => {
   // const [title1, setTitle] = useState("");
   // const [description1, setDescription] = useState("");
@@ -10,13 +11,15 @@ const Comp1 = ({ next, updateForm }) => {
   const [form, setForm] = useState({
     title: "",
     description: "",
-    image: "",
+    image: ""
   });
+
   function onNext(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
+
   function onimg(e) {
-    const bg = document.getElementById('imgbg');
+    const bg = document.getElementById("imgbg");
     // resize the background image
     bg.style.backgroundSize = "cover";
     // change the background image
@@ -72,5 +75,5 @@ const Comp1 = ({ next, updateForm }) => {
       <button type="submit">Submit</button>
     </form>
   );
-}
+};
 export default Comp1;
