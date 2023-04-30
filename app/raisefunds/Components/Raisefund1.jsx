@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from "react";
 import upload from "../../../assets/upload.png";
 import defpic from "../../../assets/default.jpeg";
+
 const Comp1 = () => {
   const [reason1, setReason] = useState("");
   const [identity1, setIdentity] = useState("anonymous");
