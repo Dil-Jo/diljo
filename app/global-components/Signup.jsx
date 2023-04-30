@@ -211,7 +211,7 @@ export default function Signup() {
             </div>
             <h1 className={"text-red-800"}>{error}</h1>
             <h1 className={"hidden text-green-800"} ref={successRef}>
-              Success! You can Sign in now.
+              Success! You can Sign in now. Reloading...
             </h1>
             <div className="grid w-full">
               <div
