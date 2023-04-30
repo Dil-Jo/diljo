@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Button from "../global-components/Button";
 import PocketBase from "pocketbase";
 import Router from "next/router";
 
@@ -13,6 +12,24 @@ export default function Signup() {
   const successRef = useRef(null);
   const [error, setError] = useState("");
 
+  async function create() {
+    const pb = new PocketBase("http://127.0.0.1:8090");
+    try {
+      const resultList = await pb.collection("users").create({
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        name: nameRef.current.value,
+        username: usernameRef.current.value,
+        emailVisibility: true,
+        passwordConfirm: passwordRef.current.value,
+      });
+      successRef.current.style.display = "block";
+      return true;
+    } catch (e) {
+      setError("Invalid email or password");
+      return false;
+    }
+  }
   async function verify() {
     if (
       emailRef.current.value === "" ||
@@ -56,6 +73,7 @@ export default function Signup() {
       usernameRef.current.value = "";
       return true;
     } catch (error) {
+      console.log(error);
       // Handle any errors that occur during the create() function
       setError("Something went wrong. Please try again later.");
       return false;
