@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+'use client';
+import Link from 'next/link';
+import Image from 'next/image';
+import reviewsImg from '../../assets/reviews.jpg';
+import nicePic from '../../assets/nicePic.jpg';
+import Button from '../global-components/Button';
+import Donate from '../Components/Banner';
+import { useState } from 'react';
+=======
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,6 +22,7 @@ import Gareeb from "../../public/assets/photo.jpeg";
 function resolveText(text) {
   return text.length > 100 ? text.substring(0, 100) + "..." : text;
 }
+>>>>>>> 06bbf91ac30dfdecb9ebd2a4b660c8e6019a1938
 
 const ExpolorePage = () => {
   const routes = [
