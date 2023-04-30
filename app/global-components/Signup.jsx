@@ -20,7 +20,9 @@ export default function Signup() {
     const pb = new PocketBase("http://127.0.0.1:8090");
     let temp = await pb.collection("users").create({
       email: email,
+      emailVisibility: true,
       password: password,
+      passwordConfirm: password,
       name: name,
       username: username,
     });
