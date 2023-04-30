@@ -6,11 +6,11 @@ import Form2 from "./Components/Raisefund1.jsx";
 import Form3 from "./Components/Raisefund2.jsx";
 
 
-async function submitForm(data) {
-  const pb = new PocketBase('http://127.0.0.1:8090');
-  const record = await pb.collection('fundraisers').create(data);
-  return record;
-}
+// async function submitForm(data) {
+//   const pb = new PocketBase('http://127.0.0.1:8090');
+//   const record = await pb.collection('fundraisers').create(data);
+//   return record;
+// }
 
 const RaiseFunds = () => {
   const [stage, setStage] = useState(1);
@@ -35,7 +35,24 @@ const RaiseFunds = () => {
       }
       console.log({ data })
 
-      const response = await submitForm(data);
+      const fetchStripe = await fetch('http://localhost:3000/api/add_product', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: fullForm.title
+        })
+      })
+      const stripeId = await fetchStripe.json();
+      console.log({ stripeId })
+      if (stripeId.status) data.stripeLink = stripeId.paymentLink.url;
+      else return alert('Something went wrong with stripe');
+
+      const pb = new PocketBase('http://127.0.0.1:8090');
+      const response = await pb.collection('fundraisers').create(data);
+      // return record;
+      // const response = await submitForm(data);
       if (response.id) alert('Form submitted successfully');
       else alert('Form submission failed');
 
