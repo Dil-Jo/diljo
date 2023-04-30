@@ -60,8 +60,14 @@ export default function Signup() {
       await create();
       setError("");
       successRef.current.style.display = "block";
+      emailRef.current.value = "";
+      passwordRef.current.value = "";
+      confirmPasswordRef.current.value = "";
+      nameRef.current.value = "";
+      usernameRef.current.value = "";
     } catch (error) {
       // Handle any errors that occur during the create() function but baad may
+      setError("Something went wrong. Please try again later.");
     }
   }
   function clickHandler() {
