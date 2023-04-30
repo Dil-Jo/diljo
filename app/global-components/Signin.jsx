@@ -3,31 +3,48 @@ import { useEffect, useRef, useState } from "react";
 import PocketBase from "pocketbase";
 
 export default function Signin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const rememberRef = useRef(null);
-  const loadingRef = useRef(null);
-
+  const successRef = useRef(null);
+  const [error, setError] = useState("");
   async function verify() {
+    if (emailRef.current.value === "" || passwordRef.current.value === "") {
+      setError("Please fill all the fields");
+      return;
+    }
+
     const pb = new PocketBase("http://127.0.0.1:8090");
-    let temp = await pb.collection("users").authWithPassword(email, password);
-    console.log(temp);
+    try {
+      const resultList = await pb
+        .collection("users")
+        .authWithPassword(emailRef.current.value, passwordRef.current.value);
+      successRef.current.style.display = "block";
+      return true;
+    } catch (e) {
+      setError("Invalid email or password");
+      return false;
+    }
   }
 
   function clickHandler() {
-    setEmail(emailRef.current.value);
-    setPassword(passwordRef.current.value);
-    setRemember(rememberRef.current.checked);
+    setError("");
+    successRef.current.style.display = "none";
+
+    verify().then((isValid) => {
+      console.log(isValid);
+      if (isValid)
+        setTimeout(() => {
+          window.location.reload();
+        }, 1200);
+    });
   }
+
   return (
     <>
       <input type="checkbox" id="sign-in" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
-          <dialog ref={loadingRef}></dialog>
           <label
             htmlFor="sign-in"
             className="btn-sm btn absolute right-2 top-2 border-0 bg-white text-black hover:text-white"
@@ -66,7 +83,7 @@ export default function Signin() {
                 required
               ></input>
             </div>
-            <div className="mb-6 flex items-start">
+            <div className="mb-2 flex items-start">
               <div className="flex h-5 items-center">
                 <input
                   ref={rememberRef}
@@ -83,6 +100,11 @@ export default function Signin() {
                 Remember me
               </label>
             </div>
+            <h1 ref={successRef} className={"mb-2 hidden text-green-800"}>
+              Success! Reloading...
+            </h1>
+            <h1 className={"mb-2 text-red-800"}>{error}</h1>
+
             <div className="grid w-full">
               <div
                 className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"

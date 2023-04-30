@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "../global-components/Button";
 import PocketBase from "pocketbase";
+import Router from "next/router";
 
 export default function Signup() {
   const emailRef = useRef(null);
@@ -12,18 +13,6 @@ export default function Signup() {
   const successRef = useRef(null);
   const [error, setError] = useState("");
 
-  async function create() {
-    const pb = new PocketBase("http://127.0.0.1:8090");
-    let temp = await pb.collection("users").create({
-      email: emailRef.current.value,
-      emailVisibility: true,
-      password: passwordRef.current.value,
-      passwordConfirm: passwordRef.current.value,
-      name: nameRef.current.value,
-      username: usernameRef.current.value,
-    });
-    console.log(temp);
-  }
   async function verify() {
     if (
       emailRef.current.value === "" ||
@@ -32,17 +21,17 @@ export default function Signup() {
       usernameRef.current.value === ""
     ) {
       setError("Please fill all the fields");
-      return;
+      return false;
     }
 
-    if (passwordRef.current.value < 9) {
+    if (passwordRef.current.value.length < 9) {
       setError("Password must be at least 9 characters long");
-      return;
+      return false;
     }
 
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Passwords do not match");
-      return;
+      return false;
     }
 
     const pb = new PocketBase("http://127.0.0.1:8090");
@@ -53,7 +42,7 @@ export default function Signup() {
 
     if (resultList.items.length > 0) {
       setError("Email or username already exists");
-      return;
+      return false;
     }
 
     try {
@@ -65,16 +54,21 @@ export default function Signup() {
       confirmPasswordRef.current.value = "";
       nameRef.current.value = "";
       usernameRef.current.value = "";
+      return true;
     } catch (error) {
-      // Handle any errors that occur during the create() function but baad may
+      // Handle any errors that occur during the create() function
       setError("Something went wrong. Please try again later.");
+      return false;
     }
   }
   function clickHandler() {
     setError("");
     successRef.current.style.display = "none";
     verify().then((r) => {
-      console.log(r);
+      if (r)
+        setTimeout(() => {
+          window.location.reload();
+        }, 1200);
     });
   }
 
