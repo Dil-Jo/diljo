@@ -1,15 +1,23 @@
+"use client";
 import Card from "../global-components/Card";
+import PocketBase from "pocketbase";
+import { useEffect, useState } from "react";
 
 export default function FeaturedPosts() {
+  async function temp() {
+    const pb = new PocketBase("http://127.0.0.1:8090");
+    let temp = await pb.collection("fundraisers").getList(1, 4, {
+      filter: "",
+    });
+    return temp.items;
+  }
 
-  let propsCard1 = {
-    id: "1",
-    caption: "hello",
-    description: "bro",
-    raised: "100",
-    goal: "1000",
-    image: "./assets-landing/photo.jpeg",
-  };
+  const [cardList, setCardList] = useState([]);
+  useEffect(() => {
+    temp().then((data) => {
+      setCardList(data);
+    });
+  }, []);
 
   return (
     <>
@@ -20,10 +28,9 @@ export default function FeaturedPosts() {
         Help those who need you the most
       </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
-        <Card {...propsCard1} />
-        <Card {...propsCard1} />
-        <Card {...propsCard1} />
-        <Card {...propsCard1} />
+        {cardList.map((card) => {
+          return <Card {...card} raised="10" />;
+        })}
       </div>
     </>
   );
