@@ -1,5 +1,7 @@
 import Card from "../global-components/Card";
+
 export default function FeaturedPosts() {
+
   let propsCard1 = {
     id: "1",
     caption: "hello",
@@ -8,6 +10,7 @@ export default function FeaturedPosts() {
     goal: "1000",
     image: "./assets-landing/photo.jpeg",
   };
+
   return (
     <>
       <h1 className="text-4xl font-black tracking-tighter text-gray-900 dark:text-white">

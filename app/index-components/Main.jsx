@@ -1,5 +1,8 @@
 "use client";
+import { useRef } from 'react'
 export default function Main() {
+
+  const videoContainerRef = useRef(null);
   function clickCoolButton() {
     const scrollHeight = window.innerHeight - 50;
     const element = document.querySelector("#coolscrolldownbutton");
