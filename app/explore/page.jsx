@@ -7,6 +7,7 @@ import Button from '../global-components/Button';
 import { useState } from 'react';
 import Card from '../global-components/Card';
 import Donate from '../Components/Donate';
+import Gareeb from "../../public/assets/photo.jpeg";
 
 function resolveText(text) {
 	return text.length > 100 ? text.substring(0, 100) + '...' : text;
@@ -70,124 +71,123 @@ const ExpolorePage = () => {
 	Thank you from the bottom of our hearts!
 	Tia, Mitch, Jinx & Luna `;
 
-	return (
-		<div className='flex min-h-full w-full flex-col gap-14 px-10 mt-5'>
-			{/* {displayModal && <Overlay/>} */}
-			{displayModal && <Donate setDisplayModal={setDisplayModal} />}
-			<div className='flex w-full flex-col gap-5'>
-				<h1 className='text-start text-3xl font-bold tracking-tighter'>
-					Explore Page
-				</h1>
-				<h3 className='text-start text-2xl tracking-tighter  text-gray-500 dark:text-gray-400 md:text-lg'>
-					Explore Our Everlasting Collection of Chanda Program
-				</h3>
-				<div className='flex w-full gap-8'>
-					<div className='carousel-center carousel rounded-box w-full space-x-8 overflow-x-scroll p-4'>
-						<Card
-							key='1'
-							caption='Help Jinx with Dental Surgery!'
-							description={resolveText(text)}
-							link='link'
-							raised='1'
-							goal='10'
-							id='DLKFJSALK12321432'
-							image={nicePic}
-						/>
-						<Card
-							key='2'
-							caption='Help Jinx with Dental Surgery!'
-							description={resolveText(text)}
-							link='link'
-							raised='1'
-							goal='10'
-							id='DLKFJSALK12321432'
-							image={nicePic}
-						/>
-						<Card
-							key='3'
-							caption='Help Jinx with Dental Surgery!'
-							description={resolveText(text)}
-							link='link'
-							raised='1'
-							goal='10'
-							id='DLKFJSALK12321432'
-							image={nicePic}
-						/>
-						<Card
-							key='4'
-							caption='Help Jinx with Dental Surgery!'
-							description={resolveText(text)}
-							link='link'
-							raised='1'
-							goal='10'
-							id='DLKFJSALK12321432'
-							image={nicePic}
-						/>
-						<Card
-							key='5'
-							caption='Help Jinx with Dental Surgery!'
-							description={resolveText(text)}
-							link='link'
-							raised='1'
-							goal='10'
-							id='DLKFJSALK12321432'
-							image={nicePic}
-						/>
-						<Card
-							key='6'
-							caption='Help Jinx with Dental Surgery!'
-							description={resolveText(text)}
-							link='link'
-							raised='1'
-							goal='10'
-							id='DLKFJSALK12321432'
-							image={nicePic}
-						/>{' '}
-						<Card
-							key='7'
-							caption='Help Jinx with Dental Surgery!'
-							description={resolveText(text)}
-							link='link'
-							raised='1'
-							goal='10'
-							id='DLKFJSALK12321432'
-							image={nicePic}
-						/>{' '}
-						<Card
-							key='8'
-							caption='Help Jinx with Dental Surgery!'
-							description={resolveText(text)}
-							link='link'
-							raised='1'
-							goal='10'
-							id='DLKFJSALK12321432'
-							image={nicePic}
-						/>
-					</div>
-				</div>
-			</div>
-			<div className='mx-2 flex w-full flex-col gap-4'>
-				{/* <h1 className='font-bold text-2xl'>Explore Page</h1> */}
-				<ExploreNav
-					routes={routes}
-					changeCategory={setCategory}
-					currentCategory={category}
-				/>
-				<div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
-					{content.map((item, index) => (
-						<SmallCard
-							title={item.title}
-							caption={text}
-							img={item.img}
-							link={item.link}
-							key={index}
-							setDisplayModal={setDisplayModal}
-						/>
-					))}
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-10">
+      <div className="flex w-full flex-col gap-5">
+        <Banner />
+        <h1 className="text-start text-3xl font-bold tracking-tighter">
+          Explore Page
+        </h1>
+        <h3 className="text-start text-2xl tracking-tighter  text-gray-500 dark:text-gray-400 md:text-lg">
+          Explore Our Everlasting Collection of Chanda Program
+        </h3>
+        <div className="flex w-full gap-8">
+          <div className="carousel-center carousel rounded-box w-full space-x-8 overflow-x-scroll p-4">
+            <Card
+              key="1"
+              caption="Help Jinx with Dental Surgery!"
+              description={resolveText(text)}
+              link="link"
+              raised="1"
+              goal="10"
+              id="DLKFJSALK12321432"
+              image={nicePic}
+            />
+            <Card
+              key="2"
+              caption="Help Jinx with Dental Surgery!"
+              description={resolveText(text)}
+              link="link"
+              raised="1"
+              goal="10"
+              id="DLKFJSALK12321432"
+              image={nicePic}
+            />
+            <Card
+              key="3"
+              caption="Help Jinx with Dental Surgery!"
+              description={resolveText(text)}
+              link="link"
+              raised="1"
+              goal="10"
+              id="DLKFJSALK12321432"
+              image={nicePic}
+            />
+            <Card
+              key="4"
+              caption="Help Jinx with Dental Surgery!"
+              description={resolveText(text)}
+              link="link"
+              raised="1"
+              goal="10"
+              id="DLKFJSALK12321432"
+              image={nicePic}
+            />
+            <Card
+              key="5"
+              caption="Help Jinx with Dental Surgery!"
+              description={resolveText(text)}
+              link="link"
+              raised="1"
+              goal="10"
+              id="DLKFJSALK12321432"
+              image={nicePic}
+            />
+            <Card
+              key="6"
+              caption="Help Jinx with Dental Surgery!"
+              description={resolveText(text)}
+              link="link"
+              raised="1"
+              goal="10"
+              id="DLKFJSALK12321432"
+              image={nicePic}
+            />{" "}
+            <Card
+              key="7"
+              caption="Help Jinx with Dental Surgery!"
+              description={resolveText(text)}
+              link="link"
+              raised="1"
+              goal="10"
+              id="DLKFJSALK12321432"
+              image={nicePic}
+            />{" "}
+            <Card
+              key="8"
+              caption="Help Jinx with Dental Surgery!"
+              description={resolveText(text)}
+              link="link"
+              raised="1"
+              goal="10"
+              id="DLKFJSALK12321432"
+              image={nicePic}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="mx-2 flex w-full flex-col gap-4">
+        {/* <h1 className='font-bold text-2xl'>Explore Page</h1> */}
+        <ExploreNav
+          routes={routes}
+          changeCategory={setCategory}
+          currentCategory={category}
+        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {content.map((item, index) => (
+            <SmallCard
+              title={item.title}
+              caption={text}
+              img={item.img}
+              link={item.link}
+              key={index}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
 };
 
 // const Card = ({ title, content, backgroundImg, link }) => {
@@ -262,6 +262,41 @@ const SmallCard = ({ title, caption, img, link, setDisplayModal }) => {
 	);
 };
 
+function Banner() {
+  return (
+    <>
+      <div className={"h-full w-full"}>
+        <Link href={"#"}>
+          <div
+            className={"rounded-xl"}
+            style={{
+              backgroundImage: `url(assets/photo.jpeg)`,
+              backgroundSize: `cover`,
+              backgroundPosition: `center`,
+              backgroundRepeat: `no-repeat`,
+            }}
+          >
+            <div className={"h-52 w-full cursor-pointer rounded-xl"}>
+              <div
+                className={
+                  "flex h-full w-full rounded-xl bg-gray-950 bg-opacity-40"
+                }
+              >
+                <div className={"md:w-full"}></div>
+                <h1
+                  className={
+                    "my-auto  text-start text-6xl font-bold tracking-tighter text-white sm:text-7xl"
+                  }
+                >
+                  Donate to Charities.
+                </h1>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+    </>
+  );
 const Overlay = ()=>{
 	return(
 		<div className="min-h-screen w-full bg-black z-10 fixed opacity-50 top-0 left-0"></div>
