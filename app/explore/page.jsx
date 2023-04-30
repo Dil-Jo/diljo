@@ -74,6 +74,7 @@ const ExpolorePage = () => {
 
   return (
     <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-10">
+      {displayModal && <Donate setDisplayModal={setDisplayModal} />}
       <div className="flex w-full flex-col gap-5">
         <Banner />
         <h1 className="text-start text-3xl font-bold tracking-tighter">
@@ -182,6 +183,7 @@ const ExpolorePage = () => {
               img={item.img}
               link={item.link}
               key={index}
+              setDisplayModal={setDisplayModal}
             />
           ))}
         </div>
@@ -297,10 +299,10 @@ function Banner() {
     </>
   );
 }
-const Overlay = () => {
-  return (
-    <div className="fixed left-0 top-0 z-10 min-h-screen w-full bg-black opacity-50"></div>
-  );
-};
+// const Overlay = () => {
+//   return (
+//     <div className="fixed left-0 top-0 z-10 min-h-screen w-full bg-black opacity-50"></div>
+//   );
+// };
 
 export default ExpolorePage;
