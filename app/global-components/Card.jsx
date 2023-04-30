@@ -1,4 +1,16 @@
+"use client";
+import { useEffect, useRef } from "react";
+
 export default function Card(props) {
+  let caption = useRef(null);
+  useEffect(() => {
+    console.log("hello");
+    caption.current.innerHTML =
+      props.caption.length > 100
+        ? props.caption.substring(0, 100) + "..."
+        : props.caption;
+  }, []);
+
   let progressbar = (raised, goal) => {
     return { width: `${(raised / goal) * 100}%` };
   };
@@ -19,18 +31,19 @@ export default function Card(props) {
         </div>
       </div>
       <div className="mt-8 px-4">
-        <p className="mt-2 text-2xl text-gray-700">{props.caption}</p>
-        <h2 className="font-small  mt-4 text-gray-400">{props.description}</h2>
-        {/* <h2 className=""></h2> */}
-
+        <p className="mt-2 text-2xl text-gray-700">{props.title}</p>
+        <h2
+          className="font-small mt-4 overflow-hidden text-ellipsis text-gray-400"
+          ref={caption}
+        ></h2>
         <div className="mt-4 h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
           <div
             className="h-2.5 rounded-full bg-blue-600"
-            style={progressbar(props.raised, props.goal)}
+            style={progressbar(props.raised, props.target)}
           ></div>
         </div>
         <h2 className="font-small mt-2 text-end text-gray-400">
-          {props.raised} / {props.goal} raised
+          {props.raised} / {props.target} raised
         </h2>
         <div className="flex flex-col items-center justify-center">
           <button
