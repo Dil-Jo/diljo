@@ -1,13 +1,11 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import reviewsImg from "../../assets/reviews.jpg";
 import nicePic from "../../assets/nicePic.jpg";
 import Button from "../global-components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../global-components/Card";
-import Donate from "../Components/Donate";
-import Gareeb from "../../public/assets/photo.jpeg";
+import PocketBase from "pocketbase";
 
 function resolveText(text) {
   return text.length > 100 ? text.substring(0, 100) + "..." : text;
@@ -18,58 +16,45 @@ const ExpolorePage = () => {
     {
       title: "title",
       link: "link",
+      name: "Education",
     },
     {
       title: "title2",
       link: "link3",
-    },
-  ];
-  const content = [
-    {
-      title: "Help Jinx with Dental Surgery!",
-      caption:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
-      img: reviewsImg,
-      link: "link",
+      name: "Emergencies",
     },
     {
-      title: "Help Jinx with Dental Surgery!",
-      caption:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
-      img: reviewsImg,
-      link: "link",
+      title: "title3",
+      link: "link3",
+      name: "Environment",
     },
     {
-      title: "Help Jinx with Dental Surgery!",
-      caption:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
-      img: reviewsImg,
-      link: "link",
+      title: "title4",
+      link: "link4",
+      name: "Medical",
     },
     {
-      title: "Help Jinx with Dental Surgery!",
-      caption:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
-      img: reviewsImg,
-      link: "link",
+      title: "title5",
+      link: "link5",
+      name: "Utility Bills",
     },
   ];
 
+  async function getContent() {
+    const pb = new PocketBase("http://127.0.0.1:8090");
+    let temp = await pb.collection("fundraisers").getList(1, 4, {
+      filter: "",
+    });
+    return temp.items;
+  }
+  useEffect(() => {
+    getContent().then((res) => {
+      setContent(res);
+    });
+  }, []);
+  const [content, setContent] = useState([]);
   const [displayModal, setDisplayModal] = useState(false);
   const [category, setCategory] = useState("title");
-
-  const text = `
-	We have a wonderful 14 year old cat named Jinx who has given us no vet troubles in the 14 years I've owned him.
-	My husband Mitch and I noticed a few days ago his face was swollen and hard on the one side and Jinx wasn't eating his hard food much anymore. I opened his mouth, and what looked to be a nasty hole in his gum with infection coming out of it.
-	The next day, I took Jinx to the vet and they said it could be a tooth root still in his gum and became infected or… a chance of cancer.
-	He is currently on a month of antibiotics and 14 days of Metacam (painkiller). In two weeks, we will have to follow up with his healing progress and will have to see what's going on in his mouth.
-	This procedure could be up to a $2000.00 for bloodwork, general anesthesia, X-rays, dental extraction and medication.
-	Which is quite a costly, unexpected bill!!
-	We are asking for Help! 
-	We are trying to make him comfortable right now and ensuring he is getting his antibiotic and painkiller treatment. He's trying so hard to fight.
-	We need to be prepared for this upcoming surgery and anything you can donate will help us greatly towards the cost of this procedure!
-	Thank you from the bottom of our hearts!
-	Tia, Mitch, Jinx & Luna `;
 
   return (
     <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-10">
@@ -83,91 +68,22 @@ const ExpolorePage = () => {
         </h3>
         <div className="flex w-full gap-8">
           <div className="carousel-center carousel rounded-box w-full space-x-8 overflow-x-scroll p-4">
-            <Card
-              key="1"
-              caption="Help Jinx with Dental Surgery!"
-              description={resolveText(text)}
-              link="link"
-              raised="1"
-              goal="10"
-              id="DLKFJSALK12321432"
-              image={nicePic}
-            />
-            <Card
-              key="2"
-              caption="Help Jinx with Dental Surgery!"
-              description={resolveText(text)}
-              link="link"
-              raised="1"
-              goal="10"
-              id="DLKFJSALK12321432"
-              image={nicePic}
-            />
-            <Card
-              key="3"
-              caption="Help Jinx with Dental Surgery!"
-              description={resolveText(text)}
-              link="link"
-              raised="1"
-              goal="10"
-              id="DLKFJSALK12321432"
-              image={nicePic}
-            />
-            <Card
-              key="4"
-              caption="Help Jinx with Dental Surgery!"
-              description={resolveText(text)}
-              link="link"
-              raised="1"
-              goal="10"
-              id="DLKFJSALK12321432"
-              image={nicePic}
-            />
-            <Card
-              key="5"
-              caption="Help Jinx with Dental Surgery!"
-              description={resolveText(text)}
-              link="link"
-              raised="1"
-              goal="10"
-              id="DLKFJSALK12321432"
-              image={nicePic}
-            />
-            <Card
-              key="6"
-              caption="Help Jinx with Dental Surgery!"
-              description={resolveText(text)}
-              link="link"
-              raised="1"
-              goal="10"
-              id="DLKFJSALK12321432"
-              image={nicePic}
-            />{" "}
-            <Card
-              key="7"
-              caption="Help Jinx with Dental Surgery!"
-              description={resolveText(text)}
-              link="link"
-              raised="1"
-              goal="10"
-              id="DLKFJSALK12321432"
-              image={nicePic}
-            />{" "}
-            <Card
-              key="8"
-              caption="Help Jinx with Dental Surgery!"
-              description={resolveText(text)}
-              link="link"
-              raised="1"
-              goal="10"
-              id="DLKFJSALK12321432"
-              image={nicePic}
-            />
+            {content.map((item, index) => (
+              <Card
+                key={index}
+                caption={item.title}
+                description={item.caption}
+                link={item.link}
+                raised={"10"}
+                goal={item.target}
+                id={item.id}
+                image={{ nicePic }}
+              />
+            ))}
           </div>
         </div>
       </div>
       <div className="mx-2 flex w-full flex-col gap-4">
-        {/* <h1 className='font-bold text-2xl'>Explore Page</h1> */}
         <ExploreNav
           routes={routes}
           changeCategory={setCategory}
@@ -177,7 +93,7 @@ const ExpolorePage = () => {
           {content.map((item, index) => (
             <SmallCard
               title={item.title}
-              caption={text}
+              caption={item.caption}
               img={item.img}
               link={item.link}
               key={index}
@@ -188,26 +104,6 @@ const ExpolorePage = () => {
     </div>
   );
 };
-
-// const Card = ({ title, content, backgroundImg, link }) => {
-//   // return (
-//   // <div className='flex h-60 w-96 flex-col justify-evenly rounded bg-blue-500 px-4 text-white'>
-//   // 	<h1 className='h-10 text-lg font-bold text-white'>{title}</h1>
-//   // 	<h3 className='max-h-20 overflow-clip'>{content}</h3>
-//   // 	<Button link={link} text='Lets Goo!' type='primary' />
-//   // </div>
-//   // );
-
-//   return (
-//     <div className="carousel-item">
-//       <div className="flex h-60 w-96 flex-col justify-evenly rounded bg-blue-500 px-4 text-white">
-//         <h1 className="h-10 text-lg font-bold text-white">{title}</h1>
-//         <h3 className="max-h-20 overflow-clip">{content}</h3>
-//         <Button link={link} text="Lets Goo!" type="primary" />
-//       </div>
-//     </div>
-//   );
-// };
 
 const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
   return (
@@ -220,7 +116,7 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
             className="group text-gray-600"
             onClick={() => changeCategory(subRoute.title)}
           >
-            <button>Visit Me!</button>
+            <button>{subRoute.name}</button>
             <div
               className={`h-1 w-0 bg-black transition-all group-hover:w-full ${styler}`}
             ></div>
@@ -296,10 +192,5 @@ function Banner() {
     </>
   );
 }
-const Overlay = () => {
-  return (
-    <div className="fixed left-0 top-0 z-10 min-h-screen w-full bg-black opacity-50"></div>
-  );
-};
 
 export default ExpolorePage;

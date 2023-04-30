@@ -7,12 +7,8 @@ import Signup from "./Signup";
 import { LoginContext } from "../Contexts/LoginContext";
 import Image from "next/image";
 export default function Navbar(props) {
-  const { login, setLogin } = useContext(LoginContext);
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
-  useEffect(() => {
-    console.log(login);
-  }, [login]);
   const router = usePathname();
 
   function NavbarOpen() {
@@ -33,8 +29,10 @@ export default function Navbar(props) {
             <div className="hidden sm:flex sm:items-center">
               <Links />
             </div>
-            {login ? (
-              <AfterLogin />
+            {JSON.parse(localStorage.getItem("Login")) ? (
+              <div className={"hidden sm:flex sm:items-center"}>
+                <AfterLogin />
+              </div>
             ) : (
               <div className="hidden sm:flex sm:items-center">
                 <Buttons />
@@ -61,9 +59,15 @@ export default function Navbar(props) {
           >
             <div className="flex flex-col">
               <Links />
-              <div className="flex items-center justify-between border-t-2 pt-2">
-                <Buttons />
-              </div>
+              {JSON.parse(localStorage.getItem("Login")) ? (
+                <div className="flex w-full border-t-2 pt-2">
+                  <AfterLogin />
+                </div>
+              ) : (
+                <div className="flex items-center justify-between border-t-2 pt-2">
+                  <Buttons />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -182,20 +186,36 @@ function Buttons() {
 }
 
 function AfterLogin() {
+  const logoutRef = useRef(null);
+
   return (
     <>
-      <div>
-        <Image
-          className="mb-9 mt-4 h-10 w-10 rounded-full border-4 border-blue-400"
-          alt={""}
-          src={""}
-        ></Image>
-        <label
-          className="rounded-lg border px-4 py-1 text-sm font-semibold text-gray-800 hover:border-blue-600 hover:text-blue-600"
-          ref={logoutRef}
-        >
-          Logout
-        </label>
+      <div className={"flex w-full justify-between"}>
+        <div className={""}>
+          <Image
+            className="h-10 mr-5 w-10 rounded-full border-4 border-blue-400"
+            alt={""}
+            src={""}
+          ></Image>{" "}
+        </div>
+        <div>
+          <label
+            className="rounded-lg border px-4 py-1 text-sm h-full flex text-center font-semibold items-center text-gray-800 hover:border-blue-600 hover:text-blue-600"
+            ref={logoutRef}
+            onClick={() => {
+              logoutRef.current.style.backgroundColor = "#3B82F6";
+              logoutRef.current.style.color = "white";
+              logoutRef.current.style.transition = "0.3s";
+              logoutRef.current.style.border = "none";
+              localStorage.removeItem("Login");
+              setTimeout(() => {
+                window.location.reload();
+              }, 1200);
+            }}
+          >
+            Logout
+          </label>
+        </div>
       </div>
     </>
   );
