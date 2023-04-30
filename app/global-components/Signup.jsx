@@ -6,14 +6,17 @@ import PocketBase from "pocketbase";
 export default function Signup() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
   const nameRef = useRef(null);
   const usernameRef = useRef(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+  const [doPasswordsMatch, setDoPasswordsMatch] = useState(false);
+  const [error, setError] = useState("");
 
-  async function verify() {
+  async function create() {
     const pb = new PocketBase("http://127.0.0.1:8090");
     let temp = await pb.collection("users").create({
       email: email,
@@ -22,21 +25,39 @@ export default function Signup() {
       username: username,
     });
     console.log(temp);
-    useEffect(() => {
-      if (email && password && name && username) {
-        verify().then((r) => {
+  }
+  async function verify() {
+    setError("");
+    if (passwordRef.current.value === confirmPasswordRef.current.value) {
+      const pb = new PocketBase("http://127.0.0.1:8090");
+      // const emailAvailable = await pb.collection("users").;
+      const resultList = await pb.collection("users").getList(1, 50, {
+        filter: `email = "${email}" || username = "${username}"`,
+      });
+      console.log(resultList.items);
+      if (resultList.items.length > 0) {
+        setError("Email or username already exists");
+      } else {
+        create().then((r) => {
           console.log(r);
         });
       }
-    }, [email, password, name, username]);
+    } else {
+      setError("Passwords do not match");
+    }
   }
-
   function clickHandler() {
     setEmail(emailRef.current.value);
     setPassword(passwordRef.current.value);
     setName(nameRef.current.value);
     setUsername(usernameRef.current.value);
   }
+
+  useEffect(() => {
+    verify().then((r) => {
+      console.log(r);
+    });
+  }, [email, password, name, username]);
 
   return (
     <>
@@ -94,7 +115,7 @@ export default function Signup() {
               <input
                 type="email"
                 name="email"
-                id="email"
+                ref={emailRef}
                 className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
                 placeholder="name@example.com"
                 required
@@ -110,7 +131,7 @@ export default function Signup() {
               <input
                 type="password"
                 name="password"
-                id="password"
+                ref={passwordRef}
                 placeholder="••••••••"
                 className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
                 required
@@ -124,9 +145,9 @@ export default function Signup() {
                 Confirm password
               </label>
               <input
-                type="confirm-password"
+                type="password"
                 name="confirm-password"
-                id="confirm-password"
+                ref={confirmPasswordRef}
                 placeholder="••••••••"
                 className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
                 required
@@ -157,14 +178,15 @@ export default function Signup() {
                 </label>
               </div>
             </div>
+            <h1 className={"text-red-800"}>{error}</h1>
             <div className="grid w-full">
-              <button
+              <div
                 className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
                 onClick={clickHandler}
-                type="submit"
+                // type="submit"
               >
                 Submit
-              </button>
+              </div>
             </div>
             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
               Already have an account?{" "}

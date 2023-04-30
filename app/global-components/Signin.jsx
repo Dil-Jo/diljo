@@ -61,6 +61,7 @@ export default function Signin() {
             <div className="mb-6">
               <label
                 htmlFor="password"
+                placeholder="••••••••"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
                 Your password
