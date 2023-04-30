@@ -1,14 +1,18 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Signin from "./Signin";
 import Signup from "./Signup";
-
+import { LoginContext } from "../Contexts/LoginContext";
+import Image from "next/image";
 export default function Navbar(props) {
+  const { login, setLogin } = useContext(LoginContext);
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
-
+  useEffect(() => {
+    console.log(login);
+  }, [login]);
   const router = usePathname();
 
   function NavbarOpen() {
@@ -29,11 +33,13 @@ export default function Navbar(props) {
             <div className="hidden sm:flex sm:items-center">
               <Links />
             </div>
-
-            <div className="hidden sm:flex sm:items-center">
-              <Buttons />
-            </div>
-
+            {login ? (
+              <AfterLogin />
+            ) : (
+              <div className="hidden sm:flex sm:items-center">
+                <Buttons />
+              </div>
+            )}
             <div className="cursor-pointer sm:hidden " onClick={NavbarOpen}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -171,6 +177,26 @@ function Buttons() {
       >
         Sign up
       </label>
+    </>
+  );
+}
+
+function AfterLogin() {
+  return (
+    <>
+      <div>
+        <Image
+          className="mb-9 mt-4 h-10 w-10 rounded-full border-4 border-blue-400"
+          alt={""}
+          src={""}
+        ></Image>
+        <label
+          className="rounded-lg border px-4 py-1 text-sm font-semibold text-gray-800 hover:border-blue-600 hover:text-blue-600"
+          ref={logoutRef}
+        >
+          Logout
+        </label>
+      </div>
     </>
   );
 }

@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import PocketBase from "pocketbase";
+import { LoginContext } from "../Contexts/LoginContext";
 
 export default function Signin() {
+  const [login, setLogin] = useState({ 1: true });
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const rememberRef = useRef(null);
@@ -16,9 +18,10 @@ export default function Signin() {
 
     const pb = new PocketBase("http://127.0.0.1:8090");
     try {
-      const resultList = await pb
+      const result = await pb
         .collection("users")
         .authWithPassword(emailRef.current.value, passwordRef.current.value);
+      setLogin(result);
       successRef.current.style.display = "block";
       return true;
     } catch (e) {
@@ -33,6 +36,7 @@ export default function Signin() {
 
     verify().then((isValid) => {
       console.log(isValid);
+      console.log(login);
       if (isValid)
         setTimeout(() => {
           window.location.reload();
@@ -41,7 +45,7 @@ export default function Signin() {
   }
 
   return (
-    <>
+    <LoginContext.Provider value={{ login, setLogin }}>
       <input type="checkbox" id="sign-in" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
@@ -116,6 +120,6 @@ export default function Signin() {
           </form>
         </div>
       </div>
-    </>
+    </LoginContext.Provider>
   );
 }
