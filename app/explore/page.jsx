@@ -6,6 +6,7 @@ import Button from "../global-components/Button";
 import { useEffect, useState } from "react";
 import Card from "../global-components/Card";
 import PocketBase from "pocketbase";
+import Donate from "../global-components/Donate";
 
 function resolveText(text) {
   return text.length > 100 ? text.substring(0, 100) + "..." : text;
@@ -43,11 +44,13 @@ const ExpolorePage = () => {
     console.log(temp);
     return temp.items;
   }
+
   useEffect(() => {
     getContent().then((res) => {
       setContent(res);
     });
   }, []);
+  const [displayModal, setDisplayModal] = useState(false);
   const [content, setContent] = useState([]);
   const [category, setCategory] = useState("title");
 
@@ -95,6 +98,7 @@ const ExpolorePage = () => {
                 img={item.img}
                 link={item.link}
                 key={index}
+                setDisplayModal={setDisplayModal}
               />
             ))}
         </div>
