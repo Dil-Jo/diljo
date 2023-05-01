@@ -15,24 +15,29 @@ function resolveText(text) {
 const ExpolorePage = () => {
   const routes = [
     {
-      title: "Education",
+      title: "title",
       link: "link",
+      name: "Education",
     },
     {
-      title: "Emergencies",
+      title: "title2",
       link: "link3",
+      name: "Emergencies",
     },
     {
-      title: "Environment",
+      title: "title3",
       link: "link3",
+      name: "Environment",
     },
     {
-      title: "Medical",
+      title: "title4",
       link: "link4",
+      name: "Medical",
     },
     {
-      title: "Utility Bills",
+      title: "title5",
       link: "link5",
+      name: "Utility Bills",
     },
   ];
 
@@ -41,7 +46,6 @@ const ExpolorePage = () => {
     let temp = await pb.collection("fundraisers").getList(1, 4, {
       filter: "",
     });
-    console.log(temp);
     return temp.items;
   }
 
@@ -82,7 +86,7 @@ const ExpolorePage = () => {
           </div>
         </div>
       </div>
-      <div className=" flex w-full flex-col gap-4">
+      <div className="mx-2 flex w-full flex-col gap-4">
         <ExploreNav
           routes={routes}
           changeCategory={setCategory}
@@ -108,14 +112,8 @@ const ExpolorePage = () => {
 };
 
 const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
-  useEffect(() => {
-    if ("Education") {
-      changeCategory("Education");
-    }
-  }, ["Education", changeCategory]);
-
   return (
-    <div className="flex overflow-x-auto gap-8 text-lg font-bold">
+    <div className="flex justify-start gap-6 text-lg font-bold">
       {routes.map((subRoute, index) => {
         const styler = currentCategory === subRoute.title ? "w-full" : "w-0";
         return (
@@ -124,7 +122,7 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
             className="group text-gray-600"
             onClick={() => changeCategory(subRoute.title)}
           >
-            <button>{subRoute.title}</button>
+            <button>{subRoute.name}</button>
             <div
               className={`h-1 w-0 bg-black transition-all group-hover:w-full ${styler}`}
             ></div>
@@ -137,11 +135,11 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
 
 const SmallCard = ({ title, caption, img, link, setDisplayModal }) => {
   return (
-    <div className="flex flex-col w-full rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 lg:w-auto">
-      <div className="relative h-48 w-full lg:h-56 ">
+    <div className="flex w-full flex-col rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 lg:w-auto">
+      <div className="relative h-56 w-full lg:h-auto lg:w-48">
         <Image
           src={img}
-          className="h-full w-full rounded-t-lg object-cover"
+          className="h-full w-full rounded-t-lg object-cover lg:rounded-l-lg lg:rounded-t-none"
           alt="Donation Img"
         />
       </div>
@@ -168,7 +166,7 @@ function Banner() {
   return (
     <>
       <div className={"h-full w-full"}>
-        <Link href={"/charities"}>
+        <Link href={"#"}>
           <div
             className={"rounded-xl"}
             style={{
