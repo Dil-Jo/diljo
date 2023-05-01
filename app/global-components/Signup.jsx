@@ -223,12 +223,12 @@ export default function Signup() {
             </div>
             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
               Already have an account?{" "}
-              <label
-                htmlFor="sign-in"
+              <a
+                href="#"
                 className="text-primary-600 dark:text-primary-500 font-medium hover:underline"
               >
                 Login here
-              </label>
+              </a>
             </p>
           </form>
         </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Banner() {
   return (
     <div className={"mb-6 h-full w-full"}>
-      <Link href={"/"}>
+      <Link href={"#"}>
         <div
           className={"rounded-xl"}
           style={{

@@ -3,9 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import nicePic from "../../assets/nicePic.jpg";
 import Button from "../global-components/Button";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import Card from "../global-components/Card";
 import PocketBase from "pocketbase";
+import Donate from "../global-components/Donate";
 
 function resolveText(text) {
   return text.length > 100 ? text.substring(0, 100) + "..." : text;
@@ -15,23 +16,18 @@ const ExpolorePage = () => {
   const routes = [
     {
       title: "Education",
-      link: "link",
     },
     {
       title: "Emergencies",
-      link: "link3",
     },
     {
       title: "Environment",
-      link: "link3",
     },
     {
       title: "Medical",
-      link: "link4",
     },
     {
       title: "Utility Bills",
-      link: "link5",
     },
   ];
 
@@ -40,9 +36,9 @@ const ExpolorePage = () => {
     let temp = await pb.collection("fundraisers").getList(1, 4, {
       filter: "",
     });
-    console.log(temp);
     return temp.items;
   }
+
   useEffect(() => {
     getContent().then((res) => {
       setContent(res);
@@ -52,8 +48,7 @@ const ExpolorePage = () => {
   const [category, setCategory] = useState("title");
 
   return (
-    <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-10">
-      {displayModal && <Donate setDisplayModal={setDisplayModal} />}
+    <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-4">
       <div className="flex w-full flex-col gap-5">
         <Banner />
         <h1 className="text-start text-3xl font-bold tracking-tighter">
@@ -69,7 +64,6 @@ const ExpolorePage = () => {
                 key={index}
                 caption={item.title}
                 description={item.caption}
-                link={item.link}
                 raised={"10"}
                 goal={item.target}
                 id={item.id}
@@ -93,8 +87,8 @@ const ExpolorePage = () => {
                 title={item.title}
                 caption={item.caption}
                 img={item.img}
-                link={item.link}
                 key={index}
+                dataFlow={item}
               />
             ))}
         </div>
@@ -131,10 +125,21 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
   );
 };
 
-const SmallCard = ({ title, caption, img, link, setDisplayModal }) => {
+const SmallCard = ({ title, caption, img, dataFlow }) => {
+  const dialog = useRef(null);
+
+  function handleClick() {
+    if (dialog.current) {
+      dialog.current.showModal();
+    }
+  }
+
   return (
     <div className="flex flex-col w-full rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 lg:w-auto">
-      <div className="relative h-48 w-full lg:h-56 ">
+      <dialog ref={dialog}>
+        <Donate data={dataFlow} />
+      </dialog>
+      <div className="relative h-48 w-full lg:h-56 lg:w-48">
         <Image
           src={img}
           className="h-full w-full rounded-t-lg object-cover"
@@ -149,11 +154,10 @@ const SmallCard = ({ title, caption, img, link, setDisplayModal }) => {
       </div>
       <div className="my-6 flex w-full justify-center">
         <Button
-          // link={link}
           text="Let's Go!"
           type="primary"
           className="mt-auto w-full py-2"
-          onClick={() => setDisplayModal(true)}
+          onClick={handleClick}
         />
       </div>
     </div>
@@ -164,7 +168,7 @@ function Banner() {
   return (
     <>
       <div className={"h-full w-full"}>
-        <Link href={"/charities"}>
+        <Link href={"#"}>
           <div
             className={"rounded-xl"}
             style={{
@@ -183,7 +187,7 @@ function Banner() {
                 <div className={"md:w-full"}></div>
                 <h1
                   className={
-                    "my-auto  text-start text-6xl font-bold tracking-tighter text-white sm:text-7xl"
+                    "my-auto text-start text-6xl font-bold tracking-tighter text-white sm:text-7xl"
                   }
                 >
                   Donate to Charities.
