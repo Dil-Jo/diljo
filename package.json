@@ -13,6 +13,7 @@
     "@stripe/stripe-js": "^1.52.1",
     "autoprefixer": "10.4.14",
     "daisyui": "^2.51.6",
+    "localStorage": "^1.0.4",
     "next": "^13.3.1",
     "pocketbase": "^0.14.0",
     "postcss": "8.4.23",
