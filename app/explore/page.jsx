@@ -53,6 +53,7 @@ const ExpolorePage = () => {
 
   return (
     <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-10">
+      {displayModal && <Donate setDisplayModal={setDisplayModal} />}
       <div className="flex w-full flex-col gap-5">
         <Banner />
         <h1 className="text-start text-3xl font-bold tracking-tighter">
