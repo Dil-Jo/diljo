@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Signin from "./Signin";
 import Signup from "./Signup";
-import { LoginContext } from "../Contexts/LoginContext";
 import Image from "next/image";
 export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);

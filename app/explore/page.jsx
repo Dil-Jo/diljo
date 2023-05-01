@@ -14,29 +14,24 @@ function resolveText(text) {
 const ExpolorePage = () => {
   const routes = [
     {
-      title: "title",
+      title: "Education",
       link: "link",
-      name: "Education",
     },
     {
-      title: "title2",
+      title: "Emergencies",
       link: "link3",
-      name: "Emergencies",
     },
     {
-      title: "title3",
+      title: "Environment",
       link: "link3",
-      name: "Environment",
     },
     {
-      title: "title4",
+      title: "Medical",
       link: "link4",
-      name: "Medical",
     },
     {
-      title: "title5",
+      title: "Utility Bills",
       link: "link5",
-      name: "Utility Bills",
     },
   ];
 
@@ -45,6 +40,7 @@ const ExpolorePage = () => {
     let temp = await pb.collection("fundraisers").getList(1, 4, {
       filter: "",
     });
+    console.log(temp);
     return temp.items;
   }
   useEffect(() => {
@@ -53,7 +49,6 @@ const ExpolorePage = () => {
     });
   }, []);
   const [content, setContent] = useState([]);
-  const [displayModal, setDisplayModal] = useState(false);
   const [category, setCategory] = useState("title");
 
   return (
@@ -83,22 +78,24 @@ const ExpolorePage = () => {
           </div>
         </div>
       </div>
-      <div className="mx-2 flex w-full flex-col gap-4">
+      <div className=" flex w-full flex-col gap-4">
         <ExploreNav
           routes={routes}
           changeCategory={setCategory}
           currentCategory={category}
         />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {content.map((item, index) => (
-            <SmallCard
-              title={item.title}
-              caption={item.caption}
-              img={item.img}
-              link={item.link}
-              key={index}
-            />
-          ))}
+          {content
+            .filter((item) => item.category === category)
+            .map((item, index) => (
+              <SmallCard
+                title={item.title}
+                caption={item.caption}
+                img={item.img}
+                link={item.link}
+                key={index}
+              />
+            ))}
         </div>
       </div>
     </div>
@@ -106,8 +103,14 @@ const ExpolorePage = () => {
 };
 
 const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
+  useEffect(() => {
+    if ("Education") {
+      changeCategory("Education");
+    }
+  }, ["Education", changeCategory]);
+
   return (
-    <div className="flex justify-start gap-6 text-lg font-bold">
+    <div className="flex overflow-x-auto gap-8 text-lg font-bold">
       {routes.map((subRoute, index) => {
         const styler = currentCategory === subRoute.title ? "w-full" : "w-0";
         return (
@@ -116,7 +119,7 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
             className="group text-gray-600"
             onClick={() => changeCategory(subRoute.title)}
           >
-            <button>{subRoute.name}</button>
+            <button>{subRoute.title}</button>
             <div
               className={`h-1 w-0 bg-black transition-all group-hover:w-full ${styler}`}
             ></div>
@@ -129,11 +132,11 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
 
 const SmallCard = ({ title, caption, img, link, setDisplayModal }) => {
   return (
-    <div className="flex w-full flex-col rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 lg:w-auto">
-      <div className="relative h-56 w-full lg:h-auto lg:w-48">
+    <div className="flex flex-col w-full rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 lg:w-auto">
+      <div className="relative h-48 w-full lg:h-56 ">
         <Image
           src={img}
-          className="h-full w-full rounded-t-lg object-cover lg:rounded-l-lg lg:rounded-t-none"
+          className="h-full w-full rounded-t-lg object-cover"
           alt="Donation Img"
         />
       </div>
@@ -160,7 +163,7 @@ function Banner() {
   return (
     <>
       <div className={"h-full w-full"}>
-        <Link href={"#"}>
+        <Link href={"/charities"}>
           <div
             className={"rounded-xl"}
             style={{
