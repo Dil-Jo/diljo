@@ -15,29 +15,24 @@ function resolveText(text) {
 const ExpolorePage = () => {
   const routes = [
     {
-      title: "title",
+      title: "Education",
       link: "link",
-      name: "Education",
     },
     {
-      title: "title2",
+      title: "Emergencies",
       link: "link3",
-      name: "Emergencies",
     },
     {
-      title: "title3",
+      title: "Environment",
       link: "link3",
-      name: "Environment",
     },
     {
-      title: "title4",
+      title: "Medical",
       link: "link4",
-      name: "Medical",
     },
     {
-      title: "title5",
+      title: "Utility Bills",
       link: "link5",
-      name: "Utility Bills",
     },
   ];
 
@@ -112,6 +107,11 @@ const ExpolorePage = () => {
 };
 
 const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
+  useEffect(() => {
+    if ("Education") {
+      changeCategory("Education");
+    }
+  }, ["Education", changeCategory]);
   return (
     <div className="flex justify-start gap-6 text-lg font-bold">
       {routes.map((subRoute, index) => {
@@ -122,7 +122,7 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
             className="group text-gray-600"
             onClick={() => changeCategory(subRoute.title)}
           >
-            <button>{subRoute.name}</button>
+            <button>{subRoute.title}</button>
             <div
               className={`h-1 w-0 bg-black transition-all group-hover:w-full ${styler}`}
             ></div>

@@ -7,18 +7,7 @@
     <list default="true" id="8074fd1a-7c94-440b-9232-f1103ac4313e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Components/Donate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/Components/Donate.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/explore/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/explore/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/global-components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/global-components/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Signup.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/index-components/Banner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/index-components/Banner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pocketbase/pb_data/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/pocketbase/pb_data/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" beforeDir="false" afterPath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pocketbase/pb_data/logs.db-shm" beforeDir="false" afterPath="$PROJECT_DIR$/pocketbase/pb_data/logs.db-shm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pocketbase/pb_data/logs.db-wal" beforeDir="false" afterPath="$PROJECT_DIR$/pocketbase/pb_data/logs.db-wal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pocketbase/pb_migrations/1682919610_updated_fundraisers.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +41,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Reverting in integration",
+    "git-widget-placeholder": "integration",
     "last_opened_file_path": "/home/tahamukhtar20/Documents/GitHub/diljo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -73,6 +62,24 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="dev --turbo" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <arguments value="--turbo" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev --turbo" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
