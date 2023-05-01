@@ -2,11 +2,19 @@ migrate((db) => {
   const dao = new Dao(db)
   const collection = dao.findCollectionByNameOrId("llklcrguar2toxe")
 
+  // remove
+  collection.schema.removeField("zbkjlifu")
+
+  return dao.saveCollection(collection)
+}, (db) => {
+  const dao = new Dao(db)
+  const collection = dao.findCollectionByNameOrId("llklcrguar2toxe")
+
   // add
   collection.schema.addField(new SchemaField({
     "system": false,
-    "id": "t4mocrvs",
-    "name": "stripeLink",
+    "id": "zbkjlifu",
+    "name": "link",
     "type": "url",
     "required": false,
     "unique": false,
@@ -15,14 +23,6 @@ migrate((db) => {
       "onlyDomains": null
     }
   }))
-
-  return dao.saveCollection(collection)
-}, (db) => {
-  const dao = new Dao(db)
-  const collection = dao.findCollectionByNameOrId("llklcrguar2toxe")
-
-  // remove
-  collection.schema.removeField("t4mocrvs")
 
   return dao.saveCollection(collection)
 })

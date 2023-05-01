@@ -2,27 +2,10 @@ migrate((db) => {
   const dao = new Dao(db)
   const collection = dao.findCollectionByNameOrId("llklcrguar2toxe")
 
-  // add
+  // update
   collection.schema.addField(new SchemaField({
     "system": false,
-    "id": "t8m767gm",
-    "name": "anonymityStatus",
-    "type": "select",
-    "required": false,
-    "unique": false,
-    "options": {
-      "maxSelect": 1,
-      "values": [
-        "anonymous",
-        "visible"
-      ]
-    }
-  }))
-
-  // add
-  collection.schema.addField(new SchemaField({
-    "system": false,
-    "id": "nxqos840",
+    "id": "yaklothj",
     "name": "category",
     "type": "select",
     "required": false,
@@ -30,9 +13,11 @@ migrate((db) => {
     "options": {
       "maxSelect": 1,
       "values": [
-        "education",
-        "emergency",
-        "healthcare"
+        "Education",
+        "Emergencies",
+        "Enviornment",
+        "Medical",
+        "Utility Bills"
       ]
     }
   }))
@@ -42,11 +27,25 @@ migrate((db) => {
   const dao = new Dao(db)
   const collection = dao.findCollectionByNameOrId("llklcrguar2toxe")
 
-  // remove
-  collection.schema.removeField("t8m767gm")
-
-  // remove
-  collection.schema.removeField("nxqos840")
+  // update
+  collection.schema.addField(new SchemaField({
+    "system": false,
+    "id": "yaklothj",
+    "name": "category",
+    "type": "select",
+    "required": false,
+    "unique": false,
+    "options": {
+      "maxSelect": 1,
+      "values": [
+        "education",
+        "emergencies",
+        "enviornment",
+        "medical",
+        "utilityBills"
+      ]
+    }
+  }))
 
   return dao.saveCollection(collection)
 })

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+
     "@iconify/icons-mdi": "^1.2.44",
     "@iconify/react": "^4.1.0",
     "@react-google-maps/api": "^2.18.1",
