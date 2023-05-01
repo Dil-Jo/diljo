@@ -46,7 +46,6 @@ const ExpolorePage = () => {
   }, []);
   const [content, setContent] = useState([]);
   const [category, setCategory] = useState("title");
-
   return (
     <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-4">
       <div className="flex w-full flex-col gap-5">
@@ -96,14 +95,12 @@ const ExpolorePage = () => {
     </div>
   );
 };
-
 const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
   useEffect(() => {
     if ("Education") {
       changeCategory("Education");
     }
   }, ["Education", changeCategory]);
-
   return (
     <div className="flex overflow-x-auto gap-8 text-lg font-bold">
       {routes.map((subRoute, index) => {
@@ -168,7 +165,7 @@ function Banner() {
   return (
     <>
       <div className={"h-full w-full"}>
-        <Link href={"#"}>
+        <Link href={"/charities"}>
           <div
             className={"rounded-xl"}
             style={{

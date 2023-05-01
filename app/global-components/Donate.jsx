@@ -1,5 +1,6 @@
 import Image from "next/image";
 import pic from "../../assets/cat.jpeg";
+
 const Donate = (props) => {
   let progressbar = (raised, goal) => {
     return { width: `${(raised / goal) * 100}%` };
@@ -11,33 +12,27 @@ const Donate = (props) => {
           <div className="flex h-full w-full flex-col items-center justify-center rounded-l-xl bg-slate-500">
             <Image
               className="max-h-5/6 max-w-5/6 flex h-5/6 w-5/6 flex-col items-center justify-center rounded-md border-4 border-white bg-gray-700"
-              src={props.image}
+              src={props.data.image}
               alt="image here"
             />
           </div>
           <div className="flex h-full w-full flex-col items-center rounded-r-xl bg-white">
             <div className="description-box mt-12 flex h-4/6 w-5/6 flex-col justify-between py-6">
               <h1 className="text-3xl font-bold text-black ">
-                {props.title}Help Save Kitty!
+                {props.data.title}
               </h1>
               <p className="mt-4 flex h-full flex-col justify-center text-xl text-black">
-                {props.description}
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Tempora saepe ad iusto nihil, expedita quis porro quas!
-                Obcaecati doloribus incidunt ab ex, perferendis rerum dolor
-                quod? Aspernatur saepe facere reprehenderit.afdanfjkdsbjgfgno
-                nanfldnsdlnflsndfnskldn lksdnfklsndlkfnsldn knsdklfnlkdsnfkn
-                slnfdlkn
+                {props.data.caption}
               </p>
             </div>
             <div className="mt-34 h-2/6 w-5/6">
               <div className="mt-4 h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
                 <div
                   className=" mt-15 h-2.5 rounded-full bg-blue-600"
-                  style={progressbar(props.raised, props.goal)}
+                  style={progressbar(props.data.raised, props.data.goal)}
                 ></div>
                 <h2 className="font-small mt-2 text-end text-gray-400">
-                  {props.raised} / {props.goal} raised
+                  {props.data.raised} / {props.data.goal} raised
                 </h2>
                 <div className="flex w-full justify-end">
                   <button
