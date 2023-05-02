@@ -8,6 +8,9 @@ import Form3 from "./Components/Raisefund2.jsx";
 const RaiseFunds = () => {
   const [stage, setStage] = useState(1);
   const [fullForm, setFullForm] = useState({});
+  useEffect(() => {
+    document.querySelector("main").style.padding = "0";
+  }, [stage]);
   const updateForm = async (form) => {
     setFullForm({ ...fullForm, ...form });
     console.log({ stage });
@@ -65,16 +68,15 @@ const RaiseFunds = () => {
   useEffect(() => {
     updateForm({}).then((r) => console.log({ r }));
   }, [stage]);
-
   if (localStorage.getItem("Login") == null)
     return <div>Please Login First</div>;
   return (
-    <div className="h-screen w-screen mt-8 flex bg-slate-400 rounded-l-3xl">
+    <div className="h-screen flex bg-slate-400 rounded-l-3xl">
       <div className="w-2/6 flex flex-col justify-center items-center">
         <MessageComponent stage={stage} />
       </div>
-      <div className="w-4/6 bg-slate-300 rounded-l-3xl shadow-xl">
-        {<Form updateForm={updateForm} setStage={setStage} stage={stage} />}
+      <div className="w-4/6 bg-slate-100 rounded-l-3xl shadow-xl">
+        <Form updateForm={updateForm} setStage={setStage} stage={stage} />
       </div>
     </div>
   );
