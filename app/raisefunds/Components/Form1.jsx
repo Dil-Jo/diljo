@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 
 const Form1 = ({ next, updateForm }) => {
-    const [form, setForm] = useState({ reason: "", visibility: "" });
+    const [form, setForm] = useState({ reason: "Emergency", 'radio-10': "" });
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (form['radio-10'] == "" || form.reason == "") return alert("Please fill all the fields")
         updateForm(form);
         next();
     }
@@ -15,9 +16,11 @@ const Form1 = ({ next, updateForm }) => {
             <div className="flex">
                 <label htmlFor="reason" className=" font-normal text-lg mr-6 mt-2">Select a reason for collecting funds:</label>
                 <select id="reason" name="reason" onChange={handleChange} className="h-11 dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <option value="emergency"  >Emergency</option>
-                    <option value="education"  >Education</option>
-                    <option value="healthcare">Healthcare</option>
+                    <option value="Emergencies"  >Emergencies</option>
+                    <option value="Education"  >Education</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Enviornment">Enviornment</option>
+                    <option value="Utility Bills">Utility Bills</option>
                 </select>
             </div>
             <div className="flex mt-11">
