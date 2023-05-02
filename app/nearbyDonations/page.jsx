@@ -1,31 +1,17 @@
 "use client";
 import { GoogleMap, Marker, useLoadScript, CircleF } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
-import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-} from "use-places-autocomplete";
+import Form from "./components/Form"
+import Sidebar from "./components/Sidebar"
 
-
-import {
-    Combobox,
-    ComboboxInput,
-    ComboboxPopover,
-    ComboboxList,
-    ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css";
-
-// import Form from "./components/form.jsx";
-
-const libraries = ["places"];
 const nearbyDonations = () => {
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: "AIzaSyAB1EQb-2K8ZD5RFHpKnewx-t3zKZMI0PE",
-        libraries,
     });
     const [formIsOpen, setFormIsOpen] = useState(false);
-    const openForm = () => {
+    const openForm = (e) => {
+        console.log("latitude = " + e.latLng.lat());
+        console.log("longitude = " + e.latLng.lng());
         setFormIsOpen(true);
         console.log('form is open');
     };
@@ -57,68 +43,46 @@ const nearbyDonations = () => {
     const center = { lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) };
 
     return (
-        <div>
-            {/* {formIsOpen ? <Form /> : null} */}
-            <Search />
-            <div className="App h-[60rem] w-[60rem]">
-                {!isLoaded ? (
-                    <h1>Loading...</h1>
-                ) : (
-                    <GoogleMap
-                        mapContainerClassName="map-container h-full w-full"
-                        center={center}
-                        zoom={14}
-                        onClick={openForm}
-                    ><Marker position={{ lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) }} />
-                        {[2000, 4000].map((radius, idx) => {
-                            return (
-                                <CircleF
-                                    key={idx}
-                                    center={center}
-                                    radius={radius}
-                                    onLoad={() => console.log('Circle Load...')}
-                                    options={{
-                                        fillColor: radius > 2000 ? 'red' : 'green',
-                                        strokeColor: radius > 2000 ? 'red' : 'green',
-                                        strokeOpacity: 0.4,
-                                        fillOpacity: 0.2,
-                                    }}
-                                />
-                            );
-                        })}
-                    </GoogleMap>
+        <>
+            <div className="flex">
+                {/* {formIsOpen ? <Form /> : null} */}
+                <Sidebar />
+                <div className="App h-[50rem] w-3/4">
+                    {!isLoaded ? (
+                        <h1>Loading...</h1>
+                    ) : (
+                        <GoogleMap
+                            mapContainerClassName="map-container h-full w-full"
+                            center={center}
+                            zoom={14}
+                            onClick={openForm}
+                        ><Marker position={{ lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) }} />
+                            {[2000, 4000].map((radius, idx) => {
+                                return (
+                                    <CircleF
+                                        key={idx}
+                                        onClick={(e) => openForm(e)}
+                                        center={center}
+                                        radius={radius}
+                                        onLoad={() => console.log('Circle Load...')}
+                                        options={{
+                                            fillColor: radius > 2000 ? 'red' : 'green',
+                                            strokeColor: radius > 2000 ? 'red' : 'green',
+                                            strokeOpacity: 0.4,
+                                            fillOpacity: 0.2,
+                                        }}
+                                    />
+                                );
+                            })}
+                        </GoogleMap>
 
 
-                )}
+                    )}
+                </div>
             </div>
-        </div>
 
+        </>
     );
 }
-
-function Search() {
-    const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
-        requestOptions: {
-            location: { lat: () => currentLocation.lat, lng: () => currentLocation.lng },
-            radius: 400 * 1000,
-        },
-    });
-    return (
-        <>
-            <Combobox onSelect={(address) => { console.log(address) }}>
-                <ComboboxInput className="mt-4 input input-bordered w-full max-w-xs" value={value} onChange={(e) => { setValue(e.target.value); setLocation(e.target.value) }} placeholder="Enter an Address" />
-            </Combobox>
-            {/* <ComboboxPopover>
-                <ComboboxList>
-                    {status === "OK" &&
-                        data.map(({ id, description }) => (
-                            <ComboboxOption key={id} value={description} />
-                        ))}
-                </ComboboxList>
-            </ComboboxPopover> */}
-        </>
-    )
-}
-
 
 export default nearbyDonations;

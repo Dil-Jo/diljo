@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 const DonationForm = () => {
     const [donationType, setDonationType] = useState('');
-    const [location, setLocation] = useState('');
-
     const handleSubmit = (event) => {
         event.preventDefault();
         // Do something with the form data
@@ -24,16 +22,6 @@ const DonationForm = () => {
                     id="donation-type"
                     value={donationType}
                     onChange={(event) => setDonationType(event.target.value)}
-                />
-            </div>
-            <div className='flex'>
-                <label className="font-normal text-lg mt-6 mr-8" htmlFor="location">Location:</label>
-                <input
-                    className="mt-4 input input-bordered w-full max-w-xs"
-                    type="text"
-                    id="location"
-                    value={location}
-                    onChange={(event) => setLocation(event.target.value)}
                 />
             </div>
             <button className='mt-10' type="submit">Submit</button>
