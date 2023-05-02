@@ -1,5 +1,8 @@
+"use client";
 import Link from "next/link";
-export default function Footer() {
+import { usePathname } from "next/navigation";
+
+function ConditionalFooter() {
   return (
     <footer className="m-4 rounded-lg bg-gray-200 shadow dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl p-4 md:py-8">
@@ -38,4 +41,14 @@ export default function Footer() {
       </div>
     </footer>
   );
+}
+
+export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/raisefunds") {
+    return <></>;
+  }
+
+  return <ConditionalFooter />;
 }
