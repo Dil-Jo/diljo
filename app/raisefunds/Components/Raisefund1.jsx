@@ -14,9 +14,9 @@ const Comp1 = ({ next, updateForm }) => {
     image: ""
   });
 
-  function onNext(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
+  // function onNext(e) {
+  //   setForm({ ...form, [e.target.name]: e.target.value });
+  // }
 
   function onimg(e) {
     const bg = document.getElementById("imgbg");
@@ -24,7 +24,9 @@ const Comp1 = ({ next, updateForm }) => {
     bg.style.backgroundSize = "cover";
     // change the background image
     bg.style.backgroundImage = `url(${URL.createObjectURL(e.target.files[0])})`;
-    setImage(e.target.files[0]);
+    // setImage(e.target.files[0]);
+    console.log({ wee: e.target })
+    setForm({ ...form, image: e.target.files[0] });
 
   }
   // const [form, setForm] = useState({ reason: "", visibility: "" });
@@ -33,6 +35,7 @@ const Comp1 = ({ next, updateForm }) => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (form.title == "" || form.description == "") return alert("Please fill all the fields")
     updateForm(form);
     next();
   }
@@ -43,11 +46,11 @@ const Comp1 = ({ next, updateForm }) => {
         <div className="flex flex-col mt-24 ml-24">
           <div className="mt-11 flex flex-col">
             <h1 className="font-normal text-lg">Title for the Fundraiser:</h1>
-            <input type="text" placeholder="Title goes here" name='title' className="mt-4 input input-bordered w-full max-w-xs" onChange={handleChange} />
+            <input type="text" placeholder="Title goes here" name='title' className="mt-4 input input-bordered w-full max-w-xs" onChange={handleChange} required />
           </div>
           <div className="mt-11 flex flex-col">
             <h1 className="font-normal text-lg">Description for the Fundraiser:</h1>
-            <textarea style={{ resize: "none", width: "30vw", height: "30vh" }} placeholder="Description goes here" className="mt-4 input input-bordered w-full max-w-xl h-xl" name='description' onChange={handleChange}></textarea>
+            <textarea style={{ resize: "none", width: "30vw", height: "30vh" }} placeholder="Description goes here" className="mt-4 input input-bordered w-full max-w-xl h-xl" name='description' onChange={handleChange} required></textarea>
           </div>
         </div>
         <div className="flex flex-col w-[40rem] h-[48rem] ml-20 mt-10">
@@ -72,7 +75,6 @@ const Comp1 = ({ next, updateForm }) => {
           Next
         </button>
       </div>
-      <button type="submit">Submit</button>
     </form>
   );
 };
