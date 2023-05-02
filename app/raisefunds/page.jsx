@@ -12,7 +12,6 @@ const RaiseFunds = () => {
     setFullForm({ ...fullForm, ...form });
     console.log({ stage });
     if (stage === 4) {
-      //Submit the data to the server
       const formData = new FormData();
       formData.append("title", fullForm.title);
       formData.append("caption", fullForm.description);
