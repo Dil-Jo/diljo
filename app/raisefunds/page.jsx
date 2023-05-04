@@ -10,6 +10,8 @@ const RaiseFunds = () => {
   const [fullForm, setFullForm] = useState({});
   useEffect(() => {
     document.querySelector("main").style.padding = "0";
+    document.querySelector("main").style.height = "100%";
+    document.querySelector("body").style.height = "100vh";
   }, [stage]);
   const updateForm = async (form) => {
     setFullForm({ ...fullForm, ...form });
@@ -71,11 +73,15 @@ const RaiseFunds = () => {
   if (localStorage.getItem("Login") == null)
     return <div>Please Login First</div>;
   return (
-    <div className="min-h-screen flex flex-col md:flex-row md:bg-slate-400 rounded-l-3xl justify-center">
-      <div className="md:w-2/6 w-full flex flex-col justify-center items-center">
+    <div className="w-full md:h-screen h-full md:flex md:flex-row overflow-auto">
+      <div
+        className={
+          "flex md:h-full h-3/6 bg-slate-400 md:w-2/6 w-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none p-5"
+        }
+      >
         <MessageComponent stage={stage} />
       </div>
-      <div className="md:w-4/6 w-full bg-slate-100 md:rounded-l-3xl md:shadow-xl">
+      <div className={"flex  flex-col md:w-4/6 w-full md:justify-center my-10"}>
         <Form updateForm={updateForm} setStage={setStage} stage={stage} />
       </div>
     </div>
@@ -91,8 +97,15 @@ const MessageComponent = ({ stage }) => {
   if (stage > 3) stage = 3;
   return (
     <>
-      <div className={"m-3"}>
-        <h2 className="lg:text-4xl md:text-3xl text-4xl font-semi-bold text-center text-blue-900 tracking-tighter mb-5">
+      <div className={"w-full md:h-full"}>
+        <h1 className={"mx-5 mt-5 flex"}> Logo here</h1>
+      </div>
+      <div
+        className={
+          "w-full h-full flex flex-col justify-center md:justify-start"
+        }
+      >
+        <h2 className="lg:text-4xl  md:text-3xl text-4xl font-semi-bold text-center text-blue-900 tracking-tighter mb-5">
           {messages[stage - 1][0]}
         </h2>
         <h2 className="lg:text-3xl md:text-2xl text-3xl text-center text-slate-700 tracking-tighter">
