@@ -14,9 +14,12 @@ const Form1 = ({ next, updateForm }) => {
     next();
   };
   return (
-    <div className={"flex h-screen w-full items-center"}>
+    <div className={"flex md:h-screen h-full w-full items-center"}>
       <div className={"w-full"}>
-        <form className="flex flex-col mx-24 " onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col md:mx-24 mx-7 my-7 md:my-0"
+          onSubmit={handleSubmit}
+        >
           <div className="flex flex-col">
             <label
               htmlFor="reason"

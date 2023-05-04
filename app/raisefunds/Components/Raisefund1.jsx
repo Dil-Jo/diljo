@@ -31,7 +31,7 @@ const Comp1 = ({ next, updateForm }) => {
   };
 
   return (
-    <div className={"h-screen w-full flex items-center"}>
+    <div className={"md:h-screen h-full w-full flex items-center"}>
       <div className={"w-full"}>
         <div>
           <form className="flex flex-col" onSubmit={handleSubmit}>

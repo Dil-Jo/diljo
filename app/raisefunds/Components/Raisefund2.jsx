@@ -29,7 +29,9 @@ const Comp2 = ({ next, updateForm }) => {
     next();
   };
   return (
-    <div className={"w-full h-screen flex justify-center items-center"}>
+    <div
+      className={"w-full md:h-screen h-full flex justify-center items-center"}
+    >
       <div className={"w-full"}>
         <form className="h-full grid grid-cols-2 gap-8" onSubmit={handleSubmit}>
           <div className="col-span-1">
