@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8074fd1a-7c94-440b-9232-f1103ac4313e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/global-components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/raisefunds/Components/Form1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/raisefunds/Components/Form1.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/raisefunds/Components/Raisefund1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/raisefunds/Components/Raisefund1.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/raisefunds/Components/Raisefund2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/raisefunds/Components/Raisefund2.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/raisefunds/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/raisefunds/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" beforeDir="false" afterPath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,29 +34,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "raisefunds-restructuring-new",
-    "last_opened_file_path": "/home/tahamukhtar20/Documents/GitHub/diljo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/home/tahamukhtar20/Documents/GitHub/diljo/node_modules/prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;bug-fix-raisefunds,-rwd-and-overflow&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tahamukhtar20/Documents/GitHub/diljo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/tahamukhtar20/Documents/GitHub/diljo/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public" />
@@ -101,6 +97,11 @@
       <workItem from="1682761254616" duration="15967000" />
       <workItem from="1682829922464" duration="12744000" />
       <workItem from="1682924766772" duration="1244000" />
+      <workItem from="1683123590880" duration="4222000" />
+      <workItem from="1683180807742" duration="636000" />
+      <workItem from="1683203607497" duration="18520000" />
+      <workItem from="1683282097096" duration="427000" />
+      <workItem from="1683314374002" duration="299000" />
     </task>
     <servers />
   </component>
