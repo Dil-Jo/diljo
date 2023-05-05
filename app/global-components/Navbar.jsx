@@ -6,6 +6,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import { LoginContext } from "../Contexts/LoginContext";
 import Image from "next/image";
+
 export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
@@ -114,6 +115,14 @@ export default function Navbar(props) {
           className="fixed z-50  -m-[2.5rem] mx-4 rounded-xl bg-white shadow-md"
           ref={navbarRef}
           style={{ width: "calc(100% - 2.5rem)" }}
+        >
+          <NavDataComponent />
+        </div>
+      ) : router === "/raisefunds" ? (
+        <div
+          className="md:fixed z-50 bg-white shadow-md hidden"
+          ref={navbarRef}
+          style={{ width: "100%" }}
         >
           <NavDataComponent />
         </div>
