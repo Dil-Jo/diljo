@@ -188,35 +188,35 @@ const SmallCard = ({ title, caption, img, dataFlow, id }) => {
 function Banner() {
   return (
     <div className={"h-full w-full"}>
-      <Link href={"/charities"}>
-        <div
-          className={"rounded-xl"}
-          style={{
-            backgroundImage: `url(assets/photo.jpeg)`,
-            backgroundSize: `cover`,
-            backgroundPosition: `center`,
-            backgroundRepeat: `no-repeat`,
-          }}
-        >
-          <div className={"h-52 w-full cursor-pointer rounded-xl"}>
-            <div
+      {/* <Link href={"/charities"}> */}
+      <div
+        className={"rounded-xl"}
+        style={{
+          backgroundImage: `url(assets/photo.jpeg)`,
+          backgroundSize: `cover`,
+          backgroundPosition: `center`,
+          backgroundRepeat: `no-repeat`,
+        }}
+      >
+        <div className={"h-52 w-full cursor-pointer rounded-xl"}>
+          <div
+            className={
+              "flex h-full w-full rounded-xl bg-gray-950 bg-opacity-40"
+            }
+          >
+            <div className={"md:w-full"}></div>
+            <h1
               className={
-                "flex h-full w-full rounded-xl bg-gray-950 bg-opacity-40"
+                "my-auto text-start text-6xl font-bold tracking-tighter text-white sm:text-7xl"
               }
             >
-              <div className={"md:w-full"}></div>
-              <h1
-                className={
-                  "my-auto text-start text-6xl font-bold tracking-tighter text-white sm:text-7xl"
-                }
-              >
-                Donate to Charities.
-              </h1>
-            </div>
+              Donate to Charities.
+            </h1>
           </div>
         </div>
-      </Link>
-    </div>
+      </div>
+      {/* </Link> */}
+    </div >
   );
 }
 
