@@ -71,7 +71,7 @@ const Comp1 = ({ next, updateForm }) => {
             >
               <h1
                 className={
-                  "tracking-tighter font-black text-2xl text-gray-500 my-auto md:hidden"
+                  "tracking-tighter font-black text-2xl text-gray-500 my-auto mb-5 md:hidden"
                 }
               >
                 UPLOAD IMAGE:
@@ -85,16 +85,16 @@ const Comp1 = ({ next, updateForm }) => {
               />
               <label
                 htmlFor="embedpollfileinput"
-                className="flex flex-col items-center justify-end h-full cursor-pointer md:block hidden"
+                className="flex flex-col items-center justify-center h-full cursor-pointer md:block hidden"
               >
                 <Image
                   src={upload}
                   alt="Upload sign"
-                  className="h-16 w-16 hover:-translate-y-2 duration-200 relative hidden md:block"
+                  className="h-16 w-16 hover:-translate-y-2 duration-200 relative hidden mx-auto md:block"
                 />
               </label>
             </div>
-            <div className="flex w-full h-full flex-col justify-end items-end">
+            <div className="flex w-full h-full flex-col justify-end items-end my-6 md:my-0">
               <div className={""}>
                 <Button type={"primary"} text={"Next"}>
                   Next
