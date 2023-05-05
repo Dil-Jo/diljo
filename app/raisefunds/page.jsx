@@ -55,7 +55,7 @@ const RaiseFunds = () => {
       console.log({ stripeId });
       if (stripeId.status) {
         data.stripeLink = stripeId.paymentLink.url;
-        formData.append("stripeLink", stripeId.paymentLink.url);
+        formData.append("link", stripeId.paymentLink.url);
       } else return alert("Something went wrong with stripe");
 
       const pb = new PocketBase("http://127.0.0.1:8090");
