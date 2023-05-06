@@ -13,14 +13,18 @@ const nearbyDonations = () => {
         googleMapsApiKey: "AIzaSyAB1EQb-2K8ZD5RFHpKnewx-t3zKZMI0PE",
     });
     const openForm = (e) => {
-        ModalIsOpen(true)
+
+        //print the city name and the area name in the console
+        console.log(e.latLng.lat());
+        console.log(e.city);
+
+
+        ModalIsOpen(true);
         setLat(e.latLng.lat());
         setLng(e.latLng.lng());
     };
 
-
     const [currentLocation, setCurrentLocation] = useState({ lat: 0, lng: 0 });
-
 
     const getLocation = () => {
         if (navigator.geolocation) {

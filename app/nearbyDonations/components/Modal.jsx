@@ -8,7 +8,7 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
     const [donationType, setDonationType] = useState('');
     const [donlat, setDonLat] = useState();
     const [donlng, setDonLng] = useState();
-
+    const [title, setTitle] = useState();
     useEffect(() => {
         setDonLat(lat);
         setDonLng(lng);
@@ -58,15 +58,27 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
                         X
                     </button>
                     <div className={styles.modalContent}>
-                        Do you want to submit a donation drive?
+                        Adding a new donation drive?
                     </div>
                     <div>
-                        <label htmlFor="reason" className="{styles.modalContent}">Select a reason for collecting funds:</label>
-                        <select id="reason" name="reason" onChange={(event) => setDonationType(event.target.value)} className="h-11 dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <option value="">-- Select a reason --</option>
-                            <option value="emergency"  >Emergency</option>
-                            <option value="education"  >Education</option>
-                            <option value="healthcare">Healthcare</option>
+                        {/*Taking title of the drive*/}
+                        <label htmlFor="title" className="text-slate-800">Title:</label>
+                        <input
+                            type="text"
+                            placeholder="Title goes here"
+                            name="title"
+                            className=" input input-bordered w-full max-w-xs pb-3 px-4 pr-9 md:mt-0 mt-5 border-gray-200 rounded-md text-lg sm:p-5 my-auto"
+                            onChange={(event) => setTitle(event.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="reason" className="text-slate-800">Select a reason for collecting funds:</label>
+                        <select id="reason" name="reason" onChange={(event) => setDonationType(event.target.value)} className="text-slate-800 h-11 dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                            <option value="food"  >Food Drive</option>
+                            <option value="clothing" >Clothing Drive</option>
+                            <option value="blood">Blood Drive</option>
+                            <option value="books">Books Drive</option>
                         </select>
                     </div>
                     <div className={styles.modalActions}>
