@@ -153,7 +153,12 @@ const SmallCard = ({ title, caption, img, dataFlow, id }) => {
   // }, [])
   return (
     <div className="flex flex-col w-full rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 lg:w-auto">
-      <dialog ref={dialog}>
+      <dialog
+        ref={dialog}
+        className={
+          "fixed top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out -translate-y-1/2 rounded-2xl border-2 border-gray-300 "
+        }
+      >
         <Donate data={dataFlow} />
       </dialog>
       <div className="relative h-48 w-full lg:h-56 lg:w-48">

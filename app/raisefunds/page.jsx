@@ -98,17 +98,27 @@ const MessageComponent = ({ stage }) => {
   return (
     <>
       <div className={"w-full md:h-full"}>
-        <h1 className={"mx-5 mt-5 flex"}> Logo here</h1>
+        <div className={"mx-5 mt-5 flex flex-col"}>
+          <h1>Logo here</h1>
+          <div
+            className={
+              "h-10 w-10 flex justify-center items-center border-2 border-gray-700 rounded-md hover:-translate-y-0.5 transition ease-in-out duration-200 cursor-pointer"
+            }
+            onClick={() => window.history.back()}
+          >
+            <h1 className={"font-light mb-1 text-4xl text-gray-700"}>{"<"}</h1>
+          </div>
+        </div>
       </div>
       <div
         className={
           "w-full h-full flex flex-col justify-center md:justify-start"
         }
       >
-        <h2 className="lg:text-4xl  md:text-3xl text-4xl font-semi-bold text-center text-blue-900 tracking-tighter mb-5">
+        <h2 className="text-3xl font-semi-bold text-center text-blue-900 tracking-tighter mb-5">
           {messages[stage - 1][0]}
         </h2>
-        <h2 className="lg:text-3xl md:text-2xl text-3xl text-center text-slate-700 tracking-tighter">
+        <h2 className="text-2xl text-center text-slate-700 tracking-tighter">
           {messages[stage - 1][1]}
         </h2>
       </div>

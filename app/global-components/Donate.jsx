@@ -7,22 +7,19 @@ const Donate = (props) => {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
-      <div className=" mt-4 flex h-[50rem] w-[70rem] ">
-        <div className="flex h-full w-full flex-col items-center justify-center rounded-l-xl bg-slate-500">
-          <Image
-            className="max-h-5/6 max-w-5/6 flex h-5/6 w-5/6 flex-col items-center justify-center rounded-md border-4 border-white bg-gray-700"
-            src={props.data.image}
-            alt="image here"
-            fill
-          />
-        </div>
-        <div className="flex h-full w-full flex-col items-center rounded-r-xl bg-white">
+    <div className={""}>
+      <div className="flex w-full h-[50rem] items-center justify-center">
+        <Image
+          className="h-full w-full bg-no-repeat bg-cover bg-fixed rounded-md border-4 border-white bg-gray-700"
+          src={props.data.image}
+          alt="image here"
+        />
+        <div className="flex h-full w-full flex-col mb-10 items-center rounded-r-xl bg-white">
           <div className="description-box mt-12 flex h-4/6 w-5/6 flex-col justify-between py-6">
-            <h1 className="text-3xl font-bold text-black ">
+            <h1 className="text-3xl font-bold text-black break-words">
               {props.data.title}
             </h1>
-            <p className="mt-4 flex h-full flex-col justify-center text-xl text-black">
+            <p className="mt-4 h-full text-ellipsis text-xl text-gray-700 break-words overflow-auto">
               {props.data.caption}
             </p>
           </div>
@@ -49,7 +46,6 @@ const Donate = (props) => {
                   className="h-30 mb-2 mr-2 mt-10 w-40 rounded-lg bg-gradient-to-br from-green-400 to-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-green-200 dark:focus:ring-green-800"
                 >
                   Donate
-
                 </a>
               </div>
             </div>
