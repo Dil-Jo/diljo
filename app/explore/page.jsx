@@ -60,9 +60,9 @@ const ExpolorePage = () => {
           <div className="carousel-center carousel rounded-box w-full space-x-8 overflow-x-scroll p-4">
             {content.map((item, index) => (
               <Card
-                key={index}
-                caption={item.title}
-                description={item.caption}
+                key={item.id}
+                title={item.title}
+                caption={item.caption}
                 raised={"10"}
                 goal={item.target}
                 id={item.id}
@@ -131,6 +131,13 @@ const SmallCard = ({ title, caption, img, dataFlow }) => {
     }
   }
 
+  // const [imageSrc, setImageSrc] = useState(null);
+  // useEffect(() => {
+  // const pb = new PocketBase('http://127.0.0.1:8090');
+  // const record = pb.collection('fundraisers').get(id);
+  // setImageSrc(pb.files.getUrl(record, record.thumbnail));
+  // }, [])
+
   return (
     <div className="flex flex-col w-full rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 lg:w-auto">
       <dialog
@@ -150,7 +157,7 @@ const SmallCard = ({ title, caption, img, dataFlow }) => {
       </div>
       <div className="flex flex-col p-4 leading-normal">
         <h3 className="text-lg font-bold">{title}</h3>
-        <h4 className="mt-2 max-h-16 overflow-hidden overflow-ellipsis text-gray-500 lg:max-h-20">
+        <h4 className="mt-2 max-h-16 overflow-hidden truncate text-gray-500 lg:max-h-20">
           {resolveText(caption)}
         </h4>
       </div>
@@ -199,6 +206,7 @@ function Banner() {
           </div>
         </Link>
       </div>
+      {/* </Link> */}
     </>
   );
 }
