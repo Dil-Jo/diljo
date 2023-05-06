@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 function ConditionalFooter() {
   return (
     <footer className="m-4 rounded-lg bg-gray-200 shadow dark:bg-gray-900 p-1">
-      <div className="flex w-full flex-row items-center justify-around p-5 [&>ul]:border-gray-300 [&>ul]:border-l-2 [&>ul]:p-3 rounded-lg border-2 border-gray-300">
+      <div className="flex w-full md:flex-row flex-col md:items-center items-start md:justify-around  p-5 [&>ul]:border-gray-300 [&>ul]:border-l-2 [&>ul]:p-3 rounded-lg border-2 border-gray-300">
         <h1>logo</h1>
         <ul className="flex flex-col [&>li]:my-2">
           <li>
