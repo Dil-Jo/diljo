@@ -5,12 +5,9 @@ export default function Banner() {
     <div className={"mb-6 h-full w-full"}>
       <Link href={"#"}>
         <div
-          className={"rounded-xl"}
+          className={"rounded-xl bg-no-repeat bg-center bg-cover w-full"}
           style={{
             backgroundImage: `url(assets/photo.jpeg)`,
-            backgroundSize: `cover`,
-            backgroundPosition: `center`,
-            backgroundRepeat: `no-repeat`,
           }}
         >
           <div className={"h-[30rem] w-full rounded-xl"}>
@@ -29,7 +26,7 @@ export default function Banner() {
                 </h1>
                 <h1
                   className={
-                    "md:6  my-auto text-start tracking-tighter text-gray-300 md:mt-10 md:text-xl lg:m-6 lg:mt-14 lg:text-2xl"
+                    "my-auto text-start tracking-tighter text-gray-300 md:mt-10 md:text-xl lg:m-6 lg:mt-14 lg:text-2xl"
                   }
                 >
                   some random text here, some random text here, some random text
