@@ -5,6 +5,7 @@ const Donate = (props) => {
   let progressbar = (raised, goal) => {
     return { width: `${(raised / goal) * 100}%` };
   };
+
   return (
     <div className={""}>
       <div className="flex w-full h-[50rem] items-center justify-center">
@@ -38,12 +39,14 @@ const Donate = (props) => {
                 >
                   Share
                 </button>
-                <button
+                <a
                   type="button"
+                  href={props.data.link}
+                  target="_blank"
                   className="h-30 mb-2 mr-2 mt-10 w-40 rounded-lg bg-gradient-to-br from-green-400 to-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-green-200 dark:focus:ring-green-800"
                 >
                   Donate
-                </button>
+                </a>
               </div>
             </div>
           </div>

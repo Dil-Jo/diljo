@@ -36,7 +36,20 @@ const ExpolorePage = () => {
     let temp = await pb.collection("fundraisers").getList(1, 4, {
       filter: "",
     });
-    return temp.items;
+    // console.log({ temp })
+    const output = temp.items.map((item) => {
+      return {
+        id: item.id,
+        title: item.title,
+        caption: item.caption,
+        target: item.target,
+        link: item.link,
+        thumbnail: pb.files.getUrl(item, item.thumbnail),
+        category: item.category,
+      };
+    });
+    // console.log({ output })
+    return output;
   }
 
   useEffect(() => {
@@ -58,21 +71,22 @@ const ExpolorePage = () => {
         </h3>
         <div className="flex w-full gap-8">
           <div className="carousel-center carousel rounded-box w-full space-x-8 overflow-x-scroll p-4">
-            {content.map((item, index) => (
+            {content.map((item) => (
               <Card
-                key={index}
+                key={item.id}
                 caption={item.title}
                 description={item.caption}
                 raised={"10"}
                 goal={item.target}
+                link={item.link}
                 id={item.id}
-                image={{ nicePic }}
+                image={item.thumbnail}
               />
             ))}
           </div>
         </div>
       </div>
-      <div className=" flex w-full flex-col gap-4">
+      <div className="flex w-full flex-col gap-4">
         <ExploreNav
           routes={routes}
           changeCategory={setCategory}
@@ -85,7 +99,7 @@ const ExpolorePage = () => {
               <SmallCard
                 title={item.title}
                 caption={item.caption}
-                img={item.img}
+                img={item.thumbnail}
                 key={index}
                 dataFlow={item}
               />
@@ -95,6 +109,7 @@ const ExpolorePage = () => {
     </div>
   );
 };
+
 const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
   useEffect(() => {
     if ("Education") {
@@ -122,7 +137,7 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
   );
 };
 
-const SmallCard = ({ title, caption, img, dataFlow }) => {
+const SmallCard = ({ title, caption, img, dataFlow, id }) => {
   const dialog = useRef(null);
 
   function handleClick() {
@@ -130,7 +145,12 @@ const SmallCard = ({ title, caption, img, dataFlow }) => {
       dialog.current.showModal();
     }
   }
-
+  // const [imageSrc, setImageSrc] = useState(null);
+  // useEffect(() => {
+  // const pb = new PocketBase('http://127.0.0.1:8090');
+  // const record = pb.collection('fundraisers').get(id);
+  // setImageSrc(pb.files.getUrl(record, record.thumbnail));
+  // }, [])
   return (
     <div className="flex flex-col w-full rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 lg:w-auto">
       <dialog
@@ -143,9 +163,13 @@ const SmallCard = ({ title, caption, img, dataFlow }) => {
       </dialog>
       <div className="relative h-48 w-full lg:h-56 lg:w-48">
         <Image
+          // loader={<h1>Loading</h1>}
+          placeholder={<>Loading prgram</>}
           src={img}
+          // width={500}
           className="h-full w-full rounded-t-lg object-cover"
           alt="Donation Img"
+          fill
         />
       </div>
       <div className="flex flex-col p-4 leading-normal">
@@ -168,38 +192,36 @@ const SmallCard = ({ title, caption, img, dataFlow }) => {
 
 function Banner() {
   return (
-    <>
-      <div className={"h-full w-full"}>
-        <Link href={"/charities"}>
+    <div className={"h-full w-full"}>
+      {/* <Link href={"/charities"}> */}
+      <div
+        className={"rounded-xl"}
+        style={{
+          backgroundImage: `url(assets/photo.jpeg)`,
+          backgroundSize: `cover`,
+          backgroundPosition: `center`,
+          backgroundRepeat: `no-repeat`,
+        }}
+      >
+        <div className={"h-52 w-full cursor-pointer rounded-xl"}>
           <div
-            className={"rounded-xl"}
-            style={{
-              backgroundImage: `url(assets/photo.jpeg)`,
-              backgroundSize: `cover`,
-              backgroundPosition: `center`,
-              backgroundRepeat: `no-repeat`,
-            }}
+            className={
+              "flex h-full w-full rounded-xl bg-gray-950 bg-opacity-40"
+            }
           >
-            <div className={"h-52 w-full cursor-pointer rounded-xl"}>
-              <div
-                className={
-                  "flex h-full w-full rounded-xl bg-gray-950 bg-opacity-40"
-                }
-              >
-                <div className={"md:w-full"}></div>
-                <h1
-                  className={
-                    "my-auto text-start text-6xl font-bold tracking-tighter text-white sm:text-7xl"
-                  }
-                >
-                  Donate to Charities.
-                </h1>
-              </div>
-            </div>
+            <div className={"md:w-full"}></div>
+            <h1
+              className={
+                "my-auto text-start text-6xl font-bold tracking-tighter text-white sm:text-7xl"
+              }
+            >
+              Donate to Charities.
+            </h1>
           </div>
-        </Link>
+        </div>
       </div>
-    </>
+      {/* </Link> */}
+    </div >
   );
 }
 
