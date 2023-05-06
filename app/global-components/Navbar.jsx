@@ -23,10 +23,10 @@ export default function Navbar(props) {
         <Signin />
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
-            <div>
+            <Link href='/'>
               <h6>logo</h6>
               {/* add logo svg here */}
-            </div>
+            </Link>
             <div className="hidden sm:flex sm:items-center">
               <Links />
             </div>
@@ -54,9 +54,8 @@ export default function Navbar(props) {
           </div>
 
           <div
-            className={`${
-              isOpen ? "block" : "hidden"
-            } border-t-2 bg-white py-2 sm:hidden`}
+            className={`${isOpen ? "block" : "hidden"
+              } border-t-2 bg-white py-2 sm:hidden`}
           >
             <div className="flex flex-col">
               <Links />
@@ -164,9 +163,8 @@ function Links() {
             {item.name}
           </Link>
           <div
-            className={`h-1 bg-black transition-all duration-500 ease-in-out ${
-              hoveredIndex === item.id ? "w-full" : "w-0"
-            }`}
+            className={`h-1 bg-black transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
+              }`}
           ></div>
         </div>
       ))}
@@ -198,34 +196,32 @@ function AfterLogin() {
   const logoutRef = useRef(null);
 
   return (
-    <>
-      <div className={"flex w-full justify-between"}>
-        <div className={""}>
+    <div className={"flex w-full justify-between"}>
+      {/* <div className={""}>
           <Image
             className="h-10 mr-5 w-10 rounded-full border-4 border-blue-400"
             alt={""}
             src={""}
           ></Image>{" "}
-        </div>
-        <div>
-          <label
-            className="rounded-lg border px-4 py-1 text-sm h-full flex text-center font-semibold items-center text-gray-800 hover:border-blue-600 hover:text-blue-600"
-            ref={logoutRef}
-            onClick={() => {
-              logoutRef.current.style.backgroundColor = "#3B82F6";
-              logoutRef.current.style.color = "white";
-              logoutRef.current.style.transition = "0.3s";
-              logoutRef.current.style.border = "none";
-              localStorage.removeItem("Login");
-              setTimeout(() => {
-                window.location.reload();
-              }, 1200);
-            }}
-          >
-            Logout
-          </label>
-        </div>
+        </div> */}
+      <div>
+        <label
+          className="rounded-lg border px-4 py-1 text-sm h-full flex text-center font-semibold items-center text-gray-800 hover:border-blue-600 hover:text-blue-600"
+          ref={logoutRef}
+          onClick={() => {
+            logoutRef.current.style.backgroundColor = "#3B82F6";
+            logoutRef.current.style.color = "white";
+            logoutRef.current.style.transition = "0.3s";
+            logoutRef.current.style.border = "none";
+            localStorage.removeItem("Login");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1200);
+          }}
+        >
+          Logout
+        </label>
       </div>
-    </>
+    </div>
   );
 }

@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Navwrapper />
-        <main className="mainContainer">{children}</main>
+        <main className="mainContainer bg-white">{children}</main>
         <Footer />
       </body>
     </html>
