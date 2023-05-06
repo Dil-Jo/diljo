@@ -23,10 +23,10 @@ export default function Navbar(props) {
         <Signin />
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
-            <div>
+            <Link href='/'>
               <h6>logo</h6>
               {/* add logo svg here */}
-            </div>
+            </Link>
             <div className="hidden sm:flex sm:items-center">
               <Links />
             </div>
@@ -54,9 +54,8 @@ export default function Navbar(props) {
           </div>
 
           <div
-            className={`${
-              isOpen ? "block" : "hidden"
-            } border-t-2 bg-white py-2 sm:hidden`}
+            className={`${isOpen ? "block" : "hidden"
+              } border-t-2 bg-white py-2 sm:hidden`}
           >
             <div className="flex flex-col">
               <Links />
@@ -164,9 +163,8 @@ function Links() {
             {item.name}
           </Link>
           <div
-            className={`h-1 bg-black transition-all duration-500 ease-in-out ${
-              hoveredIndex === item.id ? "w-full" : "w-0"
-            }`}
+            className={`h-1 bg-black transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
+              }`}
           ></div>
         </div>
       ))}

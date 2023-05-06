@@ -36,7 +36,17 @@ const ExpolorePage = () => {
     let temp = await pb.collection("fundraisers").getList(1, 4, {
       filter: "",
     });
-    return temp.items;
+    const output = temp.items.map((item) => {
+      return {
+        title: item.title,
+        caption: item.caption,
+        target: item.target,
+        id: item.id,
+        img: pb.files.getUrl(item, item.thumbnail),
+        category: item.category,
+      };
+    });
+    return output;
   }
 
   useEffect(() => {
@@ -153,6 +163,7 @@ const SmallCard = ({ title, caption, img, dataFlow }) => {
           src={img}
           className="h-full w-full rounded-t-lg object-cover"
           alt="Donation Img"
+          fill
         />
       </div>
       <div className="flex flex-col p-4 leading-normal">
