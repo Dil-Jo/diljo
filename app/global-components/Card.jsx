@@ -6,7 +6,7 @@ import Image from "next/image";
 import nicePic from "../../assets/nicePic.jpg";
 
 export default function Card(props) {
-  let caption = useRef(null);
+  // let caption = useRef(null);
   const dialog = useRef(null);
 
   let progressbar = (raised, goal) => {
@@ -22,6 +22,10 @@ export default function Card(props) {
     }
   };
 
+  const { title, caption, thumbnail, raised, target, id } = props;
+
+
+
   return (
     <div className="group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-200 hover:-translate-y-2">
       <dialog
@@ -30,11 +34,11 @@ export default function Card(props) {
           "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl border-2 border-gray-300"
         }
       >
-        <Donate data={props} />
+        <Donate {...props} />
       </dialog>
       <div
-        className="content h-64 w-full rounded rounded-b-xl bg-cover bg-center"
-        //style={resolveImage(props.image)}
+        className="h-64 w-full rounded rounded-b-xl bg-cover bg-center"
+        style={resolveImage(thumbnail)}
       >
         {/*<div>*/}
         {/*  <Image*/}
@@ -53,18 +57,18 @@ export default function Card(props) {
         </div>
       </div>
       <div className="mt-8 px-4">
-        <p className="mt-2 text-2xl text-gray-700 truncate">{props.title}</p>
+        <p className="mt-2 text-2xl text-gray-700 truncate">{title}</p>
         <h2 className="font-small mt-4 overflow-hidden truncate text-gray-400">
-          {props.caption}
+          {caption}
         </h2>
         <div className="mt-4 h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
           <div
             className="h-2.5 rounded-full bg-blue-600"
-            style={progressbar(props.raised, props.target)}
+            style={progressbar(raised, target)}
           ></div>
         </div>
         <h2 className="font-small mt-2 text-end text-gray-400">
-          {props.raised} / {props.target} raised
+          {raised} / {target} raised
         </h2>
         <div className="flex flex-col items-center justify-center">
           <button
@@ -77,5 +81,7 @@ export default function Card(props) {
         </div>
       </div>
     </div>
+
   );
+
 }

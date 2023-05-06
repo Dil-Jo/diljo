@@ -5,30 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8074fd1a-7c94-440b-9232-f1103ac4313e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/5gupvxamlsv6qd2/screenshot_from_2023_04_30_16_29_02_1uoI0d44IM.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/5gupvxamlsv6qd2/screenshot_from_2023_04_30_16_29_02_1uoI0d44IM.png.attrs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/5gupvxamlsv6qd2/screenshot_from_2023_04_30_16_29_02_oU0Vj6waaR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/5gupvxamlsv6qd2/screenshot_from_2023_04_30_16_29_02_oU0Vj6waaR.png.attrs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/5gupvxamlsv6qd2/thumbs_screenshot_from_2023_04_30_16_29_02_1uoI0d44IM.png/100x100_screenshot_from_2023_04_30_16_29_02_1uoI0d44IM.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/5gupvxamlsv6qd2/thumbs_screenshot_from_2023_04_30_16_29_02_1uoI0d44IM.png/100x100_screenshot_from_2023_04_30_16_29_02_1uoI0d44IM.png.attrs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/5gupvxamlsv6qd2/thumbs_screenshot_from_2023_04_30_16_29_02_oU0Vj6waaR.png/100x100_screenshot_from_2023_04_30_16_29_02_oU0Vj6waaR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/5gupvxamlsv6qd2/thumbs_screenshot_from_2023_04_30_16_29_02_oU0Vj6waaR.png/100x100_screenshot_from_2023_04_30_16_29_02_oU0Vj6waaR.png.attrs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/wjhzfuxi5d47i2e/screenshot_from_2023_04_30_16_29_02_9n6mdBcg7z.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/wjhzfuxi5d47i2e/screenshot_from_2023_04_30_16_29_02_9n6mdBcg7z.png.attrs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/wjhzfuxi5d47i2e/screenshot_from_2023_04_30_16_29_02_xuiJ4zFw81.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/wjhzfuxi5d47i2e/screenshot_from_2023_04_30_16_29_02_xuiJ4zFw81.png.attrs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/wjhzfuxi5d47i2e/thumbs_screenshot_from_2023_04_30_16_29_02_9n6mdBcg7z.png/100x100_screenshot_from_2023_04_30_16_29_02_9n6mdBcg7z.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/wjhzfuxi5d47i2e/thumbs_screenshot_from_2023_04_30_16_29_02_9n6mdBcg7z.png/100x100_screenshot_from_2023_04_30_16_29_02_9n6mdBcg7z.png.attrs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/wjhzfuxi5d47i2e/thumbs_screenshot_from_2023_04_30_16_29_02_xuiJ4zFw81.png/100x100_screenshot_from_2023_04_30_16_29_02_xuiJ4zFw81.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pocketbase/pb_data/storage/llklcrguar2toxe/wjhzfuxi5d47i2e/thumbs_screenshot_from_2023_04_30_16_29_02_xuiJ4zFw81.png/100x100_screenshot_from_2023_04_30_16_29_02_xuiJ4zFw81.png.attrs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/charities/components/CharityCard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/charities/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/explore/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/explore/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/global-components/Card.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Card.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/global-components/Donate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Donate.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/global-components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/raisefunds/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/raisefunds/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pocketbase/pb_data/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/pocketbase/pb_data/data.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/charities/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/index-components/Main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/global-components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/index-components/Banner.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/index-components/Banner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/index-components/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/index-components/Main.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" beforeDir="false" afterPath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -63,8 +49,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Reverting in main",
+    "git-widget-placeholder": "charities",
     "last_opened_file_path": "/home/tahamukhtar20/Documents/GitHub/diljo/pocketbase",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -82,6 +69,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/public" />
     </key>
   </component>
@@ -125,6 +113,8 @@
       <workItem from="1683203607497" duration="18520000" />
       <workItem from="1683282097096" duration="427000" />
       <workItem from="1683314374002" duration="299000" />
+      <workItem from="1683367302462" duration="3961000" />
+      <workItem from="1683389535673" duration="4514000" />
     </task>
     <servers />
   </component>

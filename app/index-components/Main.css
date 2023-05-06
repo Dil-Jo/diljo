@@ -1,0 +1,16 @@
+#path11061 {
+    fill: #000000;
+    stroke: #ffffff;
+    stroke-width: 59.0891;
+    stroke-dasharray: 3700;
+    stroke-dashoffset: 3700;
+    stroke-opacity: 1;
+    animation: animate 3s ease-in-out forwards;
+}
+
+@keyframes animate {
+    to {
+        stroke-dashoffset: 0;
+    }
+
+}
