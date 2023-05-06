@@ -2,9 +2,11 @@
 import { GoogleMap, Marker, useLoadScript, CircleF } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import Modal from "./components/Modal"
-// import Sidebar from "./components/Sidebar"
+import PocketBase from "pocketbase";
+import Sidebar from "./components/Sidebar"
 
 const nearbyDonations = () => {
+    const pb = new PocketBase("http://127.0.0.1:8090");
     const [ModalOpen, ModalIsOpen] = useState(false);
     const [lat, setLat] = useState();
     const [lng, setLng] = useState();
@@ -13,12 +15,6 @@ const nearbyDonations = () => {
         googleMapsApiKey: "AIzaSyAB1EQb-2K8ZD5RFHpKnewx-t3zKZMI0PE",
     });
     const openForm = (e) => {
-
-        //print the city name and the area name in the console
-        console.log(e.latLng.lat());
-        console.log(e.city);
-
-
         ModalIsOpen(true);
         setLat(e.latLng.lat());
         setLng(e.latLng.lng());
@@ -52,7 +48,7 @@ const nearbyDonations = () => {
         <>
             <div className="flex">
 
-                {/* <Sidebar /> */}
+                <Sidebar />
                 <div className="App h-[50rem] w-3/4">
                     {!isLoaded ? (
                         <h1>Loading...</h1>
