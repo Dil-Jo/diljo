@@ -53,7 +53,7 @@ export default function Card(props) {
         </div>
       </div>
       <div className="mt-8 px-4">
-        <p className="mt-2 text-2xl text-gray-700">{props.title}</p>
+        <p className="mt-2 text-2xl text-gray-700 truncate">{props.title}</p>
         <h2 className="font-small mt-4 overflow-hidden truncate text-gray-400">
           {props.caption}
         </h2>
