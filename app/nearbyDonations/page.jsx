@@ -1,19 +1,21 @@
 "use client";
 import { GoogleMap, Marker, useLoadScript, CircleF } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
-import Form from "./components/Form"
-import Sidebar from "./components/Sidebar"
+import Modal from "./components/Modal"
+// import Sidebar from "./components/Sidebar"
 
 const nearbyDonations = () => {
+    const [ModalOpen, ModalIsOpen] = useState(false);
+    const [lat, setLat] = useState();
+    const [lng, setLng] = useState();
+    // const [Donation, setDonation] = useState(false);
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: "AIzaSyAB1EQb-2K8ZD5RFHpKnewx-t3zKZMI0PE",
     });
-    const [formIsOpen, setFormIsOpen] = useState(false);
     const openForm = (e) => {
-        console.log("latitude = " + e.latLng.lat());
-        console.log("longitude = " + e.latLng.lng());
-        setFormIsOpen(true);
-        console.log('form is open');
+        ModalIsOpen(true)
+        setLat(e.latLng.lat());
+        setLng(e.latLng.lng());
     };
 
 
@@ -45,8 +47,8 @@ const nearbyDonations = () => {
     return (
         <>
             <div className="flex">
-                {/* {formIsOpen ? <Form /> : null} */}
-                <Sidebar />
+
+                {/* <Sidebar /> */}
                 <div className="App h-[50rem] w-3/4">
                     {!isLoaded ? (
                         <h1>Loading...</h1>
@@ -55,7 +57,7 @@ const nearbyDonations = () => {
                             mapContainerClassName="map-container h-full w-full"
                             center={center}
                             zoom={14}
-                            onClick={openForm}
+                            onClick={(e) => openForm(e)}
                         ><Marker position={{ lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) }} />
                             {[2000, 4000].map((radius, idx) => {
                                 return (
@@ -80,6 +82,7 @@ const nearbyDonations = () => {
                     )}
                 </div>
             </div>
+            {ModalOpen && <Modal ModalIsOpen={ModalIsOpen} lat={lat} lng={lng} />}
 
         </>
     );
