@@ -54,8 +54,9 @@ export default function Navbar(props) {
           </div>
 
           <div
-            className={`${isOpen ? "block" : "hidden"
-              } border-t-2 bg-white py-2 sm:hidden`}
+            className={`${
+              isOpen ? "block" : "hidden"
+            } border-t-2 bg-white py-2 sm:hidden`}
           >
             <div className="flex flex-col">
               <Links />
@@ -163,8 +164,9 @@ function Links() {
             {item.name}
           </Link>
           <div
-            className={`h-1 bg-black transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
-              }`}
+            className={`h-1 bg-black transition-all duration-500 ease-in-out ${
+              hoveredIndex === item.id ? "w-full" : "w-0"
+            }`}
           ></div>
         </div>
       ))}

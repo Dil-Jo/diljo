@@ -20,7 +20,6 @@
 *.pem
 .idea
 /pocketbase/
-/pocketbase/pb_data/
 
 # debug
 npm-debug.log*
