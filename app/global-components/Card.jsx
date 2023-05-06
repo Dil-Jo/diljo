@@ -4,20 +4,9 @@ import Donate from "../global-components/Donate";
 import Image from "next/image";
 import nicePic from "../../assets/nicePic.jpg";
 
-
-
-
 export default function Card(props) {
   let caption = useRef(null);
   const dialog = useRef(null);
-
-  useEffect(() => {
-    console.log("hello");
-    caption.current.innerHTML =
-      props.caption.length > 100
-        ? props.caption.substring(0, 100) + "..."
-        : props.caption;
-  }, []);
 
   let progressbar = (raised, goal) => {
     return { width: `${(raised / goal) * 100}%` };
@@ -29,28 +18,32 @@ export default function Card(props) {
     if (dialog.current) {
       dialog.current.showModal();
     }
-  }
-
+  };
 
   return (
     <div className="group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-200 hover:-translate-y-2">
-      <dialog ref={dialog}>
+      <dialog
+        ref={dialog}
+        className={
+          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl border-2 border-gray-300"
+        }
+      >
         <Donate data={props} />
       </dialog>
       <div
         className="content h-64 w-full rounded rounded-b-xl bg-cover bg-center"
-      //style={resolveImage(props.image)}
+        //style={resolveImage(props.image)}
       >
-        <div>
-          <Image
-            placeholder={<>Loading prgram</>}
-            src={props.image}
-            // src={nicePic}
-            className="h-full w-full rounded-t-lg object-cover"
-            alt="Donation Img"
-            // width={500}
-            fill />
-        </div>
+        {/*<div>*/}
+        {/*  <Image*/}
+        {/*    placeholder={<>Loading prgram</>}*/}
+        {/*    src={props.image}*/}
+        {/*    // src={nicePic}*/}
+        {/*    className="h-full w-full rounded-t-lg object-cover"*/}
+        {/*    alt="Donation Img"*/}
+        {/*    // width={500}*/}
+        {/*    fill />*/}
+        {/*</div>*/}
         <div className="flex h-full w-full items-end rounded rounded-b-xl bg-black bg-opacity-20 p-4  text-sm font-bold text-white">
           <div className="flex w-1/2 items-center">
             <span>#{props.id}</span>
@@ -59,10 +52,9 @@ export default function Card(props) {
       </div>
       <div className="mt-8 px-4">
         <p className="mt-2 text-2xl text-gray-700">{props.title}</p>
-        <h2
-          className="font-small mt-4 overflow-hidden text-ellipsis text-gray-400"
-          ref={caption}
-        ></h2>
+        <h2 className="font-small mt-4 overflow-hidden truncate text-gray-400">
+          {props.caption}
+        </h2>
         <div className="mt-4 h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
           <div
             className="h-2.5 rounded-full bg-blue-600"

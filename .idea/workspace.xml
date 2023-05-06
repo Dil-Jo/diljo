@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8074fd1a-7c94-440b-9232-f1103ac4313e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/explore/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/explore/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/global-components/Card.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Card.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/global-components/Donate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Donate.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" beforeDir="false" afterPath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +66,22 @@
       <recent name="$PROJECT_DIR$/public" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.dev --turbo">
+    <configuration name="Unnamed" type="ShConfigurationType" nameIsGenerated="true">
+      <option name="SCRIPT_TEXT" value="./pocketbase/pocketbase serve" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/pocketbase" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="dev --turbo" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -76,6 +93,10 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="npm.dev --turbo" />
+      <item itemvalue="Shell Script.Unnamed" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev --turbo" />
@@ -104,6 +125,7 @@
       <workItem from="1683203607497" duration="18520000" />
       <workItem from="1683282097096" duration="427000" />
       <workItem from="1683314374002" duration="299000" />
+      <workItem from="1683353692526" duration="636000" />
     </task>
     <servers />
   </component>

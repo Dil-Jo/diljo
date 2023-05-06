@@ -74,8 +74,8 @@ const ExpolorePage = () => {
             {content.map((item) => (
               <Card
                 key={item.id}
-                caption={item.title}
-                description={item.caption}
+                title={item.title}
+                caption={item.caption}
                 raised={"10"}
                 goal={item.target}
                 link={item.link}
@@ -145,6 +145,7 @@ const SmallCard = ({ title, caption, img, dataFlow, id }) => {
       dialog.current.showModal();
     }
   }
+
   // const [imageSrc, setImageSrc] = useState(null);
   // useEffect(() => {
   // const pb = new PocketBase('http://127.0.0.1:8090');
@@ -174,7 +175,7 @@ const SmallCard = ({ title, caption, img, dataFlow, id }) => {
       </div>
       <div className="flex flex-col p-4 leading-normal">
         <h3 className="text-lg font-bold">{title}</h3>
-        <h4 className="mt-2 max-h-16 overflow-hidden overflow-ellipsis text-gray-500 lg:max-h-20">
+        <h4 className="mt-2 max-h-16 overflow-hidden truncate text-gray-500 lg:max-h-20">
           {resolveText(caption)}
         </h4>
       </div>
@@ -221,7 +222,7 @@ function Banner() {
         </div>
       </div>
       {/* </Link> */}
-    </div >
+    </div>
   );
 }
 
