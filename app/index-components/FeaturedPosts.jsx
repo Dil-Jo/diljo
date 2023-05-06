@@ -3,21 +3,39 @@ import Card from "../global-components/Card";
 import PocketBase from "pocketbase";
 import { useEffect, useState } from "react";
 
+
+
+
+
 export default function FeaturedPosts() {
-  async function temp() {
+
+  async function tempFun() {
     const pb = new PocketBase("http://127.0.0.1:8090");
     let temp = await pb.collection("fundraisers").getList(1, 4, {
       filter: "",
     });
-    return temp.items;
+    const output = temp.items.map((item) => {
+      return {
+        title: item.title,
+        caption: item.caption,
+        target: item.target,
+        id: item.id,
+        thumbnail: pb.files.getUrl(item, item.thumbnail),
+        category: item.category,
+        link: item.link
+      };
+    });
+    return output;
   }
+
 
   const [cardList, setCardList] = useState([]);
   useEffect(() => {
-    temp().then((data) => {
+    tempFun().then((data) => {
       setCardList(data);
-    });
+    })
   }, []);
+
 
   return (
     <>
@@ -29,7 +47,8 @@ export default function FeaturedPosts() {
       </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
         {cardList.map((card) => {
-          return <Card {...card} raised="10" />;
+          // return (<h1>{card.id}</h1>);
+          return <Card key={card.id} {...card} raised="10" />;
         })}
       </div>
     </>
