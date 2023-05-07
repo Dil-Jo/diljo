@@ -6,6 +6,9 @@ import PocketBase from "pocketbase";
 import Sidebar from "./components/Sidebar"
 
 const nearbyDonations = () => {
+    const [reRenderSidebar, setReRenderSidebar] = useState(false);
+    const [reRenderMap, setReRenderMap] = useState(false);
+
     const [markers, setMarkers] = useState({});
 
     const pb = new PocketBase("http://127.0.0.1:8090");
