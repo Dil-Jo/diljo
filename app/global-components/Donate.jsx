@@ -59,12 +59,13 @@ export default function (props) {
   // }, []);
 
   return (
-    <div className="flex flex-col w-full h-auto relative items-center justify-center p-3">
+    <div className="flex flex-col w-full h-auto relative items-center justify-center p-3 cursor-default">
       {/* // <div className="flex flex-col w-full h-[50rem] items-center justify-center"> */}
       <div className='w-full h-96 relative '>
         <Image
           // className="h-full w-full bg-no-repeat bg-cover bg-fixed xl:rounded-bl-2xl rounded-tl-2xl rounded-bl-none xl:rounded-tr-none rounded-tr-2xl  border-4 border-white bg-gray-700"
-          className="h-full first-letter:object-contain rounded-2xl border-4 border-white"
+          // className="h-full first-letter:object-contain rounded-2xl border-4 border-white"
+          className="h-full w-auto object-cover rounded-2xl border-4 border-white"
           src={thumbnail}
           // width={"0"}
           // height={"0"}
