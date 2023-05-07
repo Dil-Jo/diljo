@@ -6,14 +6,16 @@ import PocketBase from "pocketbase";
 import Sidebar from "./components/Sidebar"
 
 const nearbyDonations = () => {
+    const [markers, setMarkers] = useState({});
+
     const pb = new PocketBase("http://127.0.0.1:8090");
     const [ModalOpen, ModalIsOpen] = useState(false);
     const [lat, setLat] = useState();
     const [lng, setLng] = useState();
-    // const [Donation, setDonation] = useState(false);
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: "AIzaSyAB1EQb-2K8ZD5RFHpKnewx-t3zKZMI0PE",
     });
+
     const openForm = (e) => {
         ModalIsOpen(true);
         setLat(e.latLng.lat());
@@ -41,7 +43,18 @@ const nearbyDonations = () => {
 
     useEffect(() => {
         getLocation();
+        pb.collection("volunteers").getList().then(data => {
+            const newMarkers = {};
+            data.items.forEach(volunteer => {
+                const title = volunteer.title;
+                const latitude = volunteer.latitude;
+                const longitude = volunteer.longitude;
+                newMarkers[title] = { lat: latitude, lng: longitude };
+            });
+            setMarkers(newMarkers);
+        });
     }, []);
+
     const center = { lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) };
 
     return (
@@ -49,16 +62,20 @@ const nearbyDonations = () => {
             <div className="flex">
 
                 <Sidebar />
-                <div className="App h-[50rem] w-3/4">
+                <div className="App h-[50rem] w-2/3">
                     {!isLoaded ? (
                         <h1>Loading...</h1>
                     ) : (
-                        <GoogleMap
+                        <GoogleMap id="map"
                             mapContainerClassName="map-container h-full w-full"
                             center={center}
                             zoom={14}
                             onClick={(e) => openForm(e)}
-                        ><Marker position={{ lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) }} />
+                        >
+                            <Marker position={{ lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) }} />
+                            {Object.entries(markers).map(([title, coords]) => (
+                                <Marker key={title} position={coords} />
+                            ))}
                             {[2000, 4000].map((radius, idx) => {
                                 return (
                                     <CircleF
@@ -77,12 +94,11 @@ const nearbyDonations = () => {
                                 );
                             })}
                         </GoogleMap>
-
-
                     )}
                 </div>
             </div>
-            {ModalOpen && <Modal ModalIsOpen={ModalIsOpen} lat={lat} lng={lng} />}
+            {ModalOpen && <Modal ModalIsOpen={ModalIsOpen}
+                lat={lat} lng={lng} />}
 
         </>
     );

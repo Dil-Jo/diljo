@@ -1,11 +1,11 @@
 const Drive = ({ title, category, lat, lng, stDate, endDate }) => {
     return (
         <>
-            <div className="flex flex-col">
-                <div className="flex flex-row">
-                    <h3 className="text-[2rem] font-normal ml-4 mt-4">{title}</h3>
+            <div>
+                <div className="flex w-30">
+                    <h3 className="text-[1.3rem] font-normal ml-4 mt-4">{title}</h3>
                     <div className="flex flex-row ml-4 mt-4">
-                        <h3 className="text-[1.5rem] font-normal">{category}</h3>
+                        <h3 className="text-[1.5rem] font-normal">Category: {category}</h3>
                         <h3 className="text-[1.5rem] font-normal ml-4">Start Date: {stDate}</h3>
                         <h3 className="text-[1.5rem] font-normal ml-4">End Date: {endDate}</h3>
                     </div>
@@ -18,3 +18,4 @@ const Drive = ({ title, category, lat, lng, stDate, endDate }) => {
         </>
     );
 }
+export default Drive;
