@@ -44,7 +44,7 @@ const RaiseFunds = () => {
       };
       console.log({ formData });
 
-      const fetchStripe = await fetch("http://localhost:3000/api/add_product", {
+      const fetchStripe = await fetch("/api/add_product", {
         method: "POST",
         headers: {
           "Content-Type": "multipart/form-data",
@@ -60,7 +60,7 @@ const RaiseFunds = () => {
         formData.append("stripeLink", stripeId.paymentLink.url);
       } else return alert("Something went wrong with stripe");
 
-      const pb = new PocketBase("http://127.0.0.1:8090");
+      const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
       const response = await pb.collection("fundraisers").create(formData);
 
       if (response.id) alert("Form submitted successfully");

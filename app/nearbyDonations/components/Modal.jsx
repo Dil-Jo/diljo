@@ -18,7 +18,7 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
     }, [lat, lng]);
 
     const saveDataToPocketBase = async () => {
-        const pb = new PocketBase("http://127.0.0.1:8090");
+        const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
         //----------REMOVED AREA AND FUNDRAISER FROM THE DATABASE--------------
 

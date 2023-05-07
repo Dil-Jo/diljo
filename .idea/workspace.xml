@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8074fd1a-7c94-440b-9232-f1103ac4313e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/charities/components/CharityCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/charities/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/charities/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/index-components/Main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/global-components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/index-components/Banner.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/index-components/Banner.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/index-components/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/index-components/Main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" beforeDir="false" afterPath="$PROJECT_DIR$/pocketbase/pb_data/logs.db" afterDir="false" />
-    </list>
+    <list default="true" id="8074fd1a-7c94-440b-9232-f1103ac4313e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +38,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "charities",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/home/tahamukhtar20/Documents/GitHub/diljo/pocketbase",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",

@@ -5,7 +5,7 @@ const Sidebar = () => {
     const [numDrives, setNumDrives] = useState([]);
     const getCollectionData = async () => {
         try {
-            const pb = new pocketbase("http://127.0.0.1:8090");
+            const pb = new pocketbase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
             const response = await pb.collection("volunteers").getList();
             setNumDrives(response.items);
         } catch (error) {

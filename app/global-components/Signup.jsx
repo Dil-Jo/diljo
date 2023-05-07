@@ -13,7 +13,7 @@ export default function Signup() {
   const [error, setError] = useState("");
 
   async function create() {
-    const pb = new PocketBase("http://127.0.0.1:8090");
+    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     try {
       const resultList = await pb.collection("users").create({
         email: emailRef.current.value,
@@ -51,7 +51,7 @@ export default function Signup() {
       return false;
     }
 
-    const pb = new PocketBase("http://127.0.0.1:8090");
+    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     const resultList = await pb.collection("users").getList(1, 50, {
       filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`,
     });

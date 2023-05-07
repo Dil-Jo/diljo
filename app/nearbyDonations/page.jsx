@@ -6,19 +6,23 @@ import PocketBase from "pocketbase";
 import Sidebar from "./components/Sidebar"
 
 const nearbyDonations = () => {
+
+    // dotenv.config();
+    // console.log(process.env.GOOGLE_API_KEY);
     const [reRenderSidebar, setReRenderSidebar] = useState(false);
     const [reRenderMap, setReRenderMap] = useState(false);
 
     const [markers, setMarkers] = useState({});
 
-    const pb = new PocketBase("http://127.0.0.1:8090");
+    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     const [ModalOpen, ModalIsOpen] = useState(false);
     const [lat, setLat] = useState();
     const [lng, setLng] = useState();
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: "AIzaSyAB1EQb-2K8ZD5RFHpKnewx-t3zKZMI0PE",
-    });
+        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
 
+    });
+    console.log('gKey', process.env.NEXT_PUBLIC_GOOGLE_API_KEY)
     const openForm = (e) => {
         ModalIsOpen(true);
         setLat(e.latLng.lat());

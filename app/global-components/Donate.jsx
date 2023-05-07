@@ -5,7 +5,7 @@ import pic from "../../assets/cat.jpeg";
 import { useEffect, useState } from "react";
 
 const getRaised = async (id) => {
-  const pb = new PocketBase("http://127.0.0.1:8090");
+  const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
   // you can also fetch all records at once via getFullList
   const records = await pb.collection('donations').getFullList({
