@@ -53,6 +53,7 @@ const nearbyDonations = () => {
             });
             setMarkers(newMarkers);
         });
+
     }, []);
 
     const center = { lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) };
@@ -74,11 +75,8 @@ const nearbyDonations = () => {
                         >
                             <Marker position={{ lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) }} />
                             {Object.entries(markers).map(([title, coords]) => {
-                                useEffect(() => {
-                                    console.log(coords);
-                                }, []);
                                 return (
-                                    <Marker key={title} position={{ lat: Number(coords.lat), lng: Number(coords.lng) }} />)
+                                    <Marker title={String(title)} key={title} position={{ lat: Number(coords.lat), lng: Number(coords.lng) }} />)
                             })}
                             {[2000, 4000].map((radius, idx) => {
                                 return (
