@@ -3,14 +3,21 @@ import Card from "../global-components/Card";
 import PocketBase from "pocketbase";
 import { useEffect, useState } from "react";
 
-
-
-
-
 export default function FeaturedPosts() {
 
   async function tempFun() {
-    const pb = new PocketBase("http://127.0.0.1:8090");
+    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+
+    // pb.beforeSend = function (url, options) {
+    //   // For list of the possible request options properties check
+    //   // https://developer.mozilla.org/en-US/docs/Web/API/fetch#options
+    //   options.headers = Object.assign({}, options.headers, {
+    //     'Access-Control-Allow-Origin': '*',
+    //   });
+
+    //   return { url, options };
+    // };
+    console.log("Pb Sb", pb)
     let temp = await pb.collection("fundraisers").getList(1, 4, {
       filter: "",
     });
