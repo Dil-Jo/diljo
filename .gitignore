@@ -19,7 +19,6 @@
 .DS_Store
 *.pem
 .idea
-/pocketbase/
 
 # debug
 npm-debug.log*
@@ -35,3 +34,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+*.xml
