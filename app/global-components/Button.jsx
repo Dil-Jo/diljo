@@ -1,3 +1,4 @@
+'use client'
 import Link from "next/link";
 import React from "react";
 
@@ -22,15 +23,19 @@ const Button = ({ type, text, link = "", onClick }) => {
   const btnStyles = `w-full place-items-center rounded-lg  px-5 py-2.5 text-center text-sm font-medium focus:outline-none focus:ring-4 sm:w-auto rounded-lg border w-max px-4 py-1 text-sm font-semibold text-gray-800 text-white ${buttonColor[type]}`;
   if (link !== "")
     return (
-      <button className={btnStyles}>
-        <Link href={link}>{text}</Link>
-      </button>
+      <>
+        <button className={btnStyles}>
+          <Link href={link}>{text}</Link>
+        </button>
+      </>
     );
   else
     return (
-      <button onClick={onClick} className={btnStyles}>
-        {text}
-      </button>
+      <>
+        <button onClick={onClick} className={btnStyles}>
+          {text}
+        </button>
+      </>
     );
 };
 
