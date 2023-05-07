@@ -18,12 +18,12 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
     }, [lat, lng]);
 
     const saveDataToPocketBase = async () => {
-        const pocketbase = new PocketBase("http://127.0.0.1:8090");
+        const pb = new PocketBase("http://127.0.0.1:8090");
 
         //----------REMOVED AREA AND FUNDRAISER FROM THE DATABASE--------------
 
         try {
-            const response = await pocketbase.collection('volunteers').create({
+            const response = await pb.collection('volunteers').create({
                 title: title,
                 longitude: donlng,
                 latitude: donlat,

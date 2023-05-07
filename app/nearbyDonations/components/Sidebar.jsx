@@ -12,7 +12,10 @@ const Sidebar = () => {
             console.error("Failed to get collection data:", error);
         }
     };
-    getCollectionData();
+    useEffect(() => {
+        getCollectionData();
+    }, []);
+
     return (
 
         <>
