@@ -73,9 +73,13 @@ const nearbyDonations = () => {
                             onClick={(e) => openForm(e)}
                         >
                             <Marker position={{ lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) }} />
-                            {Object.entries(markers).map(([title, coords]) => (
-                                <Marker key={title} position={coords} />
-                            ))}
+                            {Object.entries(markers).map(([title, coords]) => {
+                                useEffect(() => {
+                                    console.log(coords);
+                                }, []);
+                                return (
+                                    <Marker key={title} position={{ lat: Number(coords.lat), lng: Number(coords.lng) }} />)
+                            })}
                             {[2000, 4000].map((radius, idx) => {
                                 return (
                                     <CircleF
