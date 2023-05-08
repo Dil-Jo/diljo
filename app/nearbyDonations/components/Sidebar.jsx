@@ -1,7 +1,7 @@
 import Drive from './Drive';
 import pocketbase from "pocketbase";
 import { useEffect, useState } from 'react';
-const Sidebar = () => {
+const Sidebar = ({ map }) => {
     const [numDrives, setNumDrives] = useState([]);
     const getCollectionData = async () => {
         try {
@@ -27,7 +27,7 @@ const Sidebar = () => {
                 </div>
                 <div className="drives bg-slate-500">
                     {numDrives.map((drive) => (
-                        <Drive title={drive.title} category={drive.category} lat={drive.latitude} lng={drive.longitude} stDate={drive.startingDate} endDate={drive.endingDate} />
+                        <Drive title={drive.title} category={drive.category} lat={drive.latitude} lng={drive.longitude} stDate={drive.startingDate} endDate={drive.endingDate} map={map} />
                     ))}
 
                 </div>

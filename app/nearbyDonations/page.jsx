@@ -11,7 +11,7 @@ const nearbyDonations = () => {
     // console.log(process.env.GOOGLE_API_KEY);
 
     const [markers, setMarkers] = useState({});
-
+    const [map, setMap] = useState(/**@type google.maps.Map */(null));
     const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     const [ModalOpen, ModalIsOpen] = useState(false);
     const [lat, setLat] = useState();
@@ -68,7 +68,7 @@ const nearbyDonations = () => {
         <>
             <div className="flex">
 
-                <Sidebar />
+                <Sidebar map={map} />
                 <div className="App h-[50rem] w-2/3">
                     {!isLoaded ? (
                         <h1>Loading...</h1>
@@ -77,6 +77,7 @@ const nearbyDonations = () => {
                             mapContainerClassName="map-container h-full w-full"
                             center={center}
                             zoom={14}
+                            onLoad={map => setMap(map)}
                             onClick={(e) => openForm(e)}
                         >
                             <Marker position={{ lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) }} />

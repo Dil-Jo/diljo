@@ -1,4 +1,7 @@
-const Drive = ({ title, category, lat, lng, stDate, endDate }) => {
+import { Marker } from "@react-google-maps/api";
+
+const Drive = ({ title, category, lat, lng, stDate, endDate, map }) => {
+
     return (
         <>
             <div>
@@ -14,6 +17,9 @@ const Drive = ({ title, category, lat, lng, stDate, endDate }) => {
                     <h3 className="text-[1.5rem] font-normal ml-4 mt-4">Latitude: {lat}</h3>
                     <h3 className="text-[1.5rem] font-normal ml-4 mt-4">Longitude: {lng}</h3>
                 </div>
+                <button onClick={() => {
+                    map.panTo(({ lat: Number(lat), lng: Number(lng) }))
+                }}>This Button</button>
             </div>
         </>
     );
