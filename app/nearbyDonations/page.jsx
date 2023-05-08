@@ -9,8 +9,6 @@ const nearbyDonations = () => {
 
     // dotenv.config();
     // console.log(process.env.GOOGLE_API_KEY);
-    const [reRenderSidebar, setReRenderSidebar] = useState(false);
-    const [reRenderMap, setReRenderMap] = useState(false);
 
     const [markers, setMarkers] = useState({});
 
@@ -56,7 +54,8 @@ const nearbyDonations = () => {
                 const title = volunteer.title;
                 const latitude = volunteer.latitude;
                 const longitude = volunteer.longitude;
-                newMarkers[title] = { lat: latitude, lng: longitude };
+                const category = String(volunteer.category);
+                newMarkers[title] = { lat: latitude, lng: longitude, cat: category };
             });
             setMarkers(newMarkers);
         });
@@ -82,8 +81,29 @@ const nearbyDonations = () => {
                         >
                             <Marker position={{ lat: Number(currentLocation.lat), lng: Number(currentLocation.lng) }} />
                             {Object.entries(markers).map(([title, coords]) => {
+                                var url;
+                                switch (coords.cat) {
+                                    case "food":
+                                        // code block
+                                        url = '/assets/food.png'
+                                        break;
+                                    case "clothing":
+                                        // code block
+                                        url = '/assets/clothing.png'
+                                        break;
+                                    case "blood":
+                                        url = '/assets/blood.png'
+                                        break;
+                                    case "books":
+                                        url = '/assets/books.png'
+                                        break;
+                                    default:
+                                        break;
+
+                                }
+                                console.log(url);
                                 return (
-                                    <Marker title={String(title)} key={title} position={{ lat: Number(coords.lat), lng: Number(coords.lng) }} />)
+                                    <Marker title={String(title)} key={title} position={{ lat: Number(coords.lat), lng: Number(coords.lng) }} icon={{ url: url, scaledSize: new window.google.maps.Size(45, 45), origin: new window.google.maps.Point(0, 0), anchor: new window.google.maps.Point(15, 15) }} />)
                             })}
                             {[2000, 4000].map((radius, idx) => {
                                 return (
