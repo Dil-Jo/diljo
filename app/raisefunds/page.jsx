@@ -85,6 +85,7 @@ const RaiseFunds = () => {
 	};
 
 	const submitForm = async () => {
+		console.log({ fullForm })
 		const formData = new FormData();
 		formData.append('title', fullForm.title);
 		formData.append('caption', fullForm.description);
@@ -95,7 +96,7 @@ const RaiseFunds = () => {
 		);
 		formData.append('coverPhoto', fullForm.image);
 		formData.append('anonanonymityStatus', fullForm['radio-10']);
-		formData.append('thumbnail', fullForm.imageThumb);
+		formData.append('thumbnail', fullForm.imageThumbs);
 		formData.append('category', fullForm.reason);
 		formData.append('finalDate', '2025-12-1');
 
@@ -106,7 +107,7 @@ const RaiseFunds = () => {
 			owner: JSON.parse(localStorage.getItem('Login')).record.id,
 			coverPhoto: fullForm.image,
 			anonanonymityStatus: fullForm['radio-10'],
-			thumbnail: fullForm.imageThumb,
+			thumbnail: fullForm.imageThumbs,
 			category: fullForm.reason,
 			finalDate: '2025-12-1',
 		};
