@@ -17,20 +17,24 @@ export default function Navbar(props) {
   }
 
   function NavDataComponent() {
+    let Login = false;
+    useEffect(() => {
+      Login = JSON.parse(localStorage.getItem("Login")) || false;
+    }, []);
     return (
       <>
         <Signup />
         <Signin />
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
-            <Link href='/'>
+            <Link href="/">
               <h6>logo</h6>
               {/* add logo svg here */}
             </Link>
             <div className="hidden sm:flex sm:items-center">
               <Links />
             </div>
-            {JSON.parse(localStorage.getItem("Login")) ? (
+            {Login ? (
               <div className={"hidden sm:flex sm:items-center"}>
                 <AfterLogin />
               </div>
@@ -55,11 +59,11 @@ export default function Navbar(props) {
 
           <div
             className={`${isOpen ? "block" : "hidden"
-              } border-t-2 bg-white py-2 sm:hidden`}
+            } border-t-2 bg-white py-2 sm:hidden`}
           >
             <div className="flex flex-col">
               <Links />
-              {JSON.parse(localStorage.getItem("Login")) ? (
+              {Login ? (
                 <div className="flex w-full border-t-2 pt-2">
                   <AfterLogin />
                 </div>
@@ -144,7 +148,7 @@ function Links() {
   const menuItems = [
     { id: 1, name: "EXPLORE" },
     { id: 2, name: "MAIN" },
-    { id: 3, name: "ABOUT" },
+    { id: 3, name: "ABOUT" }
   ];
 
   return (
@@ -164,7 +168,7 @@ function Links() {
           </Link>
           <div
             className={`h-1 bg-black transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
-              }`}
+            }`}
           ></div>
         </div>
       ))}

@@ -23,7 +23,8 @@ const RaiseFunds = () => {
       formData.append("target", fullForm.amount);
       formData.append(
         "owner",
-        JSON.parse(localStorage.getItem("Login")).record.id
+        // JSON.parse(localStorage.getItem("Login")).record.id
+        "60f9b1b3a3c9a0001c0000a1"
       );
       formData.append("coverPhoto", fullForm.image);
       formData.append("anonanonymityStatus", fullForm["radio-10"]);
@@ -35,23 +36,24 @@ const RaiseFunds = () => {
         title: fullForm.title,
         caption: fullForm.description,
         target: fullForm.amount,
-        owner: JSON.parse(localStorage.getItem("Login")).record.id,
+        // owner: JSON.parse(localStorage.getItem("Login")).record.id,
+        owner: "60f9b1b3a3c9a0001c0000a1",
         coverPhoto: fullForm.image,
         anonanonymityStatus: fullForm["radio-10"],
         thumbnail: fullForm.image,
         category: fullForm.reason,
-        finalDate: "2025-12-1",
+        finalDate: "2025-12-1"
       };
       console.log({ formData });
 
       const fetchStripe = await fetch("/api/add_product", {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data"
         },
         body: JSON.stringify({
-          name: fullForm.title,
-        }),
+          name: fullForm.title
+        })
       });
       const stripeId = await fetchStripe.json();
       console.log({ stripeId });
@@ -70,8 +72,8 @@ const RaiseFunds = () => {
   useEffect(() => {
     updateForm({}).then((r) => console.log({ r }));
   }, [stage]);
-  if (localStorage.getItem("Login") == null)
-    return <div>Please Login First</div>;
+  // if (localStorage.getItem("Login") == null)
+  //   return <div>Please Login First</div>;
   return (
     <div className="w-full md:h-screen h-full md:flex md:flex-row overflow-auto">
       <div
@@ -92,7 +94,7 @@ const MessageComponent = ({ stage }) => {
   const messages = [
     ["Let's lend a hand to someone,", "who really needs it."],
     ["Let's lend a hand to someone,", "who really needs it."],
-    ["We make a living by what we get.", "We make a life by what we give."],
+    ["We make a living by what we get.", "We make a life by what we give."]
   ];
   if (stage > 3) stage = 3;
   return (
