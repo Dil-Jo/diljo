@@ -1,11 +1,11 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
   experimental: {
-    appDir: true,
+    appDir: true
   },
   images: {
-    domains: ['127.0.0.1'],
-  },
-}
+    domains: ["pocketbase-production-fba8.up.railway.app"]
+  }
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
