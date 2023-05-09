@@ -62,13 +62,13 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
             <div className={styles.centered}>
                 <form className={styles.modal}>
                     <div className={styles.modalHeader}>
-                        <h5 className={styles.heading}>Dialog</h5>
+                        <h5 className={styles.heading}>Add a new Donation Drive</h5>
                     </div>
                     <button className={styles.closeBtn} onClick={() => ModalIsOpen(false)}>
                         X
                     </button>
                     <div className={styles.modalContent}>
-                        Adding a new donation drive?
+                        Enter the details of the donation drive:
                     </div>
                     <div>
                         {/*Taking title of the drive*/}
