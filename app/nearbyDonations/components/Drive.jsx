@@ -1,4 +1,3 @@
-import { Marker } from "@react-google-maps/api";
 
 const Drive = ({ title, category, lat, lng, stDate, endDate, map }) => {
 
@@ -9,7 +8,7 @@ const Drive = ({ title, category, lat, lng, stDate, endDate, map }) => {
                     <h3 className="text-[1.3rem] font-normal ml-4 mt-4">{title}</h3>
                     <div className="flex flex-row ml-4 mt-4">
                         <h3 className="text-[1.5rem] font-normal">Category: {category}</h3>
-                        <h3 className="text-[1.5rem] font-normal ml-4">Start Date: {stDate}</h3>
+                        <h3 hidden className="text-[1.5rem] font-normal ml-4">Start Date: {stDate}</h3>
                         <h3 className="text-[1.5rem] font-normal ml-4">End Date: {endDate}</h3>
                     </div>
                 </div>
@@ -20,6 +19,7 @@ const Drive = ({ title, category, lat, lng, stDate, endDate, map }) => {
                 <button onClick={() => {
                     map.panTo(({ lat: Number(lat), lng: Number(lng) }))
                 }}>This Button</button>
+
             </div>
         </>
     );
