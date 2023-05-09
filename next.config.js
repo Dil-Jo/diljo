@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ['127.0.0.1'],
+    domains: ['pocketbase-production-fba8.up.railway.app'],
   },
 }
 
