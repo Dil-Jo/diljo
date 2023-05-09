@@ -16,7 +16,7 @@ body {
 }
 
 .mainContainer {
-	padding: 4.5rem 0rem;
+	padding: 4.5rem 0rem 0rem 0rem;
 }
 
 *::-webkit-scrollbar {

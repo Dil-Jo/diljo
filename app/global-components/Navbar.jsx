@@ -122,7 +122,7 @@ export default function Navbar(props) {
         </div>
       ) : router === "/raisefunds" ? (
         <div
-          className="md:fixed z-50 bg-white shadow-md hidden"
+          className="md:fixed z-50 bg-white shadow-md"
           ref={navbarRef}
           style={{ width: "100%" }}
         >
