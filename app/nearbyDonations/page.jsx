@@ -91,8 +91,10 @@ const nearbyDonations = () => {
             const title = data.title;
             const latitude = data.latitude;
             const longitude = data.longitude;
+            const start = data.startingDate;
+            const end = data.endingDate;
             const category = String(data.category);
-            const newMarker = { title: title, lat: latitude, lng: longitude, cat: category };
+            const newMarker = { title: title, lat: latitude, lng: longitude, cat: category, end: end, start: start };
             newArr.push(newMarker)
         })
         setShameekhMarkers(newArr)
@@ -162,7 +164,7 @@ const nearbyDonations = () => {
                                             }
                                             console.log(url);
                                             return (
-                                                <Marker title={String(marker.title)} key={marker.title} position={{ lat: Number(marker.lat), lng: Number(marker.lng) }} icon={{ url: url, scaledSize: new window.google.maps.Size(45, 45), origin: new window.google.maps.Point(0, 0), anchor: new window.google.maps.Point(15, 15) }} />)
+                                                <Marker title={`${marker.title}\nStarting on : ${String(marker.start).slice(0, 10)}\nEnding on : ${String(marker.end).slice(0, 10)}`} key={marker.title} position={{ lat: Number(marker.lat), lng: Number(marker.lng) }} icon={{ url: url, scaledSize: new window.google.maps.Size(45, 45), origin: new window.google.maps.Point(0, 0), anchor: new window.google.maps.Point(15, 15) }} />)
                                         })}
                                         {[2000, 4000].map((radius, idx) => {
                                             return (

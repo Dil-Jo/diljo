@@ -27,7 +27,7 @@ export default function FeaturedPosts() {
         caption: item.caption,
         target: item.target,
         id: item.id,
-        thumbnail: pb.files.getUrl(item, item.thumbnail),
+        // thumbnail: pb.files.getUrl(item, item.thumbnail),
         category: item.category,
         link: item.link
       };
