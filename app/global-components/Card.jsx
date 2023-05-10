@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef } from "react";
-
 import Donate from "../global-components/Donate";
 import Image from "next/image";
 import nicePic from "../../assets/nicePic.jpg";
@@ -23,11 +22,9 @@ export default function Card(props) {
   };
 
   const { title, caption, thumbnail, raised, target, id } = props;
-
-
-
   return (
-    <div className="group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-200 hover:-translate-y-2">
+    <div
+      className="group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-200 hover:-translate-y-2">
       <dialog
         ref={dialog}
         className={
@@ -50,7 +47,8 @@ export default function Card(props) {
         {/*    // width={500}*/}
         {/*    fill />*/}
         {/*</div>*/}
-        <div className="flex h-full w-full items-end rounded rounded-b-xl bg-black bg-opacity-20 p-4  text-sm font-bold text-white">
+        <div
+          className="flex h-full w-full items-end rounded rounded-b-xl bg-black bg-opacity-20 p-4  text-sm font-bold text-white">
           <div className="flex w-1/2 items-center">
             <span>#{props.id}</span>
           </div>
