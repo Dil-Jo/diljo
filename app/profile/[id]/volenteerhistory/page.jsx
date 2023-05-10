@@ -1,5 +1,5 @@
 "use client";
-import Card from "../../global-components/Card";
+// import Card from "../../global-components/Card";
 import { useEffect, useState } from "react";
 import WideCard from "../components/WideCard";
 
