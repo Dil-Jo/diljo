@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import PocketBase from "pocketbase";
-import { LoginContext } from "../Contexts/LoginContext";
+// import { LoginContext } from "../Contexts/LoginContext";
 
 export default function Signin() {
   const emailRef = useRef(null);

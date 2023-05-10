@@ -4,10 +4,13 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Signin from "./Signin";
 import Signup from "./Signup";
-import { LoginContext } from "../Contexts/LoginContext";
+// import { LoginContext } from "../Contexts/LoginContext";
 import Image from "next/image";
+import GlobalContext from "../Contexts/GlobalContext";
 
 export default function Navbar(props) {
+  const globalProps = useContext(GlobalContext);
+  console.log(globalProps.login)
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
   const router = usePathname();
@@ -123,7 +126,7 @@ export default function Navbar(props) {
         </div>
       ) : router === "/raisefunds" ? (
         <div
-          className="md:fixed z-50 bg-white shadow-md hidden"
+          className="md:fixed z-50 bg-white shadow-md"
           ref={navbarRef}
           style={{ width: "100%" }}
         >
