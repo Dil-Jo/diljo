@@ -172,10 +172,10 @@ function Modal(props) {
               }
 
               successRef.current.style.display = "block";
-              // setTimeout(() => {
-              //   successRef.current.style.display = "none";
-              //   window.location.reload();
-              // }, 1200);
+              setTimeout(() => {
+                successRef.current.style.display = "none";
+                window.location.reload();
+              }, 1200);
             } catch (e) {
               console.log(e);
               errorRef.current.innerHTML = "Invalid password or some other error, please try again";
