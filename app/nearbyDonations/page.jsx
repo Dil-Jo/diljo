@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import Modal from "./components/Modal"
 import PocketBase from "pocketbase";
 import Drive from "./components/Drive"
-import { get } from "http";
+import VolunteerModal from "./components/VolunteerModal";
+
 
 const nearbyDonations = () => {
     const [numDrives, setNumDrives] = useState([]);
-
-    const [markers, setMarkers] = useState({});
+    const [volunteer, setVolunteer] = useState(false);
+    const [volTit, setVolTit] = useState("");
+    const [volId, setVolId] = useState("");
+    // const [markers, setMarkers] = useState({});
     const [shameekhMarkers, setShameekhMarkers] = useState([]);
 
     const [map, setMap] = useState(/**@type google.maps.Map */(null));
@@ -52,12 +55,9 @@ const nearbyDonations = () => {
 
     const getCollectionData = async () => {
         try {
-            console.log("start get collection")
             const response = await pb.collection("volunteers").getList();
             console.log({ response })
             setNumDrives(response.items);
-            console.log("end get collection")
-
             getMarkers(response.items)
 
             // return response.items
@@ -67,10 +67,7 @@ const nearbyDonations = () => {
         }
     };
     const getMarkers = async (prop) => {
-        console.log("start get marker")
-        console.log({ prop })
         getLocation();
-        console.log({ numDrives })
         let newArr = [];
         prop.map((data) => {
             //     const newMarkers = {};
@@ -106,6 +103,10 @@ const nearbyDonations = () => {
         // getCollectionData(/).then((res) => getMarkers(res));
         getCollectionData();
     }, []);
+    // useEffect(() => {
+    //     console.log(volTit);
+    //     console.log(volId);
+    // }, [volTit, volId]);
 
     useEffect(() => {
         console.log({ shameekhMarkers }, [shameekhMarkers])
@@ -198,14 +199,16 @@ const nearbyDonations = () => {
                             </div>
                             <ul className="p-4 bg-base-100 text-base-content border-r-4 border-slate-900 w-full md:w-[30rem] overflow-y-auto">
 
-                                {numDrives.map((drive) => (
-                                    <label htmlFor="my-drawer-2" className="drawer-overlay">
-                                        <Drive title={drive.title} category={drive.category} lat={drive.latitude} lng={drive.longitude} stDate={drive.startingDate} endDate={drive.endingDate} map={map} />
+                                {numDrives.map((drive) => {
+                                    console.log(drive.id)
+                                    return (
+                                        <label htmlFor="my-drawer-2" className="drawer-overlay">
+                                            <Drive title={drive.title} category={drive.category} lat={drive.latitude} lng={drive.longitude} stDate={drive.startingDate} endDate={drive.endingDate} map={map} setVolunteer={setVolunteer} setVolTit={setVolTit} setVolId={setVolId} id={drive.id} volTit={volTit} volId={volId} />
+                                        </label>
 
-
-                                    </label>
-
-                                ))}
+                                    )
+                                }
+                                )}
                             </ul>
 
                         </div>)}
@@ -214,6 +217,7 @@ const nearbyDonations = () => {
 
             {ModalOpen && <Modal ModalIsOpen={ModalIsOpen}
                 lat={lat} lng={lng} />}
+            {volunteer && <VolunteerModal setVolunteer={setVolunteer} volTit={volTit} volId={volId} setVolTit={setVolTit} setVolId={setVolId} />}
         </>
     );
 }

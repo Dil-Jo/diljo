@@ -1,6 +1,8 @@
 import Image from "next/image";
-const Drive = ({ title, category, lat, lng, stDate, endDate, map }) => {
-
+import { useEffect } from "react";
+const Drive = ({ title, category, lat, lng, stDate, endDate, map, setVolunteer, setVolTit, setVolId, id, volTit, volId }) => {
+    useEffect(() => {
+    }, [volTit, volId])
     return (
         <>
             <div className="flex border border-solid border-black rounded-xl mb-[1rem] active:bg-blue-900 active:text-white" onClick={() => {
@@ -19,7 +21,11 @@ const Drive = ({ title, category, lat, lng, stDate, endDate, map }) => {
                     <h3 hidden >Longitude: {lng}</h3>
                 </div>
                 <div className="flex justify-center w-1/6 items-end my-auto">
-                    <Image title="Volunteer for this drive" src={"/assets/volunteer.png"} className="mr-4 bg-white rounded-full" width={30} height={30} alt="volunteer-here">
+                    <Image title="Volunteer for this drive" src={"/assets/volunteer.png"} className="mr-4 bg-white rounded-full" width={30} height={30} alt="volunteer-here" onClick={() => {
+                        setVolTit(title);
+                        setVolId(id);
+                        setVolunteer(true);
+                    }}>
                     </Image>
                     <Image title="Open directions for this drive" alt="go-here" className="mr-8 rounded-full bg-white" width={30} height={30} src={'/assets/arrow.png'}></Image>
                 </div>
