@@ -13,7 +13,7 @@ export default function page() {
   const [fundraisers, setfundraisers] = useState([{}])
   const getfundraisers = async () => {
     const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-    const fundraisers = await pb.collection("fundraisers").getFullList({ filter: `id='${id}'` });
+    const fundraisers = await pb.collection("fundraisers").getFullList({ filter: `owner='${id}'` });
     const output = fundraisers.map((fundraiser) => {
       return {
         title: fundraiser.title,
