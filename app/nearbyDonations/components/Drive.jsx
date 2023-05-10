@@ -18,8 +18,10 @@ const Drive = ({ title, category, lat, lng, stDate, endDate, map }) => {
                     <h3 hidden >Latitude: {lat}</h3>
                     <h3 hidden >Longitude: {lng}</h3>
                 </div>
-                <div className="flex flex-col justify-center w-1/6 items-end">
-                    <Image alt="go-here" className="mr-6" width={30} height={30} src={'/assets/arrow.png'}></Image>
+                <div className="flex justify-center w-1/6 items-end my-auto">
+                    <Image src={"/assets/volunteer.png"} className="mr-4 bg-white rounded-full" width={30} height={30} alt="volunteer-here">
+                    </Image>
+                    <Image alt="go-here" className="mr-8 rounded-full bg-white" width={30} height={30} src={'/assets/arrow.png'}></Image>
                 </div>
             </div>
         </>

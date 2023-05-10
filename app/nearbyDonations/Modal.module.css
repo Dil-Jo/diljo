@@ -17,15 +17,15 @@
   }
   
   .modal {
-    width: 40rem;
-    height: 30rem;
+    width: 35rem;
+    height: 25rem;
     background: white;
     color: white;
     z-index: 10;
     border-radius: 16px;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
   }
-  
+
   .modalHeader {
     height: 50px;
     background: white;
@@ -48,6 +48,84 @@
     font-size: 16px;
     color: #2c3e50;
     text-align: center;
+  }
+  .box{
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 480px){
+    .modal {
+      width: 20rem;
+      height: 32rem;
+      background: white;
+      color: white;
+      z-index: 10;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    }
+    .box{
+      display: flexbox;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+    }
+  }
+  @media (min-width: 480px){
+    .modal {
+      width: 25rem;
+      height: 30rem;
+      background: white;
+      color: white;
+      z-index: 10;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    }
+  }
+  /* @media (min-width: 640px){
+    .modal {
+      width: 25rem;
+      height: 20rem;
+      background: white;
+      color: white;
+      z-index: 10;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    }
+  } */
+  @media (min-width: 768px){
+    .modal {
+      width: 30rem;
+      height: 25rem;
+      background: white;
+      color: white;
+      z-index: 10;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    }
+  }
+  /* @media (max-width: 768px){
+    .modal {
+      width: 30rem;
+      height: 25rem;
+      background: white;
+      color: white;
+      z-index: 10;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    }
+  } */
+  @media (min-width: 1024px){
+    .modal {
+      width: 35rem;
+      height: 25rem;
+      background: white;
+      color: white;
+      z-index: 10;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    }
   }
   
   .modalActions {
@@ -107,13 +185,14 @@
   }
   
   .cancelBtn {
+    
     margin-top: 10px;
     cursor: pointer;
     font-weight: 500;
     padding: 11px 28px;
     border-radius: 12px;
     font-size: 0.8rem;
-    border: none;
+    border: 2px solid black;
     color: #2c3e50;
     background: #fcfcfc;
     transition: all 0.25s ease;
@@ -124,3 +203,4 @@
     transform: none;
     background: whitesmoke;
   }
+  
