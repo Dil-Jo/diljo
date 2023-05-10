@@ -31,7 +31,7 @@ function AchievementsCard() {
   return <>
     <div className={"w-full h-full"}>
       <div className={"border-2 border-gray-300 rounded-xl h-52"}>
-        <h1>flsajldfkj</h1>
+        <Image src={""}></Image>
       </div>
     </div>
 

@@ -3,7 +3,6 @@ import Button from "../../global-components/Button";
 import { useEffect, useId, useState, useRef } from "react";
 import PocketBase from "pocketbase";
 
-
 export default function Page() {
   const [loginData, setLoginData] = useState({});
 
@@ -50,7 +49,7 @@ function Field(props) {
     <div className="m-5 border-b-2">
       <div className="m-3 flex flex-col md:flex-row md:items-center">
         <dialog id={dialog}
-                className={"bg-white border-2  border-gray-300 rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl"}>
+                className={"bg-white border-2 dialog border-gray-300 rounded-xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl backdrop:bg-black backdrop:opacity-30"}>
           <Modal title={"Change " + props.name} name={props.name} field1={props.field1} field2={props.field2}
                  placeholder={props.placeholder} dialog={dialog} type={props.type}></Modal>
         </dialog>
@@ -112,15 +111,18 @@ function Modal(props) {
             try {
               let result = await pb.collection("users").authWithPassword(email, passRef.current.value);
 
+              const updateField = async (field, value, successMessage) => {
+                await pb.collection("users").update(result.record.id, { [field]: value });
+
+                successRef.current.innerHTML = successMessage;
+                let item = JSON.parse(localStorage.getItem("Login"));
+                item.record[field] = value;
+                localStorage.setItem("Login", JSON.stringify(item));
+              };
+
               switch (props.name.toLowerCase()) {
                 case "name":
-                  await pb.collection("users").update(result.record.id, { name: ifRef.current.value });
-
-                  successRef.current.innerHTML = "Name changed successfully, Reloading...";
-                  let item = JSON.parse(localStorage.getItem("Login"));
-                  item.record.name = ifRef.current.value;
-                  localStorage.setItem("Login", JSON.stringify(item));
-
+                  await updateField("name", ifRef.current.value, "Name changed successfully, Reloading...");
                   break;
 
                 case "password":
@@ -142,13 +144,15 @@ function Modal(props) {
                     errorRef.current.style.display = "block";
                     return false;
                   } else {
-                    await pb.collection("users").update(result.record.id, { email: ifRef.current.value, auth: true });
-                    let item = JSON.parse(localStorage.getItem("Login"));
-                    item.record.email = ifRef.current.value;
-                    localStorage.setItem("Login", JSON.stringify(item));
+                    // await updateField("email", ifRef.current.value, "Email changed successfully, Reloading...");
+                    await pb.collection("users").update(result.record.id, {
+                      email: ifRef.current.value,
+                      emailVisibility: true,
+                      auth: true
+                    });
                   }
+                  successRef.current.innerHTML = "Password changed successfully, Reloading...";
 
-                  successRef.current.innerHTML = "Email changed successfully, Reloading...";
                   break;
 
                 case "username":
@@ -159,16 +163,8 @@ function Modal(props) {
                     errorRef.current.style.display = "block";
                     return false;
                   } else {
-                    await pb.collection("users").update(result.record.id, {
-                      username: ifRef.current.value,
-                      auth: true
-                    });
-                    let item = JSON.parse(localStorage.getItem("Login"));
-                    item.record.email = ifRef.current.value;
-                    localStorage.setItem("Login", JSON.stringify(item));
+                    await updateField("username", ifRef.current.value, "Username changed successfully, Reloading...");
                   }
-
-                  successRef.current.innerHTML = "Username changed successfully, Reloading...";
                   break;
 
                 default:
@@ -186,6 +182,7 @@ function Modal(props) {
               errorRef.current.style.display = "block";
             }
           }}
+
           ></Button>
           <Button type={"secondary"} text={"Cancel"} className={"w-full md:w-auto"}
                   onClick={() => {

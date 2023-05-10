@@ -1,21 +1,28 @@
+"use client";
 import Image from "next/image";
+import PocketBase from "pocketbase";
+import { useEffect } from "react";
 
 export default function ProfileComponent(props) {
+  let pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+  const record = JSON.parse(localStorage.getItem("Login")).record;
+  const image = record.avatar;
   return (
     <div className="group mx-auto grid w-full max-w-md place-items-center rounded-xl p-10 pb-8 shadow-lg">
       <Image
-        className="mb-9 mt-4 h-36 w-36 rounded-full border-4 border-green-400"
+        className="mb-9 mt-4 h-36 w-36 rounded-full border-4 border-green-400 "
         alt={""}
-        src={""}
+        width={144}
+        height={144}
+        style={{ objectFit: "cover" }}
+        src={pb.files.getUrl(record, image)}
       ></Image>
-      <h5 className="mb-1 text-xl font-medium tracking-tighter text-gray-900 dark:text-white">
-        Name here
+      <h5 className="mb-1 text-xl font-medium tracking-tighter text-gray-900">
+        {record.name}
       </h5>
-      <span className="text-sm text-gray-500 dark:text-gray-400">
-        Some random detail
+      <span className="text-sm text-gray-500">
+        @{record.username}
       </span>
-      {/* <div class="mt-4 flex space-x-3 md:mt-6"></div>
-      <div className="mt-8 px-4"></div> */}
     </div>
   );
 }
