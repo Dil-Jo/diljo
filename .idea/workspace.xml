@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8074fd1a-7c94-440b-9232-f1103ac4313e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/profile/about/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/profile/about/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/donation/[id]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/donation/[id]/page.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -41,7 +41,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;profile&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;donationmodal&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/tahamukhtar20/Documents/GitHub/diljo/pocketbase&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -133,6 +133,7 @@
       <workItem from="1683666197171" duration="759000" />
       <workItem from="1683695167241" duration="5995000" />
       <workItem from="1683703657245" duration="12655000" />
+      <workItem from="1683823141504" duration="1976000" />
     </task>
     <servers />
   </component>

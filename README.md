@@ -15,7 +15,7 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.jsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `app/layout.jsx`. The page auto-updates as you edit the file.
 
 [http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that
 uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import PocketBase from "pocketbase";
 import pic from "../../assets/cat.jpeg";
@@ -8,21 +8,21 @@ const getRaised = async (id) => {
   const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
   // you can also fetch all records at once via getFullList
-  const records = await pb.collection('donations').getFullList({
-    filter: `fundraiser = "${id}"`,
+  const records = await pb.collection("donations").getFullList({
+    filter: `fundraiser = "${id}"`
   });
 
   // console.log({ records })
-  let total = 0
+  let total = 0;
   records.forEach((record) => {
     total += record.amount;
-  })
+  });
   // console.log({ am })
   return total;
 
 };
 // const Donate =  (props) => {
-export default function (props) {
+export default function(props) {
 
   const { title, caption, thumbnail, target, id, link } = props;
   // const raised = 0
@@ -31,44 +31,15 @@ export default function (props) {
 
     getRaised(id).then((res) => {
       setRaised(res);
-    })
+    });
   }, []);
-  // const raised = await getRaised(id);
-
-  // useState(() => {
-  //   getRaised(id);
-  // }, []);
-
-  // const [raised, setRaised] = useState('ghh');
-  // useEffect(() => {
-  //   getRaised(data.id).then((res) => {
-  //     setRaised(res);
-  //   })
-  //   console.log("Isld")
-  //   // setRaised(getRaised(data.id));
-  // }, []);
-  // const progressbar = (raised, goal) => {
-  //   return { width: `${(raised / goal) * 100}%` };
-  // };
-  // const imgLink = (img) => {
-  //   const pb = new PocketBase("http://127.0.0.1:8090");
-
-  // }
-  // useEffect(() => {
-  //   console.log("Donate.jsx props", { props });
-  // }, []);
 
   return (
     <div className="flex flex-col w-full h-auto relative items-center justify-center p-3 cursor-default">
-      {/* // <div className="flex flex-col w-full h-[50rem] items-center justify-center"> */}
-      <div className='w-full h-96 relative '>
+      <div className="w-full h-96 relative ">
         <Image
-          // className="h-full w-full bg-no-repeat bg-cover bg-fixed xl:rounded-bl-2xl rounded-tl-2xl rounded-bl-none xl:rounded-tr-none rounded-tr-2xl  border-4 border-white bg-gray-700"
-          // className="h-full first-letter:object-contain rounded-2xl border-4 border-white"
           className="h-full w-auto object-cover rounded-2xl border-4 border-white"
           src={thumbnail}
-          // width={"0"}
-          // height={"0"}
           alt="image here"
           fill={true}
 
@@ -85,11 +56,6 @@ export default function (props) {
           </p>
         </div>
         <div className="mt-34 xl:h-2/6 w-5/6">
-          {/* <div className="mt-4 h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700"> */}
-          {/* <div
-              className=" mt-15 h-2.5 rounded-full bg-blue-600"
-              style={progressbar(raised, target)}
-            ></div> */}
           <progress className="progress progress-error w-full" value={raised} max={target}></progress>
           <h2 className="font-small mt-2 text-end text-gray-400">
             {raised} / {target} raised
@@ -110,7 +76,6 @@ export default function (props) {
               Donate
             </a>
           </div>
-          {/* </div> */}
         </div>
       </div>
     </div>

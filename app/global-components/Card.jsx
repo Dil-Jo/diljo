@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import Donate from "../global-components/Donate";
 import Image from "next/image";
 import nicePic from "../../assets/nicePic.jpg";
@@ -23,32 +24,12 @@ export default function Card(props) {
 
   const { title, caption, thumbnail, raised, target, id } = props;
   return (
-    <div
-      className="md:ml-4 group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-200 hover:-translate-y-2">
-      <dialog
-        ref={dialog}
-        className={
-          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl border-2 border-gray-300"
-        }
-      >
-        <Donate {...props} />
-      </dialog>
+    <div className="group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-200 hover:-translate-y-2">
       <div
         className="h-64 w-full rounded rounded-b-xl bg-cover bg-center"
         style={resolveImage(thumbnail)}
       >
-        {/*<div>*/}
-        {/*  <Image*/}
-        {/*    placeholder={<>Loading prgram</>}*/}
-        {/*    src={props.image}*/}
-        {/*    // src={nicePic}*/}
-        {/*    className="h-full w-full rounded-t-lg object-cover"*/}
-        {/*    alt="Donation Img"*/}
-        {/*    // width={500}*/}
-        {/*    fill />*/}
-        {/*</div>*/}
-        <div
-          className="flex h-full w-full items-end rounded rounded-b-xl bg-black bg-opacity-20 p-4  text-sm font-bold text-white">
+        <div className="flex h-full w-full items-end rounded rounded-b-xl bg-black bg-opacity-20 p-4  text-sm font-bold text-white">
           <div className="flex w-1/2 items-center">
             <span>#{props.id}</span>
           </div>
@@ -69,17 +50,14 @@ export default function Card(props) {
           {raised} / {target} raised
         </h2>
         <div className="flex flex-col items-center justify-center">
-          <button
-            type="button"
-            onClick={handleClick}
+          <Link
+            href={`/donation/${props.id}`}
             className="mb-2 mr-2 rounded-lg bg-gradient-to-br from-green-400 to-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-bl focus:outline-none focus:ring-4 focus:ring-green-200 dark:focus:ring-green-800"
           >
             Donate
-          </button>
+          </Link>
         </div>
       </div>
     </div>
-
   );
-
 }
