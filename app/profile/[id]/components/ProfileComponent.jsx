@@ -9,8 +9,8 @@ export default function ProfileComponent(props) {
   // const globalContext = useContext(GlobalContext);
   // const { pb } = globalContext;
   const { pb } = props;
-  const record = pb.authStore.model;
-  const image = record.avatar;
+  const record = pb.authStore.model || {};
+  const image = record.avatar || "https://i.imgur.com/7bIhcuD.png";
   return (
     <div className="group mx-auto grid w-full max-w-md place-items-center rounded-xl p-10 pb-8 shadow-lg">
       <Image
