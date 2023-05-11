@@ -10,14 +10,14 @@
     paint-order: stroke fill markers;
     stroke-dasharray: 2700;
     stroke-dashoffset: 2700;
-    animation: animateStroke 5s cubic-bezier(.25,.75,.5,1.25) 1 forwards, animateFill 1s cubic-bezier(.5, -.75, .7, 2) 4s 1 forwards;
+    animation: animateStroke 4s cubic-bezier(.25,.75,.5,1.25) 1 forwards, animateFill 1s cubic-bezier(.5, -.75, .7, 2) 3s 1 forwards;
 }
-
 @keyframes animateStroke {
     to {
         stroke-dashoffset: 0;
     }
 }
+
 
 @keyframes animateFill {
     to {
@@ -25,3 +25,39 @@
     }
 }
 
+
+blockquote::before {
+    content: open-quote;
+  }
+  blockquote::after {
+    content: close-quote;
+  }
+  blockquote {
+    quotes: "“" "”" "‘" "’";
+  }
+/* Fallback */
+blockquote {
+    text-indent: -0.45em;
+  }
+  
+  /* If there's support, erase the indent and use the property instead */
+  @supports ( hanging-punctuation: first) {
+    blockquote {
+      text-indent: 0;
+      hanging-punctuation: first;
+    }
+  }
+#log{
+    display: inline;
+    fill-opacity: 0;
+    fill : #FFF;
+    stroke: #FFF;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: bevel;
+    stroke-opacity: 1;
+    paint-order: stroke fill markers;
+    stroke-dasharray: 2700;
+    stroke-dashoffset: 2700;
+    animation: animateStroke 0s cubic-bezier(.25,.75,.5,1.25) 1 forwards, animateFill 0s cubic-bezier(.5, -.75, .7, 2) 1 forwards;
+}

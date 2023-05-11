@@ -1,4 +1,5 @@
 "use client";
+import Logo from "./Logo";
 import { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -32,8 +33,7 @@ export default function Navbar(props) {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             <Link href="/">
-              <h6>logo</h6>
-              {/* add logo svg here */}
+              <Logo height="50px" />
             </Link>
             <div className="hidden sm:flex sm:items-center">
               <Links />
