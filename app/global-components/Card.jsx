@@ -24,7 +24,7 @@ export default function Card(props) {
   const { title, caption, thumbnail, raised, target, id } = props;
   return (
     <div
-      className="group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-200 hover:-translate-y-2">
+      className="md:ml-4 group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-200 hover:-translate-y-2">
       <dialog
         ref={dialog}
         className={
