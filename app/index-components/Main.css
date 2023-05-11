@@ -47,3 +47,17 @@ blockquote {
       hanging-punctuation: first;
     }
   }
+#log{
+    display: inline;
+    fill-opacity: 0;
+    fill : #FFF;
+    stroke: #FFF;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: bevel;
+    stroke-opacity: 1;
+    paint-order: stroke fill markers;
+    stroke-dasharray: 2700;
+    stroke-dashoffset: 2700;
+    animation: animateStroke 0s cubic-bezier(.25,.75,.5,1.25) 1 forwards, animateFill 0s cubic-bezier(.5, -.75, .7, 2) 1 forwards;
+}
