@@ -41,7 +41,7 @@ export default function() {
   }, [id]);
   
   return (
-    <div className="flex flex-row px-52 h-full w-full">
+    <div className="flex flex-row xl:px-96 md:px-52 px-10 h-full w-full">
       <div className="flex flex-col w-full border-2 border-gray-300 p-6 rounded-2xl">
         <h1 className="text-4xl tracking-tighter my-5 font-bold">{record.title}</h1>
         <div className="rounded-2xl border-2 border-gray-300 shadow-xl mb-6">

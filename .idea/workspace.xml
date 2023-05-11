@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8074fd1a-7c94-440b-9232-f1103ac4313e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/donation/[id]/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/donation/layout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/global-components/Card.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Card.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/global-components/Donate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/global-components/Donate.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/index-components/FeaturedPosts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/index-components/FeaturedPosts.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/donation/[id]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/donation/[id]/page.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +133,7 @@
       <workItem from="1683666197171" duration="759000" />
       <workItem from="1683695167241" duration="5995000" />
       <workItem from="1683703657245" duration="12655000" />
-      <workItem from="1683823141504" duration="619000" />
+      <workItem from="1683823141504" duration="1976000" />
     </task>
     <servers />
   </component>
