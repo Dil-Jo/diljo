@@ -3,7 +3,6 @@ import About from "./index-components/About";
 import Main from "./index-components/Main";
 import Navbar from "./global-components/Navbar";
 import Banner from "./index-components/Banner";
-
 export default function Page() {
   return (
     <>
