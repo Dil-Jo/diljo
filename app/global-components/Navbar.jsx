@@ -155,7 +155,7 @@ function Links() {
     { id: 1, name: "EXPLORE", link: "/explore" },
     { id: 2, name: "NEARBY", link: "/nearbyDonations" },
     { id: 3, name: "CHARITIES", link: "/charities" },
-    { id: 4, name: "FUNDRAISER", link: "/raisefunds" }
+    { id: 4, name: "FUNDRAISERS", link: "/raisefunds" }
   ];
   
   return (
