@@ -17,9 +17,9 @@ export default function FeaturedPosts() {
 
     //   return { url, options };
     // };
-    console.log("Pb Sb", pb)
+    console.log("Pb Sb", pb);
     let temp = await pb.collection("fundraisers").getList(1, 4, {
-      filter: "",
+      filter: ""
     });
     const output = temp.items.map((item) => {
       return {
@@ -27,7 +27,7 @@ export default function FeaturedPosts() {
         caption: item.caption,
         target: item.target,
         id: item.id,
-        // thumbnail: pb.files.getUrl(item, item.thumbnail),  
+        thumbnail: pb.files.getUrl(item, item.thumbnail),
         category: item.category,
         link: item.link
       };
@@ -40,7 +40,7 @@ export default function FeaturedPosts() {
   useEffect(() => {
     tempFun().then((data) => {
       setCardList(data);
-    })
+    });
   }, []);
 
 
