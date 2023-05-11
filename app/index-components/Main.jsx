@@ -34,7 +34,7 @@ export default function Main() {
           className="w-2/5 h-full bg-black text-4xl text-white text-center py-16 mt-20"
           style={{
             transform: isLoaded ? 'translateX(-5%)' : 'translateX(-115%)',
-            transition: 'transform 2s ease-in-out 2s',
+            transition: 'transform 1.25s ease-in-out 3s',
           }}
         >
           <blockquote style={{
@@ -52,7 +52,7 @@ export default function Main() {
         <svg className="mb-24 w-1/2"
           style={{
             transform: isLoaded ? 'translateX(0%)' : 'translateX(-45%)',
-            transition: 'transform 2s ease-in-out 2s',
+            transition: 'transform 1.25s ease-in-out 3s',
           }}
           version="1.1"
           id="svg6128"

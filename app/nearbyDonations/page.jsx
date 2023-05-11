@@ -200,7 +200,6 @@ const nearbyDonations = () => {
                             <ul className="p-4 bg-base-100 text-base-content border-r-4 border-slate-900 w-full md:w-[30rem] overflow-y-auto">
 
                                 {numDrives.map((drive) => {
-                                    console.log(drive.id)
                                     return (
                                         <label htmlFor="my-drawer-2" className="drawer-overlay">
                                             <Drive title={drive.title} category={drive.category} lat={drive.latitude} lng={drive.longitude} stDate={drive.startingDate} endDate={drive.endingDate} map={map} setVolunteer={setVolunteer} setVolTit={setVolTit} setVolId={setVolId} id={drive.id} volTit={volTit} volId={volId} />
