@@ -7,10 +7,13 @@ import Signup from "./Signup";
 // import { LoginContext } from "../Contexts/LoginContext";
 import Image from "next/image";
 import GlobalContext from "../Contexts/GlobalContext";
+// import GlobalState from "./Contexts/GlobalState";
+
 
 export default function Navbar(props) {
   const globalProps = useContext(GlobalContext);
-  console.log(globalProps.login)
+  // console.log(globalProps.login)
+  const { pb } = globalProps;
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
   const router = usePathname();
@@ -27,8 +30,8 @@ export default function Navbar(props) {
     }, []);
     return (
       <>
-        <Signup />
-        <Signin />
+        <Signup pb={pb} />
+        <Signin pb={pb} />
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             <Link href="/">
@@ -40,7 +43,7 @@ export default function Navbar(props) {
             </div>
             {loginStatus ? (
               <div className={"hidden sm:flex sm:items-center"}>
-                <AfterLogin />
+                <AfterLogin pb={pb} />
               </div>
             ) : (
               <div className="hidden sm:flex sm:items-center">
@@ -117,6 +120,7 @@ export default function Navbar(props) {
 
   return (
     <>
+
       {router === "/" ? (
         <div
           className="fixed z-50  -m-[2.5rem] mx-4 rounded-xl bg-white shadow-md"
@@ -200,8 +204,13 @@ function Buttons() {
   );
 }
 
-function AfterLogin() {
+function AfterLogin(props) {
   const logoutRef = useRef(null);
+  const { pb } = props;
+  const logoutUser = async () => {
+    await pb.authStore.clear();
+    return true
+  };
 
   return (
     <div className={"flex w-full justify-between"}>
@@ -221,10 +230,13 @@ function AfterLogin() {
             logoutRef.current.style.color = "white";
             logoutRef.current.style.transition = "0.3s";
             logoutRef.current.style.border = "none";
-            localStorage.removeItem("Login");
-            setTimeout(() => {
-              window.location.reload();
-            }, 1200);
+            // localStorage.removeItem("Login");
+            logoutUser().then((res) => {
+              ;
+              setTimeout(() => {
+                window.location.reload();
+              }, 1200);
+            })
           }}
         >
           Logout

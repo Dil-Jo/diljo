@@ -1,11 +1,15 @@
 "use client";
 import Image from "next/image";
-import PocketBase from "pocketbase";
-import { useEffect } from "react";
+// import PocketBase from "pocketbase";
+// import { useContext, useEffect } from "react";
 
 export default function ProfileComponent(props) {
-  let pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  const record = JSON.parse(localStorage.getItem("Login")).record;
+  // let pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+  // const record = JSON.parse(localStorage.getItem("Login")).record;
+  // const globalContext = useContext(GlobalContext);
+  // const { pb } = globalContext;
+  const { pb } = props;
+  const record = pb.authStore.model;
   const image = record.avatar;
   return (
     <div className="group mx-auto grid w-full max-w-md place-items-center rounded-xl p-10 pb-8 shadow-lg">

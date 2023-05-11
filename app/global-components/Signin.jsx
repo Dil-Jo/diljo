@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import PocketBase from "pocketbase";
-// import { LoginContext } from "../Contexts/LoginContext";
+import { useEffect, useRef, useState, useContext } from "react";
+// import PocketBase from "pocketbase";
+// import { GlobalContext } from "../Contexts/GlobalContext";
 
-export default function Signin() {
+export default function Signin({ pb }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const rememberRef = useRef(null);
@@ -11,18 +11,24 @@ export default function Signin() {
   const [result, setResult] = useState(false);
   const [error, setError] = useState("");
 
+  // const globalContext = useContext(GlobalContext);
+  // const { pb } = globalContext;
+
   async function verify() {
     if (emailRef.current.value === "" || passwordRef.current.value === "") {
       setError("Please fill all the fields");
       return false;
     }
 
-    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+    // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     try {
+      console.log("Im here")
       let result = await pb
         .collection("users")
         .authWithPassword(emailRef.current.value, passwordRef.current.value);
       setResult(result);
+
+
       successRef.current.style.display = "block";
       return true;
     } catch (e) {
@@ -44,7 +50,7 @@ export default function Signin() {
     successRef.current.style.display = "none";
 
     verify().then((isValid) => {
-      console.log(isValid);
+      // console.log(isValid);
     });
   }
 

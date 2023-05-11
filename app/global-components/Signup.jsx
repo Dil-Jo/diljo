@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import PocketBase from "pocketbase";
 import Router from "next/router";
 
-export default function Signup() {
+export default function Signup({ pb }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
@@ -13,7 +13,7 @@ export default function Signup() {
   const [error, setError] = useState("");
 
   async function create() {
-    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+    // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     try {
       const resultList = await pb.collection("users").create({
         email: emailRef.current.value,
