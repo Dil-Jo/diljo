@@ -1,13 +1,13 @@
-
 import Image from "next/image";
 import Link from "next/link";
 
 export default function CharityCard({ name, phone, email, description, logo, website }) {
-
+  
   return (
     <>
       <Link href={website}>
-        <div className="w-full sm:w-96 h-72 rounded-lg p-0.5 bg-gradient-to-r from-slate-100 to-slate-200">
+        <div
+          className="w-full sm:w-96 h-72 rounded-lg p-0.5 bg-gradient-to-r from-slate-100 to-slate-200 hover:scale-105 transition-all ease-in-out">
           <div className="flex flex-col w-full h-full rounded-lg border-2 border-gray-400 p-2">
             <div className="flex flex-col sm:flex-row w-full h-auto sm:h-full">
               <div className="w-1/3 rounded-md border-2 border-gray-400 flex items-center justify-center">
