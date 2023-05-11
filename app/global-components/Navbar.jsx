@@ -8,6 +8,7 @@ import Signup from "./Signup";
 // import { LoginContext } from "../Contexts/LoginContext";
 import Image from "next/image";
 import GlobalContext from "../Contexts/GlobalContext";
+import TermsAndConditions from "./TermsAndConditions";
 
 export default function Navbar(props) {
   const globalProps = useContext(GlobalContext);
@@ -30,6 +31,7 @@ export default function Navbar(props) {
       <>
         <Signup />
         <Signin />
+        <TermsAndConditions />
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             <Link href="/">
