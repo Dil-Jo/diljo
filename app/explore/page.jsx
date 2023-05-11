@@ -15,22 +15,22 @@ function resolveText(text) {
 const ExpolorePage = () => {
   const routes = [
     {
-      title: "Education",
+      title: "Education"
     },
     {
-      title: "Emergencies",
+      title: "Emergencies"
     },
     {
-      title: "Environment",
+      title: "Environment"
     },
     {
-      title: "Medical",
+      title: "Medical"
     },
     {
-      title: "Utility Bills",
-    },
+      title: "Utility Bills"
+    }
   ];
-
+  
   async function getContent() {
     const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     let temp = await pb.collection("fundraisers").getList(1, 4);
@@ -49,14 +49,14 @@ const ExpolorePage = () => {
     // console.log({ output });
     return output;
   }
-
+  
   useEffect(() => {
     getContent().then((res) => {
       setContent(res);
     });
-    console.log({ content })
+    console.log({ content });
   }, []);
-
+  
   const [content, setContent] = useState([]);
   const [category, setCategory] = useState("title");
   return (
@@ -74,14 +74,7 @@ const ExpolorePage = () => {
             {content.map((item, index) => (
               <Card
                 key={item.id}
-                // title={item.title}
-                // caption={item.caption}
-                // raised={"10"}
-                // goal={item.target}
-                // id={item.id}
-                // dataFlow={item}
                 {...item}
-              // thumbnail={item.thumbnail}
               />
             ))}
           </div>
@@ -103,7 +96,7 @@ const ExpolorePage = () => {
                 // thumbnail={item.thumbnail}
                 key={index}
                 {...item}
-              // dataFlow={item}
+                // dataFlow={item}
               />
             ))}
         </div>
@@ -193,14 +186,15 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
 
 const SmallCard = (props) => {
   const dialog = useRef(null);
-
+  
   const { title, caption, thumbnail } = props;
-
+  
   function handleClick() {
     if (dialog.current) {
       dialog.current.showModal();
     }
   }
+  
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl p-3">
       <dialog
@@ -211,7 +205,8 @@ const SmallCard = (props) => {
       >
         <Donate {...props} />
       </dialog>
-      <figure className="relative w-full h-64"><Image src={thumbnail} className="first-letter:object-contain rounded-lg" alt="Thunmbail" fill={true} /></figure>
+      <figure className="relative w-full h-64"><Image src={thumbnail} className="first-letter:object-contain rounded-lg"
+                                                      alt="Thunmbail" fill={true} /></figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
         <p className="h-48 overflow-hidden ">{caption}</p>
@@ -225,8 +220,9 @@ const SmallCard = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
 function Banner() {
   return (
     <>
@@ -238,7 +234,7 @@ function Banner() {
               backgroundImage: `url(assets/photo.jpeg)`,
               backgroundSize: `cover`,
               backgroundPosition: `center`,
-              backgroundRepeat: `no-repeat`,
+              backgroundRepeat: `no-repeat`
             }}
           >
             <div className={"h-52 w-full cursor-pointer rounded-xl"}>
