@@ -20,9 +20,10 @@ export default function Navbar(props) {
   }
 
   function NavDataComponent() {
-    let Login = false;
+    const [loginStatus, setLoginStatus] = useState(false)
+    // let Login = false;
     useEffect(() => {
-      Login = JSON.parse(localStorage.getItem("Login")) || false;
+      setLoginStatus(JSON.parse(localStorage.getItem("Login")) || false);
     }, []);
     return (
       <>
@@ -37,7 +38,7 @@ export default function Navbar(props) {
             <div className="hidden sm:flex sm:items-center">
               <Links />
             </div>
-            {Login ? (
+            {loginStatus ? (
               <div className={"hidden sm:flex sm:items-center"}>
                 <AfterLogin />
               </div>
@@ -62,11 +63,11 @@ export default function Navbar(props) {
 
           <div
             className={`${isOpen ? "block" : "hidden"
-            } border-t-2 bg-white py-2 sm:hidden`}
+              } border-t-2 bg-white py-2 sm:hidden`}
           >
             <div className="flex flex-col">
               <Links />
-              {Login ? (
+              {loginStatus ? (
                 <div className="flex w-full border-t-2 pt-2">
                   <AfterLogin />
                 </div>
@@ -171,7 +172,7 @@ function Links() {
           </Link>
           <div
             className={`h-1 bg-black transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
-            }`}
+              }`}
           ></div>
         </div>
       ))}

@@ -20,7 +20,8 @@ export default function page() {
         caption: donation.expand.fundraiser.caption,
         amount: donation.amount,
         thumbnail: pb.files.getUrl(donation.expand.fundraiser, donation.expand.fundraiser.thumbnail),
-        date: donation.created
+        date: donation.created,
+        fundraisrId: donation.fundraiser.id
       };
     });
     // console.log({ output });

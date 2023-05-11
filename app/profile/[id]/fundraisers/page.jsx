@@ -29,12 +29,8 @@ export default function page() {
 
   }, [])
 
-  const somecard = [1, 2, 3, 4, 5];
-  // const [fundraisers, setFundraisers] = useState([]);
   return (
     <Table headings={["Title", "Caption", "Target"]} rows={fundraisers} />
-    // <Table headings={["a", "b", "c"]} rows={[{ a: "a", b: "b", c: "c", title: "Alpha Beta Charlie" }, { a: "alpha", b: "beta", c: "Gamma", title: "Alpha Beta Charlie" }]} />
-
   );
 
 }
