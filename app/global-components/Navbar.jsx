@@ -1,4 +1,5 @@
 "use client";
+import Logo from "./Logo";
 import { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -7,6 +8,7 @@ import Signup from "./Signup";
 // import { LoginContext } from "../Contexts/LoginContext";
 import Image from "next/image";
 import GlobalContext from "../Contexts/GlobalContext";
+
 // import GlobalState from "./Contexts/GlobalState";
 
 
@@ -17,13 +19,15 @@ export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
   const router = usePathname();
-
+  
   function NavbarOpen() {
     setIsOpen(!isOpen);
   }
-
+  
   function NavDataComponent() {
+
     // const [loginStatus, setLoginStatus] = useState(false)
+
     // let Login = false;
     useEffect(() => {
       if (globalLogin) {
@@ -37,14 +41,16 @@ export default function Navbar(props) {
     return (
       <>
         <Signup />
+
         <Signin pb={pb} />
+        <TermsAndConditions />
+
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             <Link href="/">
-              <h6>logo</h6>
-              {/* add logo svg here */}
+              <Logo height="50px" />
             </Link>
-            <div className="hidden sm:flex sm:items-center">
+            <div className="hidden md:flex md:items-center">
               <Links />
             </div>
             {globalLogin ? (
@@ -52,14 +58,14 @@ export default function Navbar(props) {
                 <AfterLogin pb={pb} setGlobalLogin={setGlobalLogin} />
               </div>
             ) : (
-              <div className="hidden sm:flex sm:items-center">
+              <div className="hidden md:flex md:items-center">
                 <Buttons />
               </div>
             )}
-            <div className="cursor-pointer sm:hidden " onClick={NavbarOpen}>
+            <div className="cursor-pointer md:hidden " onClick={NavbarOpen}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-blue-600"
+                className="h-6 w-6 text-black"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -69,10 +75,10 @@ export default function Navbar(props) {
               </svg>
             </div>
           </div>
-
+          
           <div
             className={`${isOpen ? "block" : "hidden"
-              } border-t-2 bg-white py-2 sm:hidden`}
+            } border-t-2 bg-white py-2 md:hidden`}
           >
             <div className="flex flex-col">
               <Links />
@@ -91,7 +97,7 @@ export default function Navbar(props) {
       </>
     );
   }
-
+  
   useEffect(() => {
     if (router === "/") {
       function scrollFunction() {
@@ -115,15 +121,15 @@ export default function Navbar(props) {
           navbarRef.current.style.marginLeft = "1rem";
         }
       }
-
+      
       window.onscroll = scrollFunction;
-
+      
       return () => {
         window.onscroll = null;
       };
     }
   }, [router]);
-
+  
   return (
     <>
 
@@ -158,13 +164,14 @@ export default function Navbar(props) {
 
 function Links() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-
+  
   const menuItems = [
-    { id: 1, name: "EXPLORE" },
-    { id: 2, name: "MAIN" },
-    { id: 3, name: "ABOUT" }
+    { id: 1, name: "EXPLORE", link: "/explore" },
+    { id: 2, name: "NEARBY", link: "/nearbyDonations" },
+    { id: 3, name: "CHARITIES", link: "/charities" },
+    { id: 4, name: "FUNDRAISERS", link: "/raisefunds" }
   ];
-
+  
   return (
     <>
       {menuItems.map((item) => (
@@ -175,14 +182,14 @@ function Links() {
           onMouseLeave={() => setHoveredIndex(null)}
         >
           <Link
-            href={`/${item.name.toLowerCase()}`}
+            href={`${item.link}`}
             className={`text-md font-semibold tracking-tighter text-gray-800 hover:text-blue-600`}
           >
             {item.name}
           </Link>
           <div
             className={`h-1 bg-black transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
-              }`}
+            }`}
           ></div>
         </div>
       ))}
@@ -194,8 +201,7 @@ function Buttons() {
   return (
     <>
       <label
-        className="mr-10 text-sm font-semibold text-gray-800
-        hover:text-blue-600"
+        className="rounded-lg mr-2 border px-4 py-1 text-sm font-semibold text-gray-800 hover:border-blue-600 hover:text-blue-600"
         htmlFor="sign-in"
       >
         Sign in
@@ -212,6 +218,7 @@ function Buttons() {
 
 function AfterLogin(props) {
   const logoutRef = useRef(null);
+
   const { pb } = props;
   const logoutUser = async () => {
     console.log("I is happening")
@@ -222,13 +229,6 @@ function AfterLogin(props) {
 
   return (
     <div className={"flex w-full justify-between"}>
-      {/* <div className={""}>
-          <Image
-            className="h-10 mr-5 w-10 rounded-full border-4 border-blue-400"
-            alt={""}
-            src={""}
-          ></Image>{" "}
-        </div> */}
       <div>
         <label
           className="rounded-lg border px-4 py-1 text-sm h-full flex text-center font-semibold items-center text-gray-800 hover:border-blue-600 hover:text-blue-600"

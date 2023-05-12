@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import PocketBase from "pocketbase";
 import Router from "next/router";
 
+
 export default function Signup({ pb }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -11,7 +12,7 @@ export default function Signup({ pb }) {
   const usernameRef = useRef(null);
   const successRef = useRef(null);
   const [error, setError] = useState("");
-
+  
   async function create() {
     // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     try {
@@ -21,7 +22,7 @@ export default function Signup({ pb }) {
         name: nameRef.current.value,
         username: usernameRef.current.value,
         emailVisibility: true,
-        passwordConfirm: passwordRef.current.value,
+        passwordConfirm: passwordRef.current.value
       });
       successRef.current.style.display = "block";
       return true;
@@ -30,6 +31,7 @@ export default function Signup({ pb }) {
       return false;
     }
   }
+  
   async function verify() {
     if (
       emailRef.current.value === "" ||
@@ -40,28 +42,28 @@ export default function Signup({ pb }) {
       setError("Please fill all the fields");
       return false;
     }
-
+    
     if (passwordRef.current.value.length < 9) {
       setError("Password must be at least 9 characters long");
       return false;
     }
-
+    
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Passwords do not match");
       return false;
     }
-
+    
     const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     const resultList = await pb.collection("users").getList(1, 50, {
-      filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`,
+      filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`
     });
     console.log(resultList.items);
-
+    
     if (resultList.items.length > 0) {
       setError("Email or username already exists");
       return false;
     }
-
+    
     try {
       await create();
       setError("");
@@ -79,6 +81,7 @@ export default function Signup({ pb }) {
       return false;
     }
   }
+  
   function clickHandler() {
     setError("");
     successRef.current.style.display = "none";
@@ -89,7 +92,7 @@ export default function Signup({ pb }) {
         }, 1200);
     });
   }
-
+  
   return (
     <>
       <input type="checkbox" id="sign-up" className="modal-toggle" />
@@ -101,7 +104,8 @@ export default function Signup({ pb }) {
           >
             x
           </label>
-          <h1 className="mb-3 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
+          <h1
+            className="mb-3 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
             Create a Free Account
           </h1>
           <form className="space-y-4 md:space-y-6" action="#">
@@ -196,16 +200,18 @@ export default function Signup({ pb }) {
               </div>
               <div className="ml-3 text-sm">
                 <label
-                  htmlFor="terms"
                   className="font-light text-gray-500 dark:text-gray-300"
                 >
                   I accept the{" "}
-                  <a
+                  <label
                     className="text-primary-600 dark:text-primary-500 font-medium hover:underline"
-                    href="#"
+                    htmlFor={"terms-and-conditions"}
+                    onClick={() => {
+                      document.querySelector("#slkjalskdmjhweor9u8932989").click();
+                    }}
                   >
                     Terms and Conditions
-                  </a>
+                  </label>
                 </label>
               </div>
             </div>
@@ -223,12 +229,16 @@ export default function Signup({ pb }) {
             </div>
             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
               Already have an account?{" "}
-              <a
-                href="#"
+              <label
+                htmlFor="sign-in"
+                onClick={() => {
+                  document.querySelector("#slkjalskdmjhweor9u8932989").click();
+                }}
                 className="text-primary-600 dark:text-primary-500 font-medium hover:underline"
               >
                 Login here
-              </a>
+              </label>
+              <label htmlFor="sign-up" id={"slkjalskdmjhweor9u8932989"}></label>
             </p>
           </form>
         </div>

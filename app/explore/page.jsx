@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import nicePic from "../../assets/nicePic.jpg";
 import Button from "../global-components/Button";
 import { useRef, useEffect, useState } from "react";
 import Card from "../global-components/Card";
@@ -15,22 +14,22 @@ function resolveText(text) {
 const ExpolorePage = () => {
   const routes = [
     {
-      title: "Education",
+      title: "Education"
     },
     {
-      title: "Emergencies",
+      title: "Emergencies"
     },
     {
-      title: "Environment",
+      title: "Environment"
     },
     {
-      title: "Medical",
+      title: "Medical"
     },
     {
-      title: "Utility Bills",
-    },
+      title: "Utility Bills"
+    }
   ];
-
+  
   async function getContent() {
     const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     let temp = await pb.collection("fundraisers").getList(1, 4);
@@ -49,14 +48,14 @@ const ExpolorePage = () => {
     // console.log({ output });
     return output;
   }
-
+  
   useEffect(() => {
     getContent().then((res) => {
       setContent(res);
     });
-    console.log({ content })
+    console.log({ content });
   }, []);
-
+  
   const [content, setContent] = useState([]);
   const [category, setCategory] = useState("title");
   return (
@@ -74,14 +73,7 @@ const ExpolorePage = () => {
             {content.map((item, index) => (
               <Card
                 key={item.id}
-                // title={item.title}
-                // caption={item.caption}
-                // raised={"10"}
-                // goal={item.target}
-                // id={item.id}
-                // dataFlow={item}
                 {...item}
-              // thumbnail={item.thumbnail}
               />
             ))}
           </div>
@@ -93,17 +85,14 @@ const ExpolorePage = () => {
           changeCategory={setCategory}
           currentCategory={category}
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 border-2 rounded-2xl border-gray-300">
           {content
             .filter((item) => item.category === category)
             .map((item, index) => (
               <SmallCard
-                // title={item.title}
-                // caption={item.caption}
-                // thumbnail={item.thumbnail}
                 key={index}
                 {...item}
-              // dataFlow={item}
+                // dataFlow={item}
               />
             ))}
         </div>
@@ -137,96 +126,33 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
     </div>
   );
 };
-
-// const SmallCard = ({ title, caption, img, dataFlow }) => {
-//   const dialog = useRef(null);
-
-//   function handleClick() {
-//     if (dialog.current) {
-//       dialog.current.showModal();
-//     }
-//   }
-
-//   // const [imageSrc, setImageSrc] = useState(null);
-//   // useEffect(() => {
-//   // const pb = new PocketBase('http://127.0.0.1:8090');
-//   // const record = pb.collection('fundraisers').get(id);
-//   // setImageSrc(pb.files.getUrl(record, record.thumbnail));
-//   // }, [])
-
-//   return (
-//     <div className="flex flex-col w-full rounded-lg border border-gray-200 bg-white shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 lg:w-auto">
-//       <dialog
-//         ref={dialog}
-//         className={
-//           "fixed top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out -translate-y-1/2 rounded-2xl border-2 border-gray-300 "
-//         }
-//       >
-//         <Donate data={dataFlow} />
-//       </dialog>
-//       <div className="relative h-48 w-full lg:h-56 lg:w-48">
-//         <Image
-//           src={img}
-//           className="h-full w-full rounded-t-lg object-cover"
-//           alt="Donation Img"
-//           fill
-//         />
-//       </div>
-//       <div className="flex flex-col p-4 leading-normal">
-//         <h3 className="text-lg font-bold">{title}</h3>
-//         <h4 className="mt-2 max-h-16 overflow-hidden truncate text-gray-500 lg:max-h-20">
-//           {resolveText(caption)}
-//         </h4>
-//       </div>
-//       <div className="my-6 flex w-full justify-center">
-//         <Button
-//           text="Let's Go!"
-//           type="primary"
-//           className="mt-auto w-full py-2"
-//           onClick={handleClick}
-//         />
-//       </div>
-//     </div>
-//   );
-// };
-
-
 const SmallCard = (props) => {
-  const dialog = useRef(null);
-
-  const { title, caption, thumbnail } = props;
-
-  function handleClick() {
-    if (dialog.current) {
-      dialog.current.showModal();
-    }
-  }
+  const { title, caption, thumbnail, id } = props;
   return (
-    <div className="card card-compact w-96 bg-base-100 shadow-xl p-3">
-      <dialog
-        ref={dialog}
-        className={
-          "fixed top-1/2 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out -translate-y-1/2 rounded-2xl border-2 border-gray-300 "
-        }
-      >
-        <Donate {...props} />
-      </dialog>
-      <figure className="relative w-full h-64"><Image src={thumbnail} className="first-letter:object-contain rounded-lg" alt="Thunmbail" fill={true} /></figure>
+    <div className="card card-compact w-96 bg-base-100 shadow-lg p-3">
+      <figure className="relative w-full h-64 border-2 border-gray-300">
+        <Image src={thumbnail}
+               className="object-contain rounded-lg"
+               alt="Thunmbail" fill={true} />
+      </figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
-        <p className="h-48 overflow-hidden ">{caption}</p>
+        <p className="truncate">{caption}</p>
         <div className="card-actions justify-end">
-          <Button
-            text="Let's Go!"
-            type="primary"
-            className="mt-auto w-full py-2"
-            onClick={handleClick}
-          />
+          <Link href={`/donation/${id}`} className={"justify-center flex w-full"}>
+            <Button
+              text="Let's Go!"
+              type="primary"
+              className="mt-auto w-full py-2 "
+            
+            />
+          </Link>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
 function Banner() {
   return (
     <>
@@ -238,7 +164,7 @@ function Banner() {
               backgroundImage: `url(assets/photo.jpeg)`,
               backgroundSize: `cover`,
               backgroundPosition: `center`,
-              backgroundRepeat: `no-repeat`,
+              backgroundRepeat: `no-repeat`
             }}
           >
             <div className={"h-52 w-full cursor-pointer rounded-xl"}>
@@ -260,7 +186,6 @@ function Banner() {
           </div>
         </Link>
       </div>
-      {/* </Link> */}
     </>
   );
 }

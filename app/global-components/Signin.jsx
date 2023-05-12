@@ -14,7 +14,7 @@ export default function Signin() {
   const globalContext = useContext(GlobalContext);
   const { pb, setGlobalLogin } = globalContext;
 
-  async function verify() {
+async function verify() {
     if (emailRef.current.value === "" || passwordRef.current.value === "") {
       setError("Please fill all the fields");
       return false;
@@ -38,21 +38,23 @@ export default function Signin() {
       return false;
     }
   }
+
   // useEffect(() => {
 
   // }, [result]);
 
+
   function clickHandler() {
     setError("");
     successRef.current.style.display = "none";
-
+    
     verify().then((isValid) => {
       // console.log(isValid);
     });
   }
-
+  
   // Rest of your component code...
-
+  
   return (
     <>
       <input type="checkbox" id="sign-in" className="modal-toggle" />
@@ -96,28 +98,11 @@ export default function Signin() {
                 required
               ></input>
             </div>
-            <div className="mb-2 flex items-start">
-              <div className="flex h-5 items-center">
-                <input
-                  ref={rememberRef}
-                  type="checkbox"
-                  value=""
-                  className="focus:ring-3 h-4 w-4 rounded border border-gray-300 bg-gray-50 focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
-                  required
-                ></input>
-              </div>
-              <label
-                htmlFor="remember"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Remember me
-              </label>
-            </div>
             <h1 ref={successRef} className={"mb-2 hidden text-green-800"}>
               Success! Reloading...
             </h1>
             <h1 className={"mb-2 text-red-800"}>{error}</h1>
-
+            
             <div className="grid w-full">
               <div
                 className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
