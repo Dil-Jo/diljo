@@ -8,7 +8,7 @@ export default function page() {
   useEffect(() => {
     setWideCard([1, 2, 3, 4, 5, 6, 7]);
 
-  });
+  },[]);
   return (
     <>
       <div className="group grid place-items-center rounded-xl p-10 shadow-lg">
