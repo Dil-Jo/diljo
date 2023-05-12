@@ -17,26 +17,26 @@ async function getRaised(id) {
 
 export default function Card(props) {
   const [raised, setRaised] = useState(0);
-  
+
   useEffect(() => {
     async function fetchRaised() {
       const total = await getRaised(props.id);
       setRaised(total);
     }
-    
+
     fetchRaised();
   }, [props.id]);
-  
+
   let progressbar = (raised, goal) => {
     return { width: `${(raised / goal) * 100}%` };
   };
   let resolveImage = (url) => {
     return { backgroundImage: `url("${url}")` };
   };
-  
+
   return (
     <div
-      className="group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-xl duration-200 hover:-translate-y-2">
+      className="border-2 border-slate-100 group z-0 mx-auto mt-10 w-full max-w-md flex-shrink-0 transform cursor-pointer rounded pb-8 shadow-lg duration-200 hover:-translate-y-2">
       <div
         className="h-64 w-full rounded rounded-b-xl bg-cover bg-center"
         style={resolveImage(props.thumbnail)}

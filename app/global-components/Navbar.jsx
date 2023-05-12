@@ -16,11 +16,11 @@ export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
   const router = usePathname();
-  
+
   function NavbarOpen() {
     setIsOpen(!isOpen);
   }
-  
+
   function NavDataComponent() {
     const [loginStatus, setLoginStatus] = useState(false);
     // let Login = false;
@@ -62,10 +62,10 @@ export default function Navbar(props) {
               </svg>
             </div>
           </div>
-          
+
           <div
             className={`${isOpen ? "block" : "hidden"
-            } border-t-2 bg-white py-2 md:hidden`}
+              } border-t-2 bg-white py-2 md:hidden`}
           >
             <div className="flex flex-col">
               <Links />
@@ -84,7 +84,7 @@ export default function Navbar(props) {
       </>
     );
   }
-  
+
   useEffect(() => {
     if (router === "/") {
       function scrollFunction() {
@@ -108,15 +108,15 @@ export default function Navbar(props) {
           navbarRef.current.style.marginLeft = "1rem";
         }
       }
-      
+
       window.onscroll = scrollFunction;
-      
+
       return () => {
         window.onscroll = null;
       };
     }
   }, [router]);
-  
+
   return (
     <>
       {router === "/" ? (
@@ -150,14 +150,14 @@ export default function Navbar(props) {
 
 function Links() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  
+
   const menuItems = [
     { id: 1, name: "EXPLORE", link: "/explore" },
-    { id: 2, name: "NEARBY", link: "/nearbyDonations" },
+    { id: 2, name: "NEARBY DONATION DRIVES", link: "/nearbyDonations" },
     { id: 3, name: "CHARITIES", link: "/charities" },
     { id: 4, name: "FUNDRAISERS", link: "/raisefunds" }
   ];
-  
+
   return (
     <>
       {menuItems.map((item) => (
@@ -175,7 +175,7 @@ function Links() {
           </Link>
           <div
             className={`h-1 bg-black transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
-            }`}
+              }`}
           ></div>
         </div>
       ))}
@@ -204,7 +204,7 @@ function Buttons() {
 
 function AfterLogin() {
   const logoutRef = useRef(null);
-  
+
   return (
     <div className={"flex w-full justify-between"}>
       <div>

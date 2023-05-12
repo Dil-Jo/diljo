@@ -52,7 +52,7 @@ export default function FeaturedPosts() {
       <h2 className="md:ml-4 mt-2 tracking-tighter text-gray-500 dark:text-gray-400 md:text-lg">
         Help those who need you the most
       </h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
+      <div className="carousel-center carousel rounded-box w-full space-x-8 overflow-x-scroll p-4">
         {cardList.map((card) => {
           // return (<h1>{card.id}</h1>);
           return <Card key={card.id} {...card} raised="10" />;

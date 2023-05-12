@@ -29,7 +29,7 @@ const ExpolorePage = () => {
       title: "Utility Bills"
     }
   ];
-  
+
   async function getContent() {
     const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     let temp = await pb.collection("fundraisers").getList(1, 4);
@@ -48,14 +48,14 @@ const ExpolorePage = () => {
     // console.log({ output });
     return output;
   }
-  
+
   useEffect(() => {
     getContent().then((res) => {
       setContent(res);
     });
     console.log({ content });
   }, []);
-  
+
   const [content, setContent] = useState([]);
   const [category, setCategory] = useState("title");
   return (
@@ -85,14 +85,14 @@ const ExpolorePage = () => {
           changeCategory={setCategory}
           currentCategory={category}
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 border-2 rounded-2xl border-gray-300">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-2 rounded-2xl border-gray-300 p-2">
           {content
             .filter((item) => item.category === category)
             .map((item, index) => (
               <SmallCard
                 key={index}
                 {...item}
-                // dataFlow={item}
+              // dataFlow={item}
               />
             ))}
         </div>
@@ -129,11 +129,11 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
 const SmallCard = (props) => {
   const { title, caption, thumbnail, id } = props;
   return (
-    <div className="card card-compact w-96 bg-base-100 shadow-lg p-3">
+    <div className="card card-compact w-96 min-[768px]:w-80 lg:w-72 xl:w-72 2xl:w-80 min-[1720px]:w-96 bg-gradient-to-r from-slate-50 to-zinc-100 shadow-lg p-3 border-2 border-slate-100">
       <figure className="relative w-full h-64 border-2 border-gray-300">
         <Image src={thumbnail}
-               className="object-contain rounded-lg"
-               alt="Thunmbail" fill={true} />
+          className="object-contain rounded-lg"
+          alt="Thunmbail" fill={true} />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
@@ -144,7 +144,7 @@ const SmallCard = (props) => {
               text="Let's Go!"
               type="primary"
               className="mt-auto w-full py-2 "
-            
+
             />
           </Link>
         </div>

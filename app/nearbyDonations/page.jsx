@@ -288,7 +288,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
                             {/* --------------------------- */}
 
                             <label className="label text-lg tracking-tight font-semibold" tmlFor="category">
-                                Pick the best fantasy franchise
+                                Pick up the category of the drive:
                             </label>
                             <select className="select select-bordered" id="category" name="category" required value={formData.category} onChange={handleChange}>
                                 <option disabled selected>Pick one</option>
