@@ -3,9 +3,8 @@ import Link from "next/link";
 export default function Banner() {
   return (
     <div className={"mb-6 h-full w-full"}>
-      <Link href={"#"}>
         <div
-          className={"rounded-xl bg-no-repeat bg-center bg-cover w-full"}
+          className={"rounded-2xl bg-no-repeat bg-center bg-cover w-full"}
           style={{
             backgroundImage: `url(assets/photo.jpeg)`,
           }}
@@ -33,7 +32,6 @@ export default function Banner() {
             </div>
           </div>
         </div>
-      </Link>
     </div>
   );
 }

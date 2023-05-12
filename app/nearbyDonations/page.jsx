@@ -301,6 +301,7 @@ const nearbyDonations = () => {
 			</div>
 
 			{/* {ModalOpen && <Modal ModalIsOpen={ModalIsOpen}
+
                 lat={lat} lng={lng} />} */}
 			<AddDriveModal
 				id={'alphabetical-gamma-tistan'}

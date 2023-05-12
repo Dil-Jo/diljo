@@ -10,7 +10,7 @@ const Logo = (props) => {
         xmlns="http://www.w3.org/2000/svg">
         <path
           style={{
-            fill: "#050303",
+            fill: props.color === 'black' ? "#050303" : "#f0f1fa",
             stroke: "none"
             
           }}
