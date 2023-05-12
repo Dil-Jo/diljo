@@ -79,7 +79,7 @@ export default function Navbar(props) {
               <Links />
               {globalLogin ? (
                 <div className="flex w-full border-t-2 pt-2">
-                  <AfterLogin />
+                  <AfterLogin pb={pb} setGlobalLogin={setGlobalLogin} />
                 </div>
               ) : (
                 <div className="flex items-center justify-between border-t-2 pt-2">
@@ -215,7 +215,7 @@ function AfterLogin(props) {
   const logoutRef = useRef(null);
 
 
-  const { pb } = props;
+  const { pb, setGlobalLogin } = props;
   const logoutUser = async () => {
     console.log("I is happening")
     await pb.authStore.clear();

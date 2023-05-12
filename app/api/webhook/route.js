@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server"
 // import { buffer } from "micro";
 import Stripe from "stripe"
-// import { headers } from 'next/headers';
+import { headers } from 'next/headers';
 // import { Readable } from 'node:stream';
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const secretKey = 'pk_test_51N2CulJptKva7POWPNAReiOToQgyOcszDbagDlmpH3nDlhLXs8IeOJG8iTFtLetDuqvsIO69Ut7KlzYerDsuj0GE006Guzgfhp'
 // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 // export const config = {
 //     api: {
@@ -22,15 +23,20 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
   
 
 export async function POST(request) {
-    const event = await request.json();
+    // const event = await request.json();
+    const body = await request.text()
+    console.log({body})
+    const signature = headers().get("stripe-signature") 
     // const headersList = headers();
     // const signature = headersList.get('stripe-signature');
-    // try {
-    //     console.log({signature})
-    //     stripe.webhooks.constructEvent(event.body, signature, secretKey);
-    // }catch  (err) {
-    //     return NextResponse.json({err});
-    // }   
+    let event;
+    try {
+        console.log({signature})
+       event = stripe.webhooks.constructEvent(body, signature, secretKey);
+    }catch  (err) {
+      console.log({err})
+        return NextResponse.json({err});
+    }   
 
     // const rawBody = await getRawBody(request);
     // const rawBody = await buffer(request);
@@ -42,7 +48,7 @@ export async function POST(request) {
       const paymentIntent = event.data.object;
       // Then define and call a method to handle the successful payment intent.
       // handlePaymentIntentSucceeded(paymentIntent);
-    //   console.log('PaymentIntent was successful!');
+      console.log('PaymentIntent was successful!');
       break;
     case 'payment_method.attached':
       const paymentMethod = event.data.object;
@@ -52,7 +58,7 @@ export async function POST(request) {
       break;
     // ... handle other event types
     default:
-    //   console.log(`Unhandled event type ${event.type}`);
+      console.log(`Unhandled event type ${event.type}`);
   }
 
   // Return a response to acknowledge receipt of the event

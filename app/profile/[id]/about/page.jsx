@@ -1,11 +1,13 @@
 "use client";
-import { useEffect, useId, useState, useRef } from "react";
+import { useEffect, useId, useState, useRef, useContext } from "react";
 import Button from "../../../global-components/Button";
-
 import PocketBase from "pocketbase";
+import GlobalContext from "../../../Contexts/GlobalContext";
 
 export default function Page() {
   const [loginData, setLoginData] = useState({});
+  const globalContext = useContext(GlobalContext)
+  const { pb } = globalContext
 
   useEffect(() => {
     const storedData = localStorage.getItem("Login");
@@ -58,6 +60,8 @@ export default function Page() {
 
 function Field(props) {
   const dialog = useId();
+  const globalContext = useContext(GlobalContext)
+  const { pb } = globalContext
 
   function clickHandler() {
     let modal = document.getElementById(`${dialog}`);
@@ -80,6 +84,7 @@ function Field(props) {
             field2={props.field2}
             placeholder={props.placeholder}
             dialog={dialog}
+            pb={pb}
             type={props.type}
           ></Modal>
         </dialog>
@@ -111,7 +116,7 @@ function Modal(props) {
   const errorRef = useRef(null);
   const passRef = useRef(null);
   const ifRef = useRef(null);
-  const email = JSON.parse(localStorage.getItem("Login")).record.email;
+  const email = props.pb.authStore.model.email;
 
   return (
     <>
