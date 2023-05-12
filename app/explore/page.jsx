@@ -85,7 +85,7 @@ const ExpolorePage = () => {
           changeCategory={setCategory}
           currentCategory={category}
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-2 rounded-2xl border-gray-300 p-2">
+        <div className="mx-auto grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-2 rounded-2xl border-gray-300 p-2">
           {content
             .filter((item) => item.category === category)
             .map((item, index) => (
@@ -129,7 +129,7 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
 const SmallCard = (props) => {
   const { title, caption, thumbnail, id } = props;
   return (
-    <div className="card card-compact w-96 min-[768px]:w-80 lg:w-72 xl:w-72 2xl:w-80 min-[1720px]:w-96 bg-gradient-to-r from-slate-50 to-zinc-100 shadow-lg p-3 border-2 border-slate-100">
+    <div className="card card-compact w-96 min-[360px]:w-72 min-[440px]:w-96 min-[768px]:w-80 lg:w-72 xl:w-72 2xl:w-80 min-[1720px]:w-96 bg-gradient-to-r from-slate-50 to-zinc-100 shadow-lg p-3 border-2 border-slate-100">
       <figure className="relative w-full h-64 border-2 border-gray-300">
         <Image src={thumbnail}
           className="object-contain rounded-lg"
