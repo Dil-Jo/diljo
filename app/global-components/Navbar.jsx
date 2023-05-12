@@ -5,12 +5,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Signin from "./Signin";
 import Signup from "./Signup";
-// import { LoginContext } from "../Contexts/LoginContext";
-import Image from "next/image";
 import GlobalContext from "../Contexts/GlobalContext";
 import TermsAndConditions from "../global-components/TermsAndConditions";
-
-// import GlobalState from "./Contexts/GlobalState";
 
 
 export default function Navbar(props) {
@@ -42,12 +38,10 @@ export default function Navbar(props) {
     return (
       <>
         <Signup />
-
         <Signin pb={pb} />
         <TermsAndConditions />
-
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
+          <div className="flex items-center justify-between py-4 ">
             <Link href="/">
               <Logo height="50px" />
             </Link>
@@ -168,7 +162,7 @@ function Links() {
 
   const menuItems = [
     { id: 1, name: "EXPLORE", link: "/explore" },
-    { id: 2, name: "NEARBY DONATION DRIVES", link: "/nearbyDonations" },
+    { id: 2, name: "NEARBY DONATIONS", link: "/nearbyDonations" },
     { id: 3, name: "CHARITIES", link: "/charities" },
     { id: 4, name: "START A FUNDRAISER", link: "/raisefunds" }
   ];
@@ -178,13 +172,13 @@ function Links() {
       {menuItems.map((item) => (
         <div
           key={item.id}
-          className="mx-4"
+          className="mx-2"
           onMouseEnter={() => setHoveredIndex(item.id)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           <Link
             href={`${item.link}`}
-            className={`text-md font-semibold tracking-tighter text-gray-800 hover:text-blue-600`}
+            className={`lg:text-md mx-1 text-sm font-semibold tracking-tighter text-gray-800 hover:text-blue-600`}
           >
             {item.name}
           </Link>
