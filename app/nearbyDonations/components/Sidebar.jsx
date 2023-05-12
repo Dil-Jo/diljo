@@ -18,7 +18,7 @@ const Sidebar = ({ map }) => {
     return (
 
         <>
-            <div className="flex flex-col sidebar w-1/3 h-[50rem] shadow-2xl">
+            <div className="flex flex-col sidebar w-1/3 h-full shadow-2xl">
                 <div className="sidebar-header h-[7rem]  bg-slate-700">
                     <h3 className="font-normal text-[2.5rem] h-4 ml-4 text-white mt-4">
                         Nearby Donation Drives

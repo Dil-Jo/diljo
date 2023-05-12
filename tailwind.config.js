@@ -18,6 +18,8 @@ module.exports = {
         "eight":"#FFFFFf",
         "nine":"#ebfdfe",
         "ten":"#f0f1fa",
+        "eleven":"#212759",
+        "twelve":"#cfd3dd",
       },
 
       backgroundImage: {

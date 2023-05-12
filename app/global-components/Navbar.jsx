@@ -144,7 +144,16 @@ export default function Navbar(props) {
         >
           <NavDataComponent />
         </div>
-      ) : (
+      ) : router === "/nearbyDonations"?
+        <div
+          className="z-50 shadow-md bg-ten"
+          ref={navbarRef}
+          style={{ width: "100%" }}
+        >
+          <NavDataComponent />
+        </div>:
+        
+        (
         <div
           className="fixed z-50 shadow-md bg-ten"
           ref={navbarRef}
