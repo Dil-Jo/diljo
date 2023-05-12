@@ -32,7 +32,7 @@ const Drive = ({ title, category, lat, lng, stDate, endDate, map, setVolunteer, 
     }, [])
 
     return (
-        <div className={`flex border transition-all border-solid border-black rounded-xl mb-[1rem] active:bg-blue-900 active:text-white ${stautsState ? 'border-green-500' : ''}`} onClick={(e) => {
+        <div className={`shadow-lg flex border transition-all border-solid border-black rounded-xl mb-[1rem] active:bg-blue-900 active:text-white ${stautsState ? 'border-green-500' : ''}`} onClick={(e) => {
             e.stopPropagation();
             map.panTo(({ lat: Number(lat), lng: Number(lng) }))
         }}>

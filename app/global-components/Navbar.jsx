@@ -168,9 +168,9 @@ function Links() {
 
   const menuItems = [
     { id: 1, name: "EXPLORE", link: "/explore" },
-    { id: 2, name: "NEARBY", link: "/nearbyDonations" },
+    { id: 2, name: "NEARBY DONATION DRIVES", link: "/nearbyDonations" },
     { id: 3, name: "CHARITIES", link: "/charities" },
-    { id: 4, name: "FUNDRAISERS", link: "/raisefunds" }
+    { id: 4, name: "START A FUNDRAISER", link: "/raisefunds" }
   ];
 
   return (
@@ -219,6 +219,7 @@ function Buttons() {
 
 function AfterLogin(props) {
   const logoutRef = useRef(null);
+
 
   const { pb } = props;
   const logoutUser = async () => {
