@@ -205,13 +205,13 @@ function Buttons() {
   return (
     <>
       <label
-        className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four"
+        className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four duration-200"
         htmlFor="sign-in"
       >
         Sign in
       </label>
       <label
-        className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four"
+        className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four duration-200"
         htmlFor="sign-up"
       >
         Sign up
@@ -235,7 +235,7 @@ function AfterLogin(props) {
   return (
     <div className={"flex w-full justify-between"}>
       <button
-        className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four"
+        className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four duration-200 "
         ref={logoutRef}
         onClick={() => {
           logoutRef.current.style.backgroundColor = "#3B82F6";
@@ -248,7 +248,7 @@ function AfterLogin(props) {
       >
         Logout
       </button>
-      <button className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four"
+      <button className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four duration-200 "
       >
         <Link href={`/profile/${pb?.authStore?.model?.id}/about`}>
           Profile
