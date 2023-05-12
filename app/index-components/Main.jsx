@@ -65,7 +65,7 @@ export default function Main() {
           style={{
             transform: isLoaded && !isSmallScreen ? "translateX(0%)" : "translateX(-45%)",
             transition: "transform 1.25s ease-in-out 3s",
-            '@media (max-width: 1023px)': { transform: 'none', transition: 'none' },
+            '@media (maxWidth: 1023px)': { transform: 'none', transition: 'none' },
           }}
           version="1.1"
           id="svg6128"
