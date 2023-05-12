@@ -52,7 +52,7 @@ const Drive = ({ title, category, lat, lng, stDate, endDate, map, setVolunteer, 
                 {!stautsState &&
                     (
                         <label htmlFor={`volunteer-modal-${id}`} className="h-8 w-8 " onClick={(e) => e.stopPropagation()}>
-                            <img title="Volunteer for this drive" src="/assets/volunteer.png" className="bg-white rounded-full h-8 w-8" fill alt="volunteer-here" />
+                            <img title="Volunteer for this drive" src="/assets/volunteer.png" className="bg-white rounded-full h-8 w-8" alt="volunteer-here" />
                         </label>)
                 }
 
