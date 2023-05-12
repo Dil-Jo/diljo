@@ -1,9 +1,10 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import PocketBase from 'pocketbase';
 import Form1 from './Components/Form1.jsx';
 import Form2 from './Components/Raisefund1.jsx';
 import Form3 from './Components/Raisefund2.jsx';
+import GlobalContext from '../Contexts/GlobalContext';
 import Image from 'next/image';
 
 const RaiseFunds = () => {
@@ -21,6 +22,10 @@ const RaiseFunds = () => {
 		acountNumber: '',
 		imageThumb: '',
 	});
+
+	const globalContext = useContext(GlobalContext);
+	const { globalLogin } = globalContext;
+
 
 	// useEffect(() => {
 	//   document.querySelector("main").style.padding = "0";
@@ -140,7 +145,7 @@ const RaiseFunds = () => {
 	//   updateForm({}).then((r) => console.log({ r }));
 	// }, [stage]);
 
-	if (localStorage.getItem('Login') == null)
+	if (globalLogin)
 		return <div>Please Login First</div>;
 	return (
 		<div className='w-full md:h-screen h-full md:flex md:flex-row overflow-auto'>
