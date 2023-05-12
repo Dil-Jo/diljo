@@ -43,7 +43,7 @@ export default function Navbar(props) {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4 ">
             <Link href="/">
-              <Logo height="50px" />
+              <Logo height="50px" color={"black"}/>
             </Link>
             <div className="hidden md:flex md:items-center">
               <Links />
@@ -138,7 +138,7 @@ export default function Navbar(props) {
         </div>
       ) : router === "/raisefunds" ? (
         <div
-          className="md:fixed z-50 bg-white shadow-md"
+          className="md:fixed z-50 shadow-md bg-ten"
           ref={navbarRef}
           style={{ width: "100%" }}
         >
@@ -146,7 +146,7 @@ export default function Navbar(props) {
         </div>
       ) : (
         <div
-          className="fixed z-50 bg-white shadow-md"
+          className="fixed z-50 shadow-md bg-ten"
           ref={navbarRef}
           style={{ width: "100%" }}
         >

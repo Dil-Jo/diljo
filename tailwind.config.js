@@ -15,7 +15,7 @@ module.exports = {
         "five": "#c3c8ea",
         "six":"#1e212b",
         "seven":"#f9cec8",
-"eight":"#FFFFFf",
+        "eight":"#FFFFFf",
         "nine":"#ebfdfe",
         "ten":"#f0f1fa",
       },
