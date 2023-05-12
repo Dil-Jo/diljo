@@ -59,7 +59,7 @@ const ExpolorePage = () => {
   const [content, setContent] = useState([]);
   const [category, setCategory] = useState("title");
   return (
-    <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-4">
+    <div className="mt-5 flex min-h-full w-full flex-col gap-14 px-1">
       <div className="flex w-full flex-col gap-5">
         <Banner />
         <h1 className="text-start text-3xl font-bold tracking-tighter">
@@ -85,7 +85,7 @@ const ExpolorePage = () => {
           changeCategory={setCategory}
           currentCategory={category}
         />
-        <div className="mx-auto grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-2 rounded-2xl border-gray-300 p-2">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-2 place-items-center rounded-2xl border-gray-300 p-2">
           {content
             .filter((item) => item.category === category)
             .map((item, index) => (
@@ -129,14 +129,14 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
 const SmallCard = (props) => {
   const { title, caption, thumbnail, id } = props;
   return (
-    <div className="card card-compact w-96 min-[360px]:w-72 min-[440px]:w-96 min-[768px]:w-80 lg:w-72 xl:w-72 2xl:w-80 min-[1720px]:w-96 bg-gradient-to-r from-slate-50 to-zinc-100 shadow-lg p-3 border-2 border-slate-100">
+    <div className="card card-compact w-full bg-gradient-to-r from-slate-50 to-zinc-100 shadow-lg p-3 border-2 border-slate-100">
       <figure className="relative w-full h-64 border-2 border-gray-300">
         <Image src={thumbnail}
           className="object-contain rounded-lg"
           alt="Thunmbail" fill={true} />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{title}</h2>
+        <h2 className="card-title truncate overflow-ellipsis">{title}</h2>
         <p className="truncate">{caption}</p>
         <div className="card-actions justify-end">
           <Link href={`/donation/${id}`} className={"justify-center flex w-full"}>
