@@ -15,46 +15,44 @@ export default function Page() {
   }, []);
 
   return (
-    <>
-      <div className="group grid place-items-center rounded-xl p-10 shadow-lg">
-        <div className="w-full">
-          <h1 className="text m-8 mb-12 inline w-72 text-start text-3xl font-black tracking-tighter text-gray-800 lg:w-auto">
-            About
-          </h1>
-        </div>
-        <div className="h-full w-full grid gap-4">
-          <Field
-            name="Name"
-            detail={loginData.record?.name}
-            field1="New Name"
-            field2={"Enter Password"}
-            placeholder={"Full Name"}
-          />
-          <Field
-            name="Password"
-            detail={"•••••••••"}
-            field1={"New Password"}
-            field2={"Current Password"}
-            placeholder={"•••••••••"}
-            type={"password"}
-          />
-          <Field
-            name="Email"
-            detail={loginData.record?.email}
-            field1={"New Email"}
-            field2={"Enter Password"}
-            placeholder={"name@example.com"}
-          />
-          <Field
-            name="Username"
-            detail={loginData.record?.username}
-            field1={"New Username"}
-            field2={"Enter Password"}
-            placeholder={"username"}
-          />
-        </div>
+    <div className="group grid place-items-center rounded-xl p-10 shadow-lg">
+      <div className="w-full">
+        <h1 className="text m-8 mb-12 inline w-72 text-start text-3xl font-black tracking-tighter text-gray-800 lg:w-auto">
+          About
+        </h1>
       </div>
-    </>
+      <div className="h-full w-full grid gap-4">
+        <Field
+          name="Name"
+          detail={loginData.record?.name}
+          field1="New Name"
+          field2={"Enter Password"}
+          placeholder={"Full Name"}
+        />
+        <Field
+          name="Password"
+          detail={"•••••••••"}
+          field1={"New Password"}
+          field2={"Current Password"}
+          placeholder={"•••••••••"}
+          type={"password"}
+        />
+        <Field
+          name="Email"
+          detail={loginData.record?.email}
+          field1={"New Email"}
+          field2={"Enter Password"}
+          placeholder={"name@example.com"}
+        />
+        <Field
+          name="Username"
+          detail={loginData.record?.username}
+          field1={"New Username"}
+          field2={"Enter Password"}
+          placeholder={"username"}
+        />
+      </div>
+    </div>
   );
 }
 
