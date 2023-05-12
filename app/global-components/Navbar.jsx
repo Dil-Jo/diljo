@@ -130,7 +130,7 @@ export default function Navbar(props) {
 
       {router === "/" ? (
         <div
-          className="fixed z-50  -m-[2.5rem] mx-4 rounded-xl bg-white shadow-md"
+          className="fixed z-50  -m-[2.5rem] mx-4 rounded-xl shadow-md bg-ten"
           ref={navbarRef}
           style={{ width: "calc(100% - 2.5rem)" }}
         >
@@ -178,12 +178,12 @@ function Links() {
         >
           <Link
             href={`${item.link}`}
-            className={`lg:text-md mx-1 text-sm font-semibold tracking-tighter text-gray-800 hover:text-blue-600`}
+            className={`lg:text-md mx-1 text-sm font-semibold tracking-tighter text-gray-800 hover:text-four`}
           >
             {item.name}
           </Link>
           <div
-            className={`h-1 bg-black transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
+            className={`h-1 bg-six transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
               }`}
           ></div>
         </div>
@@ -196,13 +196,13 @@ function Buttons() {
   return (
     <>
       <label
-        className="rounded-lg mr-2 border px-4 py-1 text-sm font-semibold text-gray-800 hover:border-blue-600 hover:text-blue-600"
+        className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four"
         htmlFor="sign-in"
       >
         Sign in
       </label>
       <label
-        className="rounded-lg border px-4 py-1 text-sm font-semibold text-gray-800 hover:border-blue-600 hover:text-blue-600"
+        className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four"
         htmlFor="sign-up"
       >
         Sign up

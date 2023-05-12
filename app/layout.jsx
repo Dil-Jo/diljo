@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body>
           <Navwrapper />
-          <main className="mainContainer bg-white">{children}</main>
+          <main className="mainContainer bg-ten">{children}</main>
           <Footer />
         </body>
       </html>
