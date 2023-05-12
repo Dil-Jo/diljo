@@ -51,8 +51,8 @@ const Drive = ({ title, category, lat, lng, stDate, endDate, map, setVolunteer, 
             <div className="flex justify-evenly w-2/6 items-end my-auto px-2">
                 {!stautsState &&
                     (
-                        <label htmlFor={`volunteer-modal-${id}`} className="relative h-8 w-8 " onClick={(e) => e.stopPropagation()}>
-                            <Image title="Volunteer for this drive" src={"/assets/volunteer.png"} className="bg-white rounded-full " fill alt="volunteer-here" />
+                        <label htmlFor={`volunteer-modal-${id}`} className="h-8 w-8 " onClick={(e) => e.stopPropagation()}>
+                            <img title="Volunteer for this drive" src="/assets/volunteer.png" className="bg-white rounded-full h-8 w-8" fill alt="volunteer-here" />
                         </label>)
                 }
 

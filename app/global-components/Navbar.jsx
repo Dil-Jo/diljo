@@ -13,7 +13,7 @@ import GlobalContext from "../Contexts/GlobalContext";
 export default function Navbar(props) {
   const globalProps = useContext(GlobalContext);
   // console.log(globalProps.login)
-  const { pb } = globalProps;
+  const { pb, globalLogin, setGlobalLogin } = globalProps;
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
   const router = usePathname();
@@ -23,14 +23,20 @@ export default function Navbar(props) {
   }
 
   function NavDataComponent() {
-    const [loginStatus, setLoginStatus] = useState(false)
+    // const [loginStatus, setLoginStatus] = useState(false)
     // let Login = false;
     useEffect(() => {
-      setLoginStatus(JSON.parse(localStorage.getItem("Login")) || false);
+      if (globalLogin) {
+        console.log("I is happening inside use effect ")
+
+        pb.collection('users').authRefresh().then((res) => {
+          setGlobalLogin(pb.authStore.baseToken !== '');
+        })
+      }
     }, []);
     return (
       <>
-        <Signup pb={pb} />
+        <Signup />
         <Signin pb={pb} />
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
@@ -41,9 +47,9 @@ export default function Navbar(props) {
             <div className="hidden sm:flex sm:items-center">
               <Links />
             </div>
-            {loginStatus ? (
+            {globalLogin ? (
               <div className={"hidden sm:flex sm:items-center"}>
-                <AfterLogin pb={pb} />
+                <AfterLogin pb={pb} setGlobalLogin={setGlobalLogin} />
               </div>
             ) : (
               <div className="hidden sm:flex sm:items-center">
@@ -70,7 +76,7 @@ export default function Navbar(props) {
           >
             <div className="flex flex-col">
               <Links />
-              {loginStatus ? (
+              {globalLogin ? (
                 <div className="flex w-full border-t-2 pt-2">
                   <AfterLogin />
                 </div>
@@ -208,7 +214,9 @@ function AfterLogin(props) {
   const logoutRef = useRef(null);
   const { pb } = props;
   const logoutUser = async () => {
+    console.log("I is happening")
     await pb.authStore.clear();
+    setGlobalLogin(false)
     return true
   };
 
@@ -231,16 +239,18 @@ function AfterLogin(props) {
             logoutRef.current.style.transition = "0.3s";
             logoutRef.current.style.border = "none";
             // localStorage.removeItem("Login");
-            logoutUser().then((res) => {
-              ;
-              setTimeout(() => {
-                window.location.reload();
-              }, 1200);
-            })
+            logoutUser();
           }}
         >
           Logout
         </label>
+        <div className="rounded-lg border px-4 py-1 text-sm h-full flex text-center font-semibold items-center text-gray-800 hover:border-blue-600 hover:text-blue-600"
+        >
+          <Link href={`/profile/${pb?.authStore?.model?.id}/about`}>
+            Profile
+          </Link>
+
+        </div>
       </div>
     </div>
   );

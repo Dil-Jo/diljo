@@ -9,31 +9,18 @@ import Locked from "./components/Locked";
 
 
 
-const verifyUser = async (pb) => {
-  const authData = await pb.collection('users').authRefresh();
-  console.log({ pb })
-  return pb.authStore.isValid;
-}
+// const verifyUser = async (pb) => {
+//   const authData = await pb.collection('users').authRefresh();
+//   console.log({ pb })
+//   return pb.authStore.basetoken !== '';
+// }
 
 
 export default function Page({ children }) {
   const { id } = useParams();
   const globalProps = useContext(GlobalContext);
-  const { pb } = globalProps;
-  const [loginState, setLoginState] = useState(false)
-  useEffect(() => {
-    verifyUser(pb).then((res) => {
-      if (!res || pb.authStore.model.id !== id) {
-        pb.authStore.clear();
-        alert("Please login to continue");
-        // window.location.reload();
-        setLoginState(false)
-        // return <Signin pb={pb} />
-      } else setLoginState(true)
-    }
-    );
+  const { pb, globalLogin } = globalProps;
 
-  }, [])
 
   // if (!loginState) return <div>
   //   <h2 className="text-xl font-bold">
@@ -47,13 +34,13 @@ export default function Page({ children }) {
       <div className="col-span-1 bg-white xl:col-span-3">
         <div className="m-6 flex flex-col">
           <ProfileComponent pb={pb} />
-          <ButtonGroupComponent />
+          <ButtonGroupComponent pb={pb} />
         </div>
       </div>
       <div className="col-span-1 bg-white xl:col-span-9">
         <div className="m-6">
           <div className="inline">
-            {loginState ? (
+            {globalLogin && pb.authStore.model.id === id ? (
               <div>{children}</div>
             ) : (<Locked />)}
 

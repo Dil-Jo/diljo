@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useRef, useState, useContext } from "react";
 // import PocketBase from "pocketbase";
-// import { GlobalContext } from "../Contexts/GlobalContext";
+import GlobalContext from "../Contexts/GlobalContext";
 
-export default function Signin({ pb }) {
+export default function Signin() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const rememberRef = useRef(null);
@@ -11,8 +11,8 @@ export default function Signin({ pb }) {
   const [result, setResult] = useState(false);
   const [error, setError] = useState("");
 
-  // const globalContext = useContext(GlobalContext);
-  // const { pb } = globalContext;
+  const globalContext = useContext(GlobalContext);
+  const { pb, setGlobalLogin } = globalContext;
 
   async function verify() {
     if (emailRef.current.value === "" || passwordRef.current.value === "") {
@@ -26,7 +26,9 @@ export default function Signin({ pb }) {
       let result = await pb
         .collection("users")
         .authWithPassword(emailRef.current.value, passwordRef.current.value);
-      setResult(result);
+
+
+      setGlobalLogin(pb.authStore.baseToken !== '');
 
 
       successRef.current.style.display = "block";
@@ -36,14 +38,9 @@ export default function Signin({ pb }) {
       return false;
     }
   }
-  useEffect(() => {
-    if (result) {
-      localStorage.setItem("Login", JSON.stringify(result));
-      setTimeout(() => {
-        window.location.reload();
-      }, 1200);
-    }
-  }, [result]);
+  // useEffect(() => {
+
+  // }, [result]);
 
   function clickHandler() {
     setError("");
