@@ -12,7 +12,7 @@ export default function ProfileComponent(props) {
   const record = pb.authStore.model || {};
   const image = record.avatar || "https://i.imgur.com/7bIhcuD.png";
   return (
-    <div className="group mx-auto grid w-full max-w-md place-items-center rounded-xl p-10 pb-8 shadow-lg">
+    <div className="group mx-auto grid w-full max-w-md place-items-center rounded-xl p-10 pb-8 shadow-lg bg-white">
       <Image
         className="mb-9 mt-4 h-36 w-36 rounded-full border-4 border-green-400 "
         alt={""}

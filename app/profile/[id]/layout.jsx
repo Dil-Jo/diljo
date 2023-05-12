@@ -31,13 +31,13 @@ export default function Page({ children }) {
   // </div>
   return (
     <div className="grid grid-cols-1 xl:grid-cols-12">
-      <div className="col-span-1 bg-white xl:col-span-3">
+      <div className="col-span-1 bg-ten xl:col-span-3">
         <div className="m-6 flex flex-col">
           <ProfileComponent pb={pb} />
           <ButtonGroupComponent pb={pb} />
         </div>
       </div>
-      <div className="col-span-1 bg-white xl:col-span-9">
+      <div className="col-span-1 bg-ten xl:col-span-9">
         <div className="m-6">
           <div className="inline">
             {globalLogin && pb.authStore.model.id === id ? (

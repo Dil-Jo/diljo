@@ -43,13 +43,13 @@ export default function Navbar(props) {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4 ">
             <Link href="/">
-              <Logo height="50px" color={"black"}/>
+              <Logo height="50px" color={"black"} />
             </Link>
             <div className="hidden md:flex md:items-center">
               <Links />
             </div>
             {globalLogin ? (
-              <div className={"hidden sm:flex sm:items-center"}>
+              <div className={"hidden md:flex md:items-center"}>
                 <AfterLogin pb={pb} setGlobalLogin={setGlobalLogin} />
               </div>
             ) : (
@@ -144,24 +144,24 @@ export default function Navbar(props) {
         >
           <NavDataComponent />
         </div>
-      ) : router === "/nearbyDonations"?
+      ) : router === "/nearbyDonations" ?
         <div
           className="z-50 shadow-md bg-ten"
           ref={navbarRef}
           style={{ width: "100%" }}
         >
           <NavDataComponent />
-        </div>:
-        
+        </div> :
+
         (
-        <div
-          className="fixed z-50 shadow-md bg-ten"
-          ref={navbarRef}
-          style={{ width: "100%" }}
-        >
-          <NavDataComponent />
-        </div>
-      )}
+          <div
+            className="fixed z-50 shadow-md bg-ten"
+            ref={navbarRef}
+            style={{ width: "100%" }}
+          >
+            <NavDataComponent />
+          </div>
+        )}
     </>
   );
 }
@@ -234,29 +234,27 @@ function AfterLogin(props) {
 
   return (
     <div className={"flex w-full justify-between"}>
-      <div>
-        <label
-          className="rounded-lg border px-4 py-1 text-sm h-full flex text-center font-semibold items-center text-gray-800 hover:border-blue-600 hover:text-blue-600"
-          ref={logoutRef}
-          onClick={() => {
-            logoutRef.current.style.backgroundColor = "#3B82F6";
-            logoutRef.current.style.color = "white";
-            logoutRef.current.style.transition = "0.3s";
-            logoutRef.current.style.border = "none";
-            // localStorage.removeItem("Login");
-            logoutUser();
-          }}
-        >
-          Logout
-        </label>
-        <div className="rounded-lg border px-4 py-1 text-sm h-full flex text-center font-semibold items-center text-gray-800 hover:border-blue-600 hover:text-blue-600"
-        >
-          <Link href={`/profile/${pb?.authStore?.model?.id}/about`}>
-            Profile
-          </Link>
+      <button
+        className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four"
+        ref={logoutRef}
+        onClick={() => {
+          logoutRef.current.style.backgroundColor = "#3B82F6";
+          logoutRef.current.style.color = "white";
+          logoutRef.current.style.transition = "0.3s";
+          logoutRef.current.style.border = "none";
+          // localStorage.removeItem("Login");
+          logoutUser();
+        }}
+      >
+        Logout
+      </button>
+      <button className="rounded-lg mr-2 border-2 border-gray-600 px-4 py-1 text-sm font-semibold text-gray-800 hover:border-four hover:text-four"
+      >
+        <Link href={`/profile/${pb?.authStore?.model?.id}/about`}>
+          Profile
+        </Link>
 
-        </div>
-      </div>
+      </button>
     </div>
   );
 }
