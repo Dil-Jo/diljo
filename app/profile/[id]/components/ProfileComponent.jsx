@@ -1,29 +1,43 @@
 "use client";
 import Image from "next/image";
 import edit from "../../../../assets/edit.png";
-import { useState, useEffect } from "react";
-// import PocketBase from "pocketbase";
-// import { useContext, useEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 
 export default function ProfileComponent(props) {
-  // let pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-  // const record = JSON.parse(localStorage.getItem("Login")).record;
-  // const globalContext = useContext(GlobalContext);
-  // const { pb } = globalContext;
+  const picture = useRef(null);
+
   const { pb } = props;
   const record = pb.authStore.model || {};
   const image = record.avatar;
-  const [pic, setPic] = useState();
 
-  const onImg = (e) => {
+  useEffect(() => {
+    if (image) {
+      const pic = pb.files.getUrl(record, image);
+      picture.current.style.backgroundImage = `url(${pic})`;
+      picture.current.style.backgroundSize = "cover";
+      picture.current.style.backgroundPosition = "center";
+    }
+  }, [])
+
+  const onImg = async (e) => {
     const file = e.target.files[0];
-    setPic(file);
-    const bg = document.getElementById('photo');
-    bg.style.backgroundSize = 'cover';
-    bg.style.backgroundImage = `url(${URL.createObjectURL(
-      e.target.files[0]
+    const File2 = new File([file], `${record.id}.png`, { type: file.type });
+    const formData = new FormData();
+    formData.append("avatar", File2);
+    console.log({ File2 })
+
+    picture.current.style.backgroundImage = `url(${URL.createObjectURL(
+      file
     )})`;
-    pb.collection("users").update(record.id, { avatar: file });
+    picture.current.style.backgroundSize = "cover";
+    picture.current.style.backgroundPosition = "center";
+    try {
+      await pb.collection("users").update(record.id, formData);
+    }
+    catch (err) {
+      console.log(err);
+    }
+
   }
 
 
@@ -33,6 +47,7 @@ export default function ProfileComponent(props) {
       <div className="relative user-img mb-9 mt-4 h-36 w-36 rounded-full">
         <div id="photo"
           className=" h-36 w-36 rounded-full border-4 border-green-400 "
+          ref={picture}
           alt={""}
           width={144}
           height={144}
@@ -40,7 +55,7 @@ export default function ProfileComponent(props) {
         ></div>
         <input accept="/image/*" className="hidden" id="file" type="file" onChange={(e) => onImg(e)}
         ></input>
-        <label className="absolute top-[7rem] left-[6rem] border-[1.5px] border-black bg-five rounded-full w-9 h-9" htmlFor="file" id="uploadBtn"><Image className="ml-1.5 mt-1.5 w-6 h-6 cursor-pointer" src={edit}></Image></label>
+        <label className="absolute top-[7rem] left-[6rem] border-[1.5px] border-black bg-five rounded-full w-9 h-9" htmlFor="file" id="uploadBtn"><Image alt="edit" className="ml-1.5 mt-1.5 w-6 h-6 cursor-pointer" src={edit}></Image></label>
       </div>
       <h5 className="mb-1 text-xl font-medium tracking-tighter text-gray-900">
         {record.name}
