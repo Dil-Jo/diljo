@@ -1,38 +1,19 @@
 import { NextResponse } from "next/server"
-// import { buffer } from "micro";
 import Stripe from "stripe"
 import { headers } from 'next/headers';
-// import { Readable } from 'node:stream';
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-const secretKey = 'pk_test_51N2CulJptKva7POWPNAReiOToQgyOcszDbagDlmpH3nDlhLXs8IeOJG8iTFtLetDuqvsIO69Ut7KlzYerDsuj0GE006Guzgfhp'
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-// export const config = {
-//     api: {
-//       bodyParser: false,
-//     },
-//   };
-
-//   async function getRawBody(readable) {
-//     const chunks = [];
-//     for await (const chunk of readable) {
-//       chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
-//     }
-//     return Buffer.concat(chunks);
-//   }
+// const secretKey = 'whsec_5f40b5485c3fb06defafe40b94a1fe445a2d70de84def33d0f4f0211acf28a43'
   
 
 export async function POST(request) {
-    // const event = await request.json();
     const body = await request.text()
     console.log({body})
     const signature = headers().get("stripe-signature") 
-    // const headersList = headers();
-    // const signature = headersList.get('stripe-signature');
     let event;
     try {
         console.log({signature})
-       event = stripe.webhooks.constructEvent(body, signature, secretKey);
+       event = stripe.webhooks.constructEvent(body, signature, process.env.secretKey);
     }catch  (err) {
       console.log({err})
         return NextResponse.json({err});
