@@ -23,7 +23,7 @@ const nearbyDonations = () => {
 	// const [markers, setMarkers] = useState({});
 	const [shameekhMarkers, setShameekhMarkers] = useState([]);
 
-	const [map, setMap] = useState(/**@type google.maps.Map */ (null));
+	const [map, setMap] = useState(/**@type google.maps.Map */(null));
 	// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 	const [ModalOpen, ModalIsOpen] = useState(false);
 	const [lat, setLat] = useState();
@@ -192,16 +192,15 @@ const nearbyDonations = () => {
 											}
 											return (
 												<Marker
-													title={`${
-														marker.title
-													}\nStarting on : ${String(
-														marker.start
-													).slice(
-														0,
-														10
-													)}\nEnding on : ${String(
-														marker.end
-													).slice(0, 10)}`}
+													title={`${marker.title
+														}\nStarting on : ${String(
+															marker.start
+														).slice(
+															0,
+															10
+														)}\nEnding on : ${String(
+															marker.end
+														).slice(0, 10)}`}
 													key={marker.title}
 													position={{
 														lat: Number(marker.lat),

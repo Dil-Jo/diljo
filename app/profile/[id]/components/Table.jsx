@@ -5,8 +5,8 @@ import React from 'react'
 // This would surely work for out fundraisers, idk the rest for now
 const Table = ({ headings, rows }) => {
     return (
-        <div className="overflow-x-auto w-full">
-            <table className="table w-full">
+        <div className="overflow-x-auto w-full border-2 border-slate-200 rounded-xl">
+            <table className="table w-full rounded-md  ">
                 {/* head */}
                 <thead>
                     <tr>
@@ -18,7 +18,7 @@ const Table = ({ headings, rows }) => {
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className=''>
                     {
                         rows.map((row, index) => (
                             <tr key={index} className=''>
