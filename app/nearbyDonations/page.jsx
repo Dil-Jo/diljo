@@ -11,6 +11,7 @@ import PocketBase from 'pocketbase';
 import Drive from './components/Drive';
 import VolunteerModal from './components/VolunteerModal';
 import GlobalContext from '../Contexts/GlobalContext';
+import Toast from "./components/Toast";
 
 const nearbyDonations = () => {
 	const globalContext = useContext(GlobalContext);
@@ -128,7 +129,8 @@ const nearbyDonations = () => {
 	return (
 		<>
 			<div className='flex mb-4 border-4 border-solid border-slate-900'>
-				<div className='drawer drawer-mobile -mt-0.5'>
+				<div className='drawer drawer-mobile -mt-2'>
+
 					<input
 						id='my-drawer-2'
 						type='checkbox'
@@ -333,30 +335,32 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 		startingDate: '',
 		endingDate: '',
 	});
+	const [error, setError] = useState('');
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
+	const globalContext = useContext(GlobalContext);
+	const { pb } = globalContext;
+	const [toast, setToast] = useState(false);
+	
 	const saveDataToPocketBase = async (e) => {
 		e.preventDefault();
-		// console.log({ e })
 		console.log({ formData });
-		if (!formData.category) {
-			alert('Please select a donation type');
+		if (!formData.title) {
+			setError('Please enter a title.');
 			return;
 		}
-		if (!formData.title) {
-			alert('Please enter a title');
-			return;
+		if (!formData.category) {
+			formData.category = 'food';
 		}
 		if (!formData.startingDate) {
-			alert('Please enter a starting date');
+			setError('Please enter a starting date.');
 			return;
 		}
-
-		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-		const globalContext = useContext(GlobalContext);
-		const { pb } = globalContext;
-
+		if (!formData.endingDate) {
+			setError('Please enter a ending date.');
+			return;
+		}
 		const organizer = pb.authStore.model?.id;
 		try {
 			const response = await pb.collection('volunteers').create({
@@ -368,79 +372,79 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 				endingDate: formData.endingDate,
 				organizer: organizer,
 			});
-			alert('Alright youre all set to go');
+			setToast(true);
 			console.log('Data saved successfully:');
 		} catch (error) {
 			console.error('Failed to save data:', error);
 		}
 	};
+	useEffect(() => {
+		if (toast) {
+			setTimeout(() => {
+				setToast(false);
+			}, 3000);
+		}
+	}, [toast]);
 	return (
 		<div onClick={(e) => e.stopPropagation()}>
-			{/* The button to open modal */}
-
-			{/* Put this part before </body> tag */}
 			<input
 				type='checkbox'
 				id={`drive-modal-${id}`}
 				className='modal-toggle'
 			/>
-			{/* <input type="checkbox" ids={`volunteer-modal-${volId}`} className="modal-toggle bg-red-700" /> */}
 			<div className='modal cursor-pointer' ref={referer}>
-				<div className='modal-box relative'>
+				<div className='modal-box relative w-full'>
 					<label
-						onClick={closeModal}
+						onClick={()=>{closeModal();
+						setError("")}}
 						className='btn btn-sm btn-circle absolute right-2 top-2'
 					>
 						✕
 					</label>
-					<div className='model-content flex flex-col justify-center items-start my-5'>
-						<h2 className='text-2xl font-bold tracking-tighter'>
+					<div className='model-content flex flex-col justify-center items-start my-5 w-full'>
+						<h2 className='text-2xl font-bold tracking-tighter w-full justify-center flex'>
 							{' '}
-							Enter the details of the donation drive:
+							Add Donation Drive
 						</h2>
 						<form
 							id='addDrive'
 							onSubmit={saveDataToPocketBase}
-							className='text-slate-800'
+							className='text-slate-800 w-full'
 						>
 							{/* --------------------------- */}
 
 							<label
-								className='label text-lg tracking-tight font-semibold'
+								className='label text-lg font-normal'
 								htmlFor='title'
 							>
-								What is your name?
+								Drive Title
 							</label>
 							<input
 								type='text'
 								placeholder='Title goes here'
 								id='title'
-								className='input input-bordered w-full max-w-xs'
+								className='input input-bordered w-full'
 								name='title'
 								required
 								value={formData.title}
 								onChange={handleChange}
 							/>
-							{/* --------------------------- */}
-
 							<label
-								className='label text-lg tracking-tight font-semibold'
+								className='label text-lg font-normal'
+
 								htmlFor='category'
 							>
-								Pick up the category of the drive:
+								Drive Category
 							</label>
 							<select
-								className='select select-bordered'
+								className='select select-bordered w-full'
 								id='category'
 								name='category'
 								required
 								value={formData.category}
 								onChange={handleChange}
 							>
-								<option disabled selected>
-									Pick one
-								</option>
-								<option value='food'>Food Drive</option>
+								<option value='food' selected>Food Drive</option>
 								<option value='clothing'>Clothing Drive</option>
 								<option value='blood'>Blood Drive</option>
 								<option value='books'>Books Drive</option>
@@ -449,12 +453,12 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 
 							<label
 								htmlFor='starting'
-								className='label text-lg tracking-tight font-semibold'
+								className='label text-lg font-normal'
 							>
-								Select the starting date for the drive:
+								Start Date
 							</label>
 							<div className={''}>
-								<div className='relative max-w-sm'>
+								<div className='relative w-full'>
 									<div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
 										<svg
 											aria-hidden='true'
@@ -481,14 +485,14 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 									/>
 								</div>
 							</div>
-							{/* --------------------------- */}
 							<label
 								htmlFor='ending'
-								className='label text-lg tracking-tighter font-semibold'
+								className='label text-lg font-normal'
 							>
-								Select the ending date for the drive:
+								End Date
 							</label>
-							<div className='relative max-w-sm'>
+							<div className='relative w-full'>
+
 								<div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
 									<svg
 										aria-hidden='true'
@@ -516,21 +520,37 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 							</div>
 						</form>
 					</div>
-					<div className='flex justify-evenly'>
-						<label className='btn btn-warning' onClick={closeModal}>
+					<h1 className={"text-red-800 mb-2"}>{error}</h1>
+					<div className='grid sm:grid-cols-2 grid-cols-1 gap-4'>
+						<label className=' bg-red-800 px-6 py-2 rounded-md text-white border-2 border-red-800 font-bold text-lg transition-all duration-200 hover:bg-opacity-10 hover:text-red-800 flex justify-center items-center' onClick={closeModal}>
 							Cancel
-						</label>
+						</label>{
+					pb.authStore.model?.id === undefined ?
 						<label
-							className='btn btn-info '
-							type='submit'
+							className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
+						htmlFor={"sign-in"}
+							onClick={() => {
+								setError("")
+								closeModal();
+							}}
+						>Add Drive</label>:
+						<label
+							className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
 							form='addDrive'
-							onClick={saveDataToPocketBase}
+							onClick={(e)=>{
+							setError("")
+								saveDataToPocketBase(e);}}
 						>
 							Add Drive
 						</label>
+					}
 					</div>
 				</div>
 			</div>
+			{
+				toast && (
+					<Toast text={"You just enlisted a new volunteer drive!"}/>)
+			}
 		</div>
 	);
 };
