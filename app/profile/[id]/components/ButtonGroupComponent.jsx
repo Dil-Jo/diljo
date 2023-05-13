@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function ButtonGroupComponent(props) {
   return (
-    <div className="group mx-auto mt-4 grid w-full max-w-md place-items-center rounded-xl p-10 py-6 shadow-lg ">
+    <div className="group mx-auto mt-4 grid w-full max-w-md place-items-center rounded-xl p-10 py-6 shadow-lg bg-white">
       {/* <div className="m-10 w-full  rounded-lg  p-1  outline outline-1 outline-gray-300"> */}
       <OutlineButton text="About" location="about" pb={props.pb} />
       <OutlineButton text="Fundraisers" location="fundraisers" pb={props.pb} />
