@@ -127,8 +127,8 @@ const nearbyDonations = () => {
 	const modalRef = useRef(null);
 	return (
 		<>
-			<div className='flex mb-4 border-4 border-solid  border-slate-900'>
-				<div className='drawer drawer-mobile'>
+			<div className='flex mb-4 border-4 border-solid border-slate-900'>
+				<div className='drawer drawer-mobile -mt-0.5'>
 					<input
 						id='my-drawer-2'
 						type='checkbox'
@@ -142,7 +142,7 @@ const nearbyDonations = () => {
 								<>
 									<label
 										htmlFor='my-drawer-2'
-										className='drawer-overlay absolute btn btn-primary text-sm drawer-button lg:hidden z-10 top-4 right-4'
+										className='drawer-overlay absolute btn btn-primary text-sm drawer-button lg:hidden z-10 top-4 right-4 mt-24'
 									>
 										Show Drives
 									</label>
@@ -264,7 +264,8 @@ const nearbyDonations = () => {
 								htmlFor='my-drawer-2'
 								className='drawer-overlay'
 							></label>
-							<div className='flex justify-center py-4 bg-slate-900 sm:w-full md:w-[30rem]'>
+							<div className={"h-[5.5rem]"}></div>
+							<div className='flex justify-center py-4 bg-eleven sm:w-full md:w-[30rem]'>
 								<h1 className='text-3xl text-white'>
 									Nearby Donation Drives
 								</h1>
@@ -425,7 +426,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 
 							<label
 								className='label text-lg tracking-tight font-semibold'
-								tmlFor='category'
+								htmlFor='category'
 							>
 								Pick up the category of the drive:
 							</label>
@@ -454,19 +455,19 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 								Select the starting date for the drive:
 							</label>
 							<div className={''}>
-								<div class='relative max-w-sm'>
-									<div class='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
+								<div className='relative max-w-sm'>
+									<div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
 										<svg
 											aria-hidden='true'
-											class='w-5 h-5 text-gray-500 dark:text-gray-400'
+											className='w-5 h-5 text-gray-500 dark:text-gray-400'
 											fill='currentColor'
 											viewBox='0 0 20 20'
 											xmlns='http://www.w3.org/2000/svg'
 										>
 											<path
-												fill-rule='evenodd'
+												fillRule='evenodd'
 												d='M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z'
-												clip-rule='evenodd'
+												clipRule='evenodd'
 											></path>
 										</svg>
 									</div>
@@ -474,7 +475,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 										type='date'
 										name='startingDate'
 										id='startingDate'
-										class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+										className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 										placeholder='Select date'
 										value={formData.startingDate}
 										onChange={handleChange}
@@ -488,19 +489,19 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 							>
 								Select the ending date for the drive:
 							</label>
-							<div class='relative max-w-sm'>
-								<div class='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
+							<div className='relative max-w-sm'>
+								<div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
 									<svg
 										aria-hidden='true'
-										class='w-5 h-5 text-gray-500 dark:text-gray-400'
+										className='w-5 h-5 text-gray-500 dark:text-gray-400'
 										fill='currentColor'
 										viewBox='0 0 20 20'
 										xmlns='http://www.w3.org/2000/svg'
 									>
 										<path
-											fill-rule='evenodd'
+											fillRule='evenodd'
 											d='M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z'
-											clip-rule='evenodd'
+											clipRule='evenodd'
 										></path>
 									</svg>
 								</div>
@@ -508,7 +509,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 									type='date'
 									name='endingDate'
 									id='endingDate'
-									class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+									className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 									placeholder='Select date'
 									value={formData.endingDate}
 									onChange={handleChange}

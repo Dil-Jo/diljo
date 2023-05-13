@@ -143,15 +143,16 @@ export default function Navbar(props) {
           style={{ width: "100%" }}
         >
           <NavDataComponent />
-        </div>
-      ) : router === "/nearbyDonations"?
-        <div
-          className="z-50 shadow-md bg-ten"
-          ref={navbarRef}
-          style={{ width: "100%" }}
-        >
-          <NavDataComponent />
-        </div>:
+        </div>)
+      //  : router === "/nearbyDonations"?
+      //   <div
+      //     className="z-50 shadow-md bg-ten"
+      //     ref={navbarRef}
+      //     style={{ width: "100%" }}
+      //   >
+      //     <NavDataComponent />
+      //   </div>
+        :
         
         (
         <div
