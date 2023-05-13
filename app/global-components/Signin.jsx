@@ -61,9 +61,6 @@ export default function Signin() {
 			}, 1200);
 		});
 	}
-
-	// Rest of your component code...
-
 	return (
 		<>
 			<input type='checkbox' id='sign-in' className='modal-toggle' />
