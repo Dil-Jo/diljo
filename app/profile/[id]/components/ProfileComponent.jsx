@@ -56,6 +56,7 @@ export default function ProfileComponent(props) {
         <input accept="/image/*" className="hidden" id="file" type="file" onChange={(e) => onImg(e)}
         ></input>
         <label className="absolute top-[7rem] left-[6rem] border-[1.5px] border-black glass opacity-90 rounded-full w-9 h-9" htmlFor="file" id="uploadBtn"><Image alt="edit" className="ml-1.5 mt-1.5 w-6 h-6 cursor-pointer" src={edit}></Image></label>
+
       </div>
       <h5 className="mb-1 text-xl font-medium tracking-tighter text-gray-900">
         {record.name}
