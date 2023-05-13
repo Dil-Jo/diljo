@@ -1,23 +1,23 @@
-'use client';
-import { useEffect, useId, useState, useRef, useContext } from 'react';
-import Button from '../../../global-components/Button';
-import PocketBase from 'pocketbase';
-import GlobalContext from '../../../Contexts/GlobalContext';
+"use client";
+import { useEffect, useId, useState, useRef, useContext } from "react";
+import Button from "../../../global-components/Button";
+import PocketBase from "pocketbase";
+import GlobalContext from "../../../Contexts/GlobalContext";
 
 export default function Page() {
 	const [loginData, setLoginData] = useState({});
-	const globalContext = useContext(GlobalContext);
-	const { pb } = globalContext;
+	const globalContext = useContext(GlobalContext)
+	const { pb } = globalContext
 
 	useEffect(() => {
-		const storedData = localStorage.getItem('Login');
+		const storedData = localStorage.getItem("Login");
 		if (storedData) {
 			setLoginData(JSON.parse(storedData));
 		}
 	}, []);
 
 	return (
-		<div className='group grid place-items-center rounded-xl p-10 shadow-lg'>
+		<div className='group grid place-items-center rounded-xl p-10 shadow-lg bg-white'>
 			<div className='w-full'>
 				<h1 className='text m-8 mb-12 inline w-72 text-start text-3xl font-black tracking-tighter text-gray-800 lg:w-auto'>
 					About
@@ -30,6 +30,13 @@ export default function Page() {
 					field1='New Name'
 					field2={'Enter Password'}
 					placeholder={'Full Name'}
+				/>
+				<Field
+					name='Username'
+					detail={pb.authStore.model?.username}
+					field1={'New Username'}
+					field2={'Enter Password'}
+					placeholder={'username'}
 				/>
 				<Field
 					name='Password'
@@ -46,13 +53,7 @@ export default function Page() {
 					field2={'Enter Password'}
 					placeholder={'name@example.com'}
 				/>
-				<Field
-					name='Username'
-					detail={pb.authStore.model?.username}
-					field1={'New Username'}
-					field2={'Enter Password'}
-					placeholder={'username'}
-				/>
+
 			</div>
 		</div>
 	);
@@ -60,8 +61,8 @@ export default function Page() {
 
 function Field(props) {
 	const dialog = useId();
-	const globalContext = useContext(GlobalContext);
-	const { pb } = globalContext;
+	const globalContext = useContext(GlobalContext)
+	const { pb } = globalContext
 
 	function clickHandler() {
 		let modal = document.getElementById(`${dialog}`);
@@ -95,14 +96,15 @@ function Field(props) {
 					<h1 className='text-lg text-gray-500'>{props.detail}</h1>
 				</div>
 				<div className='md:w-40 md:flex-none'>
-					<Button
-						type='septenary'
-						text='Change'
-						className='w-full md:w-auto'
+					<button
+						text=''
+						className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-eleven'
 						onClick={() => {
 							clickHandler();
 						}}
-					></Button>
+					>
+						Change
+					</button>
 				</div>
 			</div>
 		</div>
@@ -154,120 +156,92 @@ function Modal(props) {
 						'grid grid-rows-1 grid-cols-2 w-full gap-4 flex-row justify-around pt-6 pb-3'
 					}
 				>
-					<Button
-						type='septenary'
-						text='Change'
-						className='flex w-full md:w-auto'
+					<button
+						text=''
+						className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-elevem'
 						onClick={async () => {
 							successRef.current.style.display = 'none';
 							errorRef.current.style.display = 'none';
 
-							const pb = new PocketBase(
-								process.env.NEXT_PUBLIC_POCKETBASE_URL
-							);
+							const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
 							try {
 								let result = await pb
-									.collection('users')
-									.authWithPassword(
-										email,
-										passRef.current.value
-									);
+									.collection("users")
+									.authWithPassword(email, passRef.current.value);
 
-								const updateField = async (
-									field,
-									value,
-									successMessage
-								) => {
+								const updateField = async (field, value, successMessage) => {
 									await pb
-										.collection('users')
-										.update(result.record.id, {
-											[field]: value,
-										});
+										.collection("users")
+										.update(result.record.id, { [field]: value });
 
-									successRef.current.innerHTML =
-										successMessage;
-									let item = JSON.parse(
-										localStorage.getItem('Login')
-									);
+									successRef.current.innerHTML = successMessage;
+									let item = JSON.parse(localStorage.getItem("Login"));
 									item.record[field] = value;
-									localStorage.setItem(
-										'Login',
-										JSON.stringify(item)
-									);
+									localStorage.setItem("Login", JSON.stringify(item));
 								};
 
 								switch (props.name.toLowerCase()) {
-									case 'name':
+									case "name":
 										await updateField(
-											'name',
+											"name",
 											ifRef.current.value,
-											'Name changed successfully, Reloading...'
+											"Name changed successfully, Reloading..."
 										);
 										break;
 
-									case 'password':
-										await pb
-											.collection('users')
-											.update(result.record.id, {
-												oldPassword:
-													passRef.current.value,
-												password: ifRef.current.value,
-												passwordConfirm:
-													ifRef.current.value,
-												auth: true,
-											});
+									case "password":
+										await pb.collection("users").update(result.record.id, {
+											oldPassword: passRef.current.value,
+											password: ifRef.current.value,
+											passwordConfirm: ifRef.current.value,
+											auth: true,
+										});
 
 										successRef.current.innerHTML =
-											'Password changed successfully, Reloading...';
+											"Password changed successfully, Reloading...";
 										break;
 
-									case 'email':
+									case "email":
 										let emailExists = await pb
-											.collection('users')
+											.collection("users")
 											.getList(1, 50, {
 												filter: `email = '${ifRef.current.value}'`,
 											});
 
 										if (emailExists.length > 0) {
-											errorRef.current.innerHTML =
-												'Email already exists';
-											errorRef.current.style.display =
-												'block';
+											errorRef.current.innerHTML = "Email already exists";
+											errorRef.current.style.display = "block";
 											return false;
 										} else {
 											// await updateField("email", ifRef.current.value, "Email changed successfully, Reloading...");
-											await pb
-												.collection('users')
-												.update(result.record.id, {
-													email: ifRef.current.value,
-													emailVisibility: true,
-													auth: true,
-												});
+											await pb.collection("users").update(result.record.id, {
+												email: ifRef.current.value,
+												emailVisibility: true,
+												auth: true,
+											});
 										}
 										successRef.current.innerHTML =
-											'Password changed successfully, Reloading...';
+											"Password changed successfully, Reloading...";
 
 										break;
 
-									case 'username':
+									case "username":
 										let usernameExists = await pb
-											.collection('users')
+											.collection("users")
 											.getList(1, 50, {
 												filter: `username = '${ifRef.current.value}'`,
 											});
 
 										if (usernameExists.length > 0) {
-											errorRef.current.innerHTML =
-												'Username already exists';
-											errorRef.current.style.display =
-												'block';
+											errorRef.current.innerHTML = "Username already exists";
+											errorRef.current.style.display = "block";
 											return false;
 										} else {
 											await updateField(
-												'username',
+												"username",
 												ifRef.current.value,
-												'Username changed successfully, Reloading...'
+												"Username changed successfully, Reloading..."
 											);
 										}
 										break;
@@ -288,17 +262,16 @@ function Modal(props) {
 								errorRef.current.style.display = 'block';
 							}
 						}}
-					></Button>
-					<Button
-						type={'secondary'}
-						text={'Cancel'}
-						className={'w-full md:w-auto'}
+					>Change</button>
+					<button
+						text=''
+						className={' bg-red-800 px-6 py-2 rounded-md text-white border-2 border-red-800 font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-red-800'}
 						onClick={() => {
 							ifRef.current.value = '';
 							passRef.current.value = '';
 							document.getElementById(props?.dialog).close();
 						}}
-					></Button>
+					>Cancel</button>
 				</div>
 				<h1 ref={successRef} className={'text-green-800 hidden'}></h1>
 				<h1 ref={errorRef} className={'text-red-800 hidden'}></h1>

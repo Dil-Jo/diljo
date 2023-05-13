@@ -24,7 +24,7 @@ const nearbyDonations = () => {
 	// const [markers, setMarkers] = useState({});
 	const [shameekhMarkers, setShameekhMarkers] = useState([]);
 
-	const [map, setMap] = useState(/**@type google.maps.Map */ (null));
+	const [map, setMap] = useState(/**@type google.maps.Map */(null));
 	// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 	const [ModalOpen, ModalIsOpen] = useState(false);
 	const [lat, setLat] = useState();
@@ -130,6 +130,7 @@ const nearbyDonations = () => {
 		<>
 			<div className='flex mb-4 border-4 border-solid border-slate-900'>
 				<div className='drawer drawer-mobile -mt-2'>
+
 					<input
 						id='my-drawer-2'
 						type='checkbox'
@@ -193,16 +194,15 @@ const nearbyDonations = () => {
 											}
 											return (
 												<Marker
-													title={`${
-														marker.title
-													}\nStarting on : ${String(
-														marker.start
-													).slice(
-														0,
-														10
-													)}\nEnding on : ${String(
-														marker.end
-													).slice(0, 10)}`}
+													title={`${marker.title
+														}\nStarting on : ${String(
+															marker.start
+														).slice(
+															0,
+															10
+														)}\nEnding on : ${String(
+															marker.end
+														).slice(0, 10)}`}
 													key={marker.title}
 													position={{
 														lat: Number(marker.lat),
@@ -431,6 +431,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 							/>
 							<label
 								className='label text-lg font-normal'
+
 								htmlFor='category'
 							>
 								Drive Category
@@ -491,6 +492,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 								End Date
 							</label>
 							<div className='relative w-full'>
+
 								<div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
 									<svg
 										aria-hidden='true'
