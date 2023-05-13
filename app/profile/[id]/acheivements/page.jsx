@@ -33,7 +33,7 @@ export default function page() {
 
 	return (
 		<>
-			<div className='group grid place-items-center rounded-xl p-10 shadow-lg'>
+			<div className='group grid place-items-center rounded-xl p-10 shadow-lg bg-white'>
 				<div className={'w-full '}>
 					<h1
 						className={
@@ -43,7 +43,7 @@ export default function page() {
 						Achievements
 					</h1>
 				</div>
-				<div className={'grid grid-cols-4 w-full h-full'}>
+				<div className={'grid grid-cols-4 w-full h-full mt-12'}>
 					{ItemsAll.map((item) => (
 						<AchievementsCard {...item} key={item.id} />
 					))}
@@ -67,26 +67,25 @@ function AchievementsCard(props) {
 
 	return (
 		<>
-			<div className='w-full h-full mb-12'>
+			<div className='w-full h-full mb-6 mx-6'>
 				<div
 					style={{
 						background:
 							'linear-gradient(109.6deg, #4C7D94 11.2%, #6A4E67 53.7%, #FCF9EE 100.2%)',
 					}}
-					className={`border-2 border-gray-300 rounded-xl h-72 w-72 hover:scale-105 transition-all ease-in ${
-						props.acheived
-							? 'opacity-100'
-							: 'opacity-75 filter grayscale'
-					}`}
+					className={`border-2 border-gray-300 rounded-xl h-60 w-60 hover:scale-105 transition-all ease-in ${props.acheived
+						? 'opacity-100'
+						: 'opacity-75 filter grayscale'
+						}`}
 					onMouseEnter={handleHover}
 					onMouseLeave={handleHoverOut}
 				>
 					<div
-						className={`w-full h-full rounded-xl transition-all ease-linear z-50  hover:bg-black hover:bg-opacity-30`}
+						className={`w-full h-full rounded-xl transition-all ease-linear z-50  hover:bg-black hover:bg-opacity-30 `}
 					>
-						{isHovered && props.acheived ? (
+						{isHovered ? (
 							<div className='flex flex-row justify-center items-center h-full w-full'>
-								<p className='text-white'>
+								<p className='text-white text-lg mx-4 text-center'>
 									{props.description}
 								</p>
 							</div>
@@ -116,7 +115,7 @@ function AchievementsCard(props) {
 									</div>
 									<h1
 										className={
-											'text-center text-3xl font-bold text-gray-50'
+											'text-center text-xl font-bold text-gray-50 mb-2'
 										}
 									>
 										{props.name}
