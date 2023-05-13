@@ -125,6 +125,7 @@ const RaiseFunds = () => {
 			},
 			body: JSON.stringify({
 				name: fullForm.title,
+				// url:`${host}/explore/`
 			}),
 		});
 		const stripeId = await fetchStripe.json();
