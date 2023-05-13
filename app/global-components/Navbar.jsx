@@ -130,7 +130,7 @@ export default function Navbar(props) {
 
       {router === "/" ? (
         <div
-          className="fixed z-50  -m-[2.5rem] mx-4 rounded-xl shadow-md bg-ten"
+          className="fixed z-40 -m-[2.5rem] mx-4 rounded-xl shadow-md bg-ten"
           ref={navbarRef}
           style={{ width: "calc(100% - 2.5rem)" }}
         >
@@ -138,7 +138,7 @@ export default function Navbar(props) {
         </div>
       ) : router === "/raisefunds" ? (
         <div
-          className="md:fixed z-50 shadow-md bg-ten"
+          className="md:fixed z-40 shadow-md bg-ten"
           ref={navbarRef}
           style={{ width: "100%" }}
         >
@@ -156,7 +156,7 @@ export default function Navbar(props) {
         
         (
         <div
-          className="fixed z-50 shadow-md bg-ten"
+          className="fixed z-40 shadow-md bg-ten"
           ref={navbarRef}
           style={{ width: "100%" }}
         >

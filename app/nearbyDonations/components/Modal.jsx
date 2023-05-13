@@ -58,7 +58,7 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
 
     return (
         <>
-            <div className={styles.darkBG} onClick={() => ModalIsOpen(false)} />
+            <div className={styles.darkBG + "z-50"} onClick={() => ModalIsOpen(false)} />
             <div className={styles.centered} >
                 <form className={styles.modal}>
                     <div className={styles.modalHeader}>
@@ -88,8 +88,7 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
                         <div className='flex mt-4'>
                             <label htmlFor="category" className="text-slate-800 mt-2 mx-4 sm:flex sm:flex-col">Select the category of donation drive:</label>
                             <select id="category" name="category" onChange={(event) => setCategory(event.target.value)} className="text-slate-800 h-11 dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 border-2 border-solid border-black mr-3 " required>
-                                <option value="" disabled selected hidden>Select a reason</option>
-                                <option value="food"  >Food Drive</option>
+                                <option value="food"  selected>Food Drive</option>
                                 <option value="clothing" >Clothing Drive</option>
                                 <option value="blood">Blood Drive</option>
                                 <option value="books">Books Drive</option>
