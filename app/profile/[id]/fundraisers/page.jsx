@@ -11,22 +11,22 @@ import { get } from "http";
 
 
 
-
 export default function page() {
   const { pb } = useContext(GlobalContext);
   const { id } = useParams();
-  console.log({ id })
   const [fundraisers, setfundraisers] = useState([{}])
 
   const getfundraisers = async () => {
     // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     const fundraisers = await pb.collection("fundraisers").getFullList({ filter: `owner='${id}'` });
+
     const output = fundraisers.map((fundraiser) => {
       return {
         id: fundraiser.id,
         title: fundraiser.title,
         caption: fundraiser.caption,
         target: fundraiser.target,
+        raised: total,
         thumbnail: pb.files.getUrl(fundraiser, fundraiser.thumbnail)
       }
     });
