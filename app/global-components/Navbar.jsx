@@ -17,20 +17,20 @@ export default function Navbar(props) {
 	const [isOpen, setIsOpen] = useState(false);
 	const navbarRef = useRef(null);
 	const router = usePathname();
-	
+
 	function NavbarOpen() {
 		setIsOpen(!isOpen);
 	}
-	
+
 	function NavDataComponent() {
-		
+
 		// const [loginStatus, setLoginStatus] = useState(false)
-		
+
 		// let Login = false;
 		useEffect(() => {
 			if (globalLogin) {
 				console.log("I is happening inside use effect ")
-				
+
 				pb.collection('users').authRefresh().then((res) => {
 					setGlobalLogin(pb.authStore.baseToken !== '');
 				})
@@ -38,7 +38,7 @@ export default function Navbar(props) {
 		}, []);
 		return (
 			<>
-				<Signup />
+				<Signup pb={pb} />
 				<Signin pb={pb} />
 				<TermsAndConditions />
 				<div className="container mx-auto px-4">
@@ -71,10 +71,10 @@ export default function Navbar(props) {
 							</svg>
 						</div>
 					</div>
-					
+
 					<div
 						className={`${isOpen ? "block" : "hidden"
-						} border-t-2 bg-white py-2 md:hidden`}
+							} border-t-2 bg-white py-2 md:hidden`}
 					>
 						<div className="flex flex-col">
 							<Links />
@@ -93,7 +93,7 @@ export default function Navbar(props) {
 			</>
 		);
 	}
-	
+
 	useEffect(() => {
 		if (router === "/") {
 			function scrollFunction() {
@@ -117,18 +117,18 @@ export default function Navbar(props) {
 					navbarRef.current.style.marginLeft = "1rem";
 				}
 			}
-			
+
 			window.onscroll = scrollFunction;
-			
+
 			return () => {
 				window.onscroll = null;
 			};
 		}
 	}, [router]);
-	
+
 	return (
 		<>
-			
+
 			{router === "/" ? (
 				<div
 					className="fixed z-40 -m-[2.5rem] mx-4 rounded-xl shadow-md bg-ten"
@@ -138,13 +138,13 @@ export default function Navbar(props) {
 					<NavDataComponent />
 				</div>
 			) : router === "/raisefunds" ? (
-					<div
-						className="md:fixed z-40 shadow-md bg-ten"
-						ref={navbarRef}
-						style={{ width: "100%" }}
-					>
-						<NavDataComponent />
-					</div>)
+				<div
+					className="md:fixed z-40 shadow-md bg-ten"
+					ref={navbarRef}
+					style={{ width: "100%" }}
+				>
+					<NavDataComponent />
+				</div>)
 				//  : router === "/nearbyDonations"?
 				//   <div
 				//     className="z-50 shadow-md bg-ten"
@@ -154,7 +154,7 @@ export default function Navbar(props) {
 				//     <NavDataComponent />
 				//   </div>
 				:
-				
+
 				(
 					<div
 						className="fixed z-40 shadow-md bg-ten"
@@ -170,14 +170,14 @@ export default function Navbar(props) {
 
 function Links() {
 	const [hoveredIndex, setHoveredIndex] = useState(null);
-	
+
 	const menuItems = [
 		{ id: 1, name: "EXPLORE", link: "/explore" },
 		{ id: 2, name: "NEARBY DONATIONS", link: "/nearbyDonations" },
 		{ id: 3, name: "CHARITIES", link: "/charities" },
 		{ id: 4, name: "START A FUNDRAISER", link: "/raisefunds" }
 	];
-	
+
 	return (
 		<>
 			{menuItems.map((item) => (
@@ -195,7 +195,7 @@ function Links() {
 					</Link>
 					<div
 						className={`h-1 bg-six transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
-						}`}
+							}`}
 					></div>
 				</div>
 			))}
@@ -224,8 +224,8 @@ function Buttons() {
 
 function AfterLogin(props) {
 	const logoutRef = useRef(null);
-	
-	
+
+
 	const { pb, setGlobalLogin } = props;
 	const logoutUser = async () => {
 		console.log("I is happening")
@@ -233,10 +233,10 @@ function AfterLogin(props) {
 		setTimeout(() => {
 			setGlobalLogin(false)
 			window.location.reload();
-		},800)
+		}, 800)
 		return true
 	};
-	
+
 	return (
 		<div className={"flex w-full justify-between"}>
 			<button
@@ -258,7 +258,7 @@ function AfterLogin(props) {
 				<Link href={`/profile/${pb?.authStore?.model?.id}/about`}>
 					Profile
 				</Link>
-			
+
 			</button>
 		</div>
 	);

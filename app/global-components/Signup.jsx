@@ -12,7 +12,7 @@ export default function Signup({ pb }) {
   const usernameRef = useRef(null);
   const successRef = useRef(null);
   const [error, setError] = useState("");
-  
+
   async function create() {
     // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     try {
@@ -31,7 +31,7 @@ export default function Signup({ pb }) {
       return false;
     }
   }
-  
+
   async function verify() {
     if (
       emailRef.current.value === "" ||
@@ -42,28 +42,28 @@ export default function Signup({ pb }) {
       setError("Please fill all the fields");
       return false;
     }
-    
+
     if (passwordRef.current.value.length < 9) {
       setError("Password must be at least 9 characters long");
       return false;
     }
-    
+
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Passwords do not match");
       return false;
     }
-    
-    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+
+    // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     const resultList = await pb.collection("users").getList(1, 50, {
       filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`
     });
     console.log(resultList.items);
-    
+
     if (resultList.items.length > 0) {
       setError("Email or username already exists");
       return false;
     }
-    
+
     try {
       await create();
       setError("");
@@ -81,7 +81,7 @@ export default function Signup({ pb }) {
       return false;
     }
   }
-  
+
   function clickHandler() {
     setError("");
     successRef.current.style.display = "none";
@@ -92,7 +92,7 @@ export default function Signup({ pb }) {
         }, 1200);
     });
   }
-  
+
   return (
     <>
       <input type="checkbox" id="sign-up" className="modal-toggle" />
