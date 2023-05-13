@@ -8,10 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "primary": "#fcf9ee",
-        "secondary": "#4c7d94",
-        "tertiary": "#6a4e67",
-        "quaternary": "#1e212b"
+        "one": "#fcf9ee",
+        "two": "#023c40",
+        "three": "#f6f7ca",
+        "four": "#ed6a5a",
+        "five": "#c3c8ea",
+        "six":"#1e212b",
+        "seven":"#f9cec8",
+        "eight":"#FFFFFf",
+        "nine":"#ebfdfe",
+        "ten":"#f0f1fa",
+        "eleven":"#212759",
+        "twelve":"#cfd3dd",
       },
 
       backgroundImage: {

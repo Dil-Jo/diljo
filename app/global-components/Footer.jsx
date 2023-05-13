@@ -52,7 +52,7 @@ function ConditionalFooter() {
 export default function Footer() {
 	const pathname = usePathname();
 
-	if (pathname === '/raisefunds') {
+	if (pathname === '/raisefunds' || pathname === '/nearbyDonations') {
 		return <></>;
 	}
 
