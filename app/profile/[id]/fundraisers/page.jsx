@@ -6,7 +6,6 @@ import Table from "../components/Table";
 import { useParams } from "next/navigation";
 import { useState, useEffect, useContext } from "react";
 import GlobalContext from "../../../Contexts/GlobalContext";
-import { get } from "http";
 
 
 
@@ -26,7 +25,6 @@ export default function page() {
         title: fundraiser.title,
         caption: fundraiser.caption,
         target: fundraiser.target,
-        raised: total,
         thumbnail: pb.files.getUrl(fundraiser, fundraiser.thumbnail)
       }
     });
