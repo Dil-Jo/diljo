@@ -30,7 +30,7 @@ export default function page() {
   }, [])
 
   return (
-    <Table headings={["Title", "Caption", "Target"]} rows={fundraisers} />
+    <Table className="border border-black" headings={["Title", "Caption", "Target"]} rows={fundraisers} />
   );
 
 }

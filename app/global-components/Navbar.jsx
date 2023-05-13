@@ -27,7 +27,6 @@ export default function Navbar(props) {
 		useEffect(() => {
 			if (globalLogin) {
 				console.log('I is happening inside use effect ');
-
 				pb.collection('users')
 					.authRefresh()
 					.then((res) => {
@@ -164,7 +163,7 @@ export default function Navbar(props) {
 			)}
 		</>
 	);
-}
+
 
 function Links() {
 	const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -223,7 +222,6 @@ function Buttons() {
 
 function AfterLogin(props) {
 	const logoutRef = useRef(null);
-
 	const { pb, setGlobalLogin } = props;
 	const logoutUser = async () => {
 		console.log('I is happening');
@@ -258,4 +256,5 @@ function AfterLogin(props) {
 			</div>
 		</div>
 	);
+
 }
