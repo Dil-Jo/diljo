@@ -1,12 +1,12 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
-import PocketBase from "pocketbase";
+import PocketBase from 'pocketbase';
 import GlobalContext from '../Contexts/GlobalContext';
 
 const GlobalState = (props) => {
 	const host = 'beautiful-red-drawers.cyclic.app';
 	const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-	const [globalLogin, setGlobalLogin] = useState(false)
+	const [globalLogin, setGlobalLogin] = useState(false);
 
 	useEffect(() => {
 		// const localStoragePB = localStorage.getItem('pb')
@@ -18,23 +18,22 @@ const GlobalState = (props) => {
 		// 	pb = pB;
 		// 	setGlobalLogin(true);
 		// }
-		pb.collection('users').authRefresh().then((res) => {
-			console.log({ res })
-			setGlobalLogin(pb.authStore.baseToken !== '');
-		})
-		return () =>
-			console.log('unmounting useEffect1')
+		pb.collection('users')
+			.authRefresh()
+			.then((res) => {
+				console.log({ res });
+				setGlobalLogin(pb.authStore.baseToken !== '');
+			});
+		return () => console.log('unmounting useEffect1');
+	}, []);
 
-	}, [])
+	// useEffect(() => {
+	// 	// if (globalLogin) localStorage.setItem('pb', pb)
 
+	// 	return () =>
+	// 		console.log('unmounting useEffect2')
 
-	useEffect(() => {
-		if (globalLogin) localStorage.setItem('pb', pb)
-
-		return () =>
-			console.log('unmounting useEffect2')
-
-	}, [globalLogin])
+	// }, [globalLogin])
 
 	return (
 		<GlobalContext.Provider
@@ -42,7 +41,7 @@ const GlobalState = (props) => {
 				host,
 				globalLogin,
 				setGlobalLogin,
-				pb
+				pb,
 			}}
 		>
 			{props.children}
