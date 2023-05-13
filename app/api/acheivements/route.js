@@ -18,7 +18,7 @@ async function Ach(pb, user_id) {
   console.log("Achievements:", acheivements);
   
   let user_acheivements = await pb.collection("acheivement_users").getFullList({
-    // filter: `user_id = "${user_id}"`,
+    filter: `user_id = "${user_id}"`,
   });
   user_acheivements = Array.from({ length: user_acheivements.length }, (_, i) => ({
     acheivement_id: user_acheivements[i].acheivement_id,
@@ -34,16 +34,15 @@ async function Ach(pb, user_id) {
 
 async function grantAchievement(pb, user_id, acheivements, user_acheivements, achievementType) {
   let id = null;
+  console.log("fuck")
   for (let i = 0; i < acheivements.length; i++) {
     if (acheivements[i].type === achievementType) {
       id = acheivements[i].id;
       break;
     }
   }
-  // console.log("Achievement ID:", id);
-  // console.log(user_id, id)
   let result = await pb.collection("acheivement_users").getList(1, 1, {filter: `user_id = "${user_id}" && acheivement_id = "${id}"`});
-  if (result.items.length > 1) {
+  if (result.items.length === 0) {
     let data = {
       "acheivement_id": id,
       "user_id": user_id,
@@ -52,7 +51,6 @@ async function grantAchievement(pb, user_id, acheivements, user_acheivements, ac
   }
 }
 
-
 async function handleDonation(pb, user_id, acheivements, user_acheivements) {
   let donationData = await pb.collection("donations").getList(1, 20, {
     filter: `donor = "${user_id}"`,
@@ -60,45 +58,47 @@ async function handleDonation(pb, user_id, acheivements, user_acheivements) {
   const donationCount = donationData.items.length;
   console.log("Donation Count:", donationCount);
   
-  if (donationCount === 1) {
+  if (donationCount >= 1 && donationCount < 10) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Donation1");
-  } else if (donationCount === 10) {
+  } if (donationCount >= 10 && donationCount < 20) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Donation2");
-  } else if (donationCount === 20) {
+  } if (donationCount >= 20) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Donation3");
   }
 }
 
 async function handleRaised(pb, user_id, acheivements, user_acheivements) {
-  let raisedData = await pb.collection("donations").getList(1, 20, {
+  let raisedData = await pb.collection("donations").getFullList({
     filter: `donor = "${user_id}"`,
   });
   
-  const raisedCount = raisedData.items.length;
+  let raisedCount = 0;
+  for (let i = 0; i < raisedData.length; i++) {
+    raisedCount += raisedData[i].amount;
+  }
+  console.log("Raised Count: ",raisedCount)
   
-  console.log("Raised Count:", raisedCount);
-  
-  if (raisedCount === 5000) {
+  if (raisedCount >= 5000 && raisedCount < 10000) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Raised1");
-  } else if (raisedCount === 10000) {
+  } if (raisedCount >= 10000 && raisedCount < 20000) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Raised2");
-  } else if (raisedCount === 20000) {
+  } if (raisedCount >= 20000) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Raised3");
   }
 }
 
 async function handleVolunteer(pb, user_id, acheivements, user_acheivements) {
-  let volunteerData = await pb.collection("volunteers").getList(1, 20, {
+  let volunteerData = await pb.collection("user_volunteers").getList(1, 20, {
     filter: `users = "${user_id}"`,
   });
   const volunteerCount = volunteerData.items.length;
   console.log("Volunteer Count:", volunteerCount);
   
-  if (volunteerCount === 1) {
+  if (volunteerCount >= 1 && volunteerCount < 10) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Volunteer1");
-  } else if (volunteerCount === 10) {
+  } if (volunteerCount >= 10 && volunteerCount < 20) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Volunteer2");
-  } else if (volunteerCount === 20) {
+  } if (volunteerCount >= 20) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Volunteer3");
   }
 }
