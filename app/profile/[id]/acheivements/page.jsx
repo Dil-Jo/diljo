@@ -69,22 +69,19 @@ function AchievementsCard(props) {
 		<>
 			<div className='w-full h-full mb-12'>
 				<div
-					style={{
-						background:
-							'linear-gradient(109.6deg, #4C7D94 11.2%, #6A4E67 53.7%, #FCF9EE 100.2%)',
-					}}
 					className={`border-2 border-gray-300 rounded-xl h-72 w-72 hover:scale-105 transition-all ease-in ${
 						props.acheived
-							? 'opacity-100'
-							: 'opacity-75 filter grayscale'
-					}`}
+							? 'bg-slate-500 text-black opacity-100'
+							: 'bg-slate-400 opacity-75 filter grayscale'
+					}`
+				}
 					onMouseEnter={handleHover}
 					onMouseLeave={handleHoverOut}
 				>
 					<div
 						className={`w-full h-full rounded-xl transition-all ease-linear z-50  hover:bg-black hover:bg-opacity-30`}
 					>
-						{isHovered && props.acheived ? (
+						{isHovered ? (
 							<div className='flex flex-row justify-center items-center h-full w-full'>
 								<p className='text-white'>
 									{props.description}
