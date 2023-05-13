@@ -28,8 +28,9 @@ const Drive = ({
 
 	const getStatus = async () => {
 		try {
-			const user = JSON.parse(localStorage.getItem('Login')).record.id;
-			const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+			// const user = JSON.parse(localStorage.getItem('Login')).record.id;
+			// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+			const user = pb.authStore.model?.id;
 			const response = await pb
 				.collection('user_volunteers')
 				.getFullList({ filter: `users="${user}"&&drives="${id}"` });

@@ -24,8 +24,7 @@ const RaiseFunds = () => {
 	});
 
 	const globalContext = useContext(GlobalContext);
-	const { globalLogin } = globalContext;
-
+	const { pb, globalLogin } = globalContext;
 
 	// useEffect(() => {
 	//   document.querySelector("main").style.padding = "0";
@@ -90,14 +89,15 @@ const RaiseFunds = () => {
 	};
 
 	const submitForm = async () => {
-		console.log({ fullForm })
+		console.log({ fullForm });
 		const formData = new FormData();
 		formData.append('title', fullForm.title);
 		formData.append('caption', fullForm.description);
 		formData.append('target', fullForm.amount);
 		formData.append(
 			'owner',
-			JSON.parse(localStorage.getItem('Login')).record.id
+			// JSON.parse(localStorage.getItem('Login')).record.id
+			pb.authStore.model.id
 		);
 		formData.append('coverPhoto', fullForm.image);
 		formData.append('anonanonymityStatus', fullForm['radio-10']);
@@ -109,7 +109,7 @@ const RaiseFunds = () => {
 			title: fullForm.title,
 			caption: fullForm.description,
 			target: fullForm.amount,
-			owner: JSON.parse(localStorage.getItem('Login')).record.id,
+			owner: pb.authStore.model.id,
 			coverPhoto: fullForm.image,
 			anonanonymityStatus: fullForm['radio-10'],
 			thumbnail: fullForm.imageThumbs,
@@ -134,7 +134,7 @@ const RaiseFunds = () => {
 			formData.append('link', stripeId.paymentLink.url);
 		} else return alert('Something went wrong with stripe');
 
-		const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 		const response = await pb.collection('fundraisers').create(formData);
 
 		if (response.id) alert('Form submitted successfully');
@@ -145,10 +145,9 @@ const RaiseFunds = () => {
 	//   updateForm({}).then((r) => console.log({ r }));
 	// }, [stage]);
 
-	if (globalLogin)
-		return <div>Please Login First</div>;
+	if (!globalLogin) return <div>Please Login First</div>;
 	return (
-		<div className='w-full md:h-screen h-full md:flex md:flex-row overflow-auto'>
+		<div className='w-full md:h-screen h-full md:flex md:flex-row overflow-hidden'>
 			<div
 				className={
 					'flex md:h-full h-3/6 bg-slate-400 md:w-2/6 w-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none p-5'
