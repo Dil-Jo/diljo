@@ -143,6 +143,7 @@ export default function Navbar(props) {
           style={{ width: "100%" }}
         >
           <NavDataComponent />
+
         </div>
       ) : router === "/nearbyDonations" ?
         <div
