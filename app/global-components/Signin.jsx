@@ -36,10 +36,10 @@ export default function Signin() {
 			console.log('i is happen');
 			successRef.current.style.display = 'block';
 
-			// return true;
+			return true;
 		} catch (e) {
 			setError('Invalid email or password');
-			// return false;
+			return false;
 		}
 	}
 
@@ -52,6 +52,7 @@ export default function Signin() {
 		successRef.current.style.display = 'none';
 
 		verify().then((isValid) => {
+			if (!isValid) return;
 			setTimeout(() => {
 				console.log('I am here at set timeout');
 				setGlobalLogin(pb.authStore.baseToken !== '');
