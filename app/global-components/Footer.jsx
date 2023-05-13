@@ -1,47 +1,48 @@
-'use client';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import Logo from './Logo';
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Logo from "./Logo";
 
 function ConditionalFooter() {
 	return (
-		<footer className='m-4 rounded-lg bg-gray-200 shadow dark:bg-gray-900 p-1'>
-			<div className='grid md:grid-cols-4 grid-cols-1 gap-4  w-full p-5 [&>ul]:border-gray-300 [&>ul]:border-l-2 [&>ul]:p-3 rounded-lg border-2 border-gray-300  [&>ul>li]:border-2 [&>ul>li]:border-gray-300 [&>ul>li]:rounded-lg'>
-				<div className='w-20 md:ml-26 md:mr-20 sm:ml-20 lg:ml-36'>
-					<Link href='/'>
-						<Logo width='80px' />
+		<footer className=" mt-0 bg-six shadow dark:bg-gray-900 p-1">
+			<div
+				className="grid md:grid-cols-4 grid-cols-1 gap-4  w-full p-1 [&>ul]:border-gray-400 [&>ul]:border-l-2 [&>ul]:p-2 [&>ul>li]:text-one [&>ul>li]:font-bold [&>ul]:md:my-6 [&>ul]:my-0 [&>ul>li]:cursor-pointer">
+				<div className=" flex md:justify-center items-center justify-start md:ml-0 ml-3">
+					<Link href="/">
+						<Logo width="60px" color={"white"}/>
 					</Link>
 				</div>
-				<ul className='flex flex-col my-6 h-36 [&>li]:my-2 justify-center '>
+				<ul className="flex flex-col h-24 [&>li]:my-2 justify-center ">
 					<li>
-						<Link href='/explore'>
+						<Link href="/explore">
 							<p>Explore Fundraisers</p>
 						</Link>
 					</li>
 					<li>
-						<Link href='/raisefunds'>
+						<Link href="/raisefunds">
 							<p>Start a Fundraiser</p>
 						</Link>
 					</li>
 				</ul>
-				<ul className=' flex flex-col [&>li]:my-2 justify-center my-6 h-36'>
+				<ul className=" flex flex-col [&>li]:my-2 justify-center h-24">
 					<li>
-						<Link href='/charities'>
+						<Link href="/charities">
 							<p>Visit Non-profit Organizations</p>
 						</Link>
 					</li>
 					<li>
-						<Link href='/nearbyDonations'>
+						<Link href="/nearbyDonations">
 							<p>Volunteer for Donation Drives</p>
 						</Link>
 					</li>
 				</ul>
-				<ul className=' flex flex-col [&>li]:my-2 justify-center my-6 h-36'>
+				<ul className=" flex flex-col [&>li]:my-2 justify-center my-2 h-24">
 					<li>
-						<p>About us</p>
+						<a href="mailto:someone@example.com">Send email</a>
 					</li>
 					<li>
-						<p>Terms and Conditions</p>
+						<label className={"cursor-pointer"} htmlFor={"terms-and-conditions"}>Terms and Conditions</label>
 					</li>
 				</ul>
 			</div>
@@ -51,10 +52,10 @@ function ConditionalFooter() {
 
 export default function Footer() {
 	const pathname = usePathname();
-
-	if (pathname === '/raisefunds' || pathname === '/nearbyDonations') {
+	
+	if (pathname === "/raisefunds" || pathname === "/nearbyDonations") {
 		return <></>;
 	}
-
+	
 	return <ConditionalFooter />;
 }
