@@ -163,7 +163,7 @@ export default function Navbar(props) {
 			)}
 		</>
 	);
-
+}
 
 function Links() {
 	const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -256,5 +256,4 @@ function AfterLogin(props) {
 			</div>
 		</div>
 	);
-
 }
