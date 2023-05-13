@@ -1,23 +1,16 @@
 "use client";
 import Card from "../global-components/Card";
 import PocketBase from "pocketbase";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import GlobalContext from "../Contexts/GlobalContext";
 
 export default function FeaturedPosts() {
 
+  const { pb } = useContext(GlobalContext);
+
   async function tempFun() {
-    const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
+    // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
-    // pb.beforeSend = function (url, options) {
-    //   // For list of the possible request options properties check
-    //   // https://developer.mozilla.org/en-US/docs/Web/API/fetch#options
-    //   options.headers = Object.assign({}, options.headers, {
-    //     'Access-Control-Allow-Origin': '*',
-    //   });
-
-    //   return { url, options };
-    // };
-    console.log("Pb Sb", pb);
     let temp = await pb.collection("fundraisers").getList(1, 4, {
       filter: ""
     });

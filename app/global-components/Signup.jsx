@@ -1,7 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import PocketBase from "pocketbase";
-import Router from "next/router";
 
 
 export default function Signup({ pb }) {
@@ -11,6 +9,7 @@ export default function Signup({ pb }) {
   const nameRef = useRef(null);
   const usernameRef = useRef(null);
   const successRef = useRef(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   async function create() {
@@ -83,6 +82,7 @@ export default function Signup({ pb }) {
   }
 
   function clickHandler() {
+    setLoading(true);
     setError("");
     successRef.current.style.display = "none";
     verify().then((r) => {
@@ -221,8 +221,10 @@ export default function Signup({ pb }) {
             </h1>
             <div className="grid w-full">
               <div
-                className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
+                className={`btn btn-primary ${loading ? 'loading' : ''}`}
+                // className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
                 onClick={clickHandler}
+                type="submit"
               >
                 Submit
               </div>
