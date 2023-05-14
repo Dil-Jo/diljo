@@ -21,7 +21,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
             <div className='flex flex-col'>
                 <label
                     htmlFor='reason'
-                    className='tracking-tighter font-black text-2xl text-slate-800 mr-6 mb-5'
+                    className='tracking-tighter font-black text-xl md:text-2xl text-slate-800 mr-6 mb-5'
                 >
                     SELECT REASON FOR FUNDRAISING:
                 </label>
@@ -39,7 +39,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                 </select>
             </div>
             <div className='flex mt-11 flex-col'>
-                <h1 className='tracking-tighter font-black text-2xl  text-slate-800 mr-6 mt-2 mb-5'>
+                <h1 className='tracking-tighter font-black text-xl md:text-2xl  text-slate-800 mr-6 mt-2 mb-5'>
                     POST AS:
                 </h1>
                 <ul className='grid w-full gap-6 md:grid-cols-2 mb-6'>
