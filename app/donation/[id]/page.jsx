@@ -87,7 +87,15 @@ export default function () {
 								Donate
 							</label>
 						)
-					:
+						: record.complete ? (
+								<button
+									rel='noopener noreferrer'
+									disabled
+									className={"bg-black px-6 py-2 rounded-md text-white border-2 border-two font-bold text-sm"}
+								>
+									Donate
+								</button>
+							):
 						(<a
 						href={`${record.link}?client_reference_id=${pb.authStore.model.id}_${id}`}
 						target='_blank'

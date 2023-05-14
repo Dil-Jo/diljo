@@ -26,8 +26,9 @@ const ExpolorePage = () => {
 
 	async function getContent() {
 		const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-		let temp = await pb.collection('fundraisers').getList(1, 50);
-		// console.log({ temp })
+		let temp = await pb.collection('fundraisers').getList(1, 200, {
+			filter: `complete = False`
+		});
 		const output = temp.items.map((item) => {
 			return {
 				title: item.title,
@@ -39,17 +40,17 @@ const ExpolorePage = () => {
 				link: item.link,
 			};
 		});
-		// console.log({ output });
 		return output;
 	}
 
 	useEffect(() => {
 		getContent().then((res) => {
 			setContent(res);
+			setContentSmall(res.slice(1,10))
 		});
 		console.log({ content });
 	}, []);
-
+	const [contentSmall, setContentSmall] = useState([])
 	const [content, setContent] = useState([]);
 	const [category, setCategory] = useState('title');
 	return (
@@ -61,7 +62,7 @@ const ExpolorePage = () => {
 				</h1>
 				<div className='flex w-full '>
 					<div className='carousel-center carousel rounded-box w-full space-x-8 overflow-x-scroll p-4 pt-0'>
-						{content.map((item, index) => (
+						{contentSmall.map((item, index) => (
 							<Card key={item.id} {...item} />
 						))}
 					</div>
@@ -87,7 +88,6 @@ const ExpolorePage = () => {
 							<SmallCard
 								key={index}
 								{...item}
-								// dataFlow={item}
 							/>
 						))}
 				</div>
