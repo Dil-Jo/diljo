@@ -18,7 +18,7 @@ const RaiseFunds = () => {
 	const [submitted, setSubmitted] = useState(false);
 	const [stage, setStage] = useState(0);
 	const [fullForm, setFullForm] = useState({
-		reason: 'Emergency',
+		reason: 'Emergencies',
 		'radio-10': 'visible',
 		title: '',
 		description: '',
@@ -150,10 +150,7 @@ const RaiseFunds = () => {
 			data.stripeLink = stripeId.paymentLink.url;
 			formData.append('link', stripeId.paymentLink.url);
 		} else setToast({ show: true, text: 'Something went wrong with the network', color: 'bg-red-700' });
-
-		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 		const response = await pb.collection('fundraisers').create(formData);
-    
 		if (response.id) {
 			setToast({ show: true, text: 'Form submitted successfully' });
 			setSubmitted(true);

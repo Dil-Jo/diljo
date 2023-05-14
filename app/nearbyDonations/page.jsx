@@ -6,10 +6,7 @@ import {
 	CircleF,
 } from '@react-google-maps/api';
 import { useEffect, useRef, useState, useContext } from 'react';
-import Modal from './components/Modal';
-import PocketBase from 'pocketbase';
 import Drive from './components/Drive';
-import VolunteerModal from './components/VolunteerModal';
 import GlobalContext from '../Contexts/GlobalContext';
 import Toast from "./components/Toast";
 
@@ -57,14 +54,9 @@ const nearbyDonations = () => {
 
 	const getCollectionData = async () => {
 		try {
-			const currentDate = new Date(); // Get the current date
-
-			const startingDateFilter = currentDate.toISOString().split('T')[0];
-			console.log({ startingDateFilter })
-			const endingDateFilter = currentDate.toISOString().split('T')[0];
-			console.log({ endingDateFilter })
-			const response = await pb.collection('volunteers').getList(1, 200, {
-				filter: `endingDate >= '${endingDateFilter}'`
+			const Filter = (new Date()).toISOString().split('T')[0] + ' 00:00:00';
+			const response = await pb.collection('volunteers').getList(1,200, {
+				filter: `endingDate >= "${Filter}"`
 			});
 			let newArr = [...response.items];
 			for await (const item of newArr) {
@@ -264,7 +256,7 @@ const nearbyDonations = () => {
 									Nearby Donation Drives
 								</h1>
 							</div>
-							<ul className='p-4 bg-base-100 text-base-content border-r-4 border-slate-900 w-full md:w-[30rem] overflow-y-auto'>
+							<ul className='p-4 bg-base-100 h-full text-base-content border-r-4 border-slate-900 w-full md:w-[30rem] overflow-y-auto'>
 								{numDrives.map((drive) => {
 									return (
 										<label
