@@ -147,7 +147,7 @@ const RaiseFunds = () => {
 		const response = await pb.collection('fundraisers').create(formData);
 
 		if (response.id) setToast({ show: true, text: 'Form submitted successfully' });
-		else setToast({ show: true, text: 'Form submission failed', color: 'bg-red' });
+		else setToast({ show: true, text: 'Form submission failed', color: 'bg-red-600' });
 	};
 
 	// useEffect(() => {

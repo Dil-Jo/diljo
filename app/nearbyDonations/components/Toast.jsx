@@ -5,7 +5,7 @@ export default function (props) {
   return (
     <>
       <div className="toast">
-        <div className={'rounded-3xl,py-2,px-4'.concat(" ", classes)}>
+        <div className={'rounded-3xl py-2 px-4'.concat(" ", classes)}>
           <div>
             <span className={"text-white"}>{props.text}</span>
           </div>
