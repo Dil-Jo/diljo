@@ -250,7 +250,7 @@ const Finish = ({ submitForm }) => {
 			<h1 className='text-center mx-12 text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
 				Your contribution will help someone in need.
 			</h1>
-			<button className='btn bg-two border-2 border-two btn-md hover:bg-white hover:text-two' onClick={submitForm}>
+			<button className='btn bg-two border-2 border-two btn-md hover:bg-opacity-10 hover:text-two' onClick={submitForm}>
 				Click here to submit
 			</button>
 		</div>
