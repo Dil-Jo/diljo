@@ -1,14 +1,9 @@
 'use client';
 import React, { useEffect, useState, useContext } from 'react';
 import GlobalContext from '../../Contexts/GlobalContext';
-// import PocketBase from 'pocketbase';
-import { useParams } from 'next/navigation';
-
-// async function getRaised(id) {}
+import { useParams, useRouter } from 'next/navigation';
 
 async function getData(id, pb) {
-	// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-	// const { pb } = useContext(GlobalContext);
 	let records = await pb.collection('donations').getFullList({
 		filter: `fundraiser = "${id}"`,
 	});
@@ -28,7 +23,6 @@ async function getData(id, pb) {
 }
 
 export default function () {
-	// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 	const { pb } = useContext(GlobalContext);
 	const { id } = useParams();
 	const [record, setRecord] = useState({});
@@ -56,7 +50,10 @@ export default function () {
 				<hr className={'my-2'}></hr>
 				<h1 className={'font-black text-black text-xl'}>
 					Fundraiser by{' '}
-					<span className={'text-gray-500'}>@{record.owner}</span>
+					<span className={'text-gray-500'}>{"@"}{record.owner}</span>
+				</h1>
+				<h1 className={"font-black text-gray-500 text-sm"}>
+					{"#"}{record.id}
 				</h1>
 				<hr className={'my-2'}></hr>
 				<h2 className='text-sm mt-2 text-start w-full text-gray-400'>
@@ -72,26 +69,33 @@ export default function () {
 				></progress>
 
 				<div className={'flex flex-row justify-start'}>
-					<button
+					<a
 						type='button'
-						className='bg-blue-500 hover:bg-blue-700 text-white font-bold rounded text-center mr-3 px-6 py-2'
+						data-action="share/whatsapp/share"
+						target={'_blank'}
+						href ={`https://wa.me/?text=Checkout to this fundraiser!%20${window.location.href}`}
+						className={"bg-blue-600 px-6 py-2 mr-2 rounded-md text-white border-2 border-blue-600 font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-blue-600"}
 					>
 						Share
-					</button>
-					<a
-						// href={record.link}
+					</a>
+					{pb.authStore?.model?.id === undefined ? (
+							<label
+								rel='noopener noreferrer'
+								htmlFor={"sign-in"}
+								className={"bg-two px-6 py-2 rounded-md text-white border-2 border-two font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-two"}
+							>
+								Donate
+							</label>
+						)
+					:
+						(<a
 						href={`${record.link}?client_reference_id=${pb.authStore.model.id}_${id}`}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='bg-green-500 hover:bg-green-700 text-white font-bold rounded px-6 py-3 text-center'
+						className={"bg-two px-6 py-2 rounded-md text-white border-2 border-two font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-two"}
 					>
 						Donate
-					</a>
-
-					{/* <stripe-buy-button
-						buy-button-id='buy_btn_1N7JgwJptKva7POWm8eUYAmI'
-						publishable-key='pk_test_51N2CulJptKva7POWPNAReiOToQgyOcszDbagDlmpH3nDlhLXs8IeOJG8iTFtLetDuqvsIO69Ut7KlzYerDsuj0GE006Guzgfhp'
-					></stripe-buy-button> */}
+					</a>)}
 				</div>
 				<hr className={'my-2'}></hr>
 				<h1 className='font-sans text-lg'>{record.caption}</h1>
@@ -99,9 +103,3 @@ export default function () {
 		</div>
 	);
 }
-
-// <div className="w-1/4">
-//   <div className="flex flex-col w-full h-auto relative items-center justify-center p-3 cursor-default">
-//
-
-//   </div>

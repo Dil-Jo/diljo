@@ -20,10 +20,7 @@ const Comp1 = ({ next, updateForm, prev, fullForm }) => {
 		bg.style.backgroundImage = `url(${URL.createObjectURL(
 			e.target.files[0]
 		)})`;
-		console.log({ wee: e.target });
-		// setForm({ ...form, image: e.target.files[0] });
 		setForm({ ...form, imageThumbs: e.target.files[0] });
-		console.log('done');
 	}
 
 	useEffect(() => {

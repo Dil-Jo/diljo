@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import ppic from '../../assets/default.jpeg'
+
 
 
 export default function Signup({ pb }) {
@@ -13,20 +15,25 @@ export default function Signup({ pb }) {
   const [error, setError] = useState("");
 
   async function create() {
-    // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
     try {
+      const formData = new FormData();
+      formData.append('image', ppic);
       const resultList = await pb.collection("users").create({
         email: emailRef.current.value,
         password: passwordRef.current.value,
         name: nameRef.current.value,
         username: usernameRef.current.value,
         emailVisibility: true,
-        passwordConfirm: passwordRef.current.value
+        passwordConfirm: passwordRef.current.value,
+        avatar:formData
       });
       successRef.current.style.display = "block";
+      setLoading(false)
       return true;
     } catch (e) {
-      setError("Invalid email or password");
+      setError("Something went wrong. Please try again later.");
+      setLoading(false)
+      
       return false;
     }
   }
@@ -39,16 +46,23 @@ export default function Signup({ pb }) {
       usernameRef.current.value === ""
     ) {
       setError("Please fill all the fields");
+      setLoading(false)
+      
       return false;
     }
+    if (emailRef)
 
     if (passwordRef.current.value.length < 9) {
       setError("Password must be at least 9 characters long");
+      setLoading(false)
+      
       return false;
     }
 
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Passwords do not match");
+      setLoading(false)
+      
       return false;
     }
 
@@ -56,10 +70,11 @@ export default function Signup({ pb }) {
     const resultList = await pb.collection("users").getList(1, 50, {
       filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`
     });
-    console.log(resultList.items);
-
+    
     if (resultList.items.length > 0) {
-      setError("Email or username already exists");
+      setError("Email or username already");
+      setLoading(false)
+      
       return false;
     }
 
@@ -72,11 +87,15 @@ export default function Signup({ pb }) {
       confirmPasswordRef.current.value = "";
       nameRef.current.value = "";
       usernameRef.current.value = "";
+      setLoading(false)
+      
       return true;
     } catch (error) {
       console.log(error);
       // Handle any errors that occur during the create() function
       setError("Something went wrong. Please try again later.");
+      setLoading(false)
+      
       return false;
     }
   }
@@ -88,6 +107,7 @@ export default function Signup({ pb }) {
     verify().then((r) => {
       if (r)
         setTimeout(() => {
+          setLoading(false)
           window.location.reload();
         }, 1200);
     });
@@ -222,7 +242,6 @@ export default function Signup({ pb }) {
             <div className="grid w-full">
               <div
                 className={`btn bg-eleven border-2 border-eleven hover:bg-opacity-10 hover:text-eleven ${loading ? 'loading' : ''}`}
-                // className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
                 onClick={clickHandler}
                 type="submit"
               >

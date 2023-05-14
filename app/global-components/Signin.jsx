@@ -22,8 +22,6 @@ export default function Signin() {
 			// alert('masla');
 			return false;
 		}
-
-		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 		try {
 			console.log('Im here inside signing');
 			let result = await pb
@@ -44,9 +42,6 @@ export default function Signin() {
 		}
 	}
 
-	// useEffect(() => {
-
-	// }, [result]);
 
 	function clickHandler() {
 		setError('');

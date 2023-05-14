@@ -2,10 +2,10 @@
 import Image from "next/image";
 import edit from "../../../../assets/edit.png";
 import { useState, useEffect, useRef, useContext } from "react";
+import Ppic from "../../../../assets/edit.png";
 
 export default function ProfileComponent(props) {
   const picture = useRef(null);
-
   const { pb } = props;
   const record = pb.authStore.model || {};
   const image = record.avatar;
@@ -62,7 +62,7 @@ export default function ProfileComponent(props) {
         {record.name}
       </h5>
       <span className="text-sm text-gray-500">
-        @{record.username}
+        {"@"}{record.username}
       </span>
 
     </div>
