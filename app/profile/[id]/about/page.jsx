@@ -46,14 +46,6 @@ export default function Page() {
 					placeholder={'•••••••••'}
 					type={'password'}
 				/>
-				<Field
-					name='Email'
-					detail={pb.authStore.model?.email}
-					field1={'New Email'}
-					field2={'Enter Password'}
-					placeholder={'name@example.com'}
-				/>
-
 			</div>
 		</div>
 	);
