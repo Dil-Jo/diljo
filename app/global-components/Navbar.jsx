@@ -74,7 +74,7 @@ export default function Navbar(props) {
 
 					<div
 						className={`${isOpen ? "block" : "hidden"
-							} border-t-2 bg-white py-2 md:hidden`}
+							} border-t-2 bg-ten py-2 md:hidden`}
 					>
 						<div className="flex flex-col">
 							<Links />

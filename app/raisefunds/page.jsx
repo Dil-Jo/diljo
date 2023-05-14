@@ -152,12 +152,13 @@ const RaiseFunds = () => {
 
 		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 		const response = await pb.collection('fundraisers').create(formData);
-
+    
 		if (response.id) {
 			setToast({ show: true, text: 'Form submitted successfully' });
 			setSubmitted(true);
 		}
 		else setToast({ show: true, text: 'Form submission failed', color: 'bg-red-700' });
+
 	};
 
 	// useEffect(() => {
