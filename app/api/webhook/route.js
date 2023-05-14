@@ -6,8 +6,7 @@ import PocketBase from 'pocketbase';
 const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-const secretKey =
-	'whsec_5f40b5485c3fb06defafe40b94a1fe445a2d70de84def33d0f4f0211acf28a43';
+const secretKey = process.env.STRIPE_WEBHOOK_SECRET;
 
 
 const setCompleted = async (id, amount) => {
