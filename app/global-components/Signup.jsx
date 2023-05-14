@@ -221,7 +221,12 @@ export default function Signup({ pb }) {
             </h1>
             <div className="grid w-full">
               <div
+<<<<<<< Updated upstream
                 className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
+=======
+                className={`btn bg-eleven border-2 border-eleven hover:bg-white hover:text-eleven ${loading ? 'loading' : ''}`}
+                // className="w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
+>>>>>>> Stashed changes
                 onClick={clickHandler}
               >
                 Submit

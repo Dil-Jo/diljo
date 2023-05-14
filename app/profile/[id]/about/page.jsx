@@ -158,7 +158,16 @@ function Modal(props) {
 				>
 					<button
 						text=''
-						className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-elevem'
+						className={' bg-red-800 px-6 py-2 rounded-md text-white border-2 border-red-800 font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-red-800'}
+						onClick={() => {
+							ifRef.current.value = '';
+							passRef.current.value = '';
+							document.getElementById(props?.dialog).close();
+						}}
+					>Cancel</button>
+					<button
+						text=''
+						className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-eleven'
 						onClick={async () => {
 							successRef.current.style.display = 'none';
 							errorRef.current.style.display = 'none';
@@ -263,15 +272,7 @@ function Modal(props) {
 							}
 						}}
 					>Change</button>
-					<button
-						text=''
-						className={' bg-red-800 px-6 py-2 rounded-md text-white border-2 border-red-800 font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-red-800'}
-						onClick={() => {
-							ifRef.current.value = '';
-							passRef.current.value = '';
-							document.getElementById(props?.dialog).close();
-						}}
-					>Cancel</button>
+
 				</div>
 				<h1 ref={successRef} className={'text-green-800 hidden'}></h1>
 				<h1 ref={errorRef} className={'text-red-800 hidden'}></h1>
