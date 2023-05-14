@@ -6,6 +6,9 @@ import Card from '../global-components/Card';
 import PocketBase from 'pocketbase';
 
 const ExpolorePage = () => {
+	const [contentSmall, setContentSmall] = useState([])
+	const [content, setContent] = useState([]);
+	const [category, setCategory] = useState('title');
 	const routes = [
 		{
 			title: 'Education',
@@ -40,19 +43,16 @@ const ExpolorePage = () => {
 				link: item.link,
 			};
 		});
+		console.log({ output })
 		return output;
 	}
 
 	useEffect(() => {
 		getContent().then((res) => {
 			setContent(res);
-			setContentSmall(res.slice(1,10))
+			setContentSmall(res.slice(0, 9))
 		});
-		console.log({ content });
 	}, []);
-	const [contentSmall, setContentSmall] = useState([])
-	const [content, setContent] = useState([]);
-	const [category, setCategory] = useState('title');
 	return (
 		<div className='mt-5 flex min-h-full w-full flex-col gap-6 px-4'>
 			<div className='flex w-full flex-col gap-5'>
