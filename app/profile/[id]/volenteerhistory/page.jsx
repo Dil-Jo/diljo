@@ -20,9 +20,9 @@ export default function page() {
     let drives = await pb.collection("volunteers").getFullList({ filter: `id='${output[0].drives}'` });
     
     return {
-      Organizer: userStuff[0].username,
-      Title: drives[0].title,
-      Category: drives[0].category,
+      Organizer: userStuff.username,
+      Title: drives.title,
+      Category: drives.category,
       Id: output[0].id,
     };
   };
