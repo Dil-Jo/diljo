@@ -3,6 +3,9 @@ import { useState } from 'react';
 import Button from '../../global-components/Button';
 import arrow from '../../../assets/arrow.png';
 import Image from 'next/image';
+import Next from '../../../assets/next.png'
+import Back from '../../../assets/back.png'
+
 
 const Comp2 = ({ next, updateForm, prev, fullForm }) => {
 	const [form, setForm] = useState({
@@ -44,15 +47,15 @@ const Comp2 = ({ next, updateForm, prev, fullForm }) => {
 		next();
 	};
 	return (
-		<form className='mx-4' onSubmit={handleSubmit}>
+		<form className='mx-20' onSubmit={handleSubmit}>
 			<div>
-				<h1 className='tracking-tighter font-black text-2xl text-gray-500 text-center'>
+				<h1 className='tracking-tighter font-black text-2xl text-slate-800 text-center'>
 					ENTER DETAILS:
 				</h1>
 			</div>
 			<div className='grid grid-cols-2 gap-8 mt-4'>
 				<div className='col-span-2'>
-					<h1 className='tracking-tighter font-black text-2xl text-gray-500 mr-6 my-auto'>
+					<h1 className='tracking-tighter font-black text-2xl text-slate-800 mr-6 my-auto'>
 						NAME:
 					</h1>
 					<input
@@ -61,12 +64,12 @@ const Comp2 = ({ next, updateForm, prev, fullForm }) => {
 						value={form.name}
 						name='name'
 						onChange={handleChange}
-						className='input input-bordered w-full'
+						className='input input-bordered w-full border-2 border-slate-300'
 						required
 					/>
 				</div>
 				<div className='col-span-2'>
-					<h1 className='tracking-tighter font-black text-2xl text-gray-500 mr-6 my-auto'>
+					<h1 className='tracking-tighter font-black text-2xl text-slate-800 mr-6 my-auto'>
 						CNIC:
 					</h1>
 					<input
@@ -76,13 +79,13 @@ const Comp2 = ({ next, updateForm, prev, fullForm }) => {
 						placeholder='e.g 35202-3156628-9'
 						value={form.cnic}
 						onChange={handleChange}
-						className='input input-bordered w-full'
+						className='input input-bordered w-full border-2 border-slate-300'
 						required
 					/>
 				</div>
 				<div className='col-span-2'>
 					<div className='form-control'>
-						<h1 className='tracking-tighter font-black text-2xl text-gray-500 mr-6 my-auto'>
+						<h1 className='tracking-tighter font-black text-2xl text-slate-800 mr-6 my-auto'>
 							TARGET AMOUNT:
 						</h1>
 						<div>
@@ -94,7 +97,7 @@ const Comp2 = ({ next, updateForm, prev, fullForm }) => {
 									value={form.amount}
 									placeholder='e.g 1000'
 									onChange={handleChange}
-									className='input input-bordered w-full'
+									className='input input-bordered w-full border-2 border-slate-300'
 									required
 								/>
 							</label>
@@ -104,8 +107,8 @@ const Comp2 = ({ next, updateForm, prev, fullForm }) => {
 				<div className='col-span-2'>
 					<div className='grid grid-cols-2 gap-8'>
 						<div className='col-span-2'>
-							<h1 className='tracking-tighter font-black text-2xl text-gray-500 mr-6 my-auto'>
-								ACCOUNT NUMBER:
+							<h1 className='tracking-tighter font-black text-2xl text-slate-800 mr-6 my-auto'>
+								ACCOUNT NAME:
 							</h1>
 							<input
 								type='text'
@@ -113,12 +116,12 @@ const Comp2 = ({ next, updateForm, prev, fullForm }) => {
 								value={form.acountName}
 								name='acountName'
 								onChange={handleChange}
-								className='input input-bordered w-full'
+								className='input input-bordered w-full border-2 border-slate-300'
 								required
 							/>
 						</div>
 						<div className='col-span-2'>
-							<h1 className='tracking-tighter font-black text-2xl text-gray-500 mr-6 my-auto '>
+							<h1 className='tracking-tighter font-black text-2xl text-slate-800 mr-6 my-auto '>
 								IBAN:
 							</h1>
 							<input
@@ -128,32 +131,32 @@ const Comp2 = ({ next, updateForm, prev, fullForm }) => {
 								onChange={handleChange}
 								value={form.acountNumber}
 								name='acountNumber'
-								className='input input-bordered w-full'
+								className='input input-bordered w-full border-2 border-slate-300'
 								required
 							/>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className='flex justify-center gap-20 py-8'>
+			<div className='flex justify-between gap-20'>
 				<div>
 					<button
 						onClick={prev}
-						className='btn btn-square btn-info btn-lg'
+						className='mt-16 flex border-2 border-slate-600 rounded-lg w-18 justify-center hover:border-eleven hover:bg-slate-200 duration-300 active:translate-y-1'
 					>
 						<Image
-							src={arrow}
+							src={Back}
 							alt='Previous'
-							className='rotate-180 w-8 h-auto'
+							className='w-16 h-16'
 						/>
 					</button>
 				</div>
 				<div>
 					<button
 						type='submit'
-						className='btn btn-square btn-success btn-lg'
+						className='mt-16 flex border-2 border-slate-600 rounded-lg w-18 justify-center hover:border-eleven hover:bg-slate-200 duration-300 active:translate-y-1'
 					>
-						<Image src={arrow} alt='Next' className='w-8 h-auto ' />
+						<Image src={Next} alt='Next' className='w-16 h-16 ' />
 					</button>
 				</div>
 			</div>

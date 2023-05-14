@@ -6,6 +6,8 @@ import Form2 from './Components/Raisefund1.jsx';
 import Form3 from './Components/Raisefund2.jsx';
 import GlobalContext from '../Contexts/GlobalContext';
 import Image from 'next/image';
+import Logo from '../../assets/Black.svg'
+import Next from '../../assets/next.png'
 
 const RaiseFunds = () => {
 	const [stage, setStage] = useState(0);
@@ -151,7 +153,7 @@ const RaiseFunds = () => {
 		<div className='w-full md:h-screen h-full md:flex md:flex-row overflow-hidden'>
 			<div
 				className={
-					'flex md:h-full h-3/6 bg-slate-400 md:w-2/6 w-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none p-5'
+					'flex md:h-full h-3/6 bg-two md:w-2/6 w-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none p-5'
 				}
 			>
 				<MessageComponent stage={stage} />
@@ -190,10 +192,10 @@ const MessageComponent = ({ stage }) => {
         </div> */}
 			</div>
 			<div className='w-full h-full flex flex-col justify-center md:justify-start'>
-				<h2 className='text-3xl font-semi-bold text-center text-blue-900 tracking-tighter mb-5'>
+				<h2 className='text-4xl font-sans font-semi-bold text-center text-one tracking-tighter mb-5'>
 					{messages[stage][0]}
 				</h2>
-				<h2 className='text-2xl text-center text-slate-700 tracking-tighter'>
+				<h2 className='text-4xl text-center text-one tracking-tighter'>
 					{messages[stage][1]}
 				</h2>
 			</div>
@@ -242,33 +244,42 @@ const Form = ({ stage, setStage, updateForm, fullForm, submitForm }) => {
 const Finish = ({ submitForm }) => {
 	return (
 		<div className='flex flex-col justify-center items-center'>
-			<button className='btn btn-accent btn-lg' onClick={submitForm}>
-				Click here to submit
-			</button>
-			<h1 className='text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
+			<h1 className='text-center text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
 				Thank you for your contribution!
 			</h1>
-			<h1 className='text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
+			<h1 className='text-center mx-12 text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
 				Your contribution will help someone in need.
 			</h1>
+			<button className='btn bg-two border-2 border-two btn-md hover:bg-white hover:text-two' onClick={submitForm}>
+				Click here to submit
+			</button>
 		</div>
 	);
 };
 
 const Welcome = ({ nextStage }) => {
 	return (
-		<div className='flex flex-col justify-center items-center'>
-			<h1 className='text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
-				Welcome to Raise Funds
-			</h1>
-			<h1 className='text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
-				Let's lend a hand to someone, who really needs it.
-			</h1>
-			<button className='btn btn-accent btn-lg' onClick={nextStage}>
-				Start
-			</button>
-		</div>
+		<>
+			<div className='flex justify-center items-center'>
+				<div className='flex justify-center items-center'>
+					<h1 className='text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter md:'>
+						Start your fundraising journey here with
+					</h1>
+					{/* <Logo /> */}
+				</div>
+				<div className='h-72 mt-24'>
+					<div className="relative h-32 w-32">
+						<Image src={Logo} fill alt='Altermae' />
+					</div>
+					<div className='ml-6 mt-16 flex border-2 border-slate-600 rounded-lg w-20 justify-center hover:border-eleven hover:bg-slate-200 duration-300 active:translate-y-1'>
+						<Image className='w-16 h-16' src={Next} alt='next' onClick={nextStage}>
+						</Image>
+					</div>
+				</div>
+			</div>
+		</>
 	);
 };
+
 
 export default RaiseFunds;

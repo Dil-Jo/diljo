@@ -16,17 +16,10 @@ import Toast from "./components/Toast";
 const nearbyDonations = () => {
 	const globalContext = useContext(GlobalContext);
 	const { pb } = globalContext;
-
 	const [numDrives, setNumDrives] = useState([]);
-	const [volunteer, setVolunteer] = useState(false);
-	const [volTit, setVolTit] = useState('');
-	const [volId, setVolId] = useState('');
-	// const [markers, setMarkers] = useState({});
 	const [shameekhMarkers, setShameekhMarkers] = useState([]);
 
 	const [map, setMap] = useState(/**@type google.maps.Map */(null));
-	// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-	const [ModalOpen, ModalIsOpen] = useState(false);
 	const [lat, setLat] = useState();
 	const [lng, setLng] = useState();
 	const [loading, setLoading] = useState(true);
@@ -65,9 +58,21 @@ const nearbyDonations = () => {
 	const getCollectionData = async () => {
 		try {
 			const response = await pb.collection('volunteers').getList();
-			console.log({ response });
-			setNumDrives(response.items);
-			getMarkers(response.items);
+			let newArr = [...response.items];
+			for await (const item of newArr) {
+				const participationStatus = await pb
+					.collection('user_volunteers')
+					.getFullList({ filter: `users="${pb.authStore.model.id}"&&drives="${item.id}"` });
+				if (participationStatus.length !== 0) {
+					item.participating = true;
+				}
+				else {
+					item.participating = false;
+				}
+			}
+			// console.log({ newArr });
+			setNumDrives(newArr);
+			getMarkers(newArr);
 
 			// return response.items
 		} catch (error) {
@@ -78,21 +83,6 @@ const nearbyDonations = () => {
 		getLocation();
 		let newArr = [];
 		prop.map((data) => {
-			//     const newMarkers = {};
-			//     console.log(data);
-			//     data.forEach(volunteer => {
-			//         const title = volunteer.title;
-			//         const latitude = volunteer.latitude;
-			//         const longitude = volunteer.longitude;
-			//         const category = String(volunteer.category);
-			//         newMarkers[title] = { lat: latitude, lng: longitude, cat: category };
-			//     });
-			//     setMarkers(newMarkers);
-			//     setLoading(false)
-			//     console.log('emd get marker')
-			// });
-			// const newMarker = {};
-			console.log({ data });
 			const title = data.title;
 			const latitude = data.latitude;
 			const longitude = data.longitude;
@@ -286,12 +276,8 @@ const nearbyDonations = () => {
 												stDate={drive.startingDate}
 												endDate={drive.endingDate}
 												map={map}
-												setVolunteer={setVolunteer}
-												setVolTit={setVolTit}
-												setVolId={setVolId}
 												id={drive.id}
-												volTit={volTit}
-												volId={volId}
+												participating={drive.participating}
 											/>
 										</label>
 									);
@@ -302,24 +288,12 @@ const nearbyDonations = () => {
 				</div>
 			</div>
 
-			{/* {ModalOpen && <Modal ModalIsOpen={ModalIsOpen}
-
-                lat={lat} lng={lng} />} */}
 			<AddDriveModal
 				id={'alphabetical-gamma-tistan'}
 				lat={lat}
 				lng={lng}
 				referer={modalRef}
 			/>
-			{volunteer && (
-				<VolunteerModal
-					setVolunteer={setVolunteer}
-					volTit={volTit}
-					volId={volId}
-					setVolTit={setVolTit}
-					setVolId={setVolId}
-				/>
-			)}
 		</>
 	);
 };
@@ -342,7 +316,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 	const globalContext = useContext(GlobalContext);
 	const { pb } = globalContext;
 	const [toast, setToast] = useState(false);
-	
+
 	const saveDataToPocketBase = async (e) => {
 		e.preventDefault();
 		console.log({ formData });
@@ -395,8 +369,10 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 			<div className='modal cursor-pointer' ref={referer}>
 				<div className='modal-box relative w-full'>
 					<label
-						onClick={()=>{closeModal();
-						setError("")}}
+						onClick={() => {
+							closeModal();
+							setError("")
+						}}
 						className='btn btn-sm btn-circle absolute right-2 top-2'
 					>
 						✕
@@ -525,31 +501,32 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 						<label className=' bg-red-800 px-6 py-2 rounded-md text-white border-2 border-red-800 font-bold text-lg transition-all duration-200 hover:bg-opacity-10 hover:text-red-800 flex justify-center items-center' onClick={closeModal}>
 							Cancel
 						</label>{
-					pb.authStore.model?.id === undefined ?
-						<label
-							className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
-						htmlFor={"sign-in"}
-							onClick={() => {
-								setError("")
-								closeModal();
-							}}
-						>Add Drive</label>:
-						<label
-							className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
-							form='addDrive'
-							onClick={(e)=>{
-							setError("")
-								saveDataToPocketBase(e);}}
-						>
-							Add Drive
-						</label>
-					}
+							pb.authStore.model?.id === undefined ?
+								<label
+									className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
+									htmlFor={"sign-in"}
+									onClick={() => {
+										setError("")
+										closeModal();
+									}}
+								>Add Drive</label> :
+								<label
+									className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
+									form='addDrive'
+									onClick={(e) => {
+										setError("")
+										saveDataToPocketBase(e);
+									}}
+								>
+									Add Drive
+								</label>
+						}
 					</div>
 				</div>
 			</div>
 			{
 				toast && (
-					<Toast text={"You just enlisted a new volunteer drive!"}/>)
+					<Toast text={"You just enlisted a new volunteer drive!"} />)
 			}
 		</div>
 	);

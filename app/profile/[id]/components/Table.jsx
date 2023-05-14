@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 // We assume that the order of the headings and the rows is same and that each row is an object with keys from heading. And theres an extra object key title, not in the headings, which is the title of the card
@@ -47,9 +48,10 @@ console.log({ headings, rows })
                                         {row[headings[3].toLowerCase()]}
                                     </td>
                                     <td>
-                                        <button
+
+                                        <Link href={row.link || ''}
                                           className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
-                                        >Details</button>
+                                          >Details</Link>
                                     </td>
                                 </tr>
                             ))
@@ -98,9 +100,9 @@ console.log({ headings, rows })
                                         {row[headings[2].toLowerCase()]}
                                     </td>
                                     <td>
-                                        <button
+                                        <Link href={row.link || ''} 
                                           className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
-                                        >Details</button>
+                                        >Details</Link>
                                     </td>
                                 </tr>
                             ))

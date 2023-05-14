@@ -9,31 +9,25 @@ const GlobalState = (props) => {
 	const [globalLogin, setGlobalLogin] = useState(false);
 
 	useEffect(() => {
-		// const localStoragePB = localStorage.getItem('pb')
-		// if (localStoragePB == null) return
-		// const pB = JSON.parse(localStoragePB)
-		// if (pB.authStore.baseToken == '') return
-		// const authData = pB.collection('users').authRefresh();
-		// if (!(authData.tokken == undefined)) {
-		// 	pb = pB;
-		// 	setGlobalLogin(true);
-		// }
+		console.log("I check if I'm logged in")
+		if (localStorage.getItem('pocketbase_auth') == null) return;
+		console.log("I passed through level one")
+
+		setGlobalLogin(true);
+
+		console.log("I passed through level two")
+
 		pb.collection('users')
 			.authRefresh()
 			.then((res) => {
 				console.log({ res });
 				setGlobalLogin(pb.authStore.baseToken !== '');
 			});
+		console.log("I passed through level three")
+
 		return () => console.log('unmounting useEffect1');
 	}, []);
 
-	// useEffect(() => {
-	// 	// if (globalLogin) localStorage.setItem('pb', pb)
-
-	// 	return () =>
-	// 		console.log('unmounting useEffect2')
-
-	// }, [globalLogin])
 
 	return (
 		<GlobalContext.Provider
