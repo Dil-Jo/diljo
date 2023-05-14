@@ -35,7 +35,7 @@ async function grantAchievement(pb, user_id, acheivements, user_acheivements, ac
       break;
     }
   }
-  let result = await pb.collection("acheivement_users").getList(1, 1, {filter: `user_id = "${user_id}" && acheivement_id = "${id}"`});
+  let result = await pb.collection("acheivement_users").getList(1, 1, { filter: `user_id = "${user_id}" && acheivement_id = "${id}"` });
   if (result.items.length === 0) {
     let data = {
       "acheivement_id": id,
@@ -74,16 +74,16 @@ async function handleRaised(pb, user_id, acheivements, user_acheivements) {
     });
     return total;
   }
-  
+
   for (let i = 0; i < raisedData.length; i++) {
     raisedData[i].amount = await getRaised(raisedData[i].id);
   }
-  
+
   let raisedCount = 0;
   for (let i = 0; i < raisedData.length; i++) {
     raisedCount += raisedData[i].amount;
   }
-  
+
   if (raisedCount >= 5000) {
     await grantAchievement(pb, user_id, acheivements, user_acheivements, "Raised1");
   } if (raisedCount >= 10000) {

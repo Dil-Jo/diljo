@@ -9,6 +9,32 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const secretKey =
 	'whsec_5f40b5485c3fb06defafe40b94a1fe445a2d70de84def33d0f4f0211acf28a43';
 
+
+const setCompleted = async (id, amount) => {
+
+	const fundraiser = await pb.collection("fundraisers").getOne(id);
+	const { target } = fundraiser;
+	console.log({ target, amount });
+
+	if (amount >= target) {
+		await pb.collection("fundraisers").update(id, { complete: true });
+		// console.log("updated")
+		return true;
+	}
+	const donations = await pb.collection("donations").getFullList({ filter: `fundraiser='${id}'` });
+	let total = 0;
+	donations.forEach((donation) => {
+		total += donation.amount;
+	})
+
+	if (total >= target) {
+		await pb.collection("fundraisers").update(id, { complete: true });
+		// console.log("updated 2.99")
+		return true;
+	}
+
+}
+
 export async function POST(request) {
 	const body = await request.text();
 	const signature = headers().get('stripe-signature');
@@ -22,23 +48,7 @@ export async function POST(request) {
 		return NextResponse.json({ err });
 	}
 
-	// const rawBody = await getRawBody(request);
-	// const rawBody = await buffer(request);
-	// console.log({rawBody})
-
-	//   Handle the event
 	switch (event.type) {
-		// case 'payment_intent.succeeded':
-		// console.log({ data: event });
-		// const paymentIntent = event.data.object;
-		// const amount = paymentIntent.amount / 100;
-		// const { name, email } =
-		// 	paymentIntent.charges.data[0].billing_details;
-		// const receipt = paymentIntent.charges.data[0].receipt_url;
-		// Then define and call a method to handle the successful payment intent.
-		// handlePaymentIntentSucceeded(paymentIntent);
-		// console.log('PaymentIntent was successful!');
-		// // break;
 		case 'checkout.session.completed':
 			// console.log({ data: event.data });
 			const paymentIntent = event.data.object;
@@ -46,14 +56,6 @@ export async function POST(request) {
 				paymentIntent;
 			const amount = paymentIntent?.amount_total / 100;
 			const [customerId, fundraiserId] = client_reference_id.split('_');
-			console.log({
-				amount,
-				client_reference_id,
-				customer_details,
-				payment_link,
-				customerId,
-				fundraiserId,
-			});
 			const data = {
 				amount,
 				transactionId: paymentIntent.id,
@@ -62,22 +64,19 @@ export async function POST(request) {
 				// customer_details,
 			};
 
-			const record = await pb.collection('donations').create(data);
-			// const { name, email } =
-			// 	paymentIntent?.charges?.data[0]?.billing_details;
-			// const receipt = paymentIntent?.charges?.data[0].receipt_url;
-			// Then define and call a method to handle the successful payment intent.
-			// handlePaymentIntentSucceeded(paymentIntent);
+			try {
+				const record = await pb.collection('donations').create(data);
+				setCompleted(fundraiserId, amount);
+			} catch (error) {
+				console.log({ error })
+				return NextResponse.json({ stuaus: false, error });
+			}
 			console.log('checkout sessions was successful!');
 			break;
 
 		default:
 			console.log(`event type ${event.type}`);
-		// console.log({ data: event.data });
 	}
 
-	// Return a response to acknowledge receipt of the event
-	return NextResponse.json({ received: true });
-
-	// return new Response('Hello, Next.js!')
+	return NextResponse.json({ status: true, received: true });
 }

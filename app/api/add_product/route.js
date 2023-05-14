@@ -23,9 +23,13 @@ export async function POST(request) {
 				},
 			],
 			after_completion: {
-				type: 'redirect',
+				"hosted_confirmation": {
+					"custom_message": 'Success! Thankyou for your donation.'
+				},
+				"type": "hosted_confirmation"
+
 				// redirect: { url: `${process.env.HOST}/explore` },
-				redirect: { url: `https://www.google.com` },
+				// redirect: { url: `https://www.google.com` },
 			},
 		});
 		status = true;
