@@ -57,18 +57,20 @@ const nearbyDonations = () => {
 
 	const getCollectionData = async () => {
 		try {
-			const response = await pb.collection('volunteers').getList();
+			const currentDate = new Date(); // Get the current date
+			
+			const startingDateFilter = currentDate.toISOString().split('T')[0];
+			const endingDateFilter = currentDate.toISOString().split('T')[0];
+			
+			const response = await pb.collection('volunteers').getList(1,200, {
+				filter: `startingDate <= '${startingDateFilter}' && endingDate >= '${endingDateFilter}'`
+			});
 			let newArr = [...response.items];
 			for await (const item of newArr) {
 				const participationStatus = await pb
 					.collection('user_volunteers')
 					.getFullList({ filter: `users="${pb.authStore.model.id}"&&drives="${item.id}"` });
-				if (participationStatus.length !== 0) {
-					item.participating = true;
-				}
-				else {
-					item.participating = false;
-				}
+				item.participating = participationStatus.length !== 0;
 			}
 			// console.log({ newArr });
 			setNumDrives(newArr);

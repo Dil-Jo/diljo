@@ -92,7 +92,6 @@ export default function Signup({ pb }) {
       return true;
     } catch (error) {
       console.log(error);
-      // Handle any errors that occur during the create() function
       setError("Something went wrong. Please try again later.");
       setLoading(false)
       

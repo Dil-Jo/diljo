@@ -9,9 +9,7 @@ export default function FeaturedPosts() {
   const { pb } = useContext(GlobalContext);
 
   async function tempFun() {
-    // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-
-    let temp = await pb.collection("fundraisers").getList(1, 4, {
+    let temp = await pb.collection("fundraisers").getList(1, 10, {
       filter: ""
     });
     const output = temp.items.map((item) => {

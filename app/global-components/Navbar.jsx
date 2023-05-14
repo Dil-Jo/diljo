@@ -170,14 +170,23 @@ export default function Navbar(props) {
 
 function Links() {
 	const [hoveredIndex, setHoveredIndex] = useState(null);
-
+	const [flag, setFlag] = useState(false);
+	const globalProps = useContext(GlobalContext);
+	const { pb } = globalProps;
+	
 	const menuItems = [
-		{ id: 1, name: "EXPLORE", link: "/explore" },
-		{ id: 2, name: "NEARBY DONATIONS", link: "/nearbyDonations" },
-		{ id: 3, name: "CHARITIES", link: "/charities" },
-		{ id: 4, name: "START A FUNDRAISER", link: "/raisefunds" }
+		{ id: 1, name: "EXPLORE", link: "/explore", flag: false },
+		{ id: 2, name: "NEARBY DONATIONS", link: "/nearbyDonations", flag: false },
+		{ id: 3, name: "CHARITIES", link: "/charities", flag: false },
+		{ id: 4, name: "START A FUNDRAISER", link: "/raisefunds", flag: flag },
 	];
-
+	
+	useEffect(() => {
+		if (!pb.authStore?.model?.id) {
+			setFlag(true);
+		}
+	}, []);
+	
 	return (
 		<>
 			{menuItems.map((item) => (
@@ -187,15 +196,25 @@ function Links() {
 					onMouseEnter={() => setHoveredIndex(item.id)}
 					onMouseLeave={() => setHoveredIndex(null)}
 				>
-					<Link
-						href={`${item.link}`}
-						className={`lg:text-md mx-1 text-sm font-semibold tracking-tighter text-gray-800 hover:text-[#476dae]`}
-					>
-						{item.name}
-					</Link>
+					{item.flag ? (
+						<label
+							htmlFor={"sign-in"}
+							className={`lg:text-md mx-1 text-sm font-semibold tracking-tighter text-gray-800 hover:text-[#476dae]`}
+						>
+							{item.name}
+						</label>
+					) : (
+						<Link
+							href={`${item.link}`}
+							className={`lg:text-md mx-1 text-sm font-semibold tracking-tighter text-gray-800 hover:text-[#476dae]`}
+						>
+							{item.name}
+						</Link>
+					)}
 					<div
-						className={`h-1 bg-six transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
-							}`}
+						className={`h-1 bg-six transition-all duration-500 ease-in-out ${
+							hoveredIndex === item.id ? "w-full" : "w-0"
+						}`}
 					></div>
 				</div>
 			))}

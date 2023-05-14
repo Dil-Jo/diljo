@@ -36,7 +36,7 @@ export default function Card(props) {
 
   return (
     <div
-      className="border-2 border-slate-100 group z-0 mx-auto mt-2 w-full max-w-md flex-shrink-0 transform bg-gradient-to-r from-slate-50 to-zinc-100 rounded-3xl pb-8 shadow-lg duration-200 hover:-translate-y-2">
+      className={"border-2 border-slate-100 group z-0 mx-auto mt-2 w-full max-w-md flex-shrink-0 transform bg-gradient-to-r from-slate-50 to-zinc-100 rounded-3xl pb-8 shadow-lg duration-200 hover:-translate-y-2"}>
       <div
         className="h-64 w-full rounded-3xl rounded-b-none bg-cover bg-center"
         style={resolveImage(props.thumbnail)}
