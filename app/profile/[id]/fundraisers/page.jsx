@@ -20,12 +20,15 @@ export default function page() {
     const fundraisers = await pb.collection("fundraisers").getFullList({ filter: `owner='${id}'` });
 
     const output = fundraisers.map((fundraiser) => {
+      console.log({ fundraiser })
+
       return {
         id: fundraiser.id,
         title: fundraiser.title,
         caption: fundraiser.caption,
         target: fundraiser.target,
-        thumbnail: pb.files.getUrl(fundraiser, fundraiser.thumbnail)
+        thumbnail: pb.files.getUrl(fundraiser, fundraiser.thumbnail),
+        link: `/donation/${fundraiser.id}`
       }
     });
 

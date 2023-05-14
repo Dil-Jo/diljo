@@ -1,17 +1,52 @@
-"use client";
-// import Card from "../../global-components/Card";
-import { useEffect, useState } from "react";
-import WideCard from "../components/WideCard";
+"use client"
+import { useContext } from "react";
+import GlobalContext from "../../../Contexts/GlobalContext";
+import Table from "../components/Table";
 
 export default function page() {
-  const [wideCard, setWideCard] = useState([]);
-  useEffect(() => {
-    setWideCard([1, 2, 3, 4, 5, 6, 7]);
-
-  },[]);
+  const { pb } = useContext(GlobalContext);
+  let id = pb.authStore.model.id;
+  
+  const getVolunteerHistory = async () => {
+    const volunteer = await pb.collection("user_volunteers").getFullList({ filter: `users='${id}'` });
+    
+    const output = volunteer.map((volunteer) => ({
+      id: volunteer.id,
+      user: volunteer.user,
+      drives: volunteer.drives,
+    }));
+    
+    let userStuff = await pb.collection("users").getFullList({ filter: `id='${output[0].user}'` });
+    let drives = await pb.collection("volunteers").getFullList({ filter: `id='${output[0].drives}'` });
+    
+    return {
+      Organizer: userStuff.username,
+      Title: drives.title,
+      Category: drives.category,
+      Id: output[0].id,
+    };
+  };
+  
+  const fetchData = async () => {
+    const data = await getVolunteerHistory();
+    const props = {
+      headings: ['Title', 'Category', 'Organizer'],
+      rows: [data],
+    };
+    console.log(props)
+    return props;
+    
+  };
+  
+  const renderTable = async () => {
+    const props = await fetchData();
+    console.log(props)
+    return <Table {...props} />;
+  };
+  
   return (
     <>
-      <div className="group grid place-items-center rounded-xl p-10 shadow-lg">
+      <div className="group grid place-items-center rounded-xl p-10 shadow-lg bg-white">
         <div className={"w-full"}>
           <h1
             className={
@@ -21,9 +56,7 @@ export default function page() {
             Volunteer History
           </h1>
         </div>
-        <div className={"h-full w-full flex flex-col"}>
-          {wideCard.map((item) => (<WideCard />))}
-        </div>
+        <div className={"h-full w-full flex flex-col"}>{renderTable()}</div>
       </div>
     </>
   );

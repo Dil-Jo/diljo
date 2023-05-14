@@ -8,7 +8,8 @@ export default function Signin() {
 	const passwordRef = useRef(null);
 	const rememberRef = useRef(null);
 	const successRef = useRef(null);
-	const [result, setResult] = useState(false);
+	// const [result, setResult] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 
 	const globalContext = useContext(GlobalContext);
@@ -49,15 +50,17 @@ export default function Signin() {
 
 	function clickHandler() {
 		setError('');
+		setLoading(true);
 		successRef.current.style.display = 'none';
 
 		verify().then((isValid) => {
+			setLoading(false);
 			if (!isValid) return;
 			setTimeout(() => {
 				console.log('I am here at set timeout');
 				setGlobalLogin(pb.authStore.baseToken !== '');
 
-				window.location.reload();
+				// window.location.reload();
 			}, 1200);
 		});
 	}
@@ -116,9 +119,11 @@ export default function Signin() {
 
 						<div className='grid w-full'>
 							<div
+
 								className={`btn bg-eleven border-2 border-eleven hover:bg-opacity-10 hover:text-eleven ${loading ? 'loading' : ''}`}
 								// className='w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto'
 								onClick={clickHandler}
+								type='submit'
 							>
 								Submit
 							</div>

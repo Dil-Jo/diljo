@@ -39,7 +39,7 @@ function ConditionalFooter() {
 				</ul>
 				<ul className=" flex flex-col [&>li]:my-2 justify-center my-2 h-24">
 					<li>
-						<a href="mailto:someone@example.com">Send email</a>
+						<a href="mailto:diljo@diljo.com">Send email</a>
 					</li>
 					<li>
 						<label className={"cursor-pointer"} htmlFor={"terms-and-conditions"}>Terms and Conditions</label>
