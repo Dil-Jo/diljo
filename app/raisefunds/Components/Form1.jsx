@@ -51,7 +51,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                             value='visible'
                             className='hidden peer'
                             onChange={handleChange}
-                            checked
+                            required
                         />
                         <label
                             htmlFor='visible'
@@ -72,6 +72,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                             value='anonymous'
                             className='hidden peer'
                             onChange={handleChange}
+                            required
                         />
                         <label
                             htmlFor='anonymous'

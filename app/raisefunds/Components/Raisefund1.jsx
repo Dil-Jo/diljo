@@ -65,7 +65,6 @@ const Comp1 = ({ next, updateForm, prev, fullForm }) => {
 								DESCRIPTION:
 							</h1>
 							<textarea
-								type='text'
 								value={form.description}
 								placeholder='Description goes here'
 								className='mt-5 pr-10 pb-10 pt-2 input input-bordered h-[8rem] min-[530px]:h-[12rem] w-72 min-[530px]:w-full resize-none border-2 border-slate-300 rounded-md sm:text-md md:text-lg sm:p-5 my-auto'
