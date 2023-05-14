@@ -9,7 +9,7 @@ const Locked = () => {
             <div className="group grid place-items-center rounded-xl p-10 shadow-lg blur-sm ">
                 <div className="w-full">
                     <h1 className="text m-8 mb-12 inline w-72 text-start text-3xl font-black tracking-tighter text-gray-800 lg:w-auto">
-                        About
+                        Login Please
                     </h1>
                 </div>
                 <div className="h-full w-full grid gap-4">
@@ -55,17 +55,8 @@ function Field(props) {
         <div className="m-5 border-b-2">
             <div className="m-3 flex flex-col md:flex-row md:items-center">
                 <div className="mb-4 md:mb-0 md:mr-4 md:flex-1">
-                    <h1 className="text-xl font-black tracking-tighter text-gray-900">
-                        {props.name}
-                    </h1>
-                    <h1 className="text-lg text-gray-500">{props.detail}</h1>
                 </div>
                 <div className="md:w-40 md:flex-none">
-                    <Button
-                        type="septenary"
-                        text="Change"
-                        className="w-full md:w-auto"
-                    ></Button>
                 </div>
             </div>
         </div>

@@ -23,8 +23,8 @@ const Drive = ({
 	return (
 		<>
 			<div
-				className={`shadow-lg flex border transition-all border-solid border-black rounded-xl mb-[1rem] active:bg-blue-900 active:text-white cursor-pointer${stautsState ? 'border-green-500' : ''
-					}`}
+				className={`shadow-lg flex transition-all border-solid border-black border-2 rounded-xl mb-[1rem] active:bg-blue-900 ease-in active:text-white cursor-pointer
+					${stautsState ? 'border-green-600' : ''}`}
 				onClick={(e) => {
 					map.panTo({ lat: Number(lat), lng: Number(lng) });
 				}}
