@@ -150,10 +150,10 @@ const RaiseFunds = () => {
 
 	if (!globalLogin) return <div>Please Login First</div>;
 	return (
-		<div className='w-full md:flex md:flex-row overflow-hidden'>
+		<div className='w-full md:h-[90.85%] mt-0 justify-center items-center md:flex md:flex-row overflow-hidden bg-ten'>
 			<div
 				className={
-					'flex h-3/6 bg-two md:w-2/6 w-full md:h-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none'
+					'flex bg-two mb-8 md:mb-0 md:w-2/6 h-full w-full md:h-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none'
 				}
 			>
 				<MessageComponent stage={stage} />
@@ -185,15 +185,17 @@ const MessageComponent = ({ stage }) => {
 	if (stage > 3) stage = 3;
 	return (
 		<>
-			<div className={'w-full md:h-full'}>
-			</div>
-			<div className='w-full h-full flex flex-col justify-center md:justify-start'>
-				<h2 className='text-4xl font-sans font-semi-bold text-center text-one tracking-tighter mb-5'>
-					{messages[stage][0]}
-				</h2>
-				<h2 className='text-4xl text-center text-one tracking-tighter'>
-					{messages[stage][1]}
-				</h2>
+			{/* <div className={'w-full md:h-full'}>
+			</div> */}
+			<div className='py-8 md:py-0 w-full h-full flex flex-col justify-center items-center mx-4 '>
+				<div>
+					<h2 className='text-3xl lg:text-4xl font-sans font-semi-bold text-center text-one tracking-tighter mb-5'>
+						{messages[stage][0]}
+					</h2>
+					<h2 className='text-3xl lg:text-4xl text-center text-one tracking-tighter'>
+						{messages[stage][1]}
+					</h2>
+				</div>
 			</div>
 		</>
 	);
@@ -256,19 +258,21 @@ const Finish = ({ submitForm }) => {
 const Welcome = ({ nextStage }) => {
 	return (
 		<>
-			<div className='flex justify-center items-center'>
-				<div className='flex justify-center items-center'>
-					<h1 className='text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter md:'>
-						Start your fundraising journey here with
-					</h1>
-				</div>
-				<div className='h-72 mt-24'>
-					<div className="relative h-32 w-32">
-						<Image src={Logo} fill alt='Altermae' />
+			<div className='flex justify-center items-center mt-12 sm:mt-8 lg:mt-0 px-auto'>
+				<div className='flex mx-auto'>
+					<div className='flex justify-center items-center'>
+						<h1 className='text-center text-2xl sm:text-3xl min-[1150px]:text-4xl font-medium  text-slate-700 mb-8 tracking-tighter md:text-2xl'>
+							Start your fundraising journey here with
+						</h1>
 					</div>
-					<div className='ml-6 mt-16 flex border-2 border-slate-600 rounded-lg w-20 justify-center hover:border-eleven hover:bg-slate-200 duration-300 active:translate-y-1'>
-						<Image className='w-16 h-16' src={Next} alt='next' onClick={nextStage}>
-						</Image>
+					<div className='h-72 mt-36 sm:mt-28 lg:mt-24'>
+						<div className="h-20 w-20 sm:h-24 sm:w-24 relative md:h-28 md:w-28 lg:h-32 lg:w-32">
+							<Image src={Logo} fill alt='Altermae' />
+						</div>
+						<div className='ml-2 sm:ml-4 lg:ml-6 mt-16 flex border-2 border-slate-600 rounded-lg w-16 sm:w-20 justify-center hover:border-eleven hover:bg-slate-200 duration-300 active:translate-y-1'>
+							<Image className='w-12 h-12 sm:w-16 sm:h-16' src={Next} alt='next' onClick={nextStage}>
+							</Image>
+						</div>
 					</div>
 				</div>
 			</div>
