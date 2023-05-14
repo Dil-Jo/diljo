@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import Button from '../../global-components/Button';
 import upload from '../../../assets/upload.png';
-import arrow from '../../../assets/arrow.png';
+import Next from '../../../assets/next.png'
+import Back from '../../../assets/back.png'
 
 const Comp1 = ({ next, updateForm, prev, fullForm }) => {
 	const [form, setForm] = useState({
@@ -45,92 +45,95 @@ const Comp1 = ({ next, updateForm, prev, fullForm }) => {
 	};
 
 	return (
-		<form className='flex w-full flex-col mx-4' onSubmit={handleSubmit}>
-			<div className='flex justify-center flex-col md:flex-row items-center'>
-				<div className='w-1/2 flex flex-col'>
-					<div className='flex md:flex-row flex-col'>
-						<h1 className='tracking-tighter font-black text-2xl text-gray-500 mr-6 md:my-auto my-2'>
-							TITLE:
-						</h1>
-						<input
-							type='text'
-							placeholder='Title goes here'
-							name='title'
-							value={form.title}
-							className=' input input-bordered w-full max-w-xs pb-3 px-4 pr-9 md:mt-0 mt-5 border-gray-200 rounded-md text-lg sm:p-5 my-auto'
-							onChange={handleChange}
-							required
-						/>
-					</div>
-					<div className='mt-11 flex flex-col'>
-						<h1 className='tracking-tighter font-black text-2xl text-gray-500 mr-6 my-auto'>
-							DESCRIPTION:
-						</h1>
-						<textarea
-							type='text'
-							value={form.description}
-							placeholder='Description goes here'
-							className='mt-5 pr-10 pb-10 pt-2 input input-bordered h-full w-full resize-none border-gray-200 rounded-md text-lg sm:p-5 my-auto'
-							name='description'
-							onChange={handleChange}
-							required
-						></textarea>
-					</div>
-				</div>
-				{/* <div className="w-1/3 my-5 "> */}
-				{/* <div className="flex flex-col h-full w-full "> */}
-				<div className='h-full rounded-md md:mx-6 md:p-3 w-1/4 transition-all'>
-					<h1 className='tracking-tighter font-black text-2xl text-gray-500 my-auto mb-5'>
-						UPLOAD IMAGE:
-					</h1>
-					<div
-						id='imgbg'
-						className='bg-slate-100 h-full w-full rounded-md'
-					>
-						<input
-							// value={form.imageThumbs}
-							type='file'
-							accept='image/*'
-							className='inputfile hidden w-full h-full'
-							id='embedpollfileinput'
-							onChange={(e) => onimg(e)}
-						/>
-						<label
-							htmlFor='embedpollfileinput'
-							className='flex flex-col items-center justify-center h-full cursor-pointer md:block'
-						>
-							<Image
-								src={upload}
-								alt='Upload sign'
-								className='h-16 bg-slate-100 w-16 hover:-translate-y-2 duration-200 relative mx-auto '
+		<form className='flex items-center w-full h-3/5 flex-col mx-4' onSubmit={handleSubmit}>
+			<div className='flex flex-col w-5/6'>
+				<div className='flex justify-between md:justify-center md:gap-20 lg:justify-between flex-col md:flex-row items-center w-full'>
+					<div className='w-1/2 flex flex-col'>
+						<div className='flex md:flex-row flex-col'>
+							<h1 className='tracking-tighter font-black text-2xl text-slate-800 mr-6 md:my-auto my-2'>
+								TITLE:
+							</h1>
+							<input
+								type='text'
+								placeholder='Title goes here'
+								name='title'
+								value={form.title}
+								className=' input input-bordered w-full max-w-xs pb-3 px-4 pr-9 md:mt-0 mt-5 border-2 border-slate-300 rounded-md text-lg sm:p-5 my-auto'
+								onChange={handleChange}
+								required
 							/>
-						</label>
+						</div>
+						<div className='mt-11 h-full flex flex-col'>
+							<h1 className='tracking-tighter font-black text-2xl text-slate-800 mr-6 my-auto'>
+								DESCRIPTION:
+							</h1>
+							<textarea
+								type='text'
+								value={form.description}
+								placeholder='Description goes here'
+								className='mt-5 pr-10 pb-10 pt-2 input input-bordered h-[12rem] w-full resize-none border-2 border-slate-300 rounded-md text-lg sm:p-5 my-auto'
+								name='description'
+								onChange={handleChange}
+								required
+							></textarea>
+						</div>
 					</div>
-				</div>
+					{/* <div className="w-1/3 my-5 "> */}
+					{/* <div className="flex flex-col h-full w-full "> */}
+					<div className='h-full rounded-md  w-1/4 transition-all'>
+						<h1 className='text-center tracking-tighter font-black text-2xl text-slate-800 my-auto mb-5'>
+							UPLOAD IMAGE
+						</h1>
+						<div
+							id='imgbg'
+							className='h-[85%] flex justify-center items-end bg-slate-100 border-2 border-slate-300 w-full rounded-md'
+						>
+							<input
+								// value={form.imageThumbs}
+								type='file'
+								accept='image/*'
+								className='inputfile hidden w-full h-full'
+								id='embedpollfileinput'
+								onChange={(e) => onimg(e)}
+							/>
+							<label
+								htmlFor='embedpollfileinput'
+								className='flex flex-col items-center justify-center mb-4 cursor-pointer md:block'
+							>
+								<Image
+									src={upload}
+									alt='Upload sign'
+									className='h-16 w-16 hover:-translate-y-2 duration-200 relative mx-auto '
+								/>
+							</label>
+						</div>
+					</div>
 
-				{/* </div> */}
-			</div>
-
-			<div className='flex justify-center gap-20 py-8'>
-				<div>
-					<button
-						onClick={prev}
-						className='btn btn-square btn-info btn-lg'
-					>
-						<Image
-							src={arrow}
-							alt='Previous'
-							className='rotate-180 w-8 h-auto'
-						/>
-					</button>
+					{/* </div> */}
 				</div>
 				<div>
-					<button
-						type='submit'
-						className='btn btn-square btn-success btn-lg'
-					>
-						<Image src={arrow} alt='Next' className='w-8 h-auto ' />
-					</button>
+					<div className='flex justify-between gap-20 py-8 mb-12'>
+						<div>
+							<button
+								onClick={prev}
+								className='mt-16 flex border-2 border-slate-600 rounded-lg w-18 justify-center hover:border-eleven hover:bg-slate-200 duration-300 active:translate-y-1'
+							>
+								<Image
+									src={Back}
+									alt='Previous'
+									className='w-16 h-16'
+								/>
+							</button>
+						</div>
+						<div>
+							<button
+								type='submit'
+								className='mt-16 flex border-2 border-slate-600 rounded-lg w-18 justify-center hover:border-eleven hover:bg-slate-200 duration-300 active:translate-y-1'
+							>
+								<Image src={Next} alt='Next' className='w-16 h-16 ' />
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</form>
