@@ -58,12 +58,13 @@ const nearbyDonations = () => {
 	const getCollectionData = async () => {
 		try {
 			const currentDate = new Date(); // Get the current date
-			
+
 			const startingDateFilter = currentDate.toISOString().split('T')[0];
+			console.log({ startingDateFilter })
 			const endingDateFilter = currentDate.toISOString().split('T')[0];
-			
-			const response = await pb.collection('volunteers').getList(1,200, {
-				filter: `startingDate <= '${startingDateFilter}' && endingDate >= '${endingDateFilter}'`
+			console.log({ endingDateFilter })
+			const response = await pb.collection('volunteers').getList(1, 200, {
+				filter: `endingDate >= '${endingDateFilter}'`
 			});
 			let newArr = [...response.items];
 			for await (const item of newArr) {
