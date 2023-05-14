@@ -10,7 +10,7 @@ import GlobalContext from "../../../Contexts/GlobalContext";
 export default function page() {
   const { pb } = useContext(GlobalContext);
   const { id } = useParams();
-  const [donations, setdonations] = useState([{}])
+  const [donations, setdonations] = useState(null)
   const getdonations = async () => {
     const donations = await pb.collection("donations").getFullList({ filter: `donor='${id}'`, expand: 'fundraiser' });
     const output = donations.map((donation) => {
@@ -32,7 +32,7 @@ export default function page() {
     getdonations();
   }, []);
   return (
-    <Table headings={['Title', 'Caption', 'Amount', 'date']} rows={donations} />
+    donations && <Table headings={['Title', 'Caption', 'Amount', 'date']} rows={donations} />
   );
 }
 

@@ -1,10 +1,9 @@
 import PocketBase from "pocketbase";
-
 export async function POST(request) {
   request = await request.json();
   const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   const id = request.id;
-  Ach(pb, id);
+  await Ach(pb, id);
   return new Response();
 }
 
