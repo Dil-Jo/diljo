@@ -15,7 +15,7 @@ const RaiseFunds = () => {
 		text: '',
 		color: null,
 	});
-
+	const [submitted, setSubmitted] = useState(false);
 	const [stage, setStage] = useState(0);
 	const [fullForm, setFullForm] = useState({
 		reason: 'Emergency',
@@ -95,6 +95,13 @@ const RaiseFunds = () => {
 		//   else alert("Form submission failed");
 		// }
 	};
+	useEffect(() => {
+		if (toast.show == true) {
+			setTimeout(() => {
+				setToast({ show: false, text: '', color: null });
+			}, 3000);
+		}
+	}, [toast]);
 
 	const submitForm = async () => {
 		console.log({ fullForm });
@@ -141,13 +148,17 @@ const RaiseFunds = () => {
 		if (stripeId.status) {
 			data.stripeLink = stripeId.paymentLink.url;
 			formData.append('link', stripeId.paymentLink.url);
-		} else setToast({ show: true, text: 'Something went wrong with stripe', color: 'bg-red' });
+		} else setToast({ show: true, text: 'Something went wrong with the network', color: 'bg-red-700' });
 
 		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 		const response = await pb.collection('fundraisers').create(formData);
+    
+		if (response.id) {
+			setToast({ show: true, text: 'Form submitted successfully' });
+			setSubmitted(true);
+		}
+		else setToast({ show: true, text: 'Form submission failed', color: 'bg-red-700' });
 
-		if (response.id) setToast({ show: true, text: 'Form submitted successfully' });
-		else setToast({ show: true, text: 'Form submission failed', color: 'bg-red-600' });
 	};
 
 	// useEffect(() => {
@@ -172,6 +183,7 @@ const RaiseFunds = () => {
 					}
 				>
 					<Form
+						submitted={submitted}
 						updateForm={updateForm}
 						fullForm={fullForm}
 						setStage={setStage}
@@ -210,7 +222,7 @@ const MessageComponent = ({ stage }) => {
 	);
 };
 
-const Form = ({ stage, setStage, updateForm, fullForm, submitForm }) => {
+const Form = ({ submitted, stage, setStage, updateForm, fullForm, submitForm }) => {
 	const nextStage = () => setStage(stage + 1);
 	const prevStage = () => setStage(stage - 1);
 	switch (stage) {
@@ -244,11 +256,11 @@ const Form = ({ stage, setStage, updateForm, fullForm, submitForm }) => {
 				/>
 			);
 		case 4:
-			return <Finish submitForm={submitForm} />;
+			return <Finish submitted={submitted} submitForm={submitForm} />;
 	}
 };
 
-const Finish = ({ submitForm }) => {
+const Finish = ({ submitted, submitForm }) => {
 	return (
 		<div className='flex flex-col justify-center items-center'>
 			<h1 className='text-center text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
@@ -257,9 +269,10 @@ const Finish = ({ submitForm }) => {
 			<h1 className='text-center mx-12 text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
 				Your contribution will help someone in need.
 			</h1>
-			<button className='btn bg-two border-2 border-two btn-md hover:bg-opacity-10 hover:text-two' onClick={submitForm}>
+			{submitted == false ? <button className='btn bg-two border-2 border-two btn-md hover:bg-opacity-10 hover:text-two' onClick={submitForm}>
 				Click here to submit
-			</button>
+			</button> : null}
+
 		</div>
 	);
 };
