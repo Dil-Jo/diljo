@@ -5,8 +5,6 @@ import GlobalContext from '../../../Contexts/GlobalContext';
 import PocketBase from 'pocketbase';
 
 export default function page() {
-	// let data = JSON.parse(localStorage.getItem("Login")).record;
-	// let pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 	const globalContext = useContext(GlobalContext);
 	const { pb } = globalContext;
 	const [ItemsAll, setItemsAll] = useState([]);
@@ -54,7 +52,6 @@ export default function page() {
 }
 
 function AchievementsCard(props) {
-	// let pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 	const globalContext = useContext(GlobalContext);
 	const { pb } = globalContext;
 	const [isHovered, setIsHovered] = useState(false);

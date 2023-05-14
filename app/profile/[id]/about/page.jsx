@@ -5,17 +5,9 @@ import PocketBase from "pocketbase";
 import GlobalContext from "../../../Contexts/GlobalContext";
 
 export default function Page() {
-	const [loginData, setLoginData] = useState({});
 	const globalContext = useContext(GlobalContext)
 	const { pb } = globalContext
-
-	useEffect(() => {
-		const storedData = localStorage.getItem("Login");
-		if (storedData) {
-			setLoginData(JSON.parse(storedData));
-		}
-	}, []);
-
+	
 	return (
 		<div className='group grid place-items-center rounded-xl p-10 shadow-lg bg-white'>
 			<div className='w-full'>
@@ -46,14 +38,6 @@ export default function Page() {
 					placeholder={'•••••••••'}
 					type={'password'}
 				/>
-				<Field
-					name='Email'
-					detail={pb.authStore.model?.email}
-					field1={'New Email'}
-					field2={'Enter Password'}
-					placeholder={'name@example.com'}
-				/>
-
 			</div>
 		</div>
 	);
@@ -157,7 +141,6 @@ function Modal(props) {
 					}
 				>
 					<button
-						text=''
 						className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-elevem'
 						onClick={async () => {
 							successRef.current.style.display = 'none';
