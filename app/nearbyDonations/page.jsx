@@ -289,7 +289,6 @@ const nearbyDonations = () => {
 					)}
 				</div>
 			</div>
-
 			<AddDriveModal
 				id={'alphabetical-gamma-tistan'}
 				lat={lat}
