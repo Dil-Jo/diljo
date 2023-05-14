@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState, useContext } from 'react';
-import PocketBase from 'pocketbase';
 import Form1 from './Components/Form1.jsx';
 import Form2 from './Components/Raisefund1.jsx';
 import Form3 from './Components/Raisefund2.jsx';
@@ -8,8 +7,15 @@ import GlobalContext from '../Contexts/GlobalContext';
 import Image from 'next/image';
 import Logo from '../../assets/Black.svg'
 import Next from '../../assets/next.png'
+import Toast from '../nearbyDonations/components/Toast.jsx';
 
 const RaiseFunds = () => {
+	const [toast, setToast] = useState({
+		show: false,
+		text: '',
+		color: null,
+	});
+
 	const [stage, setStage] = useState(0);
 	const [fullForm, setFullForm] = useState({
 		reason: 'Emergency',
@@ -135,13 +141,13 @@ const RaiseFunds = () => {
 		if (stripeId.status) {
 			data.stripeLink = stripeId.paymentLink.url;
 			formData.append('link', stripeId.paymentLink.url);
-		} else return alert('Something went wrong with stripe');
+		} else setToast({ show: true, text: 'Something went wrong with stripe', color: 'bg-red' });
 
 		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 		const response = await pb.collection('fundraisers').create(formData);
 
-		if (response.id) alert('Form submitted successfully');
-		else alert('Form submission failed');
+		if (response.id) setToast({ show: true, text: 'Form submitted successfully' });
+		else setToast({ show: true, text: 'Form submission failed', color: 'bg-red' });
 	};
 
 	// useEffect(() => {
@@ -150,28 +156,31 @@ const RaiseFunds = () => {
 
 	if (!globalLogin) return <div>Please Login First</div>;
 	return (
-		<div className='w-full md:h-[90.85%] mt-0 justify-center items-center md:flex md:flex-row overflow-hidden bg-ten'>
-			<div
-				className={
-					'flex bg-two mb-8 md:mb-0 md:w-2/6 h-full w-full md:h-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none'
-				}
-			>
-				<MessageComponent stage={stage} />
+		<>
+			{toast.show && <Toast text={toast.text} color={toast.color} />}
+			<div className='w-full md:h-[90.85%] mt-0 justify-center items-center md:flex md:flex-row overflow-hidden bg-ten'>
+				<div
+					className={
+						'flex bg-two mb-8 md:mb-0 md:w-2/6 h-full w-full md:h-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none'
+					}
+				>
+					<MessageComponent stage={stage} />
+				</div>
+				<div
+					className={
+						'flex flex-col md:w-4/6 w-full md:justify-center'
+					}
+				>
+					<Form
+						updateForm={updateForm}
+						fullForm={fullForm}
+						setStage={setStage}
+						stage={stage}
+						submitForm={submitForm}
+					/>
+				</div>
 			</div>
-			<div
-				className={
-					'flex flex-col md:w-4/6 w-full md:justify-center'
-				}
-			>
-				<Form
-					updateForm={updateForm}
-					fullForm={fullForm}
-					setStage={setStage}
-					stage={stage}
-					submitForm={submitForm}
-				/>
-			</div>
-		</div>
+		</>
 	);
 };
 

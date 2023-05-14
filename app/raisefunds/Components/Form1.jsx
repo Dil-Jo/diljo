@@ -34,7 +34,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                     <option value='Emergencies'>Emergencies</option>
                     <option value='Education'>Education</option>
                     <option value='Medical'>Medical</option>
-                    <option value='Enviornment'>Environment</option>
+                    <option value='Environment'>Environment</option>
                     <option value='Utility Bills'>Utility Bills</option>
                 </select>
             </div>
@@ -51,7 +51,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                             value='visible'
                             className='hidden peer'
                             onChange={handleChange}
-                            checked
+                            required
                         />
                         <label
                             htmlFor='visible'
@@ -72,6 +72,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                             value='anonymous'
                             className='hidden peer'
                             onChange={handleChange}
+                            required
                         />
                         <label
                             htmlFor='anonymous'

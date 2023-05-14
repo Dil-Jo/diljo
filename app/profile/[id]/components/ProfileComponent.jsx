@@ -2,7 +2,7 @@
 import Image from "next/image";
 import edit from "../../../../assets/edit.png";
 import { useState, useEffect, useRef, useContext } from "react";
-import Ppic from "../../../../assets/edit.png";
+import defaultP from "../../../../assets/default.jpeg";
 
 export default function ProfileComponent(props) {
   const picture = useRef(null);
@@ -11,13 +11,19 @@ export default function ProfileComponent(props) {
   const image = record.avatar;
 
   useEffect(() => {
-    if (image) {
+    if (image !== "") {
       const pic = pb.files.getUrl(record, image);
+      console.log("i am here");
+      console.log(image);
       picture.current.style.backgroundImage = `url(${pic})`;
-      picture.current.style.backgroundSize = "cover";
-      picture.current.style.backgroundPosition = "center";
+    } else {
+      picture.current.style.backgroundImage = `url(${defaultP.src})`;
+      console.log("no image");
     }
-  }, [])
+    picture.current.style.backgroundSize = "cover";
+    picture.current.style.backgroundPosition = "center";
+  }
+    , [])
 
   const onImg = async (e) => {
     const file = e.target.files[0];
@@ -28,7 +34,8 @@ export default function ProfileComponent(props) {
 
     picture.current.style.backgroundImage = `url(${URL.createObjectURL(
       file
-    )})`;
+    )
+      })`;
     picture.current.style.backgroundSize = "cover";
     picture.current.style.backgroundPosition = "center";
     try {
@@ -46,7 +53,7 @@ export default function ProfileComponent(props) {
     <div className="group mx-auto grid w-full max-w-md place-items-center rounded-xl p-10 pb-8 shadow-lg bg-white">
       <div className="relative user-img mb-9 mt-4 h-36 w-36 rounded-full">
         <div id="photo"
-          className=" h-36 w-36 rounded-full border-4 border-green-400 "
+          className=" h-36 w-36 rounded-full border-4 border-[#476dae] "
           ref={picture}
           alt={""}
           width={144}

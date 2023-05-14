@@ -1,7 +1,6 @@
 "use client";
 import Card from "../global-components/Card";
-import PocketBase from "pocketbase";
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../Contexts/GlobalContext";
 
 export default function FeaturedPosts() {
@@ -10,9 +9,10 @@ export default function FeaturedPosts() {
 
   async function tempFun() {
     let temp = await pb.collection("fundraisers").getList(1, 10, {
-      filter: ""
+      filter: `complete = False`,
     });
-    const output = temp.items.map((item) => {
+    console.log(temp)
+    return temp.items.map((item) => {
       return {
         title: item.title,
         caption: item.caption,
@@ -23,7 +23,6 @@ export default function FeaturedPosts() {
         link: item.link
       };
     });
-    return output;
   }
 
 
@@ -45,7 +44,6 @@ export default function FeaturedPosts() {
       </h2>
       <div className="carousel-center carousel rounded-box w-full space-x-8 overflow-x-scroll p-4">
         {cardList.map((card) => {
-          // return (<h1>{card.id}</h1>);
           return <Card key={card.id} {...card} raised="10" />;
         })}
       </div>
