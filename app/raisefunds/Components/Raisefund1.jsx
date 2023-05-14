@@ -42,12 +42,12 @@ const Comp1 = ({ next, updateForm, prev, fullForm }) => {
 	};
 
 	return (
-		<form className='flex items-center w-full h-3/5 flex-col mx-4' onSubmit={handleSubmit}>
-			<div className='flex flex-col w-5/6'>
-				<div className='flex justify-between md:justify-center md:gap-20 lg:justify-between flex-col md:flex-row items-center w-full'>
+		<form className='flex items-center w-full h-3/5 flex-col m-2 min-[530px]:mx-4' onSubmit={handleSubmit}>
+			<div className='flex flex-col md:w-full lg:w-5/6 h-full'>
+				<div className='flex h-full justify-between md:justify-center md:gap-20 lg:justify-between flex-col min-[530px]:flex-row md:flex-row w-full'>
 					<div className='w-1/2 flex flex-col'>
 						<div className='flex md:flex-row flex-col'>
-							<h1 className='tracking-tighter font-black text-2xl text-slate-800 mr-6 md:my-auto my-2'>
+							<h1 className='tracking-tighter font-black text-xl md:text-2xl text-slate-800 mr-6 md:my-auto my-2'>
 								TITLE:
 							</h1>
 							<input
@@ -55,20 +55,20 @@ const Comp1 = ({ next, updateForm, prev, fullForm }) => {
 								placeholder='Title goes here'
 								name='title'
 								value={form.title}
-								className=' input input-bordered w-full max-w-xs pb-3 px-4 pr-9 md:mt-0 mt-5 border-2 border-slate-300 rounded-md text-lg sm:p-5 my-auto'
+								className=' input input-bordered w-52 min-[530px]:w-full max-w-xs pb-3 px-4 pr-9 md:mt-0 mt-5 border-2 border-slate-300 rounded-md sm:text-md md:text-lg sm:p-5 my-auto'
 								onChange={handleChange}
 								required
 							/>
 						</div>
 						<div className='mt-11 h-full flex flex-col'>
-							<h1 className='tracking-tighter font-black text-2xl text-slate-800 mr-6 my-auto'>
+							<h1 className='tracking-tighter font-black text-xl md:text-2xl text-slate-800 mr-6 my-auto'>
 								DESCRIPTION:
 							</h1>
 							<textarea
 								type='text'
 								value={form.description}
 								placeholder='Description goes here'
-								className='mt-5 pr-10 pb-10 pt-2 input input-bordered h-[12rem] w-full resize-none border-2 border-slate-300 rounded-md text-lg sm:p-5 my-auto'
+								className='mt-5 pr-10 pb-10 pt-2 input input-bordered h-[8rem] min-[530px]:h-[12rem] w-72 min-[530px]:w-full resize-none border-2 border-slate-300 rounded-md sm:text-md md:text-lg sm:p-5 my-auto'
 								name='description'
 								onChange={handleChange}
 								required
@@ -77,13 +77,13 @@ const Comp1 = ({ next, updateForm, prev, fullForm }) => {
 					</div>
 					{/* <div className="w-1/3 my-5 "> */}
 					{/* <div className="flex flex-col h-full w-full "> */}
-					<div className='h-full rounded-md  w-1/4 transition-all'>
-						<h1 className='text-center tracking-tighter font-black text-2xl text-slate-800 my-auto mb-5'>
+					<div className='h-60 md:h-60 rounded-md  lg:w-1/4 xl:w-1/5 transition-all'>
+						<h1 className='mt-8 min-[530px]:mt-0 min-[530px]:text-center sm:whitespace-nowrap md:whitespace-pre-wrap tracking-tighter font-black text-xl min-[1508px]:text-2xl text-slate-800 my-auto mb-5'>
 							UPLOAD IMAGE
 						</h1>
 						<div
 							id='imgbg'
-							className='h-[85%] flex justify-center items-end bg-slate-100 border-2 border-slate-300 w-full rounded-md'
+							className='h-[85%] flex justify-center items-end bg-white border-2 border-slate-300 w-52 min-[530px]:w-full rounded-md'
 						>
 							<input
 								// value={form.imageThumbs}
