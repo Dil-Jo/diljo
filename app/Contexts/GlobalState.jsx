@@ -9,9 +9,13 @@ const GlobalState = (props) => {
 	const [globalLogin, setGlobalLogin] = useState(false);
 
 	useEffect(() => {
+		console.log("I check if I'm logged in")
 		if (localStorage.getItem('pocketbase_auth') == null) return;
+		console.log("I passed through level one")
 
 		setGlobalLogin(true);
+
+		console.log("I passed through level two")
 
 		pb.collection('users')
 			.authRefresh()
@@ -19,6 +23,8 @@ const GlobalState = (props) => {
 				console.log({ res });
 				setGlobalLogin(pb.authStore.baseToken !== '');
 			});
+		console.log("I passed through level three")
+
 		return () => console.log('unmounting useEffect1');
 	}, []);
 
