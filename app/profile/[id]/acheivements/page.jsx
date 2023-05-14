@@ -24,24 +24,36 @@ export default function page() {
 			})
 		);
 	};
-
+	async function fetchData() {
+		await fetch("/api/acheivements", {
+			method: "POST",
+			body: JSON.stringify({
+				id: pb.authStore.model.id
+			})
+		})
+	}
 	useEffect(() => {
-		getAchievements();
+		fetchData().then(() => {
+				getAchievements()
+		})
+
 	}, []);
 
 	return (
 		<>
 			<div className='group grid place-items-center rounded-xl p-10 shadow-lg bg-white'>
-				<div className={'w-full '}>
+				<div className={'w-full'}>
+					<div className={"pb-8"}>
 					<h1
 						className={
-							'text m-8 mb-12 inline  text-start text-3xl font-black tracking-tighter text-gray-800 lg:w-auto'
+							'text inline  text-start text-3xl font-black tracking-tighter text-gray-800 lg:w-auto'
 						}
 					>
 						Achievements
 					</h1>
+					</div>
 				</div>
-				<div className={'grid grid-cols-4 w-full h-full mt-12'}>
+				<div className={'grid xl:grid-cols-4 place-items-center lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full h-full mt-12'}>
 					{ItemsAll.map((item) => (
 						<AchievementsCard {...item} key={item.id} />
 					))}
@@ -64,7 +76,7 @@ function AchievementsCard(props) {
 
 	return (
 		<>
-			<div className='w-full h-full mb-6 mx-6'>
+			<div className='w-full h-full mb-6 mx-6 flex justify-center'>
 				<div
 					style={{
 						background:

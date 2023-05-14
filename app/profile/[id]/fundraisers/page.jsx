@@ -13,7 +13,7 @@ import GlobalContext from "../../../Contexts/GlobalContext";
 export default function page() {
   const { pb } = useContext(GlobalContext);
   const { id } = useParams();
-  const [fundraisers, setfundraisers] = useState([{}])
+  const [fundraisers, setfundraisers] = useState(null)
 
   const getfundraisers = async () => {
     // const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
@@ -75,7 +75,7 @@ export default function page() {
   // }, [fundraisers])
 
   return (
-    <Table className="border border-black" headings={["Title", "Caption", "Raised", "Target"]} rows={fundraisers} tableName="fundraisers" />
+    fundraisers && <Table className="border border-black" headings={["Title", "Caption", "Raised", "Target"]} rows={fundraisers} tableName="fundraisers" />
   );
 
 }

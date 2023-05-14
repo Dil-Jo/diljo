@@ -3,5 +3,5 @@ import Navbar from "./Navbar";
 import { usePathname } from "next/navigation";
 
 export default function Navwrapper() {
-  return <>{usePathname() === "/" ? <></> : <Navbar />}</>;
+  return <>{usePathname() === "/" || usePathname() === "/raisefunds" ? <></> : <Navbar />}</>;
 }

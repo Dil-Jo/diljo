@@ -139,7 +139,7 @@ export default function Navbar(props) {
 				</div>
 			) : router === "/raisefunds" ? (
 				<div
-					className="md:fixed z-40 shadow-md bg-ten"
+					className="z-40 shadow-md bg-ten"
 					ref={navbarRef}
 					style={{ width: "100%" }}
 				>

@@ -2,9 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-// We assume that the order of the headings and the rows is same and that each row is an object with keys from heading. And theres an extra object key title, not in the headings, which is the title of the card
-// This would surely work for out fundraisers, idk the rest for now
-
 const Table = ({ headings, rows, tableName }) => {
 console.log({ headings, rows })
     if (tableName === "fundraisers")
@@ -60,6 +57,38 @@ console.log({ headings, rows })
                 </table>
             </div>
         )
+      else if (tableName === 'Volunteer History') {
+      return (
+        <div className="w-full border-2 border-slate-200 rounded-xl">
+          <table className="table w-full rounded-md">
+            <thead>
+            <tr>
+              {headings.map((heading) => (
+                <th key={heading} className="font-bold">
+                  {heading}
+                </th>
+              ))}
+            </tr>
+            </thead>
+            <tbody className="">
+            {rows.map((row, index) => (
+              <tr key={index} className="">
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div>
+                      <div className="font-bold">{row[headings[0].toLowerCase()]}</div>
+                      <div className="text-sm opacity-50">{row.category}</div>
+                    </div>
+                  </div>
+                </td>
+                <td className="truncate">{row[headings[1].toLowerCase()]}</td>
+              </tr>
+            ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
     else
         return (
             <div className="overflow-x-auto w-full border-2 border-slate-200 rounded-xl">

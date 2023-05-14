@@ -11,13 +11,6 @@ export default function Page({ children }) {
   const { id } = useParams();
   const globalProps = useContext(GlobalContext);
   const { pb, globalLogin } = globalProps;
-  fetch("/api/acheivements", {
-    method: "POST",
-    body: JSON.stringify({
-      id: pb.authStore.model.id
-    })
-  })
-
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-12">

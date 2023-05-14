@@ -51,6 +51,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                             value='visible'
                             className='hidden peer'
                             onChange={handleChange}
+                            checked
                         />
                         <label
                             htmlFor='visible'

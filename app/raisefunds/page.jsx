@@ -150,17 +150,17 @@ const RaiseFunds = () => {
 
 	if (!globalLogin) return <div>Please Login First</div>;
 	return (
-		<div className='w-full md:h-screen h-full md:flex md:flex-row overflow-hidden'>
+		<div className='w-full md:flex md:flex-row overflow-hidden'>
 			<div
 				className={
-					'flex md:h-full h-3/6 bg-two md:w-2/6 w-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none p-5'
+					'flex h-3/6 bg-two md:w-2/6 w-full md:h-full flex-col justify-center items-center rounded-b-3xl md:rounded-bl-none'
 				}
 			>
 				<MessageComponent stage={stage} />
 			</div>
 			<div
 				className={
-					'flex  flex-col md:w-4/6 w-full md:justify-center my-10'
+					'flex flex-col md:w-4/6 w-full md:justify-center'
 				}
 			>
 				<Form
@@ -186,10 +186,6 @@ const MessageComponent = ({ stage }) => {
 	return (
 		<>
 			<div className={'w-full md:h-full'}>
-				{/* <div className={"mx-5 mt-5 flex flex-col"}>
-          <h1>Logo here</h1>
-
-        </div> */}
 			</div>
 			<div className='w-full h-full flex flex-col justify-center md:justify-start'>
 				<h2 className='text-4xl font-sans font-semi-bold text-center text-one tracking-tighter mb-5'>
@@ -265,7 +261,6 @@ const Welcome = ({ nextStage }) => {
 					<h1 className='text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter md:'>
 						Start your fundraising journey here with
 					</h1>
-					{/* <Logo /> */}
 				</div>
 				<div className='h-72 mt-24'>
 					<div className="relative h-32 w-32">
