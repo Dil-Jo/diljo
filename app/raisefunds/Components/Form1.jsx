@@ -2,6 +2,7 @@ import { useState, useId } from 'react';
 import Image from 'next/image';
 import Next from '../../../assets/next.png'
 const Form1 = ({ next, updateForm, prev, fullForm }) => {
+    const [error, setError] = useState('');
     const [form, setForm] = useState({
         reason: fullForm.reason,
         'radio-10': fullForm['radio-10'],
@@ -11,8 +12,13 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (form['radio-10'] === '' || form.reason === '')
-            return alert('Please fill all the fields');
+        if (form['radio-10'] === '' || form.reason === '') {
+            setError('Please fill all the fields');
+            console.log(form.reason);
+            console.log(form['radio-10'])
+        }
+        console.log(form.reason);
+        console.log(form['radio-10'])
         updateForm(form);
         next();
     };
@@ -26,6 +32,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                     SELECT REASON FOR FUNDRAISING:
                 </label>
                 <select
+                    required
                     id='reason'
                     name='reason'
                     onChange={handleChange}
@@ -45,13 +52,13 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                 <ul className='grid w-full gap-6 md:grid-cols-2 mb-6'>
                     <li>
                         <input
+                            required
                             type='radio'
                             id='visible'
                             name='radio-10'
                             value='visible'
                             className='hidden peer'
                             onChange={handleChange}
-                            required
                         />
                         <label
                             htmlFor='visible'
@@ -94,6 +101,7 @@ const Form1 = ({ next, updateForm, prev, fullForm }) => {
                         {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg> */}
                 {/* </button> */}
                 {/* </div> */}
+                <h1 className={'mb-2 text-red-800'}>{error}</h1>
                 <button
                     type='submit'
                     className='mt-16 flex border-2 border-slate-600 rounded-lg w-18 justify-center hover:border-eleven hover:bg-slate-200 duration-300 active:translate-y-1'
