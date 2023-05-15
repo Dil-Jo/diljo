@@ -98,7 +98,7 @@ export default function () {
 							):
 						(<a
 						href={`${record.link}?client_reference_id=${pb.authStore.model.id}_${id}`}
-						target='_blank'
+						target='_self'
 						rel='noopener noreferrer'
 						className={"bg-two px-6 py-2 rounded-md text-white border-2 border-two font-bold text-sm transition-all duration-200 hover:bg-opacity-10 hover:text-two"}
 					>

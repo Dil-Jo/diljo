@@ -2,14 +2,14 @@ import { useState, useId } from 'react';
 import Image from 'next/image';
 import Next from '../../../assets/next.png'
 const Form1 = ({ next, updateForm, prev, fullForm }) => {
-    const [form, setForm] = useState({
+    const [form, setForm] = useState({ // Creating visibility radio buttons
         reason: fullForm.reason,
         'radio-10': fullForm['radio-10'],
     });
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => { //Check for all fields
         e.preventDefault();
         if (form['radio-10'] === '' || form.reason === '')
             return alert('Please fill all the fields');

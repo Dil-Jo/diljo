@@ -7,7 +7,7 @@ export default function page() {
   const [charities, setCharities] = useState([]);
   const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
-  const getCollectionData = async () => {
+  const getCollectionData = async () => {// Function  to get the list of charities from the data base
     try {
       const response = await pb.collection("charities").getList();
       setCharities(response.items);
@@ -15,7 +15,7 @@ export default function page() {
       console.error("Failed to get collection data:", error);
     }
   };
-  useEffect(() => {
+  useEffect(() => { //calling getCollection at start
     getCollectionData();
     console.log(charities);
   }, []);

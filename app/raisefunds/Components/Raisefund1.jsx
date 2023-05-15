@@ -5,15 +5,12 @@ import upload from '../../../assets/upload.png';
 import Next from '../../../assets/next.png'
 import Back from '../../../assets/back.png'
 
-const Comp1 = ({ next, updateForm, prev, fullForm }) => {
+const Comp1 = ({ next, updateForm, prev, fullForm }) => { //States for title and description
 	const [form, setForm] = useState({
 		title: fullForm.title,
 		description: fullForm.description,
-		// imageThumb: fullForm.imageThumb,
-		// image: fullForm.image,
-		// image: '',
 	});
-
+	//Function to set image in data base
 	function onimg(e) {
 		const bg = document.getElementById('imgbg');
 		bg.style.backgroundSize = 'cover';
@@ -24,14 +21,13 @@ const Comp1 = ({ next, updateForm, prev, fullForm }) => {
 	}
 
 	useEffect(() => {
-		console.log({ form });
 	}, [form]);
 
 	const handleChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e) => { //Checks for all fiels
 		e.preventDefault();
 		console.log({ form });
 		if (form.title === '' || form.description === '')
