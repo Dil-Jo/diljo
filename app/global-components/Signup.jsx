@@ -77,22 +77,29 @@ export default function Signup({ pb }) {
 			return false;
 		}
 
-		try {
-			await create();
-			setError('');
-			successRef.current.style.display = 'block';
-			emailRef.current.value = '';
-			passwordRef.current.value = '';
-			confirmPasswordRef.current.value = '';
-			nameRef.current.value = '';
-			usernameRef.current.value = '';
-			setLoading(false);
 
-			return true;
-		} catch (error) {
-			console.log(error);
-			setError('Something went wrong. Please try again later.');
-			setLoading(false);
+    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+      setError("Passwords do not match");
+      setLoading(false)
+      
+      return false;
+    }
+    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    if (!regex.test(emailRef.current.value)) {
+      setError("Invalid email");
+      setLoading(false)
+      return false;
+    }
+    const resultList = await pb.collection("users").getList(1, 50, {
+      filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`
+    });
+    
+    if (resultList.items.length > 0) {
+      setError("Email or username already exists");
+      setLoading(false)
+      
+      return false;
+    }
 
 			return false;
 		}

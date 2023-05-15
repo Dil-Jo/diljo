@@ -8,7 +8,7 @@ export default function ButtonGroupComponent(props) {
       <OutlineButton text="Fundraisers" location="fundraisers" pb={props.pb} />
       <OutlineButton text="Volenteer History" location="volenteerhistory" pb={props.pb} />
       <OutlineButton text="Donations" location="donations" pb={props.pb} />
-      <OutlineButton text="Acheivements" location="acheivements" pb={props.pb} />
+      <OutlineButton text="Achievements" location="acheivements" pb={props.pb} />
       {/* </div> */}
     </div>
   );

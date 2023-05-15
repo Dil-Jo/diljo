@@ -36,10 +36,10 @@ export default function FeaturedPosts() {
 
   return (
     <>
-      <h1 className="md:ml-4 text-4xl font-black tracking-tighter text-gray-900 dark:text-white">
+      <h1 className="md:ml-4 text-4xl font-black tracking-tighter text-gray-900 darkremoveext-white">
         Featured Fundraisers
       </h1>
-      <h2 className="md:ml-4 mt-2 tracking-tighter text-gray-500 dark:text-gray-400 md:text-lg">
+      <h2 className="md:ml-4 mt-2 tracking-tighter text-gray-500 darkremoveext-gray-400 md:text-lg">
         Help those who need you the most
       </h2>
       <div className="carousel-center carousel rounded-box w-full space-x-8 overflow-x-scroll p-4">
