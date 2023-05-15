@@ -3,6 +3,7 @@ import Link from "next/link";
 import PocketBase from "pocketbase";
 import React, { useEffect, useState } from "react";
 
+// Function to get the total amount raised for a fundraiser
 async function getRaised(id) {
   const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
   let records = await pb.collection("donations").getFullList({
@@ -18,6 +19,7 @@ async function getRaised(id) {
 export default function Card(props) {
   const [raised, setRaised] = useState(0);
 
+  // Fetch the total amount raised when the component mounts or when props.id changes
   useEffect(() => {
     async function fetchRaised() {
       const total = await getRaised(props.id);
@@ -27,9 +29,12 @@ export default function Card(props) {
     fetchRaised();
   }, [props.id]);
 
+  // Function to calculate the progress bar width based on raised amount and goal
   let progressbar = (raised, goal) => {
     return { width: `${(raised / goal) * 100}%` };
   };
+
+  // Function to resolve the image URL for the background image
   let resolveImage = (url) => {
     return { backgroundImage: `url("${url}")` };
   };

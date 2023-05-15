@@ -3,7 +3,7 @@ import React from "react";
 import styles from "../Modal.module.css"
 import PocketBase from "pocketbase";
 
-const Modal = ({ ModalIsOpen, lat, lng }) => {
+const Modal = ({ ModalIsOpen, lat, lng }) => { //ModalIsOpen is a boolean value which is passed from the parent component
 
     const [title, setTitle] = useState();
     const [donlat, setDonLat] = useState();
@@ -23,7 +23,7 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
         //----------REMOVED AREA AND FUNDRAISER FROM THE DATABASE--------------
 
         try {
-            const response = await pb.collection('volunteers').create({
+            const response = await pb.collection('volunteers').create({ //creating new entry in pb
                 title: title,
                 longitude: donlng,
                 latitude: donlat,
@@ -39,13 +39,6 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
     };
 
     const onSubmit = () => {
-        console.log("Final latitude = ", donlat);
-        console.log("Final Longitude = ", donlng);
-        console.log(category);
-        console.log(title);
-        console.log(stDate);
-        console.log(endDate);
-        console.log(organizer);
 
         if (!category) {
             alert('Please select a donation type');
@@ -88,7 +81,7 @@ const Modal = ({ ModalIsOpen, lat, lng }) => {
                         <div className='flex mt-4'>
                             <label htmlFor="category" className="text-slate-800 mt-2 mx-4 sm:flex sm:flex-col">Select the category of donation drive:</label>
                             <select id="category" name="category" onChange={(event) => setCategory(event.target.value)} className="text-slate-800 h-11 dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 border-2 border-solid border-black mr-3 " required>
-                                <option value="food"  selected>Food Drive</option>
+                                <option value="food" selected>Food Drive</option>
                                 <option value="clothing" >Clothing Drive</option>
                                 <option value="blood">Blood Drive</option>
                                 <option value="books">Books Drive</option>

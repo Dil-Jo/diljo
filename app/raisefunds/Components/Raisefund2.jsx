@@ -8,6 +8,7 @@ import Back from '../../../assets/back.png'
 
 
 const Comp2 = ({ next, updateForm, prev, fullForm }) => {
+	//Creating form to save data
 	const [form, setForm] = useState({
 		name: fullForm.name,
 		cnic: fullForm.cnic,
@@ -20,30 +21,12 @@ const Comp2 = ({ next, updateForm, prev, fullForm }) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
 
-	// const [name, setName] = useState("");
-	// const [cnic, setCnic] = useState("");
-	// const [amount, setAmount] = useState("");
-	// const [acname, setAcname] = useState("");
-	// const [acnum, setAcnum] = useState("");
-	// const [formcp2, setForm] = useState({
-	//     name: "",
-	//     cnic: "",
-	//     amount: "",
-	//     acname: "",
-	//     acnum: "",
-	// });
 
+	//On submit function
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		updateForm(form);
-		// updateForm({
-		//     ...formcp2,
-		//     name: name,
-		//     cnic: cnic,
-		//     amount: amount,
-		//     acname: acname,
-		//     acnum: acnum,
-		// });
+
 		next();
 	};
 	return (
