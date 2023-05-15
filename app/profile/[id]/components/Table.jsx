@@ -3,6 +3,30 @@ import Link from 'next/link';
 import React from 'react';
 
 const Table = ({ headings, rows, tableName }) => {
+	const handleDelete = () => {
+		return (
+			<>
+				<input type='checkbox' id='my-modal' className='modal-toggle' />
+				<div className='modal model-open'>
+					<div className='modal-box'>
+						<h3 className='font-bold text-lg'>
+							Congratulations random Internet user!
+						</h3>
+						<p className='py-4'>
+							You've been selected for a chance to get one year of
+							subscription to use Wikipedia for free!
+						</p>
+						<div className='modal-action'>
+							<label htmlFor='my-modal' className='btn'>
+								Yay!
+							</label>
+						</div>
+					</div>
+				</div>
+			</>
+		);
+	};
+
 	console.log({ headings, rows });
 	if (tableName === 'fundraisers')
 		return (
@@ -62,6 +86,12 @@ const Table = ({ headings, rows, tableName }) => {
 									>
 										Details
 									</Link>
+									<button
+										onClick={handleDelete}
+										className=' rounded-md text-red-500 border-2 font-semibold text-md transition-all duration-200 hover:text-red-700 text-center w-full inline-block'
+									>
+										Delete
+									</button>
 								</td>
 							</tr>
 						))}

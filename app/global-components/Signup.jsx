@@ -18,7 +18,7 @@ export default function Signup({ pb }) {
 		try {
 			const formData = new FormData();
 			formData.append('image', ppic);
-			const resultList = await pb.collection('users').create({
+			const create = await pb.collection('users').create({
 				email: emailRef.current.value,
 				password: passwordRef.current.value,
 				name: nameRef.current.value,
@@ -66,43 +66,41 @@ export default function Signup({ pb }) {
 		}
 
 		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-		const resultList = await pb.collection('users').getList(1, 50, {
+		const resultListUsers = await pb.collection('users').getList(1, 50, {
 			filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`,
 		});
 
-		if (resultList.items.length > 0) {
+		if (resultListUsers.items.length > 0) {
 			setError('Email or username already');
 			setLoading(false);
 
 			return false;
 		}
 
-
-    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-      setError("Passwords do not match");
-      setLoading(false)
-      
-      return false;
-    }
-    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    if (!regex.test(emailRef.current.value)) {
-      setError("Invalid email");
-      setLoading(false)
-      return false;
-    }
-    const resultList = await pb.collection("users").getList(1, 50, {
-      filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`
-    });
-    
-    if (resultList.items.length > 0) {
-      setError("Email or username already exists");
-      setLoading(false)
-      
-      return false;
-    }
+		if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+			setError('Passwords do not match');
+			setLoading(false);
 
 			return false;
 		}
+		let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+		if (!regex.test(emailRef.current.value)) {
+			setError('Invalid email');
+			setLoading(false);
+			return false;
+		}
+		const resultList = await pb.collection('users').getList(1, 50, {
+			filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`,
+		});
+
+		if (resultList.items.length > 0) {
+			setError('Email or username already exists');
+			setLoading(false);
+
+			return false;
+		}
+
+		return false;
 	}
 
 	function clickHandler() {
