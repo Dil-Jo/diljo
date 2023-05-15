@@ -100,12 +100,12 @@ export default function Signin() {
 									type='password'
 									ref={passwordRef}
 									placeholder='••••••••'
-									className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+									className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 darkremoveorder-gray-600 darkremoveg-gray-700 darkremoveext-white darkremovelaceholder-gray-400 darkremoveocus:border-blue-500 darkremoveocus:ring-blue-500'
 									required
 								/>
 								<label
 									htmlFor='password'
-									className='mb-2 block text-sm font-medium text-gray-900 cursor-pointer dark:text-white absolute top-1/2 transform -translate-y-1/2 right-3'
+									className='mb-2 block text-sm font-medium text-gray-900 cursor-pointer darkremoveext-white absolute top-1/2 transform -translate-y-1/2 right-3'
 									onMouseDown={() => {
 										passwordRef.current.type = 'text';
 									}}
@@ -131,9 +131,7 @@ export default function Signin() {
 								className={`btn bg-eleven border-2 border-eleven hover:bg-opacity-10 hover:text-eleven ${
 									loading ? 'loading' : ''
 								}`}
-								// className='w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto'
 								onClick={clickHandler}
-								type='submit'
 							>
 								Submit
 							</div>

@@ -47,7 +47,6 @@ export default function Signup({ pb }) {
 		) {
 			setError('Please fill all the fields');
 			setLoading(false);
-
 			return false;
 		}
 		if (emailRef)
@@ -61,29 +60,10 @@ export default function Signup({ pb }) {
 		if (passwordRef.current.value !== confirmPasswordRef.current.value) {
 			setError('Passwords do not match');
 			setLoading(false);
-
 			return false;
 		}
-
-		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-		const resultList = await pb.collection('users').getList(1, 50, {
-			filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`,
-		});
-
-		if (resultList.items.length > 0) {
-			setError('Email or username already');
-			setLoading(false);
-
-			return false;
-		}
-
-
-    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-      setError("Passwords do not match");
-      setLoading(false)
-      
-      return false;
-    }
+		
+		
     let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
     if (!regex.test(emailRef.current.value)) {
       setError("Invalid email");
@@ -97,22 +77,36 @@ export default function Signup({ pb }) {
     if (resultList.items.length > 0) {
       setError("Email or username already exists");
       setLoading(false)
-      
       return false;
     }
-
+		
+		try {
+			await create();
+			setError("");
+			successRef.current.style.display = "block";
+			emailRef.current.value = "";
+			passwordRef.current.value = "";
+			confirmPasswordRef.current.value = "";
+			nameRef.current.value = "";
+			usernameRef.current.value = "";
+			setLoading(false)
+			return true;
+		} catch (error) {
+			console.log(error);
+			setError("Something went wrong. Please try again later.");
+			setLoading(false)
 			return false;
 		}
 	}
-
+	
 	function clickHandler() {
 		setLoading(true);
-		setError('');
-		successRef.current.style.display = 'none';
+		setError("");
+		successRef.current.style.display = "none";
 		verify().then((r) => {
 			if (r)
 				setTimeout(() => {
-					setLoading(false);
+					setLoading(false)
 					window.location.reload();
 				}, 1200);
 		});
@@ -129,21 +123,21 @@ export default function Signup({ pb }) {
 					>
 						x
 					</label>
-					<h1 className='mb-3 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl'>
+					<h1 className='mb-3 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 darkremoveext-white md:text-2xl'>
 						Create a Free Account
 					</h1>
 					<form className='space-y-4 md:space-y-6' action='#'>
 						<div>
 							<label
 								htmlFor='name'
-								className='mb-2 block text-sm font-medium text-gray-900 dark:text-white'
+								className='mb-2 block text-sm font-medium text-gray-900 darkremoveext-white'
 							>
 								Full Name
 							</label>
 							<input
 								name='name'
 								ref={nameRef}
-								className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm'
+								className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 darkremoveorder-gray-600 darkremoveg-gray-700 darkremoveext-white darkremovelaceholder-gray-400 darkremoveocus:border-blue-500 darkremoveocus:ring-blue-500 sm:text-sm'
 								placeholder='First and Last Name'
 								required
 							/>
@@ -151,7 +145,7 @@ export default function Signup({ pb }) {
 						<div>
 							<label
 								htmlFor='username'
-								className='mb-2 block text-sm font-medium text-gray-900 dark:text-white'
+								className='mb-2 block text-sm font-medium text-gray-900 darkremoveext-white'
 							>
 								User Name
 							</label>
@@ -159,7 +153,7 @@ export default function Signup({ pb }) {
 								type='username'
 								name='username'
 								ref={usernameRef}
-								className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm'
+								className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 darkremoveorder-gray-600 darkremoveg-gray-700 darkremoveext-white darkremovelaceholder-gray-400 darkremoveocus:border-blue-500 darkremoveocus:ring-blue-500 sm:text-sm'
 								placeholder='username'
 								required
 							/>
@@ -167,7 +161,7 @@ export default function Signup({ pb }) {
 						<div>
 							<label
 								htmlFor='email'
-								className='mb-2 block text-sm font-medium text-gray-900 dark:text-white'
+								className='mb-2 block text-sm font-medium text-gray-900 darkremoveext-white'
 							>
 								Your email
 							</label>
@@ -175,7 +169,7 @@ export default function Signup({ pb }) {
 								type='email'
 								name='email'
 								ref={emailRef}
-								className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm'
+								className='focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 darkremoveorder-gray-600 darkremoveg-gray-700 darkremoveext-white darkremovelaceholder-gray-400 darkremoveocus:border-blue-500 darkremoveocus:ring-blue-500 sm:text-sm'
 								placeholder='name@example.com'
 								required
 							/>
@@ -183,7 +177,7 @@ export default function Signup({ pb }) {
 						<div>
 							<label
 								htmlFor='password'
-								className='mb-2 block text-sm font-medium text-gray-900 dark:text-white'
+								className='mb-2 block text-sm font-medium text-gray-900 darkremoveext-white'
 							>
 								Password
 							</label>
@@ -192,12 +186,12 @@ export default function Signup({ pb }) {
 									type='password'
 									ref={passwordRef}
 									placeholder='••••••••'
-									className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+									className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 darkremoveorder-gray-600 darkremoveg-gray-700 darkremoveext-white darkremovelaceholder-gray-400 darkremoveocus:border-blue-500 darkremoveocus:ring-blue-500'
 									required
 								/>
 								<label
 									htmlFor='password'
-									className='mb-2 block text-sm font-medium text-gray-900 cursor-pointer dark:text-white absolute top-1/2 transform -translate-y-1/2 right-3'
+									className='mb-2 block text-sm font-medium text-gray-900 cursor-pointer darkremoveext-white absolute top-1/2 transform -translate-y-1/2 right-3'
 									onMouseDown={() => {
 										passwordRef.current.type = 'text';
 									}}
@@ -212,7 +206,7 @@ export default function Signup({ pb }) {
 						<div>
 							<label
 								htmlFor='confirm-password'
-								className='mb-2 block text-sm font-medium text-gray-900 dark:text-white'
+								className='mb-2 block text-sm font-medium text-gray-900 darkremoveext-white'
 							>
 								Confirm password
 							</label>
@@ -221,12 +215,12 @@ export default function Signup({ pb }) {
 									type='confirm-password'
 									ref={passwordRef}
 									placeholder='••••••••'
-									className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+									className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 darkremoveorder-gray-600 darkremoveg-gray-700 darkremoveext-white darkremovelaceholder-gray-400 darkremoveocus:border-blue-500 darkremoveocus:ring-blue-500'
 									required
 								/>
 								<label
 									htmlFor='confirm-password'
-									className='mb-2 block text-sm font-medium text-gray-900 cursor-pointer dark:text-white absolute top-1/2 transform -translate-y-1/2 right-3'
+									className='mb-2 block text-sm font-medium text-gray-900 cursor-pointer darkremoveext-white absolute top-1/2 transform -translate-y-1/2 right-3'
 									onMouseDown={() => {
 										passwordRef.current.type = 'text';
 									}}
@@ -244,15 +238,15 @@ export default function Signup({ pb }) {
 									id='terms'
 									aria-describedby='terms'
 									type='checkbox'
-									className='focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 h-4 w-4 rounded border border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800'
+									className='focus:ring-3 focus:ring-primary-300 darkremoveocus:ring-primary-600 h-4 w-4 rounded border border-gray-300 bg-gray-50 darkremoveorder-gray-600 darkremoveg-gray-700 darkremoveing-offset-gray-800'
 									required
 								/>
 							</div>
 							<div className='ml-3 text-sm'>
-								<label className='font-light text-gray-500 dark:text-gray-300'>
+								<label className='font-light text-gray-500 darkremoveext-gray-300'>
 									I accept the{' '}
 									<label
-										className='text-primary-600 dark:text-primary-500 font-medium hover:underline'
+										className='text-primary-600 darkremoveext-primary-500 font-medium hover:underline'
 										htmlFor={'terms-and-conditions'}
 										onClick={() => {
 											document
@@ -285,7 +279,7 @@ export default function Signup({ pb }) {
 								Submit
 							</div>
 						</div>
-						<p className='text-sm font-light text-gray-500 dark:text-gray-400'>
+						<p className='text-sm font-light text-gray-500 darkremoveext-gray-400'>
 							Already have an account?{' '}
 							<label
 								htmlFor='sign-in'
@@ -296,7 +290,7 @@ export default function Signup({ pb }) {
 										)
 										.click();
 								}}
-								className='text-primary-600 dark:text-primary-500 font-medium hover:underline'
+								className='text-primary-600 darkremoveext-primary-500 font-medium hover:underline'
 							>
 								Login here
 							</label>
