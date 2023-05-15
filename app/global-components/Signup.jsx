@@ -1,18 +1,18 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
-import ppic from '../../assets/default.jpeg'
-
-
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import ppic from '../../assets/default.jpeg';
+import passwordIcon from '../../assets/show-password.png';
+import Image from 'next/image';
 
 export default function Signup({ pb }) {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const confirmPasswordRef = useRef(null);
-  const nameRef = useRef(null);
-  const usernameRef = useRef(null);
-  const successRef = useRef(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+	const emailRef = useRef(null);
+	const passwordRef = useRef(null);
+	const confirmPasswordRef = useRef(null);
+	const nameRef = useRef(null);
+	const usernameRef = useRef(null);
+	const successRef = useRef(null);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState('');
 
   //Function to create a new field in users collection of pb
   async function create() {
@@ -68,6 +68,7 @@ export default function Signup({ pb }) {
       return false;
     }
     //Regex pattern for email
+
     let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
     if (!regex.test(emailRef.current.value)) {
       setError("Invalid email");
@@ -84,6 +85,38 @@ export default function Signup({ pb }) {
 
       return false;
     }
+		
+		try {
+			await create();
+			setError("");
+			successRef.current.style.display = "block";
+			emailRef.current.value = "";
+			passwordRef.current.value = "";
+			confirmPasswordRef.current.value = "";
+			nameRef.current.value = "";
+			usernameRef.current.value = "";
+			setLoading(false)
+			return true;
+		} catch (error) {
+			console.log(error);
+			setError("Something went wrong. Please try again later.");
+			setLoading(false)
+			return false;
+		}
+	}
+	
+	function clickHandler() {
+		setLoading(true);
+		setError("");
+		successRef.current.style.display = "none";
+		verify().then((r) => {
+			if (r)
+				setTimeout(() => {
+					setLoading(false)
+					window.location.reload();
+				}, 1200);
+		});
+	}
 
     try {
       //Checking for success

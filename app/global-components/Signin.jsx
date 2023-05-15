@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState, useContext } from 'react';
 // import PocketBase from "pocketbase";
 import GlobalContext from '../Contexts/GlobalContext';
+import passwordIcon from '../../assets/show-password.png';
+import Image from 'next/image';
 
 export default function Signin() {
 	const emailRef = useRef(null);
@@ -40,6 +42,7 @@ export default function Signin() {
 			return false;
 		}
 	}
+
 
 	//function to run on sign in
 	function clickHandler() {
@@ -86,20 +89,35 @@ export default function Signin() {
 								required
 							></input>
 						</div>
-						<div className='mb-6'>
+						<div className='mb-6 '>
 							<label
 								htmlFor='password'
 								className='mb-2 block text-sm font-medium text-gray-900 darkremoveext-white'
 							>
 								Your password
 							</label>
-							<input
-								type='password'
-								ref={passwordRef}
-								placeholder='••••••••'
-								className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 darkremoveorder-gray-600 darkremoveg-gray-700 darkremoveext-white darkremovelaceholder-gray-400 darkremoveocus:border-blue-500 darkremoveocus:ring-blue-500'
-								required
-							></input>
+							<div className='relative'>
+								<input
+									type='password'
+									ref={passwordRef}
+									placeholder='••••••••'
+									className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 darkremoveorder-gray-600 darkremoveg-gray-700 darkremoveext-white darkremovelaceholder-gray-400 darkremoveocus:border-blue-500 darkremoveocus:ring-blue-500'
+									required
+								/>
+								<label
+									htmlFor='password'
+									className='mb-2 block text-sm font-medium text-gray-900 cursor-pointer darkremoveext-white absolute top-1/2 transform -translate-y-1/2 right-3'
+									onMouseDown={() => {
+										passwordRef.current.type = 'text';
+									}}
+									onMouseUp={() => {
+										passwordRef.current.type = 'password';
+									}}
+								>
+									<Image src={passwordIcon} />
+								</label>
+							</div>
+
 						</div>
 						<h1
 							ref={successRef}
@@ -111,11 +129,10 @@ export default function Signin() {
 
 						<div className='grid w-full'>
 							<div
-
-								className={`btn bg-eleven border-2 border-eleven hover:bg-opacity-10 hover:text-eleven ${loading ? 'loading' : ''}`}
-								// className='w-full place-items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 darkremoveg-blue-600 darkremoveover:bg-blue-700 darkremoveocus:ring-blue-800 sm:w-auto'
+								className={`btn bg-eleven border-2 border-eleven hover:bg-opacity-10 hover:text-eleven ${
+									loading ? 'loading' : ''
+								}`}
 								onClick={clickHandler}
-								type='submit'
 							>
 								Submit
 							</div>

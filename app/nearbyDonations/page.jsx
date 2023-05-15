@@ -8,7 +8,7 @@ import {
 import { useEffect, useRef, useState, useContext } from 'react';
 import Drive from './components/Drive';
 import GlobalContext from '../Contexts/GlobalContext';
-import Toast from "./components/Toast";
+import Toast from './components/Toast';
 
 const nearbyDonations = () => {
 	//Creating necessary states
@@ -17,7 +17,7 @@ const nearbyDonations = () => {
 	const [numDrives, setNumDrives] = useState([]); //List for drives
 	const [shameekhMarkers, setShameekhMarkers] = useState([]); //List for markers to show on map
 
-	const [map, setMap] = useState(/**@type google.maps.Map */(null));
+	const [map, setMap] = useState(/**@type google.maps.Map */ (null));
 	const [lat, setLat] = useState();
 	const [lng, setLng] = useState();
 	const [loading, setLoading] = useState(true);
@@ -50,15 +50,19 @@ const nearbyDonations = () => {
 
 	const getCollectionData = async () => {// Getting data from database and applying filters to show drives
 		try {
+
 			const Filter = (new Date()).toISOString().split('T')[0] + ' 00:00:00';
 			const response = await pb.collection('volunteers').getList(1, 200, {
 				filter: `endingDate >= "${Filter}"`
+
 			});
 			let newArr = [...response.items];
 			for await (const item of newArr) {
 				const participationStatus = await pb
 					.collection('user_volunteers')
-					.getFullList({ filter: `users="${pb.authStore.model.id}"&&drives="${item.id}"` });
+					.getFullList({
+						filter: `users="${pb.authStore.model.id}"&&drives="${item.id}"`,
+					});
 				item.participating = participationStatus.length !== 0;
 			}
 			setNumDrives(newArr);
@@ -109,7 +113,6 @@ const nearbyDonations = () => {
 		<>
 			<div className='flex mb-4 border-4 border-solid border-slate-900'>
 				<div className='drawer drawer-mobile -mt-2'>
-
 					<input
 						id='my-drawer-2'
 						type='checkbox'
@@ -173,15 +176,16 @@ const nearbyDonations = () => {
 											}
 											return (
 												<Marker
-													title={`${marker.title
-														}\nStarting on : ${String(
-															marker.start
-														).slice(
-															0,
-															10
-														)}\nEnding on : ${String(
-															marker.end
-														).slice(0, 10)}`}
+													title={`${
+														marker.title
+													}\nStarting on : ${String(
+														marker.start
+													).slice(
+														0,
+														10
+													)}\nEnding on : ${String(
+														marker.end
+													).slice(0, 10)}`}
 													key={marker.title}
 													position={{
 														lat: Number(marker.lat),
@@ -240,7 +244,7 @@ const nearbyDonations = () => {
 								htmlFor='my-drawer-2'
 								className='drawer-overlay'
 							></label>
-							<div className={"h-[5.5rem]"}></div>
+							<div className={'h-[5.5rem]'}></div>
 							<div className='flex justify-center py-4 bg-eleven sm:w-full md:w-[30rem]'>
 								<h1 className='text-3xl text-white'>
 									Nearby Donation Drives
@@ -262,7 +266,9 @@ const nearbyDonations = () => {
 												endDate={drive.endingDate}
 												map={map}
 												id={drive.id}
-												participating={drive.participating}
+												participating={
+													drive.participating
+												}
 											/>
 										</label>
 									);
@@ -277,12 +283,16 @@ const nearbyDonations = () => {
 				lat={lat}
 				lng={lng}
 				referer={modalRef}
+				loading={loading}
+				setLoading={setLoading}
 			/>
 		</>
 	);
 };
 
+
 const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
+
 	const closeModal = () => {
 		referer.current.className = 'modal cursor-pointer';
 	};
@@ -330,8 +340,14 @@ const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 				organizer: organizer,
 			});
 			setToast(true);
+
+			closeModal();
+
 		} catch (error) {
 			console.error('Failed to save data:', error);
+		} finally {
+			console.log('yay');
+			setLoading(false);
 		}
 	};
 	useEffect(() => { //Applying time for toast to show
@@ -353,7 +369,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 					<label
 						onClick={() => {
 							closeModal();
-							setError("")
+							setError('');
 						}}
 						className='btn btn-sm btn-circle absolute right-2 top-2'
 					>
@@ -389,7 +405,6 @@ const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 							/>
 							<label
 								className='label text-lg font-normal'
-
 								htmlFor='category'
 							>
 								Drive Category
@@ -402,7 +417,9 @@ const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 								value={formData.category}
 								onChange={handleChange}
 							>
-								<option value='food' selected>Food Drive</option>
+								<option value='food' selected>
+									Food Drive
+								</option>
 								<option value='clothing'>Clothing Drive</option>
 								<option value='blood'>Blood Drive</option>
 								<option value='books'>Books Drive</option>
@@ -450,7 +467,6 @@ const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 								End Date
 							</label>
 							<div className='relative w-full'>
-
 								<div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
 									<svg
 										aria-hidden='true'
@@ -478,38 +494,48 @@ const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 							</div>
 						</form>
 					</div>
-					<h1 className={"text-red-800 mb-2"}>{error}</h1>
+					<h1 className={'text-red-800 mb-2'}>{error}</h1>
 					<div className='grid sm:grid-cols-2 grid-cols-1 gap-4'>
-						<label className=' bg-red-800 px-6 py-2 rounded-md text-white border-2 border-red-800 font-bold text-lg transition-all duration-200 hover:bg-opacity-10 hover:text-red-800 flex justify-center items-center' onClick={closeModal}>
+						<label
+							className=' bg-red-800 px-6 py-2 rounded-md text-white border-2 border-red-800 font-bold text-lg transition-all duration-200 hover:bg-opacity-10 hover:text-red-800 flex justify-center items-center'
+							onClick={closeModal}
+						>
 							Cancel
-						</label>{
-							pb.authStore.model?.id === undefined ?
-								<label
-									className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
-									htmlFor={"sign-in"}
-									onClick={() => {
-										setError("")
-										closeModal();
-									}}
-								>Add Drive</label> :
-								<label
-									className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
-									form='addDrive'
-									onClick={(e) => {
-										setError("")
-										saveDataToPocketBase(e);
-									}}
-								>
-									Add Drive
-								</label>
-						}
+						</label>
+						{pb.authStore.model?.id == undefined ? (
+							<label
+								className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
+								htmlFor={'sign-in'}
+								onClick={() => {
+									setError('');
+									closeModal();
+								}}
+							>
+								Add Drive
+							</label>
+						) : (
+							<label
+								className={`bg-eleven px-24 py-2 rounded-full text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center btn ${
+									loading ? 'loading' : ''
+								}`}
+								type='button'
+								form='addDrive'
+								onClick={(e) => {
+									setLoading(true);
+									setError('');
+									saveDataToPocketBase(e);
+									// closeModal();
+								}}
+							>
+								Add Drive
+							</label>
+						)}
 					</div>
 				</div>
 			</div>
-			{
-				toast && (
-					<Toast text={"You just enlisted a new volunteer drive!"} />)
-			}
+			{toast && (
+				<Toast text={'You just enlisted a new volunteer drive!'} />
+			)}
 		</div>
 	);
 };
