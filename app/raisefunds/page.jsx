@@ -5,8 +5,8 @@ import Form2 from './Components/Raisefund1.jsx';
 import Form3 from './Components/Raisefund2.jsx';
 import GlobalContext from '../Contexts/GlobalContext';
 import Image from 'next/image';
-import Logo from '../../assets/Black.svg'
-import Next from '../../assets/next.png'
+import Logo from '../../assets/Black.svg';
+import Next from '../../assets/next.png';
 import Toast from '../nearbyDonations/components/Toast.jsx';
 
 const RaiseFunds = () => {
@@ -34,66 +34,10 @@ const RaiseFunds = () => {
 	const globalContext = useContext(GlobalContext);
 	const { pb, globalLogin } = globalContext;
 
-	// useEffect(() => {
-	//   document.querySelector("main").style.padding = "0";
-	//   document.querySelector("main").style.height = "100%";
-	//   document.querySelector("body").style.height = "100vh";
-	// }, []);
-
 	const updateForm = async (form) => {
 		console.log({ formHere: form });
 		setFullForm({ ...fullForm, ...form });
 		console.log({ stage });
-		// if (stage === 4) {
-		//   const formData = new FormData();
-		//   formData.append("title", fullForm.title);
-		//   formData.append("caption", fullForm.description);
-		//   formData.append("target", fullForm.amount);
-		//   formData.append(
-		//     "owner",
-		//     JSON.parse(localStorage.getItem("Login")).record.id
-		//   );
-		//   formData.append("coverPhoto", fullForm.image);
-		//   formData.append("anonanonymityStatus", fullForm["radio-10"]);
-		//   formData.append("thumbnail", fullForm.image);
-		//   formData.append("category", fullForm.reason);
-		//   formData.append("finalDate", "2025-12-1");
-
-		//   const data = {
-		//     title: fullForm.title,
-		//     caption: fullForm.description,
-		//     target: fullForm.amount,
-		//     owner: JSON.parse(localStorage.getItem("Login")).record.id,
-		//     coverPhoto: fullForm.image,
-		//     anonanonymityStatus: fullForm["radio-10"],
-		//     thumbnail: fullForm.image,
-		//     category: fullForm.reason,
-		//     finalDate: "2025-12-1",
-		//   };
-		//   console.log({ formData });
-
-		//   const fetchStripe = await fetch("/api/add_product", {
-		//     method: "POST",
-		//     headers: {
-		//       "Content-Type": "multipart/form-data",
-		//     },
-		//     body: JSON.stringify({
-		//       name: fullForm.title,
-		//     }),
-		//   });
-		//   const stripeId = await fetchStripe.json();
-		//   console.log({ stripeId });
-		//   if (stripeId.status) {
-		//     data.stripeLink = stripeId.paymentLink.url;
-		//     formData.append("stripeLink", stripeId.paymentLink.url);
-		//   } else return alert("Something went wrong with stripe");
-
-		//   const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-		//   const response = await pb.collection("fundraisers").create(formData);
-
-		//   if (response.id) alert("Form submitted successfully");
-		//   else alert("Form submission failed");
-		// }
 	};
 	useEffect(() => {
 		if (toast.show == true) {
@@ -119,8 +63,8 @@ const RaiseFunds = () => {
 		formData.append('thumbnail', fullForm.imageThumbs);
 		formData.append('category', fullForm.reason);
 		formData.append('finalDate', '2025-12-1');
-		console.log(fullForm)
-	console.log({ formData })
+		console.log(fullForm);
+		console.log({ formData });
 		const data = {
 			title: fullForm.title,
 			caption: fullForm.description,
@@ -149,14 +93,22 @@ const RaiseFunds = () => {
 		if (stripeId.status) {
 			data.stripeLink = stripeId.paymentLink.url;
 			formData.append('link', stripeId.paymentLink.url);
-		} else setToast({ show: true, text: 'Something went wrong with the network', color: 'bg-red-700' });
+		} else
+			setToast({
+				show: true,
+				text: 'Something went wrong with the network',
+				color: 'bg-red-700',
+			});
 		const response = await pb.collection('fundraisers').create(formData);
 		if (response.id) {
 			setToast({ show: true, text: 'Form submitted successfully' });
 			setSubmitted(true);
-		}
-		else setToast({ show: true, text: 'Form submission failed', color: 'bg-red-700' });
-
+		} else
+			setToast({
+				show: true,
+				text: 'Form submission failed',
+				color: 'bg-red-700',
+			});
 	};
 
 	// useEffect(() => {
@@ -220,7 +172,14 @@ const MessageComponent = ({ stage }) => {
 	);
 };
 
-const Form = ({ submitted, stage, setStage, updateForm, fullForm, submitForm }) => {
+const Form = ({
+	submitted,
+	stage,
+	setStage,
+	updateForm,
+	fullForm,
+	submitForm,
+}) => {
 	const nextStage = () => setStage(stage + 1);
 	const prevStage = () => setStage(stage - 1);
 	switch (stage) {
@@ -267,10 +226,14 @@ const Finish = ({ submitted, submitForm }) => {
 			<h1 className='text-center mx-12 text-3xl font-medium  text-slate-700 sm:text-4xl mb-8 tracking-tighter'>
 				Your contribution will help someone in need.
 			</h1>
-			{submitted == false ? <button className='btn bg-two border-2 border-two btn-md hover:bg-opacity-10 hover:text-two' onClick={submitForm}>
-				Click here to submit
-			</button> : null}
-
+			{submitted == false ? (
+				<button
+					className='btn bg-two border-2 border-two btn-md hover:bg-opacity-10 hover:text-two'
+					onClick={submitForm}
+				>
+					Click here to submit
+				</button>
+			) : null}
 		</div>
 	);
 };
@@ -286,12 +249,16 @@ const Welcome = ({ nextStage }) => {
 						</h1>
 					</div>
 					<div className='h-72 mt-36 sm:mt-28 lg:mt-24'>
-						<div className="h-20 w-20 sm:h-24 sm:w-24 relative md:h-28 md:w-28 lg:h-32 lg:w-32">
+						<div className='h-20 w-20 sm:h-24 sm:w-24 relative md:h-28 md:w-28 lg:h-32 lg:w-32'>
 							<Image src={Logo} fill alt='Altermae' />
 						</div>
 						<div className='ml-2 sm:ml-4 lg:ml-6 mt-16 flex border-2 border-slate-600 rounded-lg w-16 sm:w-20 justify-center hover:border-eleven hover:bg-slate-200 duration-300 active:translate-y-1'>
-							<Image className='w-12 h-12 sm:w-16 sm:h-16' src={Next} alt='next' onClick={nextStage}>
-							</Image>
+							<Image
+								className='w-12 h-12 sm:w-16 sm:h-16'
+								src={Next}
+								alt='next'
+								onClick={nextStage}
+							></Image>
 						</div>
 					</div>
 				</div>
@@ -299,6 +266,5 @@ const Welcome = ({ nextStage }) => {
 		</>
 	);
 };
-
 
 export default RaiseFunds;
