@@ -12,7 +12,7 @@ async function getData(id, pb) {
 		total += record.amount;
 	});
 	records = await pb.collection('fundraisers').getOne(id, {});
-	if (records.visibility === true) {
+	if (records.visibility === "visible") {
 		let temp = await pb.collection('users').getOne(records.owner, {});
 		records.owner = temp.username;
 	} else {

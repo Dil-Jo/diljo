@@ -53,7 +53,7 @@ export default function Card(props) {
         <h2 className="font-small mt-4 overflow-hidden truncate text-gray-400">
           {props.caption}
         </h2>
-        {/*<div className="mt-4 h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">*/}
+        {/*<div className="mt-4 h-2.5 w-full rounded-full bg-gray-200 darkremoveg-gray-700">*/}
         {/*  <div*/}
         {/*    className="h-2.5 rounded-full bg-blue-600"*/}
         {/*    style={progressbar(raised, props.target)}*/}
