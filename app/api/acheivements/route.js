@@ -7,13 +7,13 @@ export async function POST(request) {
   return new Response();
 }
 
-async function Ach(pb, user_id) {
+async function Ach(pb, user_id) { //Getting the full list of achievemetns
   let acheivements = await pb.collection("acheivements").getFullList({});
   acheivements = Array.from({ length: acheivements.length }, (_, i) => ({
     id: acheivements[i].id,
     type: acheivements[i].type,
   }));
-  let user_acheivements = await pb.collection("acheivement_users").getFullList({
+  let user_acheivements = await pb.collection("acheivement_users").getFullList({ //getting the entry on the basis of user
     filter: `user_id = "${user_id}"`,
   });
   user_acheivements = Array.from({ length: user_acheivements.length }, (_, i) => ({
@@ -24,10 +24,9 @@ async function Ach(pb, user_id) {
   await handleDonation(pb, user_id, acheivements, user_acheivements);
   await handleRaised(pb, user_id, acheivements, user_acheivements);
   await handleVolunteer(pb, user_id, acheivements, user_acheivements);
-  console.log("done");
 }
 
-async function grantAchievement(pb, user_id, acheivements, user_acheivements, achievementType) {
+async function grantAchievement(pb, user_id, acheivements, user_acheivements, achievementType) { // function to grants acheivements
   let id = null;
   for (let i = 0; i < acheivements.length; i++) {
     if (acheivements[i].type === achievementType) {
@@ -45,7 +44,7 @@ async function grantAchievement(pb, user_id, acheivements, user_acheivements, ac
   }
 }
 
-async function handleDonation(pb, user_id, acheivements, user_acheivements) {
+async function handleDonation(pb, user_id, acheivements, user_acheivements) { //checking donatuions to grant any achievements later
   let donationData = await pb.collection("donations").getList(1, 20, {
     filter: `donor = "${user_id}"`,
   });
@@ -59,7 +58,7 @@ async function handleDonation(pb, user_id, acheivements, user_acheivements) {
   }
 }
 
-async function handleRaised(pb, user_id, acheivements, user_acheivements) {
+async function handleRaised(pb, user_id, acheivements, user_acheivements) { //checking the raise amount 
   let raisedData = await pb.collection("fundraisers").getFullList({
     filter: `owner = "${user_id}"`,
   });
@@ -93,7 +92,7 @@ async function handleRaised(pb, user_id, acheivements, user_acheivements) {
   }
 }
 
-async function handleVolunteer(pb, user_id, acheivements, user_acheivements) {
+async function handleVolunteer(pb, user_id, acheivements, user_acheivements) { //checking how many drives the user has volunteered in
   let volunteerData = await pb.collection("user_volunteers").getList(1, 20, {
     filter: `users = "${user_id}"`,
   });

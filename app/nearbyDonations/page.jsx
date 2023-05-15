@@ -11,31 +11,29 @@ import GlobalContext from '../Contexts/GlobalContext';
 import Toast from "./components/Toast";
 
 const nearbyDonations = () => {
+	//Creating necessary states
 	const globalContext = useContext(GlobalContext);
 	const { pb } = globalContext;
-	const [numDrives, setNumDrives] = useState([]);
-	const [shameekhMarkers, setShameekhMarkers] = useState([]);
+	const [numDrives, setNumDrives] = useState([]); //List for drives
+	const [shameekhMarkers, setShameekhMarkers] = useState([]); //List for markers to show on map
 
 	const [map, setMap] = useState(/**@type google.maps.Map */(null));
 	const [lat, setLat] = useState();
 	const [lng, setLng] = useState();
 	const [loading, setLoading] = useState(true);
-	const { isLoaded, loadError } = useLoadScript({
+	const { isLoaded, loadError } = useLoadScript({ //Loading the map
 		googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
 	});
 	const openForm = (e) => {
-		// ModalIsOpen(true);
 		setLat(e.latLng.lat());
 		setLng(e.latLng.lng());
-		console.log({ modalRef });
 		modalRef.current.className += ' modal-open ';
 	};
 
-	const [currentLocation, setCurrentLocation] = useState({ lat: 0, lng: 0 });
+	const [currentLocation, setCurrentLocation] = useState({ lat: 0, lng: 0 }); //Current location of user
 
-	const getLocation = () => {
+	const getLocation = () => { //Getting users location using geolocation
 		if (navigator.geolocation) {
-			console.log('start get location');
 			navigator.geolocation.getCurrentPosition(
 				(position) => {
 					setCurrentLocation({
@@ -43,19 +41,17 @@ const nearbyDonations = () => {
 						lng: position.coords.longitude,
 					});
 				},
-				(error) => console.error(error),
 				{ enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
 			);
 		} else {
-			console.error('Geolocation is not supported by this browser.');
+			alert('Geolocation is not supported by this browser.');
 		}
-		console.log('end get location');
 	};
 
-	const getCollectionData = async () => {
+	const getCollectionData = async () => {// Getting data from database and applying filters to show drives
 		try {
 			const Filter = (new Date()).toISOString().split('T')[0] + ' 00:00:00';
-			const response = await pb.collection('volunteers').getList(1,200, {
+			const response = await pb.collection('volunteers').getList(1, 200, {
 				filter: `endingDate >= "${Filter}"`
 			});
 			let newArr = [...response.items];
@@ -65,7 +61,6 @@ const nearbyDonations = () => {
 					.getFullList({ filter: `users="${pb.authStore.model.id}"&&drives="${item.id}"` });
 				item.participating = participationStatus.length !== 0;
 			}
-			// console.log({ newArr });
 			setNumDrives(newArr);
 			getMarkers(newArr);
 
@@ -74,7 +69,7 @@ const nearbyDonations = () => {
 			console.error('Failed to get collection data:', error);
 		}
 	};
-	const getMarkers = async (prop) => {
+	const getMarkers = async (prop) => { //Getting markers from database
 		getLocation();
 		let newArr = [];
 		prop.map((data) => {
@@ -98,15 +93,14 @@ const nearbyDonations = () => {
 		setLoading(false);
 	};
 	useEffect(() => {
-		// getCollectionData(/).then((res) => getMarkers(res));
 		getCollectionData();
 	}, []);
 
-	useEffect(() => {
-		console.log({ shameekhMarkers }, [shameekhMarkers]);
-	});
+	// useEffect(() => {
+	// 	console.log({ shameekhMarkers }, [shameekhMarkers]);
+	// });
 
-	const center = {
+	const center = { //Calculating map center on the basis of users location
 		lat: Number(currentLocation.lat),
 		lng: Number(currentLocation.lng),
 	};
@@ -219,11 +213,7 @@ const nearbyDonations = () => {
 													onClick={(e) => openForm(e)}
 													center={center}
 													radius={radius}
-													onLoad={() =>
-														console.log(
-															'Circle Load...'
-														)
-													}
+
 													options={{
 														fillColor:
 															radius > 2000
@@ -292,7 +282,7 @@ const nearbyDonations = () => {
 	);
 };
 
-const AddDriveModal = ({ id, lat, lng, referer }) => {
+const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 	const closeModal = () => {
 		referer.current.className = 'modal cursor-pointer';
 	};
@@ -311,9 +301,8 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 	const { pb } = globalContext;
 	const [toast, setToast] = useState(false);
 
-	const saveDataToPocketBase = async (e) => {
+	const saveDataToPocketBase = async (e) => { //Applying the checks
 		e.preventDefault();
-		console.log({ formData });
 		if (!formData.title) {
 			setError('Please enter a title.');
 			return;
@@ -341,12 +330,11 @@ const AddDriveModal = ({ id, lat, lng, referer }) => {
 				organizer: organizer,
 			});
 			setToast(true);
-			console.log('Data saved successfully:');
 		} catch (error) {
 			console.error('Failed to save data:', error);
 		}
 	};
-	useEffect(() => {
+	useEffect(() => { //Applying time for toast to show
 		if (toast) {
 			setTimeout(() => {
 				setToast(false);

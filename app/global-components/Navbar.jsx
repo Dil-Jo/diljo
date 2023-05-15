@@ -29,7 +29,6 @@ export default function Navbar(props) {
 		// let Login = false;
 		useEffect(() => {
 			if (globalLogin) {
-				console.log("I is happening inside use effect ")
 
 				pb.collection('users').authRefresh().then((res) => {
 					setGlobalLogin(pb.authStore.baseToken !== '');
@@ -168,25 +167,27 @@ export default function Navbar(props) {
 	);
 }
 
+//Component to display the nav data and adding links
 function Links() {
 	const [hoveredIndex, setHoveredIndex] = useState(null);
 	const [flag, setFlag] = useState(false);
 	const globalProps = useContext(GlobalContext);
 	const { pb } = globalProps;
-	
+
+	//navebar items and their linsk
 	const menuItems = [
 		{ id: 1, name: "EXPLORE", link: "/explore", flag: false },
 		{ id: 2, name: "NEARBY DONATIONS", link: "/nearbyDonations", flag: false },
 		{ id: 3, name: "CHARITIES", link: "/charities", flag: false },
 		{ id: 4, name: "START A FUNDRAISER", link: "/raisefunds", flag: flag },
 	];
-	
+
 	useEffect(() => {
 		if (!pb.authStore?.model?.id) {
 			setFlag(true);
 		}
 	}, []);
-	
+
 	return (
 		<>
 			{menuItems.map((item) => (
@@ -212,9 +213,8 @@ function Links() {
 						</Link>
 					)}
 					<div
-						className={`h-1 bg-six transition-all duration-500 ease-in-out ${
-							hoveredIndex === item.id ? "w-full" : "w-0"
-						}`}
+						className={`h-1 bg-six transition-all duration-500 ease-in-out ${hoveredIndex === item.id ? "w-full" : "w-0"
+							}`}
 					></div>
 				</div>
 			))}
@@ -222,6 +222,7 @@ function Links() {
 	);
 }
 
+// Making the sign in signup buttons
 function Buttons() {
 	return (
 		<>
@@ -243,11 +244,9 @@ function Buttons() {
 
 function AfterLogin(props) {
 	const logoutRef = useRef(null);
-
-
 	const { pb, setGlobalLogin } = props;
+	//Async function to remove users data from auth store on login
 	const logoutUser = async () => {
-		console.log("I is happening")
 		await pb.authStore.clear();
 		setTimeout(() => {
 			setGlobalLogin(false)

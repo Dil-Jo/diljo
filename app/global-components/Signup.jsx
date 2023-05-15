@@ -14,6 +14,7 @@ export default function Signup({ pb }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  //Function to create a new field in users collection of pb
   async function create() {
     try {
       const formData = new FormData();
@@ -25,7 +26,7 @@ export default function Signup({ pb }) {
         username: usernameRef.current.value,
         emailVisibility: true,
         passwordConfirm: passwordRef.current.value,
-        avatar:formData
+        avatar: formData
       });
       successRef.current.style.display = "block";
       setLoading(false)
@@ -33,11 +34,11 @@ export default function Signup({ pb }) {
     } catch (e) {
       setError("Something went wrong. Please try again later.");
       setLoading(false)
-      
+
       return false;
     }
   }
-
+  //Function to verify checks
   async function verify() {
     if (
       emailRef.current.value === "" ||
@@ -45,26 +46,28 @@ export default function Signup({ pb }) {
       nameRef.current.value === "" ||
       usernameRef.current.value === ""
     ) {
+      //Fields not filled
       setError("Please fill all the fields");
       setLoading(false)
-      
+
       return false;
     }
     if (emailRef)
+      //Password Length check
+      if (passwordRef.current.value.length < 9) {
+        setError("Password must be at least 9 characters long");
+        setLoading(false)
 
-    if (passwordRef.current.value.length < 9) {
-      setError("Password must be at least 9 characters long");
-      setLoading(false)
-      
-      return false;
-    }
-
+        return false;
+      }
+    //Passwords not matching
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Passwords do not match");
       setLoading(false)
-      
+
       return false;
     }
+    //Regex pattern for email
     let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
     if (!regex.test(emailRef.current.value)) {
       setError("Invalid email");
@@ -74,15 +77,16 @@ export default function Signup({ pb }) {
     const resultList = await pb.collection("users").getList(1, 50, {
       filter: `email = "${emailRef.current.value}" || username = "${usernameRef.current.value}"`
     });
-    
+
     if (resultList.items.length > 0) {
       setError("Email or username already exists");
       setLoading(false)
-      
+
       return false;
     }
 
     try {
+      //Checking for success
       await create();
       setError("");
       successRef.current.style.display = "block";
@@ -92,17 +96,17 @@ export default function Signup({ pb }) {
       nameRef.current.value = "";
       usernameRef.current.value = "";
       setLoading(false)
-      
+
       return true;
     } catch (error) {
       console.log(error);
       setError("Something went wrong. Please try again later.");
       setLoading(false)
-      
+
       return false;
     }
   }
-
+  //On submit function
   function clickHandler() {
     setLoading(true);
     setError("");

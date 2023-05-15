@@ -15,15 +15,15 @@ export default function Signin() {
 	const globalContext = useContext(GlobalContext);
 	const { pb, setGlobalLogin } = globalContext;
 
+	//Applying field checks
 	async function verify() {
 		if (emailRef.current.value === '' || passwordRef.current.value === '') {
 			setError('Please fill all the fields');
 
-			// alert('masla');
 			return false;
 		}
 		try {
-			console.log('Im here inside signing');
+			//Checking for success
 			let result = await pb
 				.collection('users')
 				.authWithPassword(
@@ -31,18 +31,17 @@ export default function Signin() {
 					passwordRef.current.value
 				);
 
-			// setGlobalLogin(pb.authStore.baseToken !== '');
-			console.log('i is happen');
 			successRef.current.style.display = 'block';
 
 			return true;
 		} catch (e) {
+			//Invalid email Check
 			setError('Invalid email or password');
 			return false;
 		}
 	}
 
-
+	//function to run on sign in
 	function clickHandler() {
 		setError('');
 		setLoading(true);
@@ -54,7 +53,7 @@ export default function Signin() {
 			setTimeout(() => {
 				console.log('I am here at set timeout');
 				setGlobalLogin(pb.authStore.baseToken !== '');
-				}, 1800);
+			}, 1800);
 		});
 	}
 	return (

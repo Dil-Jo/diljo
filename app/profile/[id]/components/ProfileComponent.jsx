@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 import defaultP from "../../../../assets/default.jpeg";
 import Toast from "../../../nearbyDonations/components/Toast";
 
-export default function ProfileComponent(props) {
+export default function ProfileComponent(props) { //
   const picture = useRef(null);
   const { pb } = props;
   const record = pb.authStore.model || {};
@@ -18,12 +18,9 @@ export default function ProfileComponent(props) {
   useEffect(() => {
     if (image !== "") {
       const pic = pb.files.getUrl(record, image);
-      console.log("i am here");
-      console.log(image);
       picture.current.style.backgroundImage = `url(${pic})`;
     } else {
       picture.current.style.backgroundImage = `url(${defaultP.src})`;
-      console.log("no image");
     }
     picture.current.style.backgroundSize = "cover";
     picture.current.style.backgroundPosition = "center";
@@ -35,7 +32,6 @@ export default function ProfileComponent(props) {
     const File2 = new File([file], `${record.id}.png`, { type: file.type });
     const formData = new FormData();
     formData.append("avatar", File2);
-    console.log({ File2 })
 
     picture.current.style.backgroundImage = `url(${URL.createObjectURL(
       file
@@ -52,7 +48,6 @@ export default function ProfileComponent(props) {
 
     }
     catch (err) {
-      console.log(err);
       setToast({
         show: true,
         text: "Error Updating Profile Picture",

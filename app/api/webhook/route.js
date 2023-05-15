@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import PocketBase from 'pocketbase';
-// console.log({ pbb: process.env.POCKET_BASE_KEY });
 const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
@@ -13,11 +12,9 @@ const setCompleted = async (id, amount) => {
 
 	const fundraiser = await pb.collection("fundraisers").getOne(id);
 	const { target } = fundraiser;
-	console.log({ target, amount });
 
 	if (amount >= target) {
 		await pb.collection("fundraisers").update(id, { complete: true });
-		// console.log("updated")
 		return true;
 	}
 	const donations = await pb.collection("donations").getFullList({ filter: `fundraiser='${id}'` });
@@ -28,7 +25,6 @@ const setCompleted = async (id, amount) => {
 
 	if (total >= target) {
 		await pb.collection("fundraisers").update(id, { complete: true });
-		// console.log("updated 2.99")
 		return true;
 	}
 
@@ -38,18 +34,16 @@ export async function POST(request) {
 	const body = await request.text();
 	const signature = headers().get('stripe-signature');
 
-	// console.log({ pb });
+
 	let event;
 	try {
 		event = stripe.webhooks.constructEvent(body, signature, secretKey);
 	} catch (err) {
-		console.log({ err });
 		return NextResponse.json({ err });
 	}
 
 	switch (event.type) {
 		case 'checkout.session.completed':
-			// console.log({ data: event.data });
 			const paymentIntent = event.data.object;
 			const { client_reference_id, customer_details, payment_link } =
 				paymentIntent;
@@ -67,10 +61,8 @@ export async function POST(request) {
 				const record = await pb.collection('donations').create(data);
 				setCompleted(fundraiserId, amount);
 			} catch (error) {
-				console.log({ error })
 				return NextResponse.json({ stuaus: false, error });
 			}
-			console.log('checkout sessions was successful!');
 			break;
 
 		default:

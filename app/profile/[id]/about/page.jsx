@@ -7,8 +7,8 @@ import GlobalContext from "../../../Contexts/GlobalContext";
 export default function Page() {
 	const globalContext = useContext(GlobalContext)
 	const { pb } = globalContext
-	
-	return (
+
+	return (// Adding functionality to change username password and name
 		<div className='group grid place-items-center rounded-xl p-10 shadow-lg bg-white'>
 			<div className='w-full'>
 				<h1 className='text m-8 mb-12 inline w-72 text-start text-3xl font-black tracking-tighter text-gray-800 lg:w-auto'>
@@ -95,7 +95,7 @@ function Field(props) {
 	);
 }
 
-function Modal(props) {
+function Modal(props) { //OPENING MODAL TO SHOW SUCCESS OR FAILURE ON TAKING INPUTES
 	let if1 = useId();
 	let if2 = useId();
 	const successRef = useRef(null);
@@ -249,7 +249,6 @@ function Modal(props) {
 									window.location.reload();
 								}, 1200);
 							} catch (e) {
-								console.log(e);
 								errorRef.current.innerHTML =
 									'Invalid password or some other error, please try again';
 								errorRef.current.style.display = 'block';

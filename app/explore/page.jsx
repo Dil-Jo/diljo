@@ -9,7 +9,7 @@ const ExpolorePage = () => {
 	const [contentSmall, setContentSmall] = useState([])
 	const [content, setContent] = useState([]);
 	const [category, setCategory] = useState('title');
-	const routes = [
+	const routes = [ //Creating routes to show the fundraisers on basis of types
 		{
 			title: 'Education',
 		},
@@ -27,12 +27,12 @@ const ExpolorePage = () => {
 		},
 	];
 
-	async function getContent() {
+	async function getContent() { //Getting the top 200 content from the data base
 		const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 		let temp = await pb.collection('fundraisers').getList(1, 200, {
 			filter: `complete = False`
 		});
-		const output = temp.items.map((item) => {
+		const output = temp.items.map((item) => { //Mapping each of them
 			return {
 				title: item.title,
 				caption: item.caption,
@@ -43,11 +43,10 @@ const ExpolorePage = () => {
 				link: item.link,
 			};
 		});
-		console.log({ output })
 		return output;
 	}
 
-	useEffect(() => {
+	useEffect(() => { // calling get content at the start
 		getContent().then((res) => {
 			setContent(res);
 			setContentSmall(res.slice(0, 9))
@@ -95,7 +94,7 @@ const ExpolorePage = () => {
 		</div>
 	);
 };
-const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
+const ExploreNav = ({ routes, changeCategory, currentCategory }) => { // Creating the explore nav component
 	useEffect(() => {
 		if ('Education') {
 			changeCategory('Education');
@@ -122,7 +121,7 @@ const ExploreNav = ({ routes, changeCategory, currentCategory }) => {
 		</div>
 	);
 };
-const SmallCard = (props) => {
+const SmallCard = (props) => { //Creating the small card component
 	const { title, caption, thumbnail, id } = props;
 	return (
 		<div className='card card-compact w-full bg-gradient-to-r from-slate-50 to-zinc-100 shadow-lg p-3 border-2 border-slate-100'>
@@ -154,7 +153,7 @@ const SmallCard = (props) => {
 	);
 };
 
-function Banner() {
+function Banner() { //Banner about the charities to be displayed
 	return (
 		<>
 			<div className={'h-full w-full'}>
