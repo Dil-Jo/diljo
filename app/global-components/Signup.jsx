@@ -68,7 +68,6 @@ export default function Signup({ pb }) {
       return false;
     }
     //Regex pattern for email
-
     let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
     if (!regex.test(emailRef.current.value)) {
       setError("Invalid email");
@@ -85,38 +84,6 @@ export default function Signup({ pb }) {
 
       return false;
     }
-		
-		try {
-			await create();
-			setError("");
-			successRef.current.style.display = "block";
-			emailRef.current.value = "";
-			passwordRef.current.value = "";
-			confirmPasswordRef.current.value = "";
-			nameRef.current.value = "";
-			usernameRef.current.value = "";
-			setLoading(false)
-			return true;
-		} catch (error) {
-			console.log(error);
-			setError("Something went wrong. Please try again later.");
-			setLoading(false)
-			return false;
-		}
-	}
-	
-	function clickHandler() {
-		setLoading(true);
-		setError("");
-		successRef.current.style.display = "none";
-		verify().then((r) => {
-			if (r)
-				setTimeout(() => {
-					setLoading(false)
-					window.location.reload();
-				}, 1200);
-		});
-	}
 
     try {
       //Checking for success

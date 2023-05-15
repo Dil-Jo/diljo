@@ -86,8 +86,6 @@ const Modal = ({ id, title, setStautsState, stDate, endDate }) => {
 	const [error, setError] = useState('');
 
 	const saveDataToPocketBase = async () => {
-		// const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
-		// const user = JSON.parse(localStorage.getItem('Login')).record.id;
 		const user = pb.authStore.model?.id;
 		try {
 			console.log(user, id);
@@ -95,6 +93,13 @@ const Modal = ({ id, title, setStautsState, stDate, endDate }) => {
 				users: user,
 				drives: id,
 			});
+			fetch (`/api/send_mail`, {
+				method: 'POST',
+				body: JSON.stringify({
+					user_id: user,
+					drive_id: id,
+				})
+			})
 			console.log(response);
 			setToast(true);
 			idLabel.current.click();

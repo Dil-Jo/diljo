@@ -310,6 +310,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 	const globalContext = useContext(GlobalContext);
 	const { pb } = globalContext;
 	const [toast, setToast] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const saveDataToPocketBase = async (e) => { //Applying the checks
 		e.preventDefault();
@@ -502,7 +503,7 @@ const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 						>
 							Cancel
 						</label>
-						{pb.authStore.model?.id == undefined ? (
+						{pb.authStore.model?.id === undefined ? (
 							<label
 								className='bg-eleven px-6 py-2 rounded-md text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center'
 								htmlFor={'sign-in'}
@@ -518,7 +519,6 @@ const AddDriveModal = ({ id, lat, lng, referer }) => { //Modal to add a drive
 								className={`bg-eleven px-24 py-2 rounded-full text-white border-2 border-eleven font-bold text-md transition-all duration-200 hover:bg-opacity-10 hover:text-eleven flex justify-center items-center btn ${
 									loading ? 'loading' : ''
 								}`}
-								type='button'
 								form='addDrive'
 								onClick={(e) => {
 									setLoading(true);

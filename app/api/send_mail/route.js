@@ -1,67 +1,55 @@
-import { NextResponse } from 'next/server';
+import PocketBase from "pocketbase";
 const nodemailer = require('nodemailer');
-// import Stripe from 'stripe';
-// const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
-export async function GET(request) {
-	// const { name, url } = await request.json();
-	let status = false;
+export async function POST(data) {
+	const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL)
+	data = await data.json()
+	const response = await pb.collection("users").getOne(`${data.user_id}`);
+	const response2 = await pb.collection("volunteers").getOne(`${data.drive_id}`,{
+		expand: "organizer"
+	});
+	const request = {
+		organizerEmail: response2.expand.organizer.email,
+		volunteerEmail: response.email,
+		volunteerDrive: response2.title
+	}
 	try {
-		// const transporter = nodemailer.createTransport({
-		// 	host: 'smtp.mail.com',
-		// 	secure: false,
-		// 	auth: {
-		// 		user: 'diljo@mail.com',
-		// 		pass: 'cqEyU5MJ~:m5Dbq',
-		// 	},
-		// });
-
-		// const mailOptions = {
-		// 	from: 'diljo@mail.com',
-		// 	to: 'shameekh2002@gamil.com',
-		// 	subject: 'Sending Email using Node.js',
-		// 	text: 'That was easy!',
-		// };
-
-		// transporter.sendMail(mailOptions, (error, info) => {
-		// 	if (error) {
-		// 		console.log({ error });
-		// 	} else {
-		// 		console.log('Email sent: ' + info.response);
-		// 	}
-		// });
-
-		const transporter = nodemailer.createTransport({
-			host: 'sandbox.smtp.mailtrap.io',
-			port: 2525,
+		const protocols = nodemailer.createTransport({
+			host: 'smtp.office365.com',
+			port: 587,
+			secure: false,
 			auth: {
-				user: '91b2f7ec2a7bde',
-				pass: '5798a10a4ec3eb',
+				user: 'thediljoproject@hotmail.com',
+				pass: 'Astrongpassword123'
 			},
-		});
-
-		const mailOptions = {
-			from: 'diljo@mail.com',
-			to: 'shameekh2002@gamil.com',
-			subject: 'Sending Email using Node.js',
-			text: 'That was easy!',
-		};
-
-		transporter.sendMail(mailOptions, (error, info) => {
-			if (error) {
-				console.log({ error });
-			} else {
-				console.log('Email sent: ' + info.response);
+			tls: {
+				ciphers: 'SSLv3'
 			}
 		});
-
-		status = true;
-		return NextResponse.json({ status });
+		const volunteer = {
+			from: 'thediljoproject@hotmail.com',
+			to: `${request.volunteerEmail}`,
+			subject: 'Thank you for volunteering!',
+			text: `Thank you for volunteering for the drive. Your contribution is greatly appreciated. For further details you may contact the organizer of the volunteer drive.\n\n Email:  ${request.organizerEmail}\n\nBest regards,\nThe Diljo Project`
+		};
+		const organizer = {
+			from: 'thediljoproject@hotmail.com',
+			to: `${request.organizerEmail}`,
+			subject: 'New Volunteer Registration',
+			text: `A new volunteer has registered for the ${request.volunteerDrive} drive.\n\nYou may contact him using his email at \n\nEmail:  ${request.volunteerEmail}\n\nPlease follow up with the volunteer and provide necessary instructions.\n\nBest regards,\nThe Diljo Project`
+		};
+		const response = await protocols.sendMail(volunteer);
+		const response2 = await protocols.sendMail(organizer);
+		console.log('server response:', response, 'server response2:', response2);
 	} catch (error) {
-		console.log({ error });
-		return NextResponse.json({ status, error });
+		console.error(error.message);
+		return new Response(JSON.stringify({ message: "Some Error Occurred" }), {
+			headers: { "content-type": "application/json" },
+			status: 500
+		})
 	}
-
-	// return new Response('Hello, Next.js!')
+	return new Response(JSON.stringify({ message: "Email sent" }), {
+		headers: { "content-type": "application/json" },
+		status: 200,
+	})
 }
+

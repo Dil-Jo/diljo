@@ -4,7 +4,7 @@ const Locked = () => {
     return (
         <div className="border border-gray-300 rounded relative">
             <div className="absolute top-1/2 left-1/2 w-max translate-y-1/2 -translate-x-1/2">
-                <h2 className="text-5xl font-bold tracking-tight"> Please Login to continue</h2>
+                <h2 className="text-xl font-bold tracking-tight sm:text-5xl"> Please Login to continue</h2>
             </div>
             <div className="group grid place-items-center rounded-xl p-10 shadow-lg blur-sm ">
                 <div className="w-full">

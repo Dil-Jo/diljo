@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(request) {
 	const { name, url } = await request.json();
@@ -23,13 +22,8 @@ export async function POST(request) {
 				},
 			],
 			after_completion: {
-				"hosted_confirmation": {
-					"custom_message": 'Success! Thankyou for your donation.',
-				},
-				"type": "hosted_confirmation",
-
-				// redirect: { url: `${process.env.HOST}/explore` },
-				redirect: { url: 'https://www.google.com' }
+				type: "redirect",
+				redirect: { url: `${process.env.HOST}/explore` },
 			},
 		});
 		status = true;
@@ -38,6 +32,4 @@ export async function POST(request) {
 		console.log({ error });
 		return NextResponse.json({ status, error });
 	}
-
-	// return new Response('Hello, Next.js!')
 }

@@ -41,7 +41,6 @@ export async function POST(request) {
 	} catch (err) {
 		return NextResponse.json({ err });
 	}
-
 	switch (event.type) {
 		case 'checkout.session.completed':
 			const paymentIntent = event.data.object;
@@ -54,17 +53,14 @@ export async function POST(request) {
 				transactionId: paymentIntent.id,
 				donor: customerId,
 				fundraiser: fundraiserId,
-				// customer_details,
 			};
-
 			try {
 				const record = await pb.collection('donations').create(data);
 				setCompleted(fundraiserId, amount);
 			} catch (error) {
-				return NextResponse.json({ stuaus: false, error });
+				return NextResponse.json({ status: false, error });
 			}
 			break;
-
 		default:
 			console.log(`event type ${event.type}`);
 	}
