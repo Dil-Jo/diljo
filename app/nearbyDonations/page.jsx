@@ -352,6 +352,9 @@ const AddDriveModal = ({ id, lat, lng, referer, loading, setLoading }) => {
 			console.log('Data saved successfully:');
 		} catch (error) {
 			console.error('Failed to save data:', error);
+		} finally {
+			console.log('yay');
+			setLoading(false);
 		}
 	};
 	useEffect(() => {
