@@ -28,7 +28,8 @@ export default function page() {
         caption: fundraiser.caption,
         target: fundraiser.target,
         thumbnail: pb.files.getUrl(fundraiser, fundraiser.thumbnail),
-        link: `/donation/${fundraiser.id}`
+        link: `/donation/${fundraiser.id}`,
+        complete: fundraiser.complete
       }
     });
 
