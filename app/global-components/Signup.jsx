@@ -231,9 +231,6 @@ export default function Signup({ pb }) {
                   <label
                     className="text-primary-600 darkremoveext-primary-500 font-medium hover:underline"
                     htmlFor={"terms-and-conditions"}
-                    onClick={() => {
-                      document.querySelector("#slkjalskdmjhweor9u8932989").click();
-                    }}
                   >
                     Terms and Conditions
                   </label>
