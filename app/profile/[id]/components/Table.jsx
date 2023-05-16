@@ -227,7 +227,7 @@ const handleDelete = async (id, pb) => {
 		alert('Fundraiser deleted successfully. Refreshing page...');
 		window.location.reload();
 	} catch (error) {
-		console.log({ err });
+		console.log({ error });
 		alert('Error deleting fundraiser');
 	}
 };

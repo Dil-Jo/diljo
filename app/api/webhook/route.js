@@ -7,33 +7,38 @@ const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const secretKey = process.env.STRIPE_WEBHOOK_SECRET;
 
-
 const setCompleted = async (id, amount) => {
-
-	const fundraiser = await pb.collection("fundraisers").getOne(id);
+	console.log('set completed');
+	const fundraiser = await pb.collection('fundraisers').getOne(id);
 	const { target } = fundraiser;
+	console.log({ fundraiser });
 
 	if (amount >= target) {
-		await pb.collection("fundraisers").update(id, { complete: true });
+		await pb.collection('fundraisers').update(id, { complete: true });
+		console.log('fundraiser complete check1');
 		return true;
 	}
-	const donations = await pb.collection("donations").getFullList({ filter: `fundraiser='${id}'` });
+	const donations = await pb
+		.collection('donations')
+		.getFullList({ filter: `fundraiser='${id}'` });
 	let total = 0;
 	donations.forEach((donation) => {
 		total += donation.amount;
-	})
+	});
+	console.log({ total, target });
 
 	if (total >= target) {
-		await pb.collection("fundraisers").update(id, { complete: true });
+		await pb.collection('fundraisers').update(id, { complete: true });
+		console.log('fundraiser complete check 2.0');
+
 		return true;
 	}
-
-}
+};
 
 export async function POST(request) {
 	const body = await request.text();
 	const signature = headers().get('stripe-signature');
-
+	console.log('i start');
 
 	let event;
 	try {
