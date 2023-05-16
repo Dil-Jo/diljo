@@ -231,7 +231,6 @@ const handleDelete = async (id, pb) => {
     const res = await pb.collection("fundraisers").update(id, {
       complete: true
     });
-    alert("Fundraiser deleted successfully. Refreshing page...");
     window.location.reload();
   } catch (error) {
     console.log({ error });
