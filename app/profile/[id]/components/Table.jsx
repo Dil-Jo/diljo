@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
+import GlobalContext from '../../../Contexts/GlobalContext';
 
 const Table = ({ headings, rows, tableName }) => {
+	const { pb } = useContext(GlobalContext);
 	console.log({ headings, rows });
 	if (tableName === 'fundraisers')
 		return (
@@ -62,6 +64,48 @@ const Table = ({ headings, rows, tableName }) => {
 									>
 										Details
 									</Link>
+									<label
+										htmlFor={row.id}
+										className=' rounded-md text-red-500 border-2 cursor-pointer font-semibold text-md transition-all duration-200 hover:text-red-700 text-center w-full inline-block'
+									>
+										Delete
+									</label>
+									<>
+										<input
+											type='checkbox'
+											id={row.id}
+											className='modal-toggle'
+										/>
+										<div className='modal model-open'>
+											<div className='modal-box relative'>
+												<label
+													htmlFor={row.index}
+													className='btn btn-sm btn-circle absolute right-2 top-2'
+												>
+													✕
+												</label>
+												<h3 className='font-bold text-lg'>
+													Are you sure you want to
+													delete this fundraiser
+												</h3>
+
+												<div className='modal-action'>
+													<label
+														onClick={() =>
+															handleDelete(
+																row.id,
+																pb
+															)
+														}
+														htmlFor={row.id}
+														className='btn'
+													>
+														Confirm
+													</label>
+												</div>
+											</div>
+										</div>
+									</>
 								</td>
 							</tr>
 						))}
@@ -175,6 +219,17 @@ const Table = ({ headings, rows, tableName }) => {
 				</table>
 			</div>
 		);
+};
+
+const handleDelete = async (id, pb) => {
+	try {
+		const res = await pb.collection('fundraisers').delete(id);
+		alert('Fundraiser deleted successfully. Refreshing page...');
+		window.location.reload();
+	} catch (error) {
+		console.log({ err });
+		alert('Error deleting fundraiser');
+	}
 };
 
 export default Table;

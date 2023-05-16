@@ -14,6 +14,7 @@ export default function Signup({ pb }) {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 
+
   //Function to create a new field in users collection of pb
   async function create() {
     try {
@@ -34,7 +35,6 @@ export default function Signup({ pb }) {
     } catch (e) {
       setError("Something went wrong. Please try again later.");
       setLoading(false)
-
       return false;
     }
   }
@@ -64,7 +64,6 @@ export default function Signup({ pb }) {
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Passwords do not match");
       setLoading(false)
-
       return false;
     }
     //Regex pattern for email
@@ -119,7 +118,6 @@ export default function Signup({ pb }) {
         }, 1800);
     });
   }
-
   return (
     <>
       <input type="checkbox" id="sign-up" className="modal-toggle" />
