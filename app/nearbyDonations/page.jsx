@@ -17,7 +17,7 @@ const nearbyDonations = () => {
 	const [numDrives, setNumDrives] = useState([]); //List for drives
 	const [shameekhMarkers, setShameekhMarkers] = useState([]); //List for markers to show on map
 
-	const [map, setMap] = useState(/**@type google.maps.Map */ (null));
+	const [map, setMap] = useState(/**@type google.maps.Map */(null));
 	const [lat, setLat] = useState();
 	const [lng, setLng] = useState();
 	const [loading, setLoading] = useState(true);
@@ -31,9 +31,10 @@ const nearbyDonations = () => {
 	};
 
 	const [currentLocation, setCurrentLocation] = useState({ lat: 0, lng: 0 }); //Current location of user
-
-	const getLocation = () => { //Getting users location using geolocation
+	
+	const getLocation = () => {
 		if (navigator.geolocation) {
+			console.log('start get location');
 			navigator.geolocation.getCurrentPosition(
 				(position) => {
 					setCurrentLocation({
@@ -41,11 +42,13 @@ const nearbyDonations = () => {
 						lng: position.coords.longitude,
 					});
 				},
+				(error) => console.error(error),
 				{ enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
 			);
 		} else {
-			alert('Geolocation is not supported by this browser.');
+			console.error('Geolocation is not supported by this browser.');
 		}
+		console.log('end get location');
 	};
 
 	const getCollectionData = async () => {// Getting data from database and applying filters to show drives
