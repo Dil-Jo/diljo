@@ -177,7 +177,7 @@ function Links() {
 	//navebar items and their linsk
 	const menuItems = [
 		{ id: 1, name: "EXPLORE", link: "/explore", flag: false },
-		{ id: 2, name: "NEARBY DONATIONS", link: "/nearbyDonations", flag: false },
+		{ id: 2, name: "NEARBY DONATIONS", link: "/nearbyDonations", flag: flag },
 		{ id: 3, name: "CHARITIES", link: "/charities", flag: false },
 		{ id: 4, name: "START A FUNDRAISER", link: "/raisefunds", flag: flag },
 	];

@@ -56,6 +56,7 @@ export default function Signin() {
 			setTimeout(() => {
 				console.log('I am here at set timeout');
 				setGlobalLogin(pb.authStore.baseToken !== '');
+				window.location.reload();
 			}, 1800);
 		});
 	}
@@ -79,7 +80,7 @@ export default function Signin() {
 								htmlFor='email'
 								className='mb-2 block text-sm font-medium text-gray-900 darkremoveext-white'
 							>
-								Your email
+								Your email or username
 							</label>
 							<input
 								type='email'
