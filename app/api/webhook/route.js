@@ -63,7 +63,7 @@ export async function POST(request) {
 			};
 			try {
 				const record = await pb.collection('donations').create(data);
-				setCompleted(fundraiserId, amount);
+				await setCompleted(fundraiserId, amount);
 			} catch (error) {
 				return NextResponse.json({ status: false, error });
 			}
